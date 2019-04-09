@@ -1,0 +1,185 @@
+<h1 class="page-header" style="margin-top: 15px"><b>Add Specs Manually</b></h1>
+<hr>
+<form (submit)="onAddSpecs()">
+  <div class="form-group">
+    <label>className:</label>
+    <input type="text" class="form-control" [(ngModel)]="className" name="className" placeholder="Add new className...">
+  </div>
+  <div class="form-group">
+      <label>moduleName:</label>
+      <input type="text" class="form-control" [(ngModel)]="moduleName" name="moduleName" placeholder="Add new moduleName...">
+    </div>
+  <div class="form-group">
+      <label>description:</label>
+      <input type="text" class="form-control" [(ngModel)]="description" name="description" placeholder="Add new description...">
+  </div>
+  <div class="form-group">
+      <label>name:</label>
+      <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Add new name...">
+  </div>
+  <div class="form-group">
+      <label>id:</label>
+      <input type="text" class="form-control" [(ngModel)]="id" name="id" placeholder="Add new id...">
+  </div>
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add Specs</button>
+</form>
+
+
+
+<h1><b>Search by Name</b></h1>
+<hr>
+<form (submit)="onSearchSpecsByName()">
+  <div class="form-group">
+    <label>Type the name here:</label>
+    <input type='text' class="form-control" name='name' [(ngModel)]="name" placeholder="Type the name here...">
+  </div>
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
+</form>
+<div *ngIf="searchNameRes">
+  <table class="table-primary table-bordered">
+    <tr>
+      <th style="padding-right: 10px">className</th>
+      <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+      <th style="padding-left: 10px; padding-right: 10px">description</th>
+      <th style="padding-left: 10px; padding-right: 10px">name</th>
+      <th style="padding-left: 10px; padding-right: 10px">id</th>
+    </tr>
+    <tr *ngFor="let nameres of searchNameRes">
+      <td style="padding-right: 10px">{{nameres.className}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{nameres.description}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{nameres.name}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{nameres.id}}</td>
+    </tr>
+  </table>
+</div>
+
+<h1><b>Search by ModuleName</b></h1>
+<hr>
+<form (submit)="onSearchSpecsByModuleName()">
+  <div class="form-group">
+    <label>Type the moduleName here:</label>
+    <input type='text' class="form-control" name='moduleName' [(ngModel)]="moduleName" placeholder="Type the moduleName here...">
+  </div>
+  <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
+</form>
+<div *ngIf="searchModuleNameRes">
+  <table class="table-info table-bordered">
+    <tr>
+      <th style="padding-right: 10px">className</th>
+      <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+      <th style="padding-left: 10px; padding-right: 10px">description</th>
+      <th style="padding-left: 10px; padding-right: 10px">name</th>
+      <th style="padding-left: 10px; padding-right: 10px">id</th>
+    </tr>
+    <tr *ngFor="let modulenameres of searchModuleNameRes">
+      <td style="padding-right: 10px">{{modulenameres.className}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.moduleName}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.description}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.name}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.id}}</td>
+    </tr>
+  </table>
+</div>
+
+<h1><b>Search by Id</b></h1>
+<hr>
+<form (submit)="onSearchSpecsById()">
+  <div class="form-group">
+    <label>Type the id here:</label>
+    <input type='text' class="form-control" name='id' [(ngModel)]="id" placeholder="Type the id here...">
+  </div>
+  <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
+</form>
+<div *ngIf="searchIdRes">
+  <table class="table-warning table-bordered">
+    <tr>
+      <th style="padding-right: 10px">className</th>
+      <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+      <th style="padding-left: 10px; padding-right: 10px">description</th>
+      <th style="padding-left: 10px; padding-right: 10px">name</th>
+      <th style="padding-left: 10px; padding-right: 10px">id</th>
+    </tr>
+    <tr *ngFor="let idres of searchIdRes">
+      <td style="padding-right: 10px">{{idres.className}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{idres.description}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{idres.name}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{idres.id}}</td>
+    </tr>
+  </table>
+</div>
+
+<h1><b>Search by Conditions</b></h1>
+<hr>
+<form (submit)="onSearchSpecsByConditions()">
+  <div class="form-group">
+    <label>Type the name here:</label>
+    <input type='text' class="form-control" name='name' [(ngModel)]="name" placeholder="Type the name here...">
+  </div>
+  <div class="form-group">
+    <label>Type the moduleName here:</label>
+    <input type='text' class="form-control" name='moduleName' [(ngModel)]="moduleName" placeholder="Type the moduleName here...">
+  </div>
+  <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
+</form>
+<div *ngIf="searchConRes">
+  <table class="table-secondary table-bordered">
+    <tr>
+      <th style="padding-right: 10px">className</th>
+      <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+      <th style="padding-left: 10px; padding-right: 10px">description</th>
+      <th style="padding-left: 10px; padding-right: 10px">name</th>
+      <th style="padding-left: 10px; padding-right: 10px">id</th>
+    </tr>
+    <tr *ngFor="let conres of searchConRes">
+      <td style="padding-right: 10px">{{conres.className}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{conres.description}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{conres.name}}</td>
+      <td style="padding-left: 10px; padding-right: 10px">{{conres.id}}</td>
+    </tr>
+  </table>
+</div>
+
+
+<h1 style="margin-top: 15px"><b>Grab and Show All Specs Locally</b></h1>
+<form (submit)="onGrabSpecs()" style="margin-bottom: 15px">
+    <button type="submit" class="btn btn-primary">Grab Specs</button>
+</form>
+<hr>
+<table class="table-striped">
+  <tr>
+    <th style="padding-right: 10px">className</th>
+    <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+    <th style="padding-left: 10px; padding-right: 10px">description</th>
+    <th style="padding-left: 10px; padding-right: 10px">name</th>
+    <th style="padding-left: 10px; padding-right: 10px">id</th>
+  </tr>
+  <tr *ngFor="let spec of specs">
+    <td style="padding-right: 10px"> {{spec.className}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{spec.moduleName}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{spec.description}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{spec.name}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{spec.id}} </td>
+  </tr>
+</table>
+<h1 style="margin-top: 15px"><b>Show All Specs Remotely</b></h1>
+<p>According to: <a href="http://10.253.7.14:8000/?request=getSpecs">http://10.253.7.14:8000/?request=getSpecs</a></p>
+<hr>
+<table class="table-striped">
+  <tr>
+    <th style="padding-right: 10px">className</th>
+    <th style="padding-left: 10px; padding-right: 20px">moduleName</th>
+    <th style="padding-left: 10px; padding-right: 10px">description</th>
+    <th style="padding-left: 10px; padding-right: 10px">name</th>
+    <th style="padding-left: 10px; padding-right: 10px">id</th>
+  </tr>
+  <tr *ngFor="let remotespec of remotespecs">
+    <td style="padding-right: 10px"> {{remotespec.className}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{remotespec.moduleName}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{remotespec.description}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{remotespec.name}} </td>
+    <td style="padding-left: 10px; padding-right: 10px"> {{remotespec.id}} </td>
+  </tr>
+</table>
