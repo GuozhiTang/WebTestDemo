@@ -1,7 +1,6 @@
 // create models for our specs, hold all the fields
 // fields: types of fields, functions interacting with the database
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const config = require('../config/database');
 const request = require('request');
 
@@ -21,7 +20,7 @@ const SpecSchema = mongoose.Schema({
     type: String
   },
   id: {
-    type: String
+    type: Number
   }
 });
 
@@ -34,12 +33,11 @@ module.exports.getSpecs = function (callback) {
   Spec.find(callback);
 }
 
-// create the addUser() function, especially the password hash part
 module.exports.addSpec = function (newSpec, callback) {
       newSpec.save(callback);
 }
 
-module.exports.grabspecs = function (callback) {
+module.exports.grabSpecsv1 = function (callback) {
   request('http://10.253.7.14:8000/?request=getSpecs', function (error, response, body) {
     if (response && response.statusCode == 200) {
       var data = body;
@@ -50,6 +48,44 @@ module.exports.grabspecs = function (callback) {
         grab.save(callback);
       }
     }
+  })
+}
+
+module.exports.grabSpecs = function (callback) {
+  request.post('http://10.253.7.14:8000', {
+    json: {
+      request: "fireplexCoreDaoRetrieval",
+      coreDaoReqData: {
+          attrName: "id",
+          colNames: ["id"],
+          coreDao: {
+              id: "null",
+              className: "Spec",
+              moduleName: "fireplex.data.backend.core"
+          },
+          dataRange: {},
+          loadAll: "true"
+      }
+    }
+  }, (error, response, body) => {
+    if (response && response.statusCode == 200) {
+      // console.log('body: ', body);
+      // var strbody = JSON.stringify(body.results);
+      var data = body.results;
+      // console.log("data: ", data);
+      // console.log('strbody: ', strbody);
+      // var data = body;
+      // var dataObj = JSON.parse(data);
+      for (var i = 0; i < data.length; i++) {
+        // console.log('length ' + i + ': ' + data[i]);
+        var grab = new Spec(data[i]);
+        grab.save(callback);
+        console.log(grab);
+      }
+    }
+    // console.log('error: ', error);
+    // console.log('statusCode: ', response && response.statusCode);
+    // console.log('body: ', body);
   })
 }
 

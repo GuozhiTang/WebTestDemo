@@ -30,6 +30,10 @@ const app = express();
 const users = require('./routes/users');
 // Include all files of spec routes
 const specs = require('./routes/specs');
+// Include all files of test spec routes
+const testspecs = require('./routes/testspecs');
+const labwareSpecs = require('./routes/labwareSpecs');
+const labwares = require('./routes/labwares');
 
 // Port Number
 const port = 3000;
@@ -60,6 +64,10 @@ require('./config/passport')(passport);
 app.use('/users', users);
 // Anything like 'localhose:3000/specs/xxx' will go to users file
 app.use('/specs', specs);
+// Anything like 'localhose:3000/testspecs/xxx' will go to users file
+app.use('/testspecs', testspecs);
+app.use('/labwareSpecs', labwareSpecs);
+app.use('/labwares', labwares);
 
 // Index Route to the home page
 app.get('/', (req, res) => {

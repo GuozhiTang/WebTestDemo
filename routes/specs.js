@@ -36,7 +36,7 @@ router.post('/addspecs', (req, res, next) => {
 });
 
 router.post('/grabspecs', (req, res, next) => {
-  Spec.grabspecs((err, dataObj) => {
+  Spec.grabSpecs((err, dataObj) => {
     if (err) {
       res.json({success: false, msg:'Failed to grab specs!'});
       // console.log('Failed to grab specs!');
