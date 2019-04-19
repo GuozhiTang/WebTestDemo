@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plates Transfer</title>
+
+  <style>
+  #selectable .ui-selecting { background: #FECA40; border: 3px dashed #000000}
+  #selectable .ui-selected { background: #F39814; color: white; border: 3px dashed #000000}
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 500px; }
+  #selectable li { margin: 4px; padding: 1px; float: left; width: 33px; height: 33px; text-align: center; border-radius: 50%;
+  background-color: rgb(
+    calc(
+      120 * var(--isEmpty) +
+      63 * (1 - var(--isEmpty))
+    ),
+    calc(
+      194 * var(--isEmpty) +
+      71 * (1 - var(--isEmpty))
+    ),
+    calc(
+      173 * var(--isEmpty) +
+      79 * (1 - var(--isEmpty))
+    )
+  );
+  }
+  #selectable .root {
+    --isEmpty: 0;
+  }
+  #selectable .isEmpty {
+    --isEmpty: 1;
+  }
+  .circlesmallFul{
+    width: 32px;
+    height: 32px;
+    position: relative;
+    background-color: #3f474f;
+    border-radius: 50%;
+    align-items: center;
+    cursor: pointer;
+  }
+  .circlesmallEmp{
+      width: 32px;
+      height: 32px;
+      position: relative;
+      background-color: #78c2ad;
+      border-radius: 50%;
+      align-items: center;
+      cursor: pointer;
+    }
+  .listhead {
+    list-style-type: none;
+    float: left;
+    margin: 4px;
+    width: 33px;
+    height: 33px;
+  }
+  .circlebig{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    background-color: #3f474e;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    border: 5px dashed #000000
+  }
+  .circlebigempty{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    background-color: #78C2AD;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    border: 5px dashed #000000
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+
+    <h3 style="padding-top: 15px;"><i class="fas fa-vials"></i> Choose your plate:</h3>
+    <div class="form-group" style="width: 300px">
+      <select class="custom-select">
+        <option selected="">Select the plate...</option>
+        <option value="1">8x12 Plate</option>
+        <option value="2">16x24 Plate</option>
+      </select>
+    </div>
+    <hr>
+
+
+    <div id="Display_area" classs="container" style="height:450px; width: 1150px; overflow: scorll;">
+      <h3 style="text-align: left"><i class="fas fa-vials"></i> 8x12 Plate:</h3>
+      <p>Choose your <b>TARGET</b>:</p>
+      <div class="container" style="background:#FECA40;">
+        <div style="float: left; background-color: #e3edf0; padding-bottom: 15px; width: 620px; border-radius: 15px;">
+          <div class="row">
+            <div class="col-1"></div>
+            <div id="Number_area" class="col-11" style="margin-left: -40px; font-size: 28px; text-align: center;">
+              <ol>
+                <!-- <li class="listhead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
+                <li class="listhead">1</li>
+                <li class="listhead">2</li>
+                <li class="listhead">3</li>
+                <li class="listhead">4</li>
+                <li class="listhead">5</li>
+                <li class="listhead">6</li>
+                <li class="listhead">7</li>
+                <li class="listhead">8</li>
+                <li class="listhead">9</li>
+                <li class="listhead">10</li>
+                <li class="listhead">11</li>
+                <li class="listhead">12</li>
+              </ol>
+            </div>
+          </div>
+          <div class="row">
+            <div id="Letter_area" class="col-1" style="text-align: center; font-size: 27.5px; margin-left: 15px;">A<br>B<br>C<br>D<br>E<br>F<br>G<br>H</div>
+            <div id="Tube_area" class="col-11" style="margin-left: -15px">
+              <ol id="selectable">
+                <li class="root" (click)="onSearchPlatesByCoor('A1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G6')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H6')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H12')"></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div style="margin-left: 80px; width: 350px; height:380px; overflow: auto; float: left;">
+          <h5><b>You have selected</b> (<span id="select-count"></span>)<b>:</b></h5>
+            <div style="margin-left: -35px;">
+              <span id="select-result"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div>
+      <p>Select the <b>TARGET</b> and ready to choose <b>SOURCE</b> of a <b>TRANSFER</b>:</p>
+      <button type="button" class="btn btn-info">Submit <b>TARGET</b> and choose <b>SOURCE</b></button>
+    </div>
+    <hr>
+
+    <div *ngIf="searchCoorRes">
+      <div class="circlebig" style="color: white" *ngFor="let coorRes of searchCoorRes">
+        <br><br>
+        <p>Position: {{coorRes.coor}}</p>
+        <p>Name: {{coorRes.name}}</p>
+        <p>Desciption: {{coorRes.description}}</p>
+        <p>Volume: {{coorRes.volume}}</p>
+        <p>Id: {{coorRes.id}}</p>
+      </div>
+    </div>
+    <div *ngIf="emptyCoorRes">
+      <div class="circlebigempty" style="color: white" *ngFor="let emptyRes of emptyCoorRes">
+        <br><br>
+        <p>Position: {{emptyRes.coor}}</p>
+        <p>Name: {{emptyRes.name}}</p>
+        <p>Desciption: {{emptyRes.description}}</p>
+        <p>Volume: {{emptyRes.volume}}</p>
+        <p>Id: {{emptyRes.id}}</p>
+      </div>
+    </div>
+    <hr>
+    <table class="table-striped">
+      <tr>
+        <th style="padding-right: 10px">id</th>
+        <th style="padding-left: 10px; padding-right: 10px">name</th>
+        <th style="padding-left: 10px; padding-right: 10px">description</th>
+        <th style="padding-left: 10px; padding-right: 10px">volume</th>
+        <th style="padding-left: 10px; padding-right: 10px">coor</th>
+      </tr>
+      <tr *ngFor="let plate of plates">
+        <td style="padding-right: 10px"> {{plate.id}} </td>
+        <td style="padding-left: 10px; padding-right: 10px"> {{plate.name}} </td>
+        <td style="padding-left: 10px; padding-right: 10px"> {{plate.description}} </td>
+        <td style="padding-left: 10px; padding-right: 10px"> {{plate.volume}} </td>
+        <td style="padding-left: 10px; padding-right: 10px"> {{plate.coor}} </td>
+      </tr>
+    </table>
+  </div>
+  
+<!-- <table border="1px">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr *ngFor="let letter of letters" id="selectable">
+      <th scope="row">{{letter.th}}</th>
+      <td>{{letter.td1}}</td>
+      <td>{{letter.td2}}</td>
+      <td>{{letter.td3}}</td>
+    </tr> -->
+    <!-- <tr id="selectable">
+      <th scope="row">A</th>
+      <td>A1</td>
+      <td>A2</td>
+      <td>A3</td>
+    </tr>
+    <tr>
+      <th scope="row">B</th>
+      <td>B1</td>
+      <td>B2</td>
+      <td>B3</td>
+    </tr>
+    <tr>
+      <th scope="row">C</th>
+      <td>C1</td>
+      <td>C2</td>
+      <td>C3</td>
+    </tr>
+  </tbody> -->
+<!-- </table> -->
+<!-- <ol id="selectable">
+  <li class="ui-widget-content">Item 1</li>
+  <li class="ui-widget-content">Item 2</li>
+  <li class="ui-widget-content">Item 3</li>
+  <li class="ui-widget-content">Item 4</li>
+  <li class="ui-widget-content">Item 5</li>
+  <li class="ui-widget-content">Item 6</li>
+</ol> -->
+</body>
+</html>

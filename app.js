@@ -34,6 +34,7 @@ const specs = require('./routes/specs');
 const testspecs = require('./routes/testspecs');
 const labwareSpecs = require('./routes/labwareSpecs');
 const labwares = require('./routes/labwares');
+const plates = require('./routes/plates');
 
 // Port Number
 const port = 3000;
@@ -68,6 +69,7 @@ app.use('/specs', specs);
 app.use('/testspecs', testspecs);
 app.use('/labwareSpecs', labwareSpecs);
 app.use('/labwares', labwares);
+app.use('/plates', plates);
 
 // Index Route to the home page
 app.get('/', (req, res) => {

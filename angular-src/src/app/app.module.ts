@@ -12,15 +12,19 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SpecsComponent } from './components/specs/specs.component';
+import { PlateComponent } from './components/plate/plate.component';
+import { PlatelistComponent } from './components/platelist/platelist.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { SpecsService } from './services/specs.service';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
-import { SpecsComponent } from './components/specs/specs.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+// import { BootstrapModalModule } from 'ngx-bootstrap-modal';
+// import { ModalModule } from 'ngx-bootstrap/modal';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -29,7 +33,9 @@ const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path:'specs', component: SpecsComponent}
+  {path:'specs', component: SpecsComponent},
+  {path:'plate', component: PlateComponent},
+  {path:'platelist', component: PlatelistComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -47,7 +53,9 @@ export function tokenGetter() {
     HomeComponent,
     DashboardComponent,
     ProfileComponent,
-    SpecsComponent
+    SpecsComponent,
+    PlateComponent,
+    PlatelistComponent,
   ],
   // Modules should be put into imports
   imports: [
@@ -60,8 +68,10 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
-      }
-    })
+      },
+    }),
+    // BootstrapModalModule,
+    // ModalModule
   ],
   // Services should be put into providers
   providers: [ValidateService, AuthService, AuthGuard, SpecsService],

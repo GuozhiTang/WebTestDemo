@@ -6,9 +6,63 @@
   <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <base href="/">
+  <!-- <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+    $(function() {
+      $("#selectable").selectable({
+        stop: function(evt) {
+          var result = $( "#select-result" ).empty();
+          var count = $("#select-count").empty();
+          var final = $("#select-final").empty();
+          num = 1;
+          var ulDom = $('<ul style="margin-top:10px;list-style-type: none;"></ul>');
+          $( ".ui-selected").each(function() {
+            var index = $( "#selectable li" ).index(this);
+            $('<li style="margin-bottom:3px;padding-top:3px;text-align:center;height:30px;width:30px;color:white;border-radius:5px;margin-right:10px;background:#6CC3D5;">' + String.fromCharCode(index/12 + "A".charCodeAt()) + (index%12 + 1) + '</li>').appendTo(ulDom);
+            num++;
+            // result.append( " #" + ( index + 1 ));
+            // result.append(" #" + String.fromCharCode(index/12 + "A".charCodeAt(1)) + (index%12 + 1));
+            // console.log(typeof(result));
+            // console.log(result);
+          });
+          count.append(num - 1);
+          // count = count["0"].childNodes.length;
+          // final.append(count["0"].childNodes.length);
+          // console.log(count["0"].childNodes.length);
+          // console.log(typeof(count["0"].childNodes.length));
+          result.append(ulDom);
+          // console.log(typeof(count));
+          // console.log(count);
+          // console.log(evt);
+          // console.log(this);
+          // console.log($( "ol#select-result li:selected" ));
+          // this.results = result;
+          // console.log(this.results);
+        }
+      });
+    });
+      
+    // $( function() {
+    //   $("#selectable").selectable({
+    //     stop: function() {
+    //       var result = $( "#select-result" ).empty();
+    //       $( ".ui-selected", this ).each(function() {
+    //         var index = $( "#selectable li" ).index( this );
+    //         // result.append( " #" + ( index + 1 ));
+    //         result.append(" #" + String.fromCharCode(index/12 + "A".charCodeAt()) + (index%12 + 1));
+    //         // console.log(typeof(result));
+    //         // console.log(result);
+    //       });
+    //     }
+    //   });
+    // } );
+  </script>
 </head>
 <body>
   <app-root></app-root>
