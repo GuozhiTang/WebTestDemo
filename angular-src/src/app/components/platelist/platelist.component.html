@@ -78,30 +78,32 @@
   }
   </style>
 </head>
-
 <body>
-  <div class="container">
 
+  <div class="container" id="Webpage_container">
 
-    <h3 style="padding-top: 15px;"><i class="fas fa-vials"></i> Choose your plate:</h3>
-    <div class="form-group" style="width: 300px">
-      <select class="custom-select">
-        <option selected="">Select the plate...</option>
-        <option value="1">8x12 Plate</option>
-        <option value="2">16x24 Plate</option>
-      </select>
+    <div class="container" id="Target_selection">
+      <h3><i class="fas fa-vials"></i> Select your Target Plate: </h3>
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Type in your &nbsp; <b>BARCODE</b> &nbsp; here: &nbsp; </label>
+          <input class="form-control" type="text" placeholder="barcode here...">
+        </div>
+        <button style="margin-left: 10px;" type="submit" class="btn btn-info">Get the Plate</button>
+      </form>
     </div>
     <hr>
 
-
-    <div id="Display_area" classs="container" style="height:450px; width: 1150px; overflow: scorll;">
-      <h3 style="text-align: left"><i class="fas fa-vials"></i> 8x12 Plate:</h3>
-      <p>Choose your <b>TARGET</b>:</p>
-      <div class="container" style="background:#FECA40;">
-        <div style="float: left; background-color: #e3edf0; padding-bottom: 15px; width: 620px; border-radius: 15px;">
-          <div class="row">
-            <div class="col-1"></div>
-            <div id="Number_area" class="col-11" style="margin-left: -40px; font-size: 28px; text-align: center;">
+    <div class="container" id="Target_display" style="height:480px; width: 1150px; overflow: scorll;">
+      <h3 style="text-align: left">
+        <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">"Barcode here..."</span>
+      </h3>
+      <p style="font-size: 17px; margin-left: 15px;"><i class="fas fa-angle-double-down"></i> Select your <b>TARGET</b> wells:</p>
+      <div id="Target_display_selection">
+        <div id="Target_display_selection_plate" style="float: left; background-color: #e3edf0; padding-bottom: 15px; width: 590px; border-radius: 15px;">
+          <div class="row" id="numtitle">
+            <div class="col-1" id="emptytitle"></div>
+            <div class="col-11" id="numbertitle_area" style="margin-left: -40px; font-size: 28px; text-align: center;">
               <ol>
                 <!-- <li class="listhead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
                 <li class="listhead">1</li>
@@ -119,9 +121,11 @@
               </ol>
             </div>
           </div>
-          <div class="row">
-            <div id="Letter_area" class="col-1" style="text-align: center; font-size: 27.5px; margin-left: 15px;">A<br>B<br>C<br>D<br>E<br>F<br>G<br>H</div>
-            <div id="Tube_area" class="col-11" style="margin-left: -15px">
+          <div class="row" id="lettertitle&well">
+            <div class="col-1" id="lettertitle_area" style="text-align: center; font-size: 27.5px; margin-left: 15px;">
+              A<br>B<br>C<br>D<br>E<br>F<br>G<br>H
+            </div>
+            <div class="col-11" id="well_area" style="margin-left: -15px">
               <ol id="selectable">
                 <li class="root" (click)="onSearchPlatesByCoor('A1')"></li>
                 <li class="root" (click)="onSearchPlatesByCoor('A2')"></li>
@@ -223,59 +227,74 @@
             </div>
           </div>
         </div>
-        <div style="margin-left: 80px; width: 350px; height:380px; overflow: auto; float: left;">
+        <div id="Target_display_selection_selected" style="margin-left: 80px; width: 350px; height: 380px; overflow: auto; float: left;">
           <h5><b>You have selected</b> (<span id="select-count"></span>)<b>:</b></h5>
-            <div style="margin-left: -35px;">
+            <div id="Target_display_selection_selected_results" style="margin-left: -35px;">
               <span id="select-result"></span>
             </div>
         </div>
       </div>
     </div>
+    <div id="Target_display_button" style="margin-left: 15px;">
+      <button type="button" class="btn btn-info">Submit <b>TARGET</b> and select <b>SOURCE</b></button>
+    </div>
     <hr>
 
-    <div>
+    <div id="Target_details" class="container">
+      <div id="Target_detials_full" *ngIf="searchCoorRes">
+        <h3 style="text-align: left">
+          <i class="fas fa-vial"></i> Details:
+        </h3>
+        <div class="circlebig" style="color: white; margin-top: 10px;" *ngFor="let coorRes of searchCoorRes">
+          <br><br>
+          <p>Position: {{coorRes.coor}}</p>
+          <p>Name: {{coorRes.name}}</p>
+          <p>Desciption: {{coorRes.description}}</p>
+          <p>Volume: {{coorRes.volume}}</p>
+          <p>Id: {{coorRes.id}}</p>
+        </div>
+      </div>
+      <div id="Target_detials_empty" *ngIf="emptyCoorRes">
+        <h3 style="text-align: left">
+          <i class="fas fa-vial"></i> Details:
+        </h3>
+        <div class="circlebigempty" style="color: white; margin-top: 10px;" *ngFor="let emptyRes of emptyCoorRes">
+          <br><br>
+          <p>Position: {{emptyRes.coor}}</p>
+          <p>Name: {{emptyRes.name}}</p>
+          <p>Desciption: {{emptyRes.description}}</p>
+          <p>Volume: {{emptyRes.volume}}</p>
+          <p>Id: {{emptyRes.id}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container" id="Test_reference">
+      <table class="table-striped">
+        <tr>
+          <th style="padding-right: 10px">id</th>
+          <th style="padding-left: 10px; padding-right: 10px">name</th>
+          <th style="padding-left: 10px; padding-right: 10px">description</th>
+          <th style="padding-left: 10px; padding-right: 10px">volume</th>
+          <th style="padding-left: 10px; padding-right: 10px">coor</th>
+        </tr>
+        <tr *ngFor="let plate of plates">
+          <td style="padding-right: 10px"> {{plate.id}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.name}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.description}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.volume}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.coor}} </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <div>
       <p>Select the <b>TARGET</b> and ready to choose <b>SOURCE</b> of a <b>TRANSFER</b>:</p>
       <button type="button" class="btn btn-info">Submit <b>TARGET</b> and choose <b>SOURCE</b></button>
     </div>
-    <hr>
+    <hr> -->
 
-    <div *ngIf="searchCoorRes">
-      <div class="circlebig" style="color: white" *ngFor="let coorRes of searchCoorRes">
-        <br><br>
-        <p>Position: {{coorRes.coor}}</p>
-        <p>Name: {{coorRes.name}}</p>
-        <p>Desciption: {{coorRes.description}}</p>
-        <p>Volume: {{coorRes.volume}}</p>
-        <p>Id: {{coorRes.id}}</p>
-      </div>
-    </div>
-    <div *ngIf="emptyCoorRes">
-      <div class="circlebigempty" style="color: white" *ngFor="let emptyRes of emptyCoorRes">
-        <br><br>
-        <p>Position: {{emptyRes.coor}}</p>
-        <p>Name: {{emptyRes.name}}</p>
-        <p>Desciption: {{emptyRes.description}}</p>
-        <p>Volume: {{emptyRes.volume}}</p>
-        <p>Id: {{emptyRes.id}}</p>
-      </div>
-    </div>
-    <hr>
-    <table class="table-striped">
-      <tr>
-        <th style="padding-right: 10px">id</th>
-        <th style="padding-left: 10px; padding-right: 10px">name</th>
-        <th style="padding-left: 10px; padding-right: 10px">description</th>
-        <th style="padding-left: 10px; padding-right: 10px">volume</th>
-        <th style="padding-left: 10px; padding-right: 10px">coor</th>
-      </tr>
-      <tr *ngFor="let plate of plates">
-        <td style="padding-right: 10px"> {{plate.id}} </td>
-        <td style="padding-left: 10px; padding-right: 10px"> {{plate.name}} </td>
-        <td style="padding-left: 10px; padding-right: 10px"> {{plate.description}} </td>
-        <td style="padding-left: 10px; padding-right: 10px"> {{plate.volume}} </td>
-        <td style="padding-left: 10px; padding-right: 10px"> {{plate.coor}} </td>
-      </tr>
-    </table>
+
   </div>
   
 <!-- <table border="1px">
@@ -322,5 +341,14 @@
   <li class="ui-widget-content">Item 5</li>
   <li class="ui-widget-content">Item 6</li>
 </ol> -->
+
+<!-- <h3 style="padding-top: 15px;"><i class="fas fa-vials"></i> Select:</h3>
+<div class="form-group" style="width: 300px">
+  <select class="custom-select">
+    <option selected="">Select the plate...</option>
+    <option value="1">8x12 Plate</option>
+    <option value="2">16x24 Plate</option>
+  </select>
+</div> -->
 </body>
 </html>
