@@ -82,10 +82,12 @@
 
   <div class="container" id="Webpage_container">
 
-    <div class="container" id="Target_selection">
-      <h3><i class="fas fa-vials"></i> Select your Target Plate: </h3>
-      <form class="form-inline">
-        <div class="form-group">
+    <div class="jumbotron text-center" id="Target_selection">
+      <h1><i class="fas fa-vials"></i> Set Up Your Transfer</h1>
+      <hr>
+      <h3>Select your Target Plate: </h3>
+      <form class="lead" style="margin-top: 20px; margin-bottom: -40px;">
+        <div class="form-group form-inline" style="margin-left: 300px;">
           <label>Type in your &nbsp; <b>BARCODE</b> &nbsp; here: &nbsp; </label>
           <input class="form-control" type="text" placeholder="barcode here...">
         </div>
@@ -253,6 +255,7 @@
           <p>Volume: {{coorRes.volume}}</p>
           <p>Id: {{coorRes.id}}</p>
         </div>
+        <hr>
       </div>
       <div id="Target_detials_empty" *ngIf="emptyCoorRes">
         <h3 style="text-align: left">
@@ -266,10 +269,12 @@
           <p>Volume: {{emptyRes.volume}}</p>
           <p>Id: {{emptyRes.id}}</p>
         </div>
+        <hr>
       </div>
     </div>
     
-    <div class="container" id="Test_reference">
+    <div class="container" id="Test_sample">
+      <h3 style="text-align: left">Test_Sample:</h3>
       <table class="table-striped">
         <tr>
           <th style="padding-right: 10px">id</th>
@@ -287,68 +292,6 @@
         </tr>
       </table>
     </div>
-
-    <!-- <div>
-      <p>Select the <b>TARGET</b> and ready to choose <b>SOURCE</b> of a <b>TRANSFER</b>:</p>
-      <button type="button" class="btn btn-info">Submit <b>TARGET</b> and choose <b>SOURCE</b></button>
-    </div>
-    <hr> -->
-
-
   </div>
-  
-<!-- <table border="1px">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">1</th>
-      <th scope="col">2</th>
-      <th scope="col">3</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr *ngFor="let letter of letters" id="selectable">
-      <th scope="row">{{letter.th}}</th>
-      <td>{{letter.td1}}</td>
-      <td>{{letter.td2}}</td>
-      <td>{{letter.td3}}</td>
-    </tr> -->
-    <!-- <tr id="selectable">
-      <th scope="row">A</th>
-      <td>A1</td>
-      <td>A2</td>
-      <td>A3</td>
-    </tr>
-    <tr>
-      <th scope="row">B</th>
-      <td>B1</td>
-      <td>B2</td>
-      <td>B3</td>
-    </tr>
-    <tr>
-      <th scope="row">C</th>
-      <td>C1</td>
-      <td>C2</td>
-      <td>C3</td>
-    </tr>
-  </tbody> -->
-<!-- </table> -->
-<!-- <ol id="selectable">
-  <li class="ui-widget-content">Item 1</li>
-  <li class="ui-widget-content">Item 2</li>
-  <li class="ui-widget-content">Item 3</li>
-  <li class="ui-widget-content">Item 4</li>
-  <li class="ui-widget-content">Item 5</li>
-  <li class="ui-widget-content">Item 6</li>
-</ol> -->
-
-<!-- <h3 style="padding-top: 15px;"><i class="fas fa-vials"></i> Select:</h3>
-<div class="form-group" style="width: 300px">
-  <select class="custom-select">
-    <option selected="">Select the plate...</option>
-    <option value="1">8x12 Plate</option>
-    <option value="2">16x24 Plate</option>
-  </select>
-</div> -->
 </body>
 </html>
