@@ -91,7 +91,7 @@
           <label>Type in your &nbsp; <b>BARCODE</b> &nbsp; here: &nbsp; </label>
           <input class="form-control" type="text" placeholder="barcode here...">
         </div>
-        <button style="margin-left: 10px;" type="submit" class="btn btn-info">Get the Plate</button>
+        <button style="margin-left: 10px;" type="submit" class="btn btn-info">Get the <b>Target</b> Plate</button>
       </form>
     </div>
     <hr>
@@ -229,8 +229,8 @@
             </div>
           </div>
         </div>
-        <div id="Target_display_selection_selected" style="margin-left: 80px; width: 350px; height: 380px; overflow: auto; float: left;">
-          <h5><b>You have selected</b> (<span id="select-count"></span>)<b>:</b></h5>
+        <div id="Target_display_selection_selected" style="margin-left: 80px; width: 350px; height: 380px; overflow: auto; float: left; border-radius: 15px; border: 3px dashed #e3edf0">
+          <h5 style="text-align: center;"><b>You have selected</b> (<span id="select-count"></span>)<b>:</b></h5>
             <div id="Target_display_selection_selected_results" style="margin-left: -35px;">
               <span id="select-result"></span>
             </div>
@@ -238,7 +238,32 @@
       </div>
     </div>
     <div id="Target_display_button" style="margin-left: 15px;">
-      <button type="button" class="btn btn-info">Submit <b>TARGET</b> and select <b>SOURCE</b></button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#toSource">Submit <b>TARGET</b> and select <b>SOURCE</b></button>
+
+      <div class="modal fade" id="toSource" tabindex="-1" role="dialog" aria-labelledby="toSourceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="toSourceLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
+                  <input class="form-control" type="text" placeholder="barcode here...">
+                </div>
+                <button class="btn btn-info">Get the <b>SOURCE</b> Plate</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <hr>
 

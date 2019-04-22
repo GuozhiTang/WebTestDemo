@@ -23,8 +23,6 @@ import { SpecsService } from './services/specs.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-// import { BootstrapModalModule } from 'ngx-bootstrap-modal';
-// import { ModalModule } from 'ngx-bootstrap/modal';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -70,8 +68,6 @@ export function tokenGetter() {
         tokenGetter: tokenGetter
       },
     }),
-    // BootstrapModalModule,
-    // ModalModule
   ],
   // Services should be put into providers
   providers: [ValidateService, AuthService, AuthGuard, SpecsService],
