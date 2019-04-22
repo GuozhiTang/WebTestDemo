@@ -1,24 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PlateService } from '../../services/plate.service';
 import { Plate } from '../../../Plate';
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-plate',
-  templateUrl: './plate.component.html',
-  styleUrls: ['./plate.component.css']
+  selector: 'app-sourceplate',
+  templateUrl: './sourceplate.component.html',
+  styleUrls: ['./sourceplate.component.css']
 })
-export class PlateComponent implements OnInit {
+export class SourceplateComponent implements OnInit {
   plates: Plate[];
-  id: String;
+  id: Number;
+  barcode: Number;
   name: String;
   coor: String;
   volume: String;
   description: String;
   searchCoorRes: Plate[];
   emptyCoorRes: Plate[];
+  results: object;
+  text: String;
 
   constructor(
     private plateService: PlateService,
+    private router: Router,
+    private flashMessage: FlashMessagesService,
   ) {
     this.plateService.getPlates().subscribe(plates => {
       this.plates = plates;
@@ -27,7 +34,6 @@ export class PlateComponent implements OnInit {
 
   ngOnInit() {
   }
-
   onClick() {
     console.log('Click Successfully!');
   }

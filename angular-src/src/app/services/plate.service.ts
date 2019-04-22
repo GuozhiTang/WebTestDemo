@@ -11,17 +11,6 @@ export class PlateService {
     private http:Http
   ) { }
 
-  clickTube() {
-    const tube = {
-      id: "12345",
-      name: "testtube",
-      coor: "A2",
-      volume: "12mL",
-      description: "test 12mL tube"
-    }
-    return tube;
-  }
-
   getPlates() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/plates/getplates', {headers: headers})
@@ -32,6 +21,13 @@ export class PlateService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/plates/searchbycoor', coor, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  searchPlateByBar(barcode) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://127.0.0.1:3000/plates/searchbybarcode', barcode, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

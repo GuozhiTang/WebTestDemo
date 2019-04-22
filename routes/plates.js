@@ -29,4 +29,16 @@ router.post('/searchbycoor', (req, res, next) => {
   });
 });
 
+router.post('/searchbybarcode', (req, res, next) => {
+  const barcode = req.body.barcode;
+
+  Plate.getByBarcode(barcode, (err, barcode) => {
+    if (err) {
+      res.json({success: false, msg:'Failed to get Plates!'});
+    } else {
+      res.json(barcode);
+    }
+  });
+})
+
 module.exports = router;

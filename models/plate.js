@@ -10,6 +10,9 @@ const PlateSchema = mongoose.Schema({
     id: {
       type: Number
     },
+    barcode: {
+      type: Number
+    },
     name: {
       type: String
     },
@@ -35,5 +38,10 @@ module.exports.getPlates = function (callback) {
 
 module.exports.getByCoor = function(coor, callback) {
   const query = {coor: coor}
+  Plate.find(query, callback);
+}
+
+module.exports.getByBarcode = function(barcode, callback) {
+  const query = {barcode: barcode}
   Plate.find(query, callback);
 }

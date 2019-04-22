@@ -23,6 +23,9 @@ import { SpecsService } from './services/specs.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { TargetplateComponent } from './components/targetplate/targetplate.component';
+import { SourceplateComponent } from './components/sourceplate/sourceplate.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -34,6 +37,9 @@ const appRoutes: Routes = [
   {path:'specs', component: SpecsComponent},
   {path:'plate', component: PlateComponent},
   {path:'platelist', component: PlatelistComponent},
+  {path:'transfer', component: TransferComponent},
+  {path:'transfer/targetplate', component: TargetplateComponent},
+  {path:'transfer/sourceplate', component: SourceplateComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -54,6 +60,9 @@ export function tokenGetter() {
     SpecsComponent,
     PlateComponent,
     PlatelistComponent,
+    TransferComponent,
+    TargetplateComponent,
+    SourceplateComponent,
   ],
   // Modules should be put into imports
   imports: [

@@ -1,5 +1,6 @@
 export class Plate {
-  id: String;
+  id: Number;
+  barcode: Number;
   name: String;
   coor: String;
   volume: String;

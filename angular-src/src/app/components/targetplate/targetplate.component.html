@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Target Plates</title>
+
+  <style>
+  #selectable .ui-selecting { background: #FECA40; border: 3px dashed #000000}
+  #selectable .ui-selected { background: #F39814; color: white; border: 3px dashed #000000}
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 500px; }
+  #selectable li { margin: 4px; padding: 1px; float: left; width: 33px; height: 33px; text-align: center; border-radius: 50%;
+  background-color: rgb(
+    calc(
+      120 * var(--isEmpty) +
+      63 * (1 - var(--isEmpty))
+    ),
+    calc(
+      194 * var(--isEmpty) +
+      71 * (1 - var(--isEmpty))
+    ),
+    calc(
+      173 * var(--isEmpty) +
+      79 * (1 - var(--isEmpty))
+    )
+  );
+  }
+  #selectable .root {
+    --isEmpty: 0;
+  }
+  #selectable .isEmpty {
+    --isEmpty: 1;
+  }
+  .circlesmallFul{
+    width: 32px;
+    height: 32px;
+    position: relative;
+    background-color: #3f474f;
+    border-radius: 50%;
+    align-items: center;
+    cursor: pointer;
+  }
+  .circlesmallEmp{
+      width: 32px;
+      height: 32px;
+      position: relative;
+      background-color: #78c2ad;
+      border-radius: 50%;
+      align-items: center;
+      cursor: pointer;
+    }
+  .listhead {
+    list-style-type: none;
+    float: left;
+    margin: 4px;
+    width: 33px;
+    height: 33px;
+  }
+  .circlebig{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    background-color: #3f474e;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    border: 5px dashed #000000
+  }
+  .circlebigempty{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    background-color: #78C2AD;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    border: 5px dashed #000000
+  }
+  </style>
+  
+</head>
+<body>
+  <div class="container" id="Webpage_container">
+    <hr>
+    <div class="container" id="Target_display" style="height:480px; width: 1150px; overflow: scorll;">
+      <h3 style="text-align: left">
+        <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">"Barcode here..."</span>
+      </h3>
+      <p style="font-size: 17px; margin-left: 15px;"><i class="fas fa-angle-double-down"></i> Select your <b>TARGET</b> wells:</p>
+      <div id="Target_display_selection">
+        <div id="Target_display_selection_plate" style="float: left; background-color: #e3edf0; padding-bottom: 15px; width: 590px; border-radius: 15px;">
+          <div class="row" id="numtitle">
+            <div class="col-1" id="emptytitle"></div>
+            <div class="col-11" id="numbertitle_area" style="margin-left: -40px; font-size: 28px; text-align: center;">
+              <ol>
+                <!-- <li class="listhead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> -->
+                <li class="listhead">1</li>
+                <li class="listhead">2</li>
+                <li class="listhead">3</li>
+                <li class="listhead">4</li>
+                <li class="listhead">5</li>
+                <li class="listhead">6</li>
+                <li class="listhead">7</li>
+                <li class="listhead">8</li>
+                <li class="listhead">9</li>
+                <li class="listhead">10</li>
+                <li class="listhead">11</li>
+                <li class="listhead">12</li>
+              </ol>
+            </div>
+          </div>
+          <div class="row" id="lettertitle&well">
+            <div class="col-1" id="lettertitle_area" style="text-align: center; font-size: 27.5px; margin-left: 15px;">
+              A<br>B<br>C<br>D<br>E<br>F<br>G<br>H
+            </div>
+            <div class="col-11" id="well_area" style="margin-left: -15px">
+              <ol id="selectable">
+                <li class="root" (click)="onSearchPlatesByCoor('A1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('A7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('A12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('B7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('B12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('C7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('C12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('D7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('D12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('E7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('E12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F6')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('F7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('F12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('G6')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('G12')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H1')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H2')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H3')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H4')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H5')"></li>
+                <li class="root" (click)="onSearchPlatesByCoor('H6')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H7')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H8')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H9')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H10')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H11')"></li>
+                <li class="isEmpty" (click)="onSearchPlatesByCoor('H12')"></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div id="Target_display_selection_selected" style="margin-left: 80px; width: 350px; height: 380px; overflow: auto; float: left; border-radius: 15px; border: 3px dashed #e3edf0">
+          <h5 style="text-align: center;"><b>You have selected</b> (<span id="select-count"></span>)<b>:</b></h5>
+            <div id="Target_display_selection_selected_results" style="margin-left: -35px;">
+              <span id="select-result"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="Target_display_button" style="margin-left: 15px;">
+      <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#toSource">Submit <b>TARGET</b> and select <b>SOURCE</b></button> -->
+      <form (submit)="onSearchPlateByBar()">
+        <div class="form-group">
+          <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
+          <input class="form-control" type="text" [(ngModel)]="barcode" name="barcode" placeholder="barcode here...">
+        </div>
+        <button class="btn btn-info" type="submit">Submit and Get the <b>SOURCE</b> Plate</button>
+      </form>
+      <!-- <div class="modal fade" id="toSource" tabindex="-1" role="dialog" aria-labelledby="toSourceLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="toSourceLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (submit)="onClickTest()">
+                <div class="form-group">
+                  <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
+                  <input class="form-control" type="text" placeholder="barcode here...">
+                </div>
+                <button type="submit" class="btn btn-info">Get the <b>SOURCE</b> Plate</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <hr>
+
+    <div id="Target_details" class="container">
+      <div id="Target_detials_full" *ngIf="searchCoorRes">
+        <h3 style="text-align: left">
+          <i class="fas fa-vial"></i> Details:
+        </h3>
+        <div class="circlebig" style="color: white; margin-top: 10px;" *ngFor="let coorRes of searchCoorRes">
+          <br><br>
+          <p>Position: {{coorRes.coor}}</p>
+          <p>Name: {{coorRes.name}}</p>
+          <p>Desciption: {{coorRes.description}}</p>
+          <p>Volume: {{coorRes.volume}}</p>
+          <p>Id: {{coorRes.id}}</p>
+        </div>
+        <hr>
+      </div>
+      <div id="Target_detials_empty" *ngIf="emptyCoorRes">
+        <h3 style="text-align: left">
+          <i class="fas fa-vial"></i> Details:
+        </h3>
+        <div class="circlebigempty" style="color: white; margin-top: 10px;" *ngFor="let emptyRes of emptyCoorRes">
+          <br><br>
+          <p>Position: {{emptyRes.coor}}</p>
+          <p>Name: {{emptyRes.name}}</p>
+          <p>Desciption: {{emptyRes.description}}</p>
+          <p>Volume: {{emptyRes.volume}}</p>
+          <p>Id: {{emptyRes.id}}</p>
+        </div>
+        <hr>
+      </div>
+    </div>
+    
+    <div class="container" id="Test_sample">
+      <h3 style="text-align: left">Test_Sample:</h3>
+      <table class="table-striped">
+        <tr>
+          <th style="padding-right: 10px">id</th>
+          <th style="padding-left: 10px; padding-right: 10px">barcode</th>
+          <th style="padding-left: 10px; padding-right: 10px">name</th>
+          <th style="padding-left: 10px; padding-right: 10px">description</th>
+          <th style="padding-left: 10px; padding-right: 10px">volume</th>
+          <th style="padding-left: 10px; padding-right: 10px">coor</th>
+        </tr>
+        <tr *ngFor="let plate of plates">
+          <td style="padding-right: 10px"> {{plate.id}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.barcode}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.name}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.description}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.volume}} </td>
+          <td style="padding-left: 10px; padding-right: 10px"> {{plate.coor}} </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
