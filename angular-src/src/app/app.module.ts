@@ -24,8 +24,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { TransferComponent } from './components/transfer/transfer.component';
-import { TargetplateComponent } from './components/targetplate/targetplate.component';
-import { SourceplateComponent } from './components/sourceplate/sourceplate.component';
+import { TargetplateComponent } from './components/transfer/targetplate/targetplate.component';
+import { SourceplateComponent } from './components/transfer/sourceplate/sourceplate.component';
 
 const appRoutes: Routes = [
   // This could be the home page

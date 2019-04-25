@@ -21,6 +21,10 @@ export class TransferComponent implements OnInit {
   emptyCoorRes: Plate[];
   results: object;
   text: String;
+  // barcode_typeintransfer: String;
+  // barcode_targetjudge: String;
+  // transferjudge: String = 'something';
+  // showTransfer: boolean = false;
 
   constructor(
     private plateService: PlateService,
@@ -45,6 +49,9 @@ export class TransferComponent implements OnInit {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/transfer/targetplate']);
         window.location.href = "/transfer/targetplate/";
+        // this.barcode_targetjudge = res[0].barcode;
+        // this.transferjudge = undefined;
+        // this.showTransfer = ! this.showTransfer;
         // console.log('Submit successfully!');
         // console.log(res);
       } else {

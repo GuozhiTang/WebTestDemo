@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PlateService } from '../../services/plate.service';
-import { Plate } from '../../../Plate';
+import { Component, OnInit, Input } from '@angular/core';
+import { PlateService } from '../../../services/plate.service';
+import { Plate } from '../../../../Plate';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-targetplate',
-  templateUrl: './targetplate.component.html',
-  styleUrls: ['./targetplate.component.css']
+  selector: 'app-sourceplate',
+  templateUrl: './sourceplate.component.html',
+  styleUrls: ['./sourceplate.component.css']
 })
-export class TargetplateComponent implements OnInit {
+export class SourceplateComponent implements OnInit {
   plates: Plate[];
   id: Number;
   barcode: Number;
@@ -20,6 +20,9 @@ export class TargetplateComponent implements OnInit {
   searchCoorRes: Plate[];
   emptyCoorRes: Plate[];
   results: object;
+  text: String;
+  // @Input() sourcebarcode: Number;
+  // @Input() showSource : boolean = true;
 
   constructor(
     private plateService: PlateService,
@@ -33,7 +36,6 @@ export class TargetplateComponent implements OnInit {
 
   ngOnInit() {
   }
-
   onClick() {
     console.log('Click Successfully!');
   }
@@ -54,7 +56,6 @@ export class TargetplateComponent implements OnInit {
     // });
     this.plateService.searchPlatesByCoor(searchCoor).subscribe(res => {
       // console.log(typeof(res));
-      // console.log(res);
       if (res[0].volume != null && res[0] != "") {
         this.emptyCoorRes = undefined;
         this.searchCoorRes = res;
@@ -63,27 +64,5 @@ export class TargetplateComponent implements OnInit {
         this.emptyCoorRes = res;
       }
     });
-  }
-
-  onSearchPlateByBar() {
-    const searchBar = {
-      barcode: this.barcode
-    }
-
-    this.plateService.searchPlateByBar(searchBar).subscribe(res => {
-      if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
-        this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/transfer/sourceplate/']);
-        window.location.href = "/transfer/sourceplate/";
-        // console.log('Submit successfully!');
-        // console.log(res);
-      } else {
-        this.flashMessage.show('Please type correct barcode!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Submit failed!');
-        // console.log(res);
-      }
-    });
-
-
   }
 }

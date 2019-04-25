@@ -15,9 +15,9 @@
       <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/dashboard']"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
       </li>
-      <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
+      <!-- <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/profile']"><i class="fas fa-tachometer-alt"></i> Profile</a>
-      </li>
+      </li> -->
       <li class="nav-item" *ngIf="authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</a>
       </li>
