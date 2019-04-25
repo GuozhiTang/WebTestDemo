@@ -24,6 +24,9 @@
     <li class="nav-item" *ngIf="authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a>
     </li>
+    <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
+        <a class="nav-link" [routerLink]="['/transfer']"><i class="fas fa-vials"></i> Transfer</a>
+    </li>
     <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
     </li>

@@ -223,72 +223,83 @@
         </div>
       </div>
     </div>
-    <div id="Target_display_button" style="margin-left: 15px;">
-      <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#toSource">Submit <b>TARGET</b> and select <b>SOURCE</b></button> -->
-      <form (submit)="onSearchPlateByBar()">
-        <div class="form-group">
-          <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
-          <input class="form-control" type="text" [(ngModel)]="barcode" name="barcode" placeholder="barcode here...">
-        </div>
-        <button class="btn btn-info" type="submit">Submit and Get the <b>SOURCE</b> Plate</button>
-      </form>
-      <!-- <div class="modal fade" id="toSource" tabindex="-1" role="dialog" aria-labelledby="toSourceLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="toSourceLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form (submit)="onClickTest()">
-                <div class="form-group">
-                  <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
-                  <input class="form-control" type="text" placeholder="barcode here...">
-                </div>
-                <button type="submit" class="btn btn-info">Get the <b>SOURCE</b> Plate</button>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+    <hr>
+    
+    <div class="container" id="Target_details">
+      <div class="row">
+        <div class="col" id="Target_detials_full" *ngIf="searchCoorRes">
+          <h3 style="text-align: left">
+            <i class="fas fa-vial"></i> Details:
+          </h3>
+          <div class="circlebig" style="color: white; margin-top: 10px;" *ngFor="let coorRes of searchCoorRes">
+            <br><br>
+            <p>Position: {{coorRes.coor}}</p>
+            <p>Name: {{coorRes.name}}</p>
+            <p>Desciption: {{coorRes.description}}</p>
+            <p>Volume: {{coorRes.volume}}</p>
+            <p>Id: {{coorRes.id}}</p>
           </div>
         </div>
-      </div> -->
+        <div class="col" id="Target_detials_empty" *ngIf="emptyCoorRes">
+          <h3 style="text-align: left">
+            <i class="fas fa-vial"></i> Details:
+          </h3>
+          <div class="circlebigempty" style="color: white; margin-top: 10px;" *ngFor="let emptyRes of emptyCoorRes">
+            <br><br>
+            <p>Position: {{emptyRes.coor}}</p>
+            <p>Name: {{emptyRes.name}}</p>
+            <p>Desciption: {{emptyRes.description}}</p>
+            <p>Volume: {{emptyRes.volume}}</p>
+            <p>Id: {{emptyRes.id}}</p>
+          </div>
+        </div>
+
+        <div class="col" id="Target_display_button" style="margin-top: 25px;">
+          <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#toSource">Submit <b>TARGET</b> and select <b>SOURCE</b></button> -->
+          <form (submit)="onSearchPlateByBar()">
+            <div class="form-group">
+              <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
+              <input class="form-control" type="text" [(ngModel)]="barcode" name="barcode" placeholder="barcode here..." style="width: 300px;">
+            </div>
+            <div class="form-group">
+              <label>Type in the <b>VOLUME</b> of <b>TRANSFER</b>:</label>
+              <input class="form-control" type="text" placeholder="volume here..." style="width: 300px;">
+            </div>
+            <button class="btn btn-info" type="submit">Submit and Get the <b>SOURCE</b> Plate</button>
+          </form>
+          <!-- <div class="modal fade" id="toSource" tabindex="-1" role="dialog" aria-labelledby="toSourceLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="toSourceLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form (submit)="onClickTest()">
+                    <div class="form-group">
+                      <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
+                      <input class="form-control" type="text" placeholder="barcode here...">
+                    </div>
+                    <button type="submit" class="btn btn-info">Get the <b>SOURCE</b> Plate</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
     </div>
+
+    
     <hr>
 
-    <div id="Target_details" class="container">
-      <div id="Target_detials_full" *ngIf="searchCoorRes">
-        <h3 style="text-align: left">
-          <i class="fas fa-vial"></i> Details:
-        </h3>
-        <div class="circlebig" style="color: white; margin-top: 10px;" *ngFor="let coorRes of searchCoorRes">
-          <br><br>
-          <p>Position: {{coorRes.coor}}</p>
-          <p>Name: {{coorRes.name}}</p>
-          <p>Desciption: {{coorRes.description}}</p>
-          <p>Volume: {{coorRes.volume}}</p>
-          <p>Id: {{coorRes.id}}</p>
-        </div>
-        <hr>
-      </div>
-      <div id="Target_detials_empty" *ngIf="emptyCoorRes">
-        <h3 style="text-align: left">
-          <i class="fas fa-vial"></i> Details:
-        </h3>
-        <div class="circlebigempty" style="color: white; margin-top: 10px;" *ngFor="let emptyRes of emptyCoorRes">
-          <br><br>
-          <p>Position: {{emptyRes.coor}}</p>
-          <p>Name: {{emptyRes.name}}</p>
-          <p>Desciption: {{emptyRes.description}}</p>
-          <p>Volume: {{emptyRes.volume}}</p>
-          <p>Id: {{emptyRes.id}}</p>
-        </div>
-        <hr>
-      </div>
-    </div>
+
     
     <div class="container" id="Test_sample">
       <h3 style="text-align: left">Test_Sample:</h3>
