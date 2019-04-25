@@ -8,10 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  name: String;
+  departmemt: String;
   user: {
     name: String;
-    username: String;
-    email: String
+    department: String;
   };
 
   constructor(

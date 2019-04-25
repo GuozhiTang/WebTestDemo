@@ -11,9 +11,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   name: String;
-  username: String;
-  email: String;
-  password: String;
+  department: String;
+  departments: String[] = ['Manufacturing Dept', 'HT Assay Dept'];
 
   // We need to inject into the constructor anytime we use a service in a component
   constructor(
@@ -29,22 +28,13 @@ export class RegisterComponent implements OnInit {
   onRegisterSubmit() {
     const user = {
       name: this.name,
-      email: this.email,
-      username: this.username,
-      password: this.password
+      department: this.department,
     }
 
     // Required Fields
     if (!this.validateService.validateRegister(user)) {
       // console.log('Please fill in all fields');
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
-      return false;
-    }
-
-    // Validate Email
-    if (!this.validateService.validateEmail(user.email)) {
-      // console.log('Please use a valid email');
-      this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
 

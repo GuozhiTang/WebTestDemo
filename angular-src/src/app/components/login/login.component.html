@@ -2,12 +2,19 @@
 <hr>
 <form (submit)="onLoginSubmit()">
   <div class="form-group">
-    <label>Username</label>
-    <input type="text" class="form-control" [(ngModel)]="username" name="username">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="name" name="name">
   </div>
   <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="password" name="password">
+    <label for="selectDep">Department</label>
+    <select class="form-control" id="selectDep" [(ngModel)]="department" name="department">
+      <option>Select your department...</option>
+      <option [value]="department" *ngFor='let department of departments'>{{department}}</option>
+    </select>
   </div>
+  <!-- <div class="form-group">
+      <label>Department</label>
+      <input type="text" class="form-control" [(ngModel)]="department" name="department">
+  </div> -->
   <button type="submit" class="btn btn-primary"><i class="fas fa-user"></i> Login</button>
 </form>

@@ -9,6 +9,12 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  name: String;
+  departmemt: String;
+  user: {
+    name: String;
+    department: String;
+  };
 
   constructor(
     public authService:AuthService,
@@ -17,6 +23,14 @@ export class NavbarComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.authService.getProfile().subscribe(profile => {
+      // console.log(profile.user);
+      this.user = profile.user;
+    },
+    err => {
+      console.log(err);
+      return false;
+    });
   }
 
   onLogoutClick() {
@@ -26,6 +40,7 @@ export class NavbarComponent implements OnInit {
       timeout: 3000
     });
     this.router.navigate(['/login']);
+    window.location.href = "/login";
     return false;
   }
 }

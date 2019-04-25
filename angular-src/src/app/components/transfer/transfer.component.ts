@@ -54,4 +54,11 @@ export class TransferComponent implements OnInit {
       }
     });
   }
+
+  showBarcode() {
+    const showBar = {
+      barcode: this.barcode
+    }
+    return showBar;
+  }
 }
