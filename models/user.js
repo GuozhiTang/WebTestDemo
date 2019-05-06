@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
 // We want to use it outside
 // model('the name of user')
 // module.exports so that it can be used outside this file
-const User = module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('Userlog', UserSchema);
 
 // Use function outside: search by id
 module.exports.getUserById = function(id, callback) {
@@ -33,7 +33,7 @@ module.exports.addUser = function (newUser, callback) {
 
 module.exports.getUserByName = function(name, callback) {
   const query = {name: name}
-  User.find(query, callback);
+  User.findOne(query, callback);
 }
 
 module.exports.getByDep = function (department, callback) {

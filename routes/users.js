@@ -41,14 +41,18 @@ router.post('/authenticate', (req, res, next) => {
   const name = req.body.name;
   const department = req.body.department;
 
+  // if (name == undefined || department == undefined) {
+  //   res.json({success: false, msg:'Please complete each blank!'});
+  
+
   User.getUserByName(name, (err, user) => {
     if (err) {
       res.json({success: false, msg:'Error exists for authentication!'});
     } else if (!user) {
       res.json({success: false, msg:'User not found!'});
-    } else if (user[0].department != department) {
+    } else if (user.department != department) {
       res.json({success: false, msg:'Name and department are not matched!'});
-    } else if (user[0].department == department) {
+    } else if (user.department == department) {
       const token = jwt.sign({data: user}, config.secret, {
         expiresIn: 604800 // One week
       });
@@ -57,14 +61,44 @@ router.post('/authenticate', (req, res, next) => {
         success: true,
         token: 'JWT ' + token,
         user: {
-          id: user[0]._id,
-          name: user[0].name,
-          department: user[0].department
+          id: user._id,
+          name: user.name,
+          department: user.department
         },
         msg:'Login Successfully!'
       });
     }
   });
+//     if (err) throw err;
+//     if (!user) {
+//       res.json({success: false, msg:'User not found!'});
+//     } 
+
+//     // if (user[0].department == undefined || user[0].name == undefined) {
+//     //   res.json({success: false, msg:'Please complete each blank!'});
+//     // } else 
+//     if (user[0].department != department) {
+//       res.json({success: false, msg:'Name and department are not matched!'});
+//     } else if (user[0].department == department) {
+//       const token = jwt.sign({data: user}, config.secret, {
+//         expiresIn: 604800 // One week
+//       });
+
+//       res.json({
+//         success: true,
+//         token: 'JWT ' + token,
+//         user: {
+//           id: user[0]._id,
+//           name: user[0].name,
+//           department: user[0].department
+//         },
+//         msg:'Login Successfully!'
+//       });
+//     } else {
+//       res.json({success: false, msg: 'Something goes wrong, please check!'});
+//     }
+//   });
+// // }
 });
 
 // Profile - /users/profile

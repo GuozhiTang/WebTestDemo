@@ -24,7 +24,7 @@ export class TransferComponent implements OnInit {
   // barcode_typeintransfer: String;
   // barcode_targetjudge: String;
   // transferjudge: String = 'something';
-  // showTransfer: boolean = false;
+  showTransfer: boolean = false;
 
   constructor(
     private plateService: PlateService,
@@ -37,6 +37,7 @@ export class TransferComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.showTransfer);
   }
 
   onSearchPlateByBar() {
@@ -47,8 +48,8 @@ export class TransferComponent implements OnInit {
     this.plateService.searchPlateByBar(searchBar).subscribe(res => {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/transfer/targetplate']);
-        window.location.href = "/transfer/targetplate/";
+        // this.router.navigate(['/transfer/targetplate']);
+        window.location.href = "/transfer/targetplate";
         // this.barcode_targetjudge = res[0].barcode;
         // this.transferjudge = undefined;
         // this.showTransfer = ! this.showTransfer;

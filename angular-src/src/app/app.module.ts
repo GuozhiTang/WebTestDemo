@@ -26,6 +26,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { TargetplateComponent } from './components/transfer/targetplate/targetplate.component';
 import { SourceplateComponent } from './components/transfer/sourceplate/sourceplate.component';
+import { HintComponent } from './components/hint/hint.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   {path:'transfer', component: TransferComponent},
   {path:'transfer/targetplate', component: TargetplateComponent},
   {path:'transfer/sourceplate', component: SourceplateComponent},
+  {path:'hint', component: HintComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -63,6 +65,7 @@ export function tokenGetter() {
     TransferComponent,
     TargetplateComponent,
     SourceplateComponent,
+    HintComponent,
   ],
   // Modules should be put into imports
   imports: [

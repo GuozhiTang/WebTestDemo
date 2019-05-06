@@ -7,7 +7,7 @@
   
 </head>
 <body>
-  <div class="container" id="Webpage_container">
+  <div class="container" id="Webpage_container" ng-show="showTransfer">
     <div class="jumbotron text-center" id="Target_selection">
       <h1><i class="fas fa-vials"></i> Set Up Your Transfer</h1>
       <hr>
@@ -23,5 +23,6 @@
   </div>
   <!-- <app-targetplate [targetbarcode]='barcode_targetjudge' [showTarget]='showTransfer'></app-targetplate>
   <app-sourceplate [sourcebarcode]='barcode_sourcejudge' [showSource]="showTarget2"></app-sourceplate> -->
+  <!-- <app-targetplate [targetbarcode]='barcode_targetjudge' *ngIf="targetjudge"></app-targetplate> -->
 </body>
 </html>

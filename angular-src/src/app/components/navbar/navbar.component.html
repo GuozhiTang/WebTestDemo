@@ -30,9 +30,12 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
       </li>
-      <li class="nav-item" *ngIf="!authService.isTokenExp() && user" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}" style="color:white; margin-top: 8px;">
-        <i class="fas fa-user-circle"></i> {{user.name}} <i class="fas fa-angle-double-right"></i> {{user.department}}
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
+        <a class="nav-link" [routerLink]="['/hint']"><i class="fas fa-lightbulb"></i> Hint</a>
       </li>
+      <!-- <li class="nav-item" *ngIf="!authService.isTokenExp() && user" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}" style="color:white; margin-top: 8px;">
+        <i class="fas fa-user-circle"></i> {{user.name}} <i class="fas fa-angle-double-right"></i> {{user.department}}
+      </li> -->
     </ul>
   </div>
 </nav>
