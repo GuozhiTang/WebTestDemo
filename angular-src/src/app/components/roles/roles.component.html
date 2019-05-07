@@ -1,0 +1,228 @@
+<div class="container">
+  <div class="row">
+    <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <h2 style="margin-top: 15px"><b>Grab and Show All Specs Locally</b></h2>
+      <form (submit)="onGrabRoles()" style="margin-bottom: 15px">
+          <button type="submit" class="btn btn-primary">Grab Specs</button>
+      </form>
+      <hr>
+      <table class="table-striped" style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">id</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
+          <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
+          <th style="padding-left: 2px; padding-right: 2px">role</th>
+          <th style="padding-left: 2px; padding-right: 2px">reagent</th>
+        </tr>
+        <tr *ngFor="let role of roles">
+          <td style="padding-right: 2px">{{role.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.moduleName}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.liquid_class}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.role}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.reagent}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <h2 style="margin-top: 15px"><b>Show All Roles Remotely</b></h2>
+      <p>According to: <a href="http://10.253.7.14:8000/?request=getRoles">http://10.253.7.14:8000/?request=getRoles</a></p>
+      <hr>
+      <table class="table-striped"  style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">id</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
+          <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
+          <th style="padding-left: 2px; padding-right: 2px">role</th>
+          <th style="padding-left: 2px; padding-right: 2px">reagent</th>
+        </tr>
+        <tr *ngFor="let remoterole of remoteroles">
+          <td style="padding-right: 2px">{{remoterole.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.moduleName}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.liquid_class}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.role}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.reagent}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2><b>Search by Role</b></h2>
+      <hr>
+      <form (submit)="onSearchRolesByRole()">
+        <div class="form-group">
+          <label>Type the role here:</label>
+          <input type='text' class="form-control" name='role' [(ngModel)]="role" placeholder="Type the role here...">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchRoleRes">
+        <table class="table-primary table-bordered">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
+            <th style="padding-left: 10px; padding-right: 10px">role</th>
+            <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+          </tr>
+          <tr *ngFor="let roleres of searchRoleRes">
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.id}}</td>
+            <td style="padding-right: 10px">{{roleres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.liquid_class}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.role}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <h2><b>Search by ModuleName</b></h2>
+      <hr>
+      <form (submit)="onSearchRolesByModuleName()">
+        <div class="form-group">
+          <label>Type the moduleName here:</label>
+          <input type='text' class="form-control" name='moduleName' [(ngModel)]="moduleName" placeholder="Type the moduleName here...">
+        </div>
+        <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchModuleNameRes">
+        <table class="table-info table-bordered">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
+            <th style="padding-left: 10px; padding-right: 10px">role</th>
+            <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+          </tr>
+          <tr *ngFor="let modulenameres of searchModuleNameRes">
+            <td style="padding-right: 10px">{{modulenameres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.liquid_class}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.role}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2><b>Search by Id</b></h2>
+      <hr>
+      <form (submit)="onSearchRolesById()">
+        <div class="form-group">
+          <label>Type the id here:</label>
+          <input type='text' class="form-control" name='id' [(ngModel)]="id" placeholder="Type the id here...">
+        </div>
+        <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchIdRes">
+        <table class="table-warning table-bordered">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
+            <th style="padding-left: 10px; padding-right: 10px">role</th>
+            <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+          </tr>
+          <tr *ngFor="let idres of searchIdRes">
+            <td style="padding-right: 10px">{{idres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.liquid_class}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.role}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="col">
+      <h2><b>Search by Conditions</b></h2>
+      <hr>
+      <form (submit)="onSearchRolesByConditions()">
+        <div class="form-group">
+          <label>Type the role here:</label>
+          <input type='text' class="form-control" name='role_condition' [(ngModel)]="role_condition" placeholder="Type the role here...">
+        </div>
+        <div class="form-group">
+          <label>Type the moduleName here:</label>
+          <input type='text' class="form-control" name='moduleName_condition' [(ngModel)]="moduleName_condition" placeholder="Type the moduleName here...">
+        </div>
+        <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchConRes">
+        <table class="table-secondary table-bordered">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
+            <th style="padding-left: 10px; padding-right: 10px">role</th>
+            <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+          </tr>
+          <tr *ngFor="let conres of searchConRes">
+            <td style="padding-right: 10px">{{conres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.liquid_class}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.role}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="page-header" style="margin-top: 15px"><b>Add Roles Manually</b></h2>
+      <form (submit)="onAddRoles()">
+        <div class="form-group">
+          <label>id:</label>
+          <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">
+        </div>
+        <div class="form-group">
+          <label>className:</label>
+          <input type="text" class="form-control" [(ngModel)]="className_add" name="className_add" placeholder="Add new className...">
+        </div>
+        <div class="form-group">
+            <label>moduleName:</label>
+            <input type="text" class="form-control" [(ngModel)]="moduleName_add" name="moduleName_add" placeholder="Add new moduleName...">
+          </div>
+        <div class="form-group">
+            <label>liquid_class:</label>
+            <input type="text" class="form-control" [(ngModel)]="liquid_class_add" name="liquid_class_add" placeholder="Add new liquid_class...">
+        </div>
+        <div class="form-group">
+            <label>role:</label>
+            <input type="text" class="form-control" [(ngModel)]="role_add" name="role_add" placeholder="Add new role...">
+        </div>
+        <div class="form-group">
+          <label>reagent:</label>
+          <input type="text" class="form-control" [(ngModel)]="reagent_add" name="reagent_add" placeholder="Add new reagent...">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add Roles</button>
+      </form>
+    </div>
+  </div>
+</div>

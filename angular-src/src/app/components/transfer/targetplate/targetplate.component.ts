@@ -78,7 +78,7 @@ export class TargetplateComponent {
     this.plateService.searchPlateByBar(searchBar).subscribe(res => {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // this.router.navigate(['/transfer/sourceplate/']);
+        this.router.navigate(['/transfer/sourceplate']);
         window.location.href = "/transfer/sourceplate";
         // this.barcode_sourcejudge = res[0].barcode;
         // this.targetbarcode = undefined;

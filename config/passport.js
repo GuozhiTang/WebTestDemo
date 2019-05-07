@@ -14,7 +14,7 @@ module.exports = function (passport) {
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
     // It is very important to see what the jwt_payload is first and then we can get _id correctly!!!
     console.log(jwt_payload);
-    User.getUserById(jwt_payload.data[0]._id, (err, user) => {
+    User.getUserById(jwt_payload.data._id, (err, user) => {
       if (err) {
         return done(err, false);
       }

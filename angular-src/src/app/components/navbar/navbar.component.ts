@@ -20,17 +20,19 @@ export class NavbarComponent implements OnInit {
     public authService:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService
-    ) { }
+    ) {
+      this.authService.getProfile().subscribe(profile => {
+        console.log(profile.user);
+        this.user = profile.user;
+      },
+      err => {
+        console.log(err);
+        return false;
+      });
+     }
 
   ngOnInit() {
-    // this.authService.getProfile().subscribe(profile => {
-    //   // console.log(profile.user);
-    //   this.user = profile.user;
-    // },
-    // err => {
-    //   console.log(err);
-    //   return false;
-    // });
+
   }
 
   onLogoutClick() {
@@ -39,7 +41,7 @@ export class NavbarComponent implements OnInit {
       cssClass: 'alert-success',
       timeout: 3000
     });
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
     window.location.href = "/login";
     return false;
   }

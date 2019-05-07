@@ -69,36 +69,6 @@ router.post('/authenticate', (req, res, next) => {
       });
     }
   });
-//     if (err) throw err;
-//     if (!user) {
-//       res.json({success: false, msg:'User not found!'});
-//     } 
-
-//     // if (user[0].department == undefined || user[0].name == undefined) {
-//     //   res.json({success: false, msg:'Please complete each blank!'});
-//     // } else 
-//     if (user[0].department != department) {
-//       res.json({success: false, msg:'Name and department are not matched!'});
-//     } else if (user[0].department == department) {
-//       const token = jwt.sign({data: user}, config.secret, {
-//         expiresIn: 604800 // One week
-//       });
-
-//       res.json({
-//         success: true,
-//         token: 'JWT ' + token,
-//         user: {
-//           id: user[0]._id,
-//           name: user[0].name,
-//           department: user[0].department
-//         },
-//         msg:'Login Successfully!'
-//       });
-//     } else {
-//       res.json({success: false, msg: 'Something goes wrong, please check!'});
-//     }
-//   });
-// // }
 });
 
 // Profile - /users/profile

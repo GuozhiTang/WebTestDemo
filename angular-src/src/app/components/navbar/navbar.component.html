@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <!-- <a class="navbar-brand" href="#">Manufacturing</a> -->
-  <a class="navbar-brand" href="#"><img alt='Firefly' src='./../../../assets/FFLogo.png' style="height: 55px; width: 130px; margin-top: -35px; margin-bottom: -32px; margin-left: -15px;"> Manufacturing</a>
+  <a class="navbar-brand" href="#"><img alt='Firefly' src='./../../../assets/FFLogo.png' style="height: 55px; width: 130px; margin-top: -35px; margin-bottom: -32px; margin-left: -15px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,15 +27,23 @@
       <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/transfer']"><i class="fas fa-vials"></i> Transfer</a>
       </li>
+      <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-file"></i> Components</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" [routerLink]="['/roles']"><i class="fas fa-file"></i> Roles</a>
+          <a class="dropdown-item" [routerLink]="['/transfer']"><i class="fas fa-file"></i> Labwares</a>
+          <a class="dropdown-item" [routerLink]="['/transfer']"><i class="fas fa-file"></i> Instruments</a>
+        </div>
+      </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
       </li>
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/hint']"><i class="fas fa-lightbulb"></i> Hint</a>
       </li>
-      <!-- <li class="nav-item" *ngIf="!authService.isTokenExp() && user" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}" style="color:white; margin-top: 8px;">
+      <li class="nav-item" *ngIf="!authService.isTokenExp() && user" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}" style="color:white; margin-top: 8px;">
         <i class="fas fa-user-circle"></i> {{user.name}} <i class="fas fa-angle-double-right"></i> {{user.department}}
-      </li> -->
+      </li>
     </ul>
   </div>
 </nav>
