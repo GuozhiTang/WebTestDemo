@@ -28,6 +28,7 @@ import { TargetplateComponent } from './components/transfer/targetplate/targetpl
 import { SourceplateComponent } from './components/transfer/sourceplate/sourceplate.component';
 import { HintComponent } from './components/hint/hint.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { LabwarespecsComponent } from './components/labwarespecs/labwarespecs.component';
 
 export const appRoutes: Routes = [
   // This could be the home page
@@ -44,6 +45,7 @@ export const appRoutes: Routes = [
   {path: 'transfer/sourceplate', component: SourceplateComponent},
   {path: 'hint', component: HintComponent},
   {path: 'roles', component: RolesComponent},
+  {path: 'labwarespecs', component: LabwarespecsComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -69,6 +71,7 @@ export function tokenGetter() {
     SourceplateComponent,
     HintComponent,
     RolesComponent,
+    LabwarespecsComponent,
   ],
   // Modules should be put into imports
   imports: [

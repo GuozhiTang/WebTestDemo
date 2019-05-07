@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" style="margin-top: 15px;">
   <div class="row">
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
-      <h2 style="margin-top: 15px"><b>Grab and Show All Specs Locally</b></h2>
+      <h2 style="margin-top: 15px"><b>Grab and Show All Roles Locally</b></h2>
       <form (submit)="onGrabRoles()" style="margin-bottom: 15px">
-          <button type="submit" class="btn btn-primary">Grab Specs</button>
+          <button type="submit" class="btn btn-primary">Grab Roles</button>
       </form>
       <hr>
       <table class="table-striped" style="text-align: center">
@@ -66,7 +66,7 @@
         <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchRoleRes">
-        <table class="table-primary table-bordered">
+        <table class="table-primary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">className</th>
@@ -76,8 +76,8 @@
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
           </tr>
           <tr *ngFor="let roleres of searchRoleRes">
-            <td style="padding-left: 10px; padding-right: 10px">{{roleres.id}}</td>
-            <td style="padding-right: 10px">{{roleres.className}}</td>
+            <td style="padding-right: 10px">{{roleres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.className}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.liquid_class}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.role}}</td>
@@ -88,17 +88,17 @@
     </div>
 
     <div class="col">
-      <h2><b>Search by ModuleName</b></h2>
+      <h2><b>Search by Liquid_Class</b></h2>
       <hr>
-      <form (submit)="onSearchRolesByModuleName()">
+      <form (submit)="onSearchRolesByLiquidClass()">
         <div class="form-group">
-          <label>Type the moduleName here:</label>
-          <input type='text' class="form-control" name='moduleName' [(ngModel)]="moduleName" placeholder="Type the moduleName here...">
+          <label>Type the liquid_class here:</label>
+          <input type='text' class="form-control" name='liquid_class' [(ngModel)]="liquid_class" placeholder="Type the liquid_class here...">
         </div>
         <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
       </form>
-      <div *ngIf="searchModuleNameRes">
-        <table class="table-info table-bordered">
+      <div *ngIf="searchLiquidClassRes">
+        <table class="table-info table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">className</th>
@@ -107,13 +107,13 @@
             <th style="padding-left: 10px; padding-right: 10px">role</th>
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
           </tr>
-          <tr *ngFor="let modulenameres of searchModuleNameRes">
-            <td style="padding-right: 10px">{{modulenameres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.moduleName}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.liquid_class}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.role}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.reagent}}</td>
+          <tr *ngFor="let liquidclassres of searchLiquidClassRes">
+            <td style="padding-right: 10px">{{liquidclassres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.liquid_class}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.role}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.reagent}}</td>
           </tr>
         </table>
       </div>
@@ -132,7 +132,7 @@
         <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchIdRes">
-        <table class="table-warning table-bordered">
+        <table class="table-warning table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">className</th>
@@ -162,13 +162,13 @@
           <input type='text' class="form-control" name='role_condition' [(ngModel)]="role_condition" placeholder="Type the role here...">
         </div>
         <div class="form-group">
-          <label>Type the moduleName here:</label>
-          <input type='text' class="form-control" name='moduleName_condition' [(ngModel)]="moduleName_condition" placeholder="Type the moduleName here...">
+          <label>Type the liquid_class here:</label>
+          <input type='text' class="form-control" name='liquid_class_condition' [(ngModel)]="liquid_class_condition" placeholder="Type the liquid_class here...">
         </div>
         <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchConRes">
-        <table class="table-secondary table-bordered">
+        <table class="table-secondary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">className</th>

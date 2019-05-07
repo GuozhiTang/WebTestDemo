@@ -39,7 +39,17 @@ const LabwareSpecSchema = mongoose.Schema({
   }
 });
 
+// We want to use it outside
+// module.exports so that it can be used outside this file
 const LabwareSpec = module.exports = mongoose.model('LabwareSpec', LabwareSpecSchema);
+
+module.exports.getLabwareSpec = function (callback) {
+  LabwareSpec.find(callback);
+}
+
+module.exports.addLabwareSpec = function (newLabwareSpec, callback) {
+  newLabwareSpec.save(callback);
+}
 
 module.exports.grabLabwareSpecs = function (callback) {
   request.post('http://10.253.7.14:8000', {
@@ -50,19 +60,6 @@ module.exports.grabLabwareSpecs = function (callback) {
           colNames: ["id"],
           coreDao: {
               id: "null",
-              name: "null",
-              description: "null",
-              map_id: {
-                id: "null",
-                name: "null",
-                description: "null",
-                className: "Map",
-                moduleName: "fireplex.data.backend.core"
-              },
-              volume: "null",
-              material: "null",
-              cat_num: "null",
-              manufacturer: "null",
               className: "LabwareSpec",
               moduleName: "fireplex.data.backend.core"
           },
@@ -84,4 +81,27 @@ module.exports.grabLabwareSpecs = function (callback) {
       }
     }
   })
+}
+
+module.exports.getByName = function(name, callback) {
+  const query = {name: name}
+  LabwareSpec.find(query, callback);
+}
+
+module.exports.getByManufacturer = function(manufacturer, callback) {
+  const query = {manufacturer: manufacturer}
+  LabwareSpec.find(query, callback);
+}
+
+module.exports.getById = function(id, callback) {
+  const query = {id: id}
+  LabwareSpec.find(query, callback);
+}
+
+module.exports.getByConditions = function(name, manufacturer, callback) {
+  const query = {
+    name: name,
+    manufacturer: manufacturer
+  }
+  LabwareSpec.find(query, callback);
 }

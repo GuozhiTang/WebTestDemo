@@ -15,7 +15,7 @@ router.get('/getroles', (req, res, next) => {
   });
 });
 
-router.post('/addroles', (req, res, next) => {
+router.post('/addrole', (req, res, next) => {
   let newRole = new Role({
     moduleName: req.body.moduleName,
     className: req.body.className,
@@ -61,10 +61,10 @@ router.post('/searchbyrole', (req, res, next) => {
   });
 });
 
-router.post('/searchbymodulename', (req, res, next) => {
-  const moduleName = req.body.moduleName;
+router.post('/searchbyliquidclass', (req, res, next) => {
+  const liquid_class = req.body.liquid_class;
 
-  Role.getByModuleName(moduleName, (err, role) => {
+  Role.getByLiquidClass(liquid_class, (err, role) => {
     if (err) {
       res.json({success: false, msg:'Failed to get Roles!'});
     } else {
@@ -87,9 +87,9 @@ router.post('/searchbyid', (req, res, next) => {
 
 router.post('/searchbyconditions', (req, res, next) => {
   const rolename = req.body.role;
-  const moduleName = req.body.moduleName;
+  const liquid_class = req.body.liquid_class;
 
-  Role.getByConditions(rolename, moduleName, (err, role) => {
+  Role.getByConditions(rolename, liquid_class, (err, role) => {
     if (err) {
       res.json({success: false, msg:'Failed to get Roles!'});
     } else {

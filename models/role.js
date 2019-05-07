@@ -36,7 +36,7 @@ module.exports.getRoles = function (callback) {
 }
 
 module.exports.addRole = function (newRole, callback) {
-      newRole.save(callback);
+  newRole.save(callback);
 }
 
 // module.exports.grabSpecsv1 = function (callback) {
@@ -93,8 +93,8 @@ module.exports.getByRole = function(role, callback) {
   Role.find(query, callback);
 }
 
-module.exports.getByModuleName = function(moduleName, callback) {
-  const query = {moduleName: moduleName}
+module.exports.getByLiquidClass = function(liquid_class, callback) {
+  const query = {liquid_class: liquid_class}
   Role.find(query, callback);
 }
 
@@ -103,10 +103,10 @@ module.exports.getById = function(id, callback) {
   Role.find(query, callback);
 }
 
-module.exports.getByConditions = function(role, moduleName, callback) {
+module.exports.getByConditions = function(role, liquid_class, callback) {
   const query = {
     role: role,
-    moduleName: moduleName
+    liquid_class: liquid_class
   }
   Role.find(query, callback);
 }

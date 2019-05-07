@@ -1,0 +1,288 @@
+<div class="container" style="margin-top: 15px;">
+  <div class="row">
+    <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <h2 style="margin-top: 15px"><b>Grab and Show All LabwareSpecs Locally</b></h2>
+      <form (submit)="onGrabLwareSpecs()" style="margin-bottom: 15px">
+          <button type="submit" class="btn btn-primary">Grab LabwareSpecs</button>
+      </form>
+      <hr>
+      <table class="table-striped" style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">id</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
+          <th style="padding-left: 2px; padding-right: 2px">name</th>
+          <th style="padding-left: 2px; padding-right: 2px">description</th>
+          <th style="padding-left: 2px; padding-right: 2px">material</th>
+          <th style="padding-left: 2px; padding-right: 2px">volume</th>
+          <th style="padding-left: 2px; padding-right: 2px">cat_num</th>
+          <th style="padding-left: 2px; padding-right: 2px">manufacturer</th>
+          <th style="padding-left: 2px; padding-right: 2px">map_id</th>
+        </tr>
+        <tr *ngFor="let lwarespec of lwarespecs">
+          <td style="padding-right: 2px">{{lwarespec.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.moduleName}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.description}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.material}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.volume}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.cat_num}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.manufacturer}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.map_id}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <h2 style="margin-top: 15px"><b>Show All LabwareSpecs Remotely</b></h2>
+      <p>According to: <a href="http://10.253.7.14:8000/?request=getLabwareSpecs">http://10.253.7.14:8000/?request=getLabwareSpecs</a></p>
+      <hr>
+      <table class="table-striped"  style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">id</th>
+          <th style="padding-left: 2px; padding-right: 2px">name</th>
+          <th style="padding-left: 2px; padding-right: 2px">description</th>
+          <th style="padding-left: 2px; padding-right: 2px">material</th>
+          <th style="padding-left: 2px; padding-right: 2px">volume</th>
+          <th style="padding-left: 2px; padding-right: 2px">cat_num</th>
+          <th style="padding-left: 2px; padding-right: 2px">manufacturer</th>
+          <th style="padding-left: 2px; padding-right: 2px">map_id</th>
+        </tr>
+        <tr *ngFor="let remotelwarespec of remotelwarespecs">
+          <td style="padding-right: 2px">{{remotelwarespec.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.description}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.material}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.volume}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.cat_num}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.manufacturer}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.map_id}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<hr>
+  
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2><b>Search by Name</b></h2>
+      <hr>
+      <form (submit)="onSearchLwareSpecsByName()">
+        <div class="form-group">
+          <label>Type the name here:</label>
+          <input type='text' class="form-control" name='name' [(ngModel)]="name" placeholder="Type the name here...">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchNameRes">
+        <table class="table-primary table-bordered" style="text-align: center">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">name</th>
+            <th style="padding-left: 10px; padding-right: 10px">description</th>
+            <th style="padding-left: 10px; padding-right: 10px">material</th>
+            <th style="padding-left: 10px; padding-right: 10px">volume</th>
+            <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
+            <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
+            <th style="padding-left: 10px; padding-right: 10px">map_id</th>
+          </tr>
+          <tr *ngFor="let nameres of searchNameRes">
+            <td style="padding-right: 10px">{{nameres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.description}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.material}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.volume}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.cat_num}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.manufacturer}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <h2><b>Search by Manufacturer</b></h2>
+      <hr>
+      <form (submit)="onSearchLwareSpecsByManufacturer()">
+        <div class="form-group">
+          <label>Type the manufacturer here:</label>
+          <input type='text' class="form-control" name='manufacturer' [(ngModel)]="manufacturer" placeholder="Type the manufacturer here...">
+        </div>
+        <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchManufacturerRes">
+        <table class="table-info table-bordered" style="text-align: center">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">name</th>
+            <th style="padding-left: 10px; padding-right: 10px">description</th>
+            <th style="padding-left: 10px; padding-right: 10px">material</th>
+            <th style="padding-left: 10px; padding-right: 10px">volume</th>
+            <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
+            <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
+            <th style="padding-left: 10px; padding-right: 10px">map_id</th>
+          </tr>
+          <tr *ngFor="let manures of searchManufacturerRes">
+            <td style="padding-right: 10px">{{manures.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.description}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.material}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.volume}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.cat_num}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.manufacturer}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2><b>Search by Id</b></h2>
+      <hr>
+      <form (submit)="onSearchLwareSpecsById()">
+        <div class="form-group">
+          <label>Type the id here:</label>
+          <input type='text' class="form-control" name='id' [(ngModel)]="id" placeholder="Type the id here...">
+        </div>
+        <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchIdRes">
+        <table class="table-warning table-bordered" style="text-align: center">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">name</th>
+            <th style="padding-left: 10px; padding-right: 10px">description</th>
+            <th style="padding-left: 10px; padding-right: 10px">material</th>
+            <th style="padding-left: 10px; padding-right: 10px">volume</th>
+            <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
+            <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
+            <th style="padding-left: 10px; padding-right: 10px">map_id</th>
+          </tr>
+          <tr *ngFor="let idres of searchIdRes">
+            <td style="padding-right: 10px">{{idres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.description}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.material}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.volume}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.cat_num}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.manufacturer}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div class="col">
+      <h2><b>Search by Conditions</b></h2>
+      <hr>
+      <form (submit)="onSearchLwareSpecsByConditions()">
+        <div class="form-group">
+          <label>Type the name here:</label>
+          <input type='text' class="form-control" name='name_condition' [(ngModel)]="name_condition" placeholder="Type the name here...">
+        </div>
+        <div class="form-group">
+          <label>Type the manufacturer here:</label>
+          <input type='text' class="form-control" name='manufacturer_condition' [(ngModel)]="manufacturer_condition" placeholder="Type the manufacturer here...">
+        </div>
+        <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
+      </form>
+      <div *ngIf="searchConRes">
+        <table class="table-secondary table-bordered" style="text-align: center">
+          <tr>
+            <th style="padding-right: 10px">id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
+            <th style="padding-left: 10px; padding-right: 10px">name</th>
+            <th style="padding-left: 10px; padding-right: 10px">description</th>
+            <th style="padding-left: 10px; padding-right: 10px">material</th>
+            <th style="padding-left: 10px; padding-right: 10px">volume</th>
+            <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
+            <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
+            <th style="padding-left: 10px; padding-right: 10px">map_id</th>
+          </tr>
+          <tr *ngFor="let conres of searchConRes">
+            <td style="padding-right: 10px">{{conres.id}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.description}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.material}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.volume}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.cat_num}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.manufacturer}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.reagent}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="page-header" style="margin-top: 15px"><b>Add LabwareSpec Manually</b></h2>
+      <form (submit)="onAddLwareSpecs()">
+        <div class="form-group">
+          <label>id:</label>
+          <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">
+        </div>
+        <div class="form-group">
+          <label>className:</label>
+          <input type="text" class="form-control" [(ngModel)]="className_add" name="className_add" placeholder="Add new className...">
+        </div>
+        <div class="form-group">
+          <label>moduleName:</label>
+          <input type="text" class="form-control" [(ngModel)]="moduleName_add" name="moduleName_add" placeholder="Add new moduleName...">
+        </div>
+        <div class="form-group">
+            <label>name:</label>
+            <input type="text" class="form-control" [(ngModel)]="name_add" name="name_add" placeholder="Add new name...">
+          </div>
+        <div class="form-group">
+            <label>description:</label>
+            <input type="text" class="form-control" [(ngModel)]="description_add" name="description_add" placeholder="Add new description...">
+        </div>
+        <div class="form-group">
+            <label>material:</label>
+            <input type="text" class="form-control" [(ngModel)]="material_add" name="material_add" placeholder="Add new material...">
+        </div>
+        <div class="form-group">
+          <label>volume:</label>
+          <input type="text" class="form-control" [(ngModel)]="volume_add" name="volume_add" placeholder="Add new volume...">
+        </div>
+        <div class="form-group">
+          <label>cat_num:</label>
+          <input type="text" class="form-control" [(ngModel)]="cat_num_add" name="cat_num_add" placeholder="Add new cat_num...">
+        </div>
+        <div class="form-group">
+          <label>manufacturer:</label>
+          <input type="text" class="form-control" [(ngModel)]="manufacturer_add" name="manufacturer_add" placeholder="Add new manufacturer...">
+        </div>
+        <div class="form-group">
+          <label>map_id:</label>
+          <input type="text" class="form-control" [(ngModel)]="map_id_add" name="map_id_add" placeholder="Add new map_id...">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add LabwareSpec</button>
+      </form>
+    </div>
+  </div>
+</div>

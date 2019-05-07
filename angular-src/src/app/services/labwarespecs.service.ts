@@ -5,72 +5,72 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class RolesService {
+export class LabwarespecsService {
 
   constructor(
     private http:Http
   ) { }
 
-  // Function to get all roles locally
-  getRoles() {
+  // Function to get all labwarespecs locally
+  getLabwareSpecs() {
     let headers = new Headers();
-    return this.http.get('http://localhost:3000/roles/getroles', {headers: headers})
+    return this.http.get('http://localhost:3000/labwarespecs/getlwarespec', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  // Function to get all roles remotely
-  getremoteRoles() {
+  // Function to get all labwarespecs remotely
+  getremoteLabwareSpecs() {
     let headers = new Headers();
-    return this.http.get('http://10.253.7.14:8000/?request=getRoles', {headers: headers})
+    return this.http.get('http://10.253.7.14:8000/?request=getLabwareSpecs', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  // Function to add role to the roles
-  addRole(role) {
+  // Function to add labwarespec to the labwarespecs
+  addLabwareSpec(lwarespec) {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/addrole', role, {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/addlwarespec', lwarespec, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  // Function to grab roles remotely
-  grabRoles () {
+  // Function to grab labwarespecs remotely
+  grabLabwareSpecs () {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/grabroles', {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/grablabwareSpecs', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  searchRolesByRole(rolename) {
+  searchLwarespecsByName(name) {
     // this.searchUrl = 'https://api.spotify.com/v1/search?query='+str+'&offset=0&limit=20&type='+type+'&market=US';
     // return this.http.get(this.searchUrl)
     //   .pipe(map(res => res.json()));
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/searchbyrole', rolename, {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/searchbyname', name, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  searchRolesByLiquidClass(liquid_class) {
+  searchLwarespecsByManufacturer(manufacturer) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/searchbyliquidclass', liquid_class, {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/searchbymanufacturer', manufacturer, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  searchRolesById(id) {
+  searchLwarespecsById(id) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/searchbyid', id, {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/searchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  searchRolesByConditions(conditions) {
+  searchLwarespecsByConditions(conditions) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/roles/searchbyconditions', conditions, {headers: headers})
+    return this.http.post('http://localhost:3000/labwarespecs/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

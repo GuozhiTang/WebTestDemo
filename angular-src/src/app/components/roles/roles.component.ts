@@ -15,9 +15,9 @@ export class RolesComponent implements OnInit {
   className_add: String;
   moduleName: String;
   moduleName_add: String;
-  moduleName_condition: String;
   liquid_class: String;
   liquid_class_add: String;
+  liquid_class_condition: String;
   role: String;
   role_add: String;
   role_condition: String;
@@ -26,7 +26,7 @@ export class RolesComponent implements OnInit {
   id: Number;
   id_add: Number;
   searchRoleRes: Role[];
-  searchModuleNameRes: Role[];
+  searchLiquidClassRes: Role[];
   searchIdRes: Role[];
   searchConRes: Role[];
 
@@ -58,8 +58,11 @@ export class RolesComponent implements OnInit {
     // Add Role
     this.rolesService.addRole(role).subscribe(data => {
       if (data.success) {
+        this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
         console.log('Add Successfully!');
+        location.reload();
       } else {
+        this.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
         console.log('Add Failed!');
       }
     });
@@ -87,12 +90,12 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  onSearchRolesByModuleName() {
-    const searchModuleName = {
-      moduleName: this.moduleName
+  onSearchRolesByLiquidClass() {
+    const searchLiquidClass = {
+      liquid_class: this.liquid_class
     }
-    this.rolesService.searchRolesByModuleName(searchModuleName).subscribe(res => {
-      this.searchModuleNameRes = res;
+    this.rolesService.searchRolesByLiquidClass(searchLiquidClass).subscribe(res => {
+      this.searchLiquidClassRes = res;
     });
   }
 
@@ -108,7 +111,7 @@ export class RolesComponent implements OnInit {
   onSearchRolesByConditions() {
     const conditions = {
       role: this.role_condition,
-      moduleName: this.moduleName_condition
+      liquid_class: this.liquid_class_condition
     }
     this.rolesService.searchRolesByConditions(conditions).subscribe(res => {
       this.searchConRes = res;
