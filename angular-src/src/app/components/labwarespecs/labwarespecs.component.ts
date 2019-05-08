@@ -36,7 +36,7 @@ export class LabwarespecsComponent implements OnInit {
   searchNameRes: LabwareSpec[];
   searchManufacturerRes: LabwareSpec[];
   searchIdRes: LabwareSpec[];
-  searchConRes: LabwareSpec[];
+  searchConRes: LabwareSpec[]; 
 
   constructor(
     private flashMessage: FlashMessagesService,
