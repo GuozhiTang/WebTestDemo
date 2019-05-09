@@ -68,11 +68,11 @@ export class ProbemapsComponent implements OnInit {
     this.probemapsService.addProbemap(probemaps).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        console.log('Add Successfully!');
+        // console.log('Add Successfully!');
         location.reload();
       } else {
         this.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Add Failed!');
+        // console.log('Add Failed!');
       }
     });
   }
@@ -81,11 +81,11 @@ export class ProbemapsComponent implements OnInit {
     this.probemapsService.grabProbemaps().subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        console.log('Grab Successfully!');
+        // console.log('Grab Successfully!');
         location.reload();
       } else {
         this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Grab Failed!');
+        // console.log('Grab Failed!');
       }
     });
   }
@@ -94,6 +94,7 @@ export class ProbemapsComponent implements OnInit {
     const searchmoduleName = {
       moduleName: this.moduleName,
     }
+
     this.probemapsService.searchProbemapsBymoduleName(searchmoduleName).subscribe(res => {
       this.searchmoduleNameRes = res;
     });
@@ -103,6 +104,7 @@ export class ProbemapsComponent implements OnInit {
     const searchShort = {
       name: this.name
     }
+
     this.probemapsService.searchProbemapsByName(searchShort).subscribe(res => {
       this.searchNameRes = res;
     });
@@ -112,6 +114,7 @@ export class ProbemapsComponent implements OnInit {
     const searchId = {
       id: this.id
     }
+
     this.probemapsService.searchProbemapsById(searchId).subscribe(res => {
       this.searchIdRes = res;
     });
@@ -122,6 +125,7 @@ export class ProbemapsComponent implements OnInit {
       moduleName: this.moduleName_condition,
       name: this.name_condition
     }
+
     this.probemapsService.searchProbemapsByConditions(conditions).subscribe(res => {
       this.searchConRes = res;
     });
@@ -131,6 +135,7 @@ export class ProbemapsComponent implements OnInit {
     const creatorName = {
       creatorName: this.creatorName
     }
+
     this.probemapsService.searchProbemapsByCreator(creatorName).subscribe(res => {
       this.searchCreatorRes = res;
       // console.log(res);

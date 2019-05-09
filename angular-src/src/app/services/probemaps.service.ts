@@ -44,9 +44,6 @@ export class ProbemapsService {
   }
 
   searchProbemapsBymoduleName(moduleName) {
-    // this.searchUrl = 'https://api.spotify.com/v1/search?query='+str+'&offset=0&limit=20&type='+type+'&market=US';
-    // return this.http.get(this.searchUrl)
-    //   .pipe(map(res => res.json()));
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbymoduleName', moduleName, {headers: headers})
@@ -81,24 +78,10 @@ export class ProbemapsService {
       .pipe(map(res => res.json()));
   }
 
-  // showProbes() {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://127.0.0.1:3000/probes/showProbes', {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // showProbes2() {
-  //   let headers = new Headers();
-  //   // headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://10.253.7.14:8000', {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
   showProbes3(mapId) {
     let headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     return this.http.post('http://127.0.0.1:3000/probes/showProbes', mapId, {headers: headers})
-      .pipe(map(res => res.json()));
+    .pipe(map(res => res.json()));
   }
 }

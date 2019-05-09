@@ -71,11 +71,11 @@ export class LabwarespecsComponent implements OnInit {
     this.labwarespecsService.addLabwareSpec(lwarespecs).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        console.log('Add Successfully!');
+        // console.log('Add Successfully!');
         location.reload();
       } else {
         this.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Add Failed!');
+        // console.log('Add Failed!');
       }
     });
   }
@@ -84,11 +84,11 @@ export class LabwarespecsComponent implements OnInit {
     this.labwarespecsService.grabLabwareSpecs().subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        console.log('Grab Successfully!');
+        // console.log('Grab Successfully!');
         location.reload();
       } else {
         this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Grab Failed!');
+        // console.log('Grab Failed!');
       }
     });
   }

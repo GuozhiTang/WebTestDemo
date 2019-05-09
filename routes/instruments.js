@@ -1,4 +1,3 @@
-// All of our specs' routes
 const express = require('express');
 const router = express.Router();
 const config = require('../config/database');
@@ -37,7 +36,6 @@ router.post('/grabInstruments', (req, res, next) => {
   Instrument.grabInstruments((err, dataObj) => {
     if (err) {
       res.json({success: false, msg:'Failed to grab Instruments!'});
-      // console.log('Failed to grab specs!');
     } else {
       try {
         res.json({success: true, msg:'Grab Instruments successfully!'});

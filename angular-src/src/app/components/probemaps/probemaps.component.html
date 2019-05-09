@@ -39,8 +39,8 @@
             <th style="padding-left: 2px; padding-right: 2px">probe_id.ffid</th>
             <th style="padding-left: 2px; padding-right: 2px">probe_id.mir_seq</th>
             <th style="padding-left: 2px; padding-right: 2px">label</th>
-            <th style="padding-left: 2px; padding-right: 2px">code.row</th>
             <th style="padding-left: 2px; padding-right: 2px">code.col</th>
+            <th style="padding-left: 2px; padding-right: 2px">code.row</th>
             <th style="padding-left: 2px; padding-right: 2px">probe_id.qc</th>
           </tr>
           <tr *ngFor="let proberes of probeRes">
@@ -49,8 +49,8 @@
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.ffid}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.mir_seq}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.label}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.row}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.col}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.row}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.qc}}</td>
           </tr>
         </table>

@@ -2,7 +2,7 @@
   <h1>MEAN Stack App for Manufacturing</h1>
   <hr>
   <p class="lead">This is a MEAN Stack App(MongoDB/Mongoose, Express, Angular-CLI, NodeJS) including functionalities: </p>
-  <p class="lead">Login/Logout, Register, Dashboard, Transfer in lab/Source to target plate.</p>
+  <p class="lead">Login/Logout, Register, Dashboard, Transfer porcess, Grab and show specific components.</p>
   <div>
     <a class="btn btn-primary" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a> <a class="btn btn-dark" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</a>
   </div>
@@ -10,18 +10,23 @@
 <hr>
 <h2><b>Instructions:</b></h2>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <h3>Register</h3>
     <p>Click the register button to fill all the information correctly, especially the email format. Then you have the access to login.</p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <h3>Login/Logout</h3>
     <p>After resgister successfully, go to login page to login. The dashboard of your account can been seen after that. Whenever you want to logout the account, just click the logout button.</p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
       <h3>Transfer</h3>
       <p>After login to your account, you can access the transfer process by clicking transfer button. You need to type in the <b>barcode of the target plate</b> first and then modify it. 
         After that, type in the <b>barcode of source plate with the volume you want to transfer</b>. Finally, after modification, click submit to submit the whole transfer process.</p>
+  </div>
+  <div class="col-md-3">
+      <h3>Components</h3>
+      <p>Show the exact data for each component at remote data server and can <b>grab and show</b> all the data to the <b>local database</b>. Show the <b>search</b> functionalities for each component.
+      Meanwhile, "add" functionalities are settled but not allowed for users right now in order to protect the robot.</p>
   </div>
 </div>
 <hr>

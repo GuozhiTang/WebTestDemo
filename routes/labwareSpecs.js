@@ -1,4 +1,3 @@
-// All of our specs' routes
 const express = require('express');
 const router = express.Router();
 const config = require('../config/database');
