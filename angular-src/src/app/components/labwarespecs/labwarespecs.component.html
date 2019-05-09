@@ -9,8 +9,6 @@
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">name</th>
           <th style="padding-left: 2px; padding-right: 2px">description</th>
           <th style="padding-left: 2px; padding-right: 2px">material</th>
@@ -18,11 +16,11 @@
           <th style="padding-left: 2px; padding-right: 2px">cat_num</th>
           <th style="padding-left: 2px; padding-right: 2px">manufacturer</th>
           <th style="padding-left: 2px; padding-right: 2px">map_id.name</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let lwarespec of lwarespecs">
           <td style="padding-right: 2px">{{lwarespec.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.name}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.description}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.material}}</td>
@@ -30,6 +28,8 @@
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.cat_num}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.manufacturer}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.map_id.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{lwarespec.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -41,8 +41,6 @@
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">name</th>
           <th style="padding-left: 2px; padding-right: 2px">description</th>
           <th style="padding-left: 2px; padding-right: 2px">material</th>
@@ -50,11 +48,11 @@
           <th style="padding-left: 2px; padding-right: 2px">cat_num</th>
           <th style="padding-left: 2px; padding-right: 2px">manufacturer</th>
           <th style="padding-left: 2px; padding-right: 2px">map_id.name</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let remotelwarespec of remotelwarespecs">
           <td style="padding-right: 2px">{{remotelwarespec.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.name}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.description}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.material}}</td>
@@ -62,6 +60,8 @@
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.cat_num}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.manufacturer}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.map_id.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -85,8 +85,6 @@
         <table class="table-primary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
             <th style="padding-left: 10px; padding-right: 10px">description</th>
             <th style="padding-left: 10px; padding-right: 10px">material</th>
@@ -94,11 +92,11 @@
             <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
             <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
             <th style="padding-left: 10px; padding-right: 10px">map_id.name</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let nameres of searchNameRes">
             <td style="padding-right: 10px">{{nameres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{nameres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.name}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.description}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.material}}</td>
@@ -106,6 +104,8 @@
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.cat_num}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.manufacturer}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{nameres.map_id.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -125,8 +125,6 @@
         <table class="table-info table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
             <th style="padding-left: 10px; padding-right: 10px">description</th>
             <th style="padding-left: 10px; padding-right: 10px">material</th>
@@ -134,11 +132,11 @@
             <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
             <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
             <th style="padding-left: 10px; padding-right: 10px">map_id.name</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let manures of searchManufacturerRes">
             <td style="padding-right: 10px">{{manures.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{manures.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{manures.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{manures.name}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{manures.description}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{manures.material}}</td>
@@ -146,6 +144,8 @@
             <td style="padding-left: 10px; padding-right: 10px">{{manures.cat_num}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{manures.manufacturer}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{manures.map_id.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{manures.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -167,8 +167,6 @@
         <table class="table-warning table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
             <th style="padding-left: 10px; padding-right: 10px">description</th>
             <th style="padding-left: 10px; padding-right: 10px">material</th>
@@ -176,11 +174,11 @@
             <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
             <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
             <th style="padding-left: 10px; padding-right: 10px">map_id.name</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let idres of searchIdRes">
             <td style="padding-right: 10px">{{idres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.name}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.description}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.material}}</td>
@@ -188,6 +186,8 @@
             <td style="padding-left: 10px; padding-right: 10px">{{idres.cat_num}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.manufacturer}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.map_id.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -211,8 +211,6 @@
         <table class="table-secondary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
             <th style="padding-left: 10px; padding-right: 10px">description</th>
             <th style="padding-left: 10px; padding-right: 10px">material</th>
@@ -220,11 +218,11 @@
             <th style="padding-left: 10px; padding-right: 10px">cat_num</th>
             <th style="padding-left: 10px; padding-right: 10px">manufacturer</th>
             <th style="padding-left: 10px; padding-right: 10px">map_id.name</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let conres of searchConRes">
             <td style="padding-right: 10px">{{conres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.name}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.description}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.material}}</td>
@@ -232,6 +230,8 @@
             <td style="padding-left: 10px; padding-right: 10px">{{conres.cat_num}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.manufacturer}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.map_id.name}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
           </tr>
         </table>
       </div>

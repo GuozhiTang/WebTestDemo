@@ -34,31 +34,16 @@ const ProbeSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Probe = module.exports = mongoose.model('Probe', ProbeSchema);
 
-module.exports.showProbes = function (callback) {
+module.exports.showProbes = function (mapId, callback) {
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "getProbemapProbe",
-      probemapId: 2834487
+      probemapId: mapId
     }
   }, (error, response, body) => {
     if (response && response.statusCode == 200) {
-      // var data = JSON.parse(body);
-
-      return body;
-      // console.log(callback);
-      // console.log('body: ', body);
-      // console.log(typeof(body));
-      // var data = body.results;
-      // console.log("data: ", data);
-      // var dataObj = JSON.parse(data);
-      // for (var i = 0; i < body.length; i++) {
-      //   // console.log('length ' + i + ': ' + data[i]);
-      //   var grab = new Probe(body[i]);
-      //   grab.save(callback);
-      //   // console.log(grab);
-      // }
+      // console.log(body);
+      callback(error, body);
     }
   });
-  // return callback;
 }
-

@@ -35,6 +35,7 @@ export class ProbemapsComponent implements OnInit {
   searchConRes: Probemap[];
   searchCreatorRes: Probemap[];
   probeRes: Probe[];
+  probemapId: Number;
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -43,10 +44,10 @@ export class ProbemapsComponent implements OnInit {
         this.probemaps = probemaps;
       });
 
-      // this.probemapsService.getremoteProbemaps().subscribe(remoteprobemaps => {
-      //   this.remoteprobemaps = remoteprobemaps;
-      //   console.log(this.remoteprobemaps);
-      // });
+      this.probemapsService.getremoteProbemaps().subscribe(remoteprobemaps => {
+        this.remoteprobemaps = remoteprobemaps;
+        // console.log(this.remoteprobemaps);
+      });
     }
 
   ngOnInit() {
@@ -136,22 +137,15 @@ export class ProbemapsComponent implements OnInit {
     });
   }
 
-  // onShowProbe() {
-  //   this.probemapsService.showProbes().subscribe(res => {
-  //     // this.probeRes = res;
-  //     // console.log("res: " + res); // Shoule be an Array with objects attributes
-  //   })
-  //   // this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-  // }
+  onShowProbe(mapId) {
+    const probemapId = {
+      mapId: mapId
+    }
 
-  // onShowProbe2() {
-  //   // const probemapIdset = {
-  //   //   request: "getProbemapProbe",
-  //   //   probemapId: 2834487
-  //   // }
-  //   this.probemapsService.showProbes2().subscribe(res => {
-  //     this.probeRes = res;
-  //     console.log("res: " + res); 
-  //   });
-  // }
+    this.probemapId = mapId;
+    this.probemapsService.showProbes3(probemapId).subscribe(res => {
+      this.probeRes = res;
+      // console.log("res: " + res.length); 
+    });
+  }
 }

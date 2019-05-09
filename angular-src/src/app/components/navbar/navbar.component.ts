@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     private flashMessage:FlashMessagesService
     ) {
       this.authService.getProfile().subscribe(profile => {
-        console.log(profile.user);
+        // console.log(profile.user);
         this.user = profile.user;
       },
       err => {

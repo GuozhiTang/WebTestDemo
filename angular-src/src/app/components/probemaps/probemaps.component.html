@@ -9,77 +9,79 @@
         <table class="table-striped" style="text-align: center">
           <tr>
             <th style="padding-right: 2px">id</th>
-            <th style="padding-left: 2px; padding-right: 2px">className</th>
-            <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
             <th style="padding-left: 2px; padding-right: 2px">name</th>
             <th style="padding-left: 2px; padding-right: 2px">creator</th>
             <th style="padding-left: 2px; padding-right: 2px">codemap_id.name</th>
             <th style="padding-left: 2px; padding-right: 2px">most_current</th>
+            <th style="padding-left: 2px; padding-right: 2px">className</th>
+            <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           </tr>
           <tr *ngFor="let probemap of probemaps">
-            <!-- <td style="padding-right: 2px"><button class="btn btn-dark" type="button" (click)="onShowProbe2()">{{probemap.id}}</button></td> -->
-            <td style="padding-left: 2px; padding-right: 2px">{{probemap.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{probemap.className}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{probemap.moduleName}}</td>
+            <td style="padding-right: 2px"><button class="btn btn-dark" type="button" (click)="onShowProbe(probemap.id)">{{probemap.id}}</button></td>
+            <!-- <td style="padding-left: 2px; padding-right: 2px">{{probemap.id}}</td> -->
             <td style="padding-left: 2px; padding-right: 2px">{{probemap.name}}</td>
             <td style="padding-left: 2px; padding-right: 2px">name: {{probemap.creator.requestor_id.name}}<br>requested: {{probemap.creator.requested}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{probemap.codemap_id.name}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{probemap.most_current}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{probemap.className}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{probemap.moduleName}}</td>
           </tr>
         </table>
       </div>
 
-      <!-- <div class="col" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
-        <h2 style="margin-top: 15px"><b>Show Probes</b></h2>
+      <div class="col" *ngIf="probeRes" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+        <h2 style="margin-top: 15px"><b>Show Probes -- ProbemapId: </b><span class="badge badge-pill badge-dark">{{probemapId}}</span></h2>
         <hr>
-        <table class="table-striped"  style="text-align: center">
+        <table class="table-striped table-bordered table-dark"  style="text-align: center">
           <tr>
             <th style="padding-right: 2px">id</th>
-            <th style="padding-left: 2px; padding-right: 2px">className</th>
-            <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
-            <th style="padding-left: 2px; padding-right: 2px">code</th>
-            <th style="padding-left: 2px; padding-right: 2px">map_id</th>
-            <th style="padding-left: 2px; padding-right: 2px">probe_id</th>
+            <th style="padding-left: 2px; padding-right: 2px">map_id.name</th>
+            <th style="padding-left: 2px; padding-right: 2px">probe_id.ffid</th>
+            <th style="padding-left: 2px; padding-right: 2px">probe_id.mir_seq</th>
             <th style="padding-left: 2px; padding-right: 2px">label</th>
+            <th style="padding-left: 2px; padding-right: 2px">code.row</th>
+            <th style="padding-left: 2px; padding-right: 2px">code.col</th>
+            <th style="padding-left: 2px; padding-right: 2px">probe_id.qc</th>
           </tr>
           <tr *ngFor="let proberes of probeRes">
             <td style="padding-right: 2px">{{proberes.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.className}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.moduleName}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.code}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.map_id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.map_id.name}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.ffid}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.mir_seq}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{proberes.label}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.row}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.col}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.qc}}</td>
           </tr>
         </table>
-      </div> -->
+      </div>
       
   
-      <!-- <div class="col" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <div class="col" *ngIf="!probeRes" style="margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
         <h2 style="margin-top: 15px"><b>Show All Probemaps Remotely</b></h2>
         <p>According to: <a href="http://10.253.7.14:8000/?request=getAllProbemaps">http://10.253.7.14:8000/?request=getAllProbemaps</a></p>
         <hr>
         <table class="table-striped"  style="text-align: center">
           <tr>
             <th style="padding-right: 2px">id</th>
-            <th style="padding-left: 2px; padding-right: 2px">className</th>
-            <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
             <th style="padding-left: 2px; padding-right: 2px">name</th>
             <th style="padding-left: 2px; padding-right: 2px">creator</th>
             <th style="padding-left: 2px; padding-right: 2px">codemap_id.name</th>
             <th style="padding-left: 2px; padding-right: 2px">most_current</th>
+            <th style="padding-left: 2px; padding-right: 2px">className</th>
+            <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           </tr>
           <tr *ngFor="let remoteprobemap of remoteprobemaps">
             <td style="padding-right: 2px">{{remoteprobemap.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.className}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.moduleName}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.name}}</td>
             <td style="padding-left: 2px; padding-right: 2px">name: {{remoteprobemap.creator.requestor_id.name}}<br>requested: {{remoteprobemap.creator.requested}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.codemap_id.name}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.most_current}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.className}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.moduleName}}</td>
           </tr>
         </table>
-      </div> -->
+      </div>
     </div>
   </div>
   <hr>
@@ -100,21 +102,21 @@
           <table class="table-primary table-bordered" style="text-align: center">
             <tr>
               <th style="padding-right: 10px">id</th>
-              <th style="padding-left: 10px; padding-right: 10px">className</th>
-              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
               <th style="padding-left: 10px; padding-right: 10px">name</th>
               <th style="padding-left: 10px; padding-right: 10px">creator</th>
               <th style="padding-left: 10px; padding-right: 10px">codemap_id.name</th>
               <th style="padding-left: 10px; padding-right: 10px">most_current</th>
+              <th style="padding-left: 10px; padding-right: 10px">className</th>
+              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             </tr>
             <tr *ngFor="let creatorres of searchCreatorRes">
               <td style="padding-right: 10px">{{creatorres.id}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{creatorres.className}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{creatorres.moduleName}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{creatorres.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">name: {{creatorres.creator.requestor_id.name}}<br>requested: {{creatorres.creator.requested}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{creatorres.codemap_id.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{creatorres.most_current}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{creatorres.className}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{creatorres.moduleName}}</td>
             </tr>
           </table>
         </div>
@@ -134,21 +136,21 @@
           <table class="table-info table-bordered" style="text-align: center">
             <tr>
               <th style="padding-right: 10px">id</th>
-              <th style="padding-left: 10px; padding-right: 10px">className</th>
-              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
               <th style="padding-left: 10px; padding-right: 10px">name</th>
               <th style="padding-left: 10px; padding-right: 10px">creator</th>
               <th style="padding-left: 10px; padding-right: 10px">codemap_id.name</th>
               <th style="padding-left: 10px; padding-right: 10px">most_current</th>
+              <th style="padding-left: 10px; padding-right: 10px">className</th>
+              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             </tr>
             <tr *ngFor="let nameres of searchNameRes">
               <td style="padding-right: 10px">{{nameres.id}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{nameres.className}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{nameres.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">name: {{nameres.creator.requestor_id.name}}<br>requested: {{nameres.creator.requested}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{nameres.codemap_id.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{nameres.most_current}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{nameres.className}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{nameres.moduleName}}</td>
             </tr>
           </table>
         </div>
@@ -170,21 +172,21 @@
           <table class="table-warning table-bordered" style="text-align: center">
             <tr>
               <th style="padding-right: 10px">id</th>
-              <th style="padding-left: 10px; padding-right: 10px">className</th>
-              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
               <th style="padding-left: 10px; padding-right: 10px">name</th>
               <th style="padding-left: 10px; padding-right: 10px">creator</th>
               <th style="padding-left: 10px; padding-right: 10px">codemap_id.name</th>
               <th style="padding-left: 10px; padding-right: 10px">most_current</th>
+              <th style="padding-left: 10px; padding-right: 10px">className</th>
+              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             </tr>
             <tr *ngFor="let idres of searchIdRes">
               <td style="padding-right: 10px">{{idres.id}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{idres.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">name: {{idres.creator.requestor_id.name}}<br>requested: {{idres.creator.requested}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{idres.codemap_id.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{idres.most_current}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
             </tr>
           </table>
         </div>
@@ -208,21 +210,21 @@
           <table class="table-secondary table-bordered" style="text-align: center">
             <tr>
               <th style="padding-right: 10px">id</th>
-              <th style="padding-left: 10px; padding-right: 10px">className</th>
-              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
               <th style="padding-left: 10px; padding-right: 10px">name</th>
               <th style="padding-left: 10px; padding-right: 10px">creator</th>
               <th style="padding-left: 10px; padding-right: 10px">codemap_id.name</th>
               <th style="padding-left: 10px; padding-right: 10px">most_current</th>
+              <th style="padding-left: 10px; padding-right: 10px">className</th>
+              <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             </tr>
             <tr *ngFor="let conres of searchConRes">
               <td style="padding-right: 10px">{{conres.id}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
-              <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{conres.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">name: {{conres.creator.requestor_id.name}}<br>requested: {{conres.creator.requested}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{conres.codemap_id.name}}</td>
               <td style="padding-left: 10px; padding-right: 10px">{{conres.most_current}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+              <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
             </tr>
           </table>
         </div>

@@ -90,8 +90,15 @@ export class ProbemapsService {
 
   // showProbes2() {
   //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
+  //   // headers.append('Content-Type', 'application/json');
   //   return this.http.post('http://10.253.7.14:8000', {headers: headers})
   //     .pipe(map(res => res.json()));
   // }
+
+  showProbes3(mapId) {
+    let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    return this.http.post('http://127.0.0.1:3000/probes/showProbes', mapId, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 }

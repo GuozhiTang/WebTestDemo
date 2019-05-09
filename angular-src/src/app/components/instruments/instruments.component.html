@@ -9,17 +9,17 @@
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">short</th>
           <th style="padding-left: 2px; padding-right: 2px">spec_id</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let instrument of instruments">
           <td style="padding-right: 2px">{{instrument.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{instrument.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{instrument.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{instrument.short}}</td>
           <td style="padding-left: 2px; padding-right: 2px">type: {{instrument.spec_id.type}}<br>manufacturer: {{instrument.spec_id.manufacturer}}<br>model: {{instrument.spec_id.model}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{instrument.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{instrument.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -31,17 +31,17 @@
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">short</th>
           <th style="padding-left: 2px; padding-right: 2px">spec_id</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let remoteinstrument of remoteinstruments">
           <td style="padding-right: 2px">{{remoteinstrument.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteinstrument.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteinstrument.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remoteinstrument.short}}</td>
           <td style="padding-left: 2px; padding-right: 2px">type: {{remoteinstrument.spec_id.type}}<br>manufacturer: {{remoteinstrument.spec_id.manufacturer}}<br>model: {{remoteinstrument.spec_id.model}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteinstrument.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteinstrument.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -65,17 +65,17 @@
         <table class="table-primary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">short</th>
             <th style="padding-left: 10px; padding-right: 10px">spec_id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let modulenameres of searchmoduleNameRes">
             <td style="padding-right: 10px">{{modulenameres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.short}}</td>
             <td style="padding-left: 10px; padding-right: 10px">type: {{modulenameres.spec_id.type}}<br>manufacturer: {{modulenameres.spec_id.manufacturer}}<br>model: {{modulenameres.spec_id.model}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{modulenameres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -95,17 +95,17 @@
         <table class="table-info table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">short</th>
             <th style="padding-left: 10px; padding-right: 10px">spec_id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let shortres of searchShortRes">
             <td style="padding-right: 10px">{{shortres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{shortres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{shortres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{shortres.short}}</td>
             <td style="padding-left: 10px; padding-right: 10px">type: {{shortres.spec_id.type}}<br>manufacturer: {{shortres.spec_id.manufacturer}}<br>model: {{shortres.spec_id.model}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{shortres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{shortres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -127,17 +127,17 @@
         <table class="table-warning table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">short</th>
             <th style="padding-left: 10px; padding-right: 10px">spec_id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let idres of searchIdRes">
             <td style="padding-right: 10px">{{idres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.short}}</td>
             <td style="padding-left: 10px; padding-right: 10px">type: {{idres.spec_id.type}}<br>manufacturer: {{idres.spec_id.manufacturer}}<br>model: {{idres.spec_id.model}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -161,17 +161,17 @@
         <table class="table-secondary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">short</th>
             <th style="padding-left: 10px; padding-right: 10px">spec_id</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let conres of searchConRes">
             <td style="padding-right: 10px">{{conres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.short}}</td>
             <td style="padding-left: 10px; padding-right: 10px">type: {{conres.spec_id.type}}<br>manufacturer: {{conres.spec_id.manufacturer}}<br>model: {{conres.spec_id.model}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
           </tr>
         </table>
       </div>

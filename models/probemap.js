@@ -19,23 +19,6 @@ const ProbemapSchema = mongoose.Schema({
   creator: {
     type: Object
   },
-  // creator: [{
-  //   requested: Date,
-  //   moduleName: String,
-  //   className: String,
-  //   id: Number,
-  //   requestor_id: [{
-  //     moduleName: String,
-  //     className: String,
-  //     id: Number,
-  //     name: String,
-  //     admin: Boolean,
-  //     active: Boolean,
-  //     manufacturing: Boolean
-  //   }],
-  //   className: String,
-  //   spec_id: Object
-  // }],
   codemap_id: {
     type: Object
   },

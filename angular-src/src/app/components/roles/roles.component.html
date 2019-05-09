@@ -9,19 +9,19 @@
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
           <th style="padding-left: 2px; padding-right: 2px">role</th>
           <th style="padding-left: 2px; padding-right: 2px">reagent</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let role of roles">
           <td style="padding-right: 2px">{{role.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{role.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{role.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{role.liquid_class}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{role.role}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{role.reagent}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{role.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -33,19 +33,19 @@
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
           <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
           <th style="padding-left: 2px; padding-right: 2px">role</th>
           <th style="padding-left: 2px; padding-right: 2px">reagent</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
         </tr>
         <tr *ngFor="let remoterole of remoteroles">
           <td style="padding-right: 2px">{{remoterole.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.moduleName}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remoterole.liquid_class}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remoterole.role}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{remoterole.reagent}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoterole.moduleName}}</td>
         </tr>
       </table>
     </div>
@@ -69,19 +69,19 @@
         <table class="table-primary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
             <th style="padding-left: 10px; padding-right: 10px">role</th>
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let roleres of searchRoleRes">
             <td style="padding-right: 10px">{{roleres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{roleres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{roleres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.liquid_class}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.role}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{roleres.reagent}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{roleres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -101,19 +101,19 @@
         <table class="table-info table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
             <th style="padding-left: 10px; padding-right: 10px">role</th>
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let liquidclassres of searchLiquidClassRes">
             <td style="padding-right: 10px">{{liquidclassres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.liquid_class}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.role}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.reagent}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{liquidclassres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -135,19 +135,19 @@
         <table class="table-warning table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
             <th style="padding-left: 10px; padding-right: 10px">role</th>
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let idres of searchIdRes">
             <td style="padding-right: 10px">{{idres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.liquid_class}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.role}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{idres.reagent}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{idres.moduleName}}</td>
           </tr>
         </table>
       </div>
@@ -171,19 +171,19 @@
         <table class="table-secondary table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
-            <th style="padding-left: 10px; padding-right: 10px">className</th>
-            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
             <th style="padding-left: 10px; padding-right: 10px">role</th>
             <th style="padding-left: 10px; padding-right: 10px">reagent</th>
+            <th style="padding-left: 10px; padding-right: 10px">className</th>
+            <th style="padding-left: 10px; padding-right: 10px">moduleName</th>
           </tr>
           <tr *ngFor="let conres of searchConRes">
             <td style="padding-right: 10px">{{conres.id}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
-            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.liquid_class}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.role}}</td>
             <td style="padding-left: 10px; padding-right: 10px">{{conres.reagent}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.className}}</td>
+            <td style="padding-left: 10px; padding-right: 10px">{{conres.moduleName}}</td>
           </tr>
         </table>
       </div>

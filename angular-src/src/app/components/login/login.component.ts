@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
     // data is what we store after sending this request
     this.authService.authenticateUser(user).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       if (data.success) {
         // console.log(data);
         this.authService.storeUserData(data.token, data.user);
