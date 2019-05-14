@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <!-- <head>
+    <title>Process Request Initial Testing ui</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <script type="text/javascript" src="scripts/js/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/js/lib/jquery/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/js/lib/jquery/jquery.form.js"></script>
+
+    <script type="text/javascript" src="scripts/js/misc.js"></script>
+
+    <script type="text/javascript" src="scripts/js/genRequest.js"></script>
+
+
+    <script type="text/javascript" src="scripts/js/procRequest.js"></script>
+
+    <style type="text/css" media="all">
+      @import url("scripts/js/lib/jquery.ui.theme.css");
+      @import url("css/style.css");
+      @import url("css/iop.css");
+      @import url("css/order.css");
+      @import url("css/firefly.css");
+      @import url("css/w3.css");
+
+
+    </style>
+
+  </head> -->
+<body>
+  <div class="container">
+    <div class="row">
+      <div clas="col">
+        <h3>Setup</h3>
+        <div class="form-group">
+          <label for="selectIns">Instruments</label>
+          <select class="form-control" id="selectIns">
+            <option>Select Instrument...</option>
+            <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
+          </select>
+
+          <label for="selectIns">Work-order Type</label>
+          <select class="form-control" id="selectIns">
+            <option>Select Work-order...</option>
+            <option [value]="workorder" *ngFor='let workorder of workorders'>{{workorder}}</option>
+          </select>
+
+          <label for="selectIns">Protocols for work-order</label>
+          <select class="form-control" id="selectIns">
+            <option>Select Protocol...</option>
+            <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Work-orders</button>
+        <hr>
+        <table class="table-striped table-bordered" style="text-align: center">
+          <tr>
+            <th style="padding-right: 2px">Work-order ID</th>
+            <th style="padding-left: 2px; padding-right: 2px">Work-order Type</th>
+            <th style="padding-left: 2px; padding-right: 2px">Work-order Info</th>
+            <th style="padding-left: 2px; padding-right: 2px">Work-order Items</th>
+            <th style="padding-left: 2px; padding-right: 2px">Requested By</th>
+            <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
+            <th style="padding-left: 2px; padding-right: 2px">Open Work-order</th>
+          </tr>
+          <tr *ngFor="let role of roles">
+            <td style="padding-right: 2px">{{role.id}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{role.liquid_class}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{role.role}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{role.reagent}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{role.className}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{role.moduleName}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

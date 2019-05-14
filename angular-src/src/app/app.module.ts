@@ -31,6 +31,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { LabwarespecsComponent } from './components/labwarespecs/labwarespecs.component';
 import { InstrumentsComponent } from './components/instruments/instruments.component';
 import { ProbemapsComponent } from './components/probemaps/probemaps.component';
+import { ProcessComponent } from './components/process/process.component';
 
 export const appRoutes: Routes = [
   // This could be the home page
@@ -50,6 +51,7 @@ export const appRoutes: Routes = [
   {path: 'labwarespecs', component: LabwarespecsComponent},
   {path: 'instruments', component: InstrumentsComponent},
   {path: 'probemaps', component: ProbemapsComponent},
+  {path: 'process', component: ProcessComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -78,6 +80,7 @@ export function tokenGetter() {
     LabwarespecsComponent,
     InstrumentsComponent,
     ProbemapsComponent,
+    ProcessComponent,
   ],
   // Modules should be put into imports
   imports: [

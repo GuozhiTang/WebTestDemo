@@ -25,6 +25,9 @@
         <a class="nav-link" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a>
       </li>
       <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
+        <a class="nav-link" [routerLink]="['/process']"><i class="fab fa-mixcloud"></i> Process</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
         <a class="nav-link" [routerLink]="['/transfer']"><i class="fas fa-vials"></i> Transfer</a>
       </li>
       <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
