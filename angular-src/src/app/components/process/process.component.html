@@ -34,26 +34,28 @@
     <div class="row">
       <div clas="col">
         <h3>Setup</h3>
-        <div class="form-group">
-          <label for="selectIns">Instruments</label>
-          <select class="form-control" id="selectIns">
-            <option>Select Instrument...</option>
-            <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
-          </select>
+        <form (submit)="getWorkorders()">
+          <div class="form-group">
+            <label for="selectIns">Instruments</label>
+            <select class="form-control" id="selectIns" [(ngModel)]="instrument" name="instrument" (change)="getTypes($event.target.value)">
+              <option>Select Instrument...</option>
+              <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
+            </select>
 
-          <label for="selectIns">Work-order Type</label>
-          <select class="form-control" id="selectIns">
-            <option>Select Work-order...</option>
-            <option [value]="workorder" *ngFor='let workorder of workorders'>{{workorder}}</option>
-          </select>
+            <label for="selectType">Work-order Type</label>
+            <select class="form-control" id="selectType" [(ngModel)]="type" name="type" (change)="getProtocols($event.target.value)">
+              <option>Select Work-order...</option>
+              <option [value]="workorder" *ngFor='let workorder of workorders'>{{workorder}}</option>
+            </select>
 
-          <label for="selectIns">Protocols for work-order</label>
-          <select class="form-control" id="selectIns">
-            <option>Select Protocol...</option>
-            <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Get Work-orders</button>
+            <label for="selectPro">Protocols for work-order</label>
+            <select class="form-control" id="selectPro">
+              <option>Select Protocol...</option>
+              <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Get Work-orders</button>
+        </form>
         <hr>
         <table class="table-striped table-bordered" style="text-align: center">
           <tr>
@@ -63,15 +65,27 @@
             <th style="padding-left: 2px; padding-right: 2px">Work-order Items</th>
             <th style="padding-left: 2px; padding-right: 2px">Requested By</th>
             <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
-            <th style="padding-left: 2px; padding-right: 2px">Open Work-order</th>
           </tr>
-          <tr *ngFor="let role of roles">
-            <td style="padding-right: 2px">{{role.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{role.liquid_class}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{role.role}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{role.reagent}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{role.className}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{role.moduleName}}</td>
+          <tr *ngFor="let process of remoteprocess">
+            <td style="padding-right: 2px">{{process.requestId}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{process.reqType}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">
+              <table>
+                <tr>
+                  <th>Plex</th>
+                  <th>Plex Label</th>
+                  <th>Barcode</th>
+                </tr>
+                <tr>
+                  <td>{{process.plex}}</td>
+                  <td>{{process.plexLabel}}</td>
+                  <td>{{process.labwareBarcode}}</td>
+                </tr>
+              </table>
+            </td>
+            <td style="padding-left: 2px; padding-right: 2px">{{process.requestItems}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{process.requestor}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{process.dateRequested}}</td>
           </tr>
         </table>
       </div>
