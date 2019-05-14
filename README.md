@@ -27,10 +27,10 @@ brew install node
 npm install
 ```
 
-* Then, install the dependencies for the angular frontend at client folder:
+* Then, install the dependencies for the angular frontend at `./angular-src` folder:
 
 ```Bash
-cd client
+cd angular-src
 
 npm install
 ```
@@ -42,7 +42,7 @@ npm install
 
 ```javascript
 module.exports = {
-  database: 'mongodb://localhost:27017/meanauthapi',
+  database: 'mongodb://localhost:27017/fptest',
   secret: 'yoursecret'
 }
 ```
@@ -92,6 +92,12 @@ ng serve
 ```
 
 Then, we can see our project locally on http://localhost:4200.
+
+Once we have some changes on the frontend side, run following command to export frontend components to the public folder, and then deploy the project to Heroku:
+
+```Bash
+ng build
+```
 
 ## Built With
 
