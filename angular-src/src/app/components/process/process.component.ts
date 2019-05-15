@@ -3,11 +3,21 @@ import { ProcessService } from '../../services/process.service';
 // import { Process } from '../../../Instrument';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LabwareSpec } from '../../../LabwareSpec';
+import { LabwarespecsService } from '../../services/labwarespecs.service';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-process',
   templateUrl: './process.component.html',
-  styleUrls: ['./process.component.css']
+  styleUrls: ['./process.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+  .modal-lg {
+    max-width: 1200px !important;
+  }
+`]
 })
 export class ProcessComponent implements OnInit {
   instruments: String[];
@@ -18,21 +28,20 @@ export class ProcessComponent implements OnInit {
     name: String;
     department: String;
   };
-  ins: String;
   type: String;
   Requests: any;
   requestId: Number;
   reqRes: any;
+  closeResult: string;
+  protocol: String;
+  instrument: String;
 
   constructor(
     public authService:AuthService,
     private flashMessage: FlashMessagesService,
-    private processService: ProcessService) {
+    private processService: ProcessService,
+    private modalService: NgbModal,) {
 
-      // this.processService.getremoteRequests().subscribe(remoteprocess => {
-      //   this.remoteprocess = remoteprocess;
-      //   // console.log(this.remoteprocess);
-      // });
 
     this.authService.getProfile().subscribe(profile => {
       // console.log(profile.user.department);
@@ -97,5 +106,9 @@ export class ProcessComponent implements OnInit {
     this.processService.getByReqId(ReqId).subscribe(reqres => {
       this.reqRes = reqres;
     });
+  }
+
+  openModalforSetup(content) {
+    this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
   }
 }

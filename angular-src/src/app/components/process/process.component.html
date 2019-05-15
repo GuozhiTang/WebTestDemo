@@ -33,8 +33,6 @@
   <div class="container">
     <div class="row">
       <div class="col">
-
-
         <h1 style="margin-top: 15px;"><b>Setup</b></h1>
         <form (submit)="getRequests()">
           <div class="form-group">
@@ -58,7 +56,7 @@
                   </select>
                 </td>
                 <td>
-                  <select class="form-control" id="selectPro">
+                  <select class="form-control" id="selectPro" [(ngModel)]="protocol" name="protocol">
                     <option>Select Protocol...</option>
                     <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
                   </select>
@@ -88,12 +86,47 @@
           <tr *ngFor="let req of Requests">
             <td style="padding-right: 2px">
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-dark" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
+                <button type="button" class="btn btn-outline-dark" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
                 <div class="btn-group" role="group">
-                  <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                     <button class="dropdown-item" type="button" (click)="onShowRequest(req.requestId)">Show Requests</button>
-                    <button class="dropdown-item" type="button">Setup Work-order</button>
+                    <button class="dropdown-item" type="button" (click)="openModalforSetup(content)">Setup Work-order</button>
+
+                    <ng-template #content let-modal>
+                      <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div style="width: 1150px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+                          <table class="table-striped" style="text-align: center">
+                            <tr>
+                              <th style="padding-right: 5px">Dept Name</th>
+                              <th style="padding-left: 5px; padding-right: 5px">User Name</th>
+                              <th style="padding-left: 5px; padding-right: 5px">Work-order ID</th>
+                              <th style="padding-left: 5px; padding-right: 5px">Work-order Type</th>
+                              <th style="padding-left: 5px; padding-right: 5px">Protocal Name</th>
+                              <th style="padding-left: 5px; padding-right: 5px">Instrument</th>
+                            </tr>
+                            <tr>
+                              <td style="padding-right: 5px">{{user.department}}</td>
+                              <td style="padding-left: 5px; padding-right: 5px">{{user.name}}</td>
+                              <td style="padding-left: 5px; padding-right: 5px">{{req.requestId}}</td>
+                              <td style="padding-left: 5px; padding-right: 5px">{{req.reqType}}</td>
+                              <td style="padding-left: 5px; padding-right: 5px">{{protocol}}</td>
+                              <td style="padding-left: 5px; padding-right: 5px">{{instrument}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+                      </div>
+                    </ng-template>
+
                   </div>
                 </div>
               </div>
