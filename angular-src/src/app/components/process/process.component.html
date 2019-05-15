@@ -32,30 +32,47 @@
 <body>
   <div class="container">
     <div class="row">
-      <div clas="col">
+      <div class="col">
         <h3>Setup</h3>
-        <form (submit)="getWorkorders()">
+        <form (submit)="getRequests()">
           <div class="form-group">
-            <label for="selectIns">Instruments</label>
-            <select class="form-control" id="selectIns" [(ngModel)]="instrument" name="instrument" (change)="getTypes($event.target.value)">
-              <option>Select Instrument...</option>
-              <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
-            </select>
-
-            <label for="selectType">Work-order Type</label>
-            <select class="form-control" id="selectType" [(ngModel)]="type" name="type" (change)="getProtocols($event.target.value)">
-              <option>Select Work-order...</option>
-              <option [value]="workorder" *ngFor='let workorder of workorders'>{{workorder}}</option>
-            </select>
-
-            <label for="selectPro">Protocols for work-order</label>
-            <select class="form-control" id="selectPro">
-              <option>Select Protocol...</option>
-              <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
-            </select>
+            <table>
+              <tr>
+                <th><label for="selectIns">Instruments</label></th>
+                <th><label for="selectType">Work-order Type</label></th>
+                <th><label for="selectPro">Protocols for work-order</label></th>
+              </tr>
+              <tr>
+                <td>
+                  <select class="form-control" id="selectIns" [(ngModel)]="instrument" name="instrument" (change)="getTypes($event.target.value)">
+                    <option>Select Instrument...</option>
+                    <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" id="selectType" [(ngModel)]="type" name="type" (change)="getProtocols($event.target.value)">
+                    <option>Select Work-order...</option>
+                    <option [value]="workorder" *ngFor='let workorder of workorders'>{{workorder}}</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" id="selectPro">
+                    <option>Select Protocol...</option>
+                    <option [value]="protocol" *ngFor='let protocol of protocols'>{{protocol}}</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
           </div>
           <button type="submit" class="btn btn-primary">Get Work-orders</button>
         </form>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="Requests">
+      <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+        <h2 style="margin-top: 15px"><b>Work-orders:</b></h2>
         <hr>
         <table class="table-striped table-bordered" style="text-align: center">
           <tr>
@@ -66,9 +83,9 @@
             <th style="padding-left: 2px; padding-right: 2px">Requested By</th>
             <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
           </tr>
-          <tr *ngFor="let process of remoteprocess">
-            <td style="padding-right: 2px">{{process.requestId}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{process.reqType}}</td>
+          <tr *ngFor="let req of Requests">
+            <td style="padding-right: 2px"><button class="btn btn-dark" type="button" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button></td>
+            <td style="padding-left: 2px; padding-right: 2px">{{req.reqType}}</td>
             <td style="padding-left: 2px; padding-right: 2px">
               <table>
                 <tr>
@@ -77,25 +94,44 @@
                   <th>Barcode</th>
                 </tr>
                 <tr>
-                  <td>{{process.plex}}</td>
-                  <td>{{process.plexLabel}}</td>
-                  <td>{{process.labwareBarcode}}</td>
+                  <td>{{req.plex}}</td>
+                  <td>{{req.plexLabel}}</td>
+                  <td>{{req.labwareBarcode}}</td>
                 </tr>
               </table>
             </td>
-            <td style="padding-left: 2px; padding-right: 2px">{{process.requestItems}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{process.requestor}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{process.dateRequested}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{req.requestItems}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{req.requestor}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{req.dateRequested}}</td>
           </tr>
         </table>
       </div>
-    </div>
-  </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-
+      <div class="col" *ngIf="reqRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+        <table class="table-striped table-bordered table-dark"  style="text-align: center">
+          <tr>
+            <th style="padding-right: 2px">Req Item</th>
+            <th style="padding-left: 2px; padding-right: 2px">HTID</th>
+            <th style="padding-left: 2px; padding-right: 2px">Antibody Name</th>
+            <th style="padding-left: 2px; padding-right: 2px">Antibody Type</th>
+            <th style="padding-left: 2px; padding-right: 2px">Antibody AbID</th>
+            <th style="padding-left: 2px; padding-right: 2px">Antibody Clone ID</th>
+            <th style="padding-left: 2px; padding-right: 2px">Assay Code</th>
+            <th style="padding-left: 2px; padding-right: 2px">Linked Req ID</th>
+            <th style="padding-left: 2px; padding-right: 2px">Antibody Tube Barcode</th>
+          </tr>
+          <tr *ngFor="let reqres of reqRes">
+            <td style="padding-right: 2px">{{reqres.ord + 1}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyHTID}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyName}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbType}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbId}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyCloneId}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.assayCode}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.linkedReq}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyLabwareBarcode}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

@@ -19,16 +19,20 @@ export class ProcessComponent implements OnInit {
     department: String;
   };
   ins: String;
+  type: String;
+  Requests: any;
+  requestId: Number;
+  reqRes: any;
 
   constructor(
     public authService:AuthService,
     private flashMessage: FlashMessagesService,
     private processService: ProcessService) {
 
-      this.processService.getremoteRequests().subscribe(remoteprocess => {
-        this.remoteprocess = remoteprocess;
-        // console.log(this.remoteprocess);
-      });
+      // this.processService.getremoteRequests().subscribe(remoteprocess => {
+      //   this.remoteprocess = remoteprocess;
+      //   // console.log(this.remoteprocess);
+      // });
 
     this.authService.getProfile().subscribe(profile => {
       // console.log(profile.user.department);
@@ -61,10 +65,37 @@ export class ProcessComponent implements OnInit {
   }
 
   getProtocols(type) {
-    if (type == 'Assay Request') {
+    if (type == 'Assay Request' && this.user.department == 'HT Assay Dept') {
       this.protocols = ['HT Immunoassay Conjugation V1-2-With-Tips Short'];
+    } else if (type == 'Particle Coding Request') {
+      // this.protocols = ['HT Immunoassay Conjugation V1-2-With-Tips Short'];
     }
   }
 
-  getWorkorders() {}
+  getRequests() {
+    const getReq = {
+      request: "fpGetReqDT",
+      dept: this.user.department,
+      reqType: this.type
+    }
+    
+    // console.log(getReq);
+    this.processService.getRequests(getReq).subscribe(req => {
+      this.Requests = req;
+      // console.log(this.Requests);
+    });
+  }
+
+  onShowRequest(reqId) {
+    const ReqId = {
+      request: "fpGetReqDetails",
+      reqId: reqId
+    }
+
+    // console.log('Successful!');
+    this.requestId = reqId;
+    this.processService.getByReqId(ReqId).subscribe(reqres => {
+      this.reqRes = reqres;
+    });
+  }
 }
