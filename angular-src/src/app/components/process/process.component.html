@@ -33,7 +33,9 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3>Setup</h3>
+
+
+        <h1 style="margin-top: 15px;"><b>Setup</b></h1>
         <form (submit)="getRequests()">
           <div class="form-group">
             <table>
@@ -84,7 +86,18 @@
             <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
           </tr>
           <tr *ngFor="let req of Requests">
-            <td style="padding-right: 2px"><button class="btn btn-dark" type="button" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button></td>
+            <td style="padding-right: 2px">
+              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-dark" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                    <button class="dropdown-item" type="button" (click)="onShowRequest(req.requestId)">Show Requests</button>
+                    <button class="dropdown-item" type="button">Setup Work-order</button>
+                  </div>
+                </div>
+              </div>
+            </td>
             <td style="padding-left: 2px; padding-right: 2px">{{req.reqType}}</td>
             <td style="padding-left: 2px; padding-right: 2px">
               <table>
@@ -108,6 +121,7 @@
       </div>
 
       <div class="col" *ngIf="reqRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+        <h2 style="margin-top: 15px"><b>Show Requests -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
         <table class="table-striped table-bordered table-dark"  style="text-align: center">
           <tr>
             <th style="padding-right: 2px">Req Item</th>
