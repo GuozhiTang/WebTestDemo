@@ -81,6 +81,7 @@ export class ProcessComponent implements OnInit {
     }
   }
 
+  // get requests by request type
   getRequests() {
     const getReq = {
       request: "fpGetReqDT",
@@ -95,6 +96,7 @@ export class ProcessComponent implements OnInit {
     });
   }
 
+  // get request items by request ID
   onShowRequest(reqId) {
     const ReqId = {
       request: "fpGetReqDetails",
@@ -108,6 +110,7 @@ export class ProcessComponent implements OnInit {
     });
   }
 
+  // open the modal for setup the request
   openModalforSetup(content) {
     this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
   }

@@ -1,36 +1,10 @@
 <!DOCTYPE html>
 
 <html>
-  <!-- <head>
-    <title>Process Request Initial Testing ui</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-
-    <script type="text/javascript" src="scripts/js/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts/js/lib/jquery/jquery-ui.js"></script>
-    <script type="text/javascript" src="scripts/js/lib/jquery/jquery.form.js"></script>
-
-    <script type="text/javascript" src="scripts/js/misc.js"></script>
-
-    <script type="text/javascript" src="scripts/js/genRequest.js"></script>
-
-
-    <script type="text/javascript" src="scripts/js/procRequest.js"></script>
-
-    <style type="text/css" media="all">
-      @import url("scripts/js/lib/jquery.ui.theme.css");
-      @import url("css/style.css");
-      @import url("css/iop.css");
-      @import url("css/order.css");
-      @import url("css/firefly.css");
-      @import url("css/w3.css");
-
-
-    </style>
-
-  </head> -->
 <body>
+  <!-- Total container -->
   <div class="container">
+    <!-- Selections at the top -->
     <div class="row">
       <div class="col">
         <h1 style="margin-top: 15px;"><b>Setup</b></h1>
@@ -70,10 +44,12 @@
       </div>
     </div>
 
+    <!-- Get all Requests by work-order type -->
     <div class="row" *ngIf="Requests">
       <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
         <h2 style="margin-top: 15px"><b>Work-orders:</b></h2>
         <hr>
+        <!-- table to show all requests -->
         <table class="table-striped table-bordered" style="text-align: center">
           <tr>
             <th style="padding-right: 2px">Work-order ID</th>
@@ -84,6 +60,7 @@
             <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
           </tr>
           <tr *ngFor="let req of Requests">
+            <!-- Two functionalities for ID button -->
             <td style="padding-right: 2px">
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button type="button" class="btn btn-outline-dark" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
@@ -153,6 +130,7 @@
         </table>
       </div>
 
+      <!-- To show specific requests by ID -->
       <div class="col" *ngIf="reqRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
         <h2 style="margin-top: 15px"><b>Show Requests -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
         <table class="table-striped table-bordered table-dark"  style="text-align: center">
