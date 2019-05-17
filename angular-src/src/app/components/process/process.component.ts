@@ -35,26 +35,70 @@ export class ProcessComponent implements OnInit {
   closeResult: string;
   protocol: String;
   instrument: String;
+  // statusRes: any;
+  statusRes: {
+    requested: String;
+    status_op: {
+      comment: String;
+      requested: String;
+      moduleName: String;
+      requestor_id: {
+        moduleName: String;
+        name: String;
+        admin: Boolean;
+        className: String;
+        active: Boolean;
+        manufacturing: Boolean;
+        id: Number;
+      }
+      className: String;
+      spec_id: Object;
+      id: Number;
+    }
+    requestor_id: Object;
+    dept_spec: Object;
+    className: String;
+    moduleNAme: String;
+    completed_op: Object;
+  }
+  typeRes: {
+    moduleName: String;
+    description: String;
+    approber_id: Number;
+    name: String;
+    className: String;
+    sop_id: Number;
+    id: Number;
+  }
+  operatorName: String;
+  comments: String;
+  opSpecId: Number;
 
   constructor(
     public authService:AuthService,
     private flashMessage: FlashMessagesService,
     private processService: ProcessService,
     private modalService: NgbModal,) {
-
-
-    this.authService.getProfile().subscribe(profile => {
-      // console.log(profile.user.department);
-      // console.log(typeof(profile.user.department));
-      this.user = profile.user;
-      if (this.user.department == "Manufacturing Dept") {
-        // console.log("successful!");
-        this.instruments = ['Robot 2', 'Robot 3', 'Stamp 1', 'Nanodrop', 'Manual'];
-      } else if (this.user.department == "HT Assay Dept") {
-        // console.log("Failed!");
-        this.instruments = ['Hamilton RBT1', 'Manual'];
+    
+      const info ={
+        request: "fpReqStatusList"
       }
-    });
+      this.processService.getStatusTypes(info).subscribe(types => {
+        this.typeRes = types;
+      });
+
+      this.authService.getProfile().subscribe(profile => {
+        // console.log(profile.user.department);
+        // console.log(typeof(profile.user.department));
+        this.user = profile.user;
+        if (this.user.department == "Manufacturing Dept") {
+          // console.log("successful!");
+          this.instruments = ['Robot 2', 'Robot 3', 'Stamp 1', 'Nanodrop', 'Manual'];
+        } else if (this.user.department == "HT Assay Dept") {
+          // console.log("Failed!");
+          this.instruments = ['Hamilton RBT1', 'Manual'];
+        }
+      });
     }
 
   ngOnInit() {
@@ -105,13 +149,54 @@ export class ProcessComponent implements OnInit {
 
     // console.log('Successful!');
     this.requestId = reqId;
+    this.statusRes = undefined;
     this.processService.getByReqId(ReqId).subscribe(reqres => {
       this.reqRes = reqres;
     });
   }
 
   // open the modal for setup the request
-  openModalforSetup(content) {
+  openModalforRequest(content) {
     this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
+  }
+
+  onShowStatus(reqId) {
+    const showComment = {
+      request: "fpStatusForReq",
+      requestId: reqId
+    }
+
+    this.requestId = reqId;
+    this.reqRes = undefined;
+    this.processService.showStatus(showComment).subscribe(status => {
+      // console.log("status"+status);
+      this.statusRes = status;
+      // console.log(this.statusRes);
+      // this.operatorName = this.statusRes.status_op.requestor_id.name;
+    });
+  }
+
+  // open the modal for update the status
+  openModalforStatus(content) {
+    this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
+  }
+
+  addStatus() {
+    const add = {
+      request: "fpAddReqStatus",
+      requestId: this.requestId,
+      operatorName: "Felix Green",
+      opSpecId: this.opSpecId,
+      statusComment: this.comments
+    }
+
+    this.processService.addStatus(add).subscribe(newStatus => {
+      console.log(newStatus);
+    });
+  }
+
+  showSth() {
+    console.log(this.requestId);
+    console.log(this.opSpecId);
   }
 }

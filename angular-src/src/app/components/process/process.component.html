@@ -68,7 +68,8 @@
                   <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                     <button class="dropdown-item" type="button" (click)="onShowRequest(req.requestId)">Show Requests</button>
-                    <button class="dropdown-item" type="button" (click)="openModalforSetup(content)">Setup Work-order</button>
+                    <button class="dropdown-item" type="button" (click)="openModalforRequest(content)">Setup Work-order</button>
+                    <button class="dropdown-item" type="button" (click)="onShowStatus(req.requestId)">Show Status</button>
 
                     <ng-template #content let-modal>
                       <div class="modal-header">
@@ -155,6 +156,60 @@
             <td style="padding-left: 2px; padding-right: 2px">{{reqres.assayCode}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{reqres.linkedReq}}</td>
             <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyLabwareBarcode}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- To show all status by request ID -->
+      <div class="col" *ngIf="statusRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+        <h2 style="margin-top: 15px"><b>Show Status -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
+
+        <form (submit)="openModalforStatus(content2)">
+            <div class="form-group">
+              <label for="updateStatus">Select Status Type: </label>
+              <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
+                <option>Select Status Type...</option>
+                <option *ngFor='let types of typeRes' [value]= types.id>{{types.name}}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+
+        <ng-template #content2 let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Update Status</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (submit)="addStatus()">
+              <div class="form-group">
+                <label for="statusTextarea">Type in your comments: </label>
+                <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+          </div>
+        </ng-template>
+
+        <table class="table-striped table-bordered table-dark"  style="text-align: center">
+          <tr>
+            <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
+            <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
+            <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
+            <th style="padding-left: 2px; padding-right: 2px">Comments</th>
+            <th style="padding-left: 2px; padding-right: 2px">Requested</th>
+          </tr>
+          <tr *ngFor="let status of statusRes">
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
           </tr>
         </table>
       </div>
