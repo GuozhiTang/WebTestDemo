@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,11 +16,11 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private router:Router
   ) { }
 
   // Initialize the user
   ngOnInit() {
+    // get login information about the current user in local storage.
     this.authService.getProfile().subscribe(profile => {
       // console.log(profile.user);
       this.user = profile.user;

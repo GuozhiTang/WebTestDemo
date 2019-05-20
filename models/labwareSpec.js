@@ -43,14 +43,17 @@ const LabwareSpecSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const LabwareSpec = module.exports = mongoose.model('LabwareSpec', LabwareSpecSchema);
 
+// To get all labwarespecs
 module.exports.getLabwareSpec = function (callback) {
   LabwareSpec.find(callback);
 }
 
+// To add and save new labwarespecs locally
 module.exports.addLabwareSpec = function (newLabwareSpec, callback) {
   newLabwareSpec.save(callback);
 }
 
+// To pull labwarespecs remotely
 module.exports.grabLabwareSpecs = function (callback) {
   request.post('http://10.253.7.14:8000', {
     json: {
@@ -83,21 +86,25 @@ module.exports.grabLabwareSpecs = function (callback) {
   })
 }
 
+// Search by name
 module.exports.getByName = function(name, callback) {
   const query = {name: name}
   LabwareSpec.find(query, callback);
 }
 
+// Search by manufacturer
 module.exports.getByManufacturer = function(manufacturer, callback) {
   const query = {manufacturer: manufacturer}
   LabwareSpec.find(query, callback);
 }
 
+// Search by labwarespec_id
 module.exports.getById = function(id, callback) {
   const query = {id: id}
   LabwareSpec.find(query, callback);
 }
 
+// Search by name and manufacturer
 module.exports.getByConditions = function(name, manufacturer, callback) {
   const query = {
     name: name,

@@ -27,15 +27,18 @@ module.exports.getUserById = function(id, callback) {
   User.findById(id, callback);
 }
 
+// To add and save new users locally
 module.exports.addUser = function (newUser, callback) {
   newUser.save(callback);
 }
 
+// Search users by Name
 module.exports.getUserByName = function(name, callback) {
   const query = {name: name}
   User.findOne(query, callback);
 }
 
+// Search users by department
 module.exports.getByDep = function (department, callback) {
   const query = {department: department}
   User.find(query, callback);

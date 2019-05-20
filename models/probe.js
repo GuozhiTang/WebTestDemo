@@ -34,6 +34,7 @@ const ProbeSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Probe = module.exports = mongoose.model('Probe', ProbeSchema);
 
+// To get and show all probes with specific probemap_id remotely
 module.exports.showProbes = function (mapId, callback) {
   request.post('http://10.253.7.14:8000', {
     json: {

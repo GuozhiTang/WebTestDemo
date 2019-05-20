@@ -19,6 +19,7 @@ const request = require('request');
 //   });
 // });
 
+// To get and show all probes with specific probemap_id remotely
 router.post('/showProbes', (req, res, next) => {
   const mapId = req.body.mapId;
 

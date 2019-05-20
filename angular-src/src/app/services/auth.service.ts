@@ -20,8 +20,11 @@ export class AuthService {
     public jwtHelper:JwtHelperService
     ) { }
 
-  // Function to register to the user
-  // Here is where we actually reach into our backend API and make that post request to register
+  /**
+   * Function to register to the user
+   * Here is where we actually reach into our backend API and make that post request to register
+   * @param user: json sent to local server conatining all information for adding/registering new users
+   */
   registerUser(user) {
     // Set header values
     let headers = new Headers();
@@ -31,6 +34,10 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Authenticate the login information for the specific user.
+   * @param user: json sent to local server conatining all information for authenticating existed users.
+   */
   authenticateUser(user) {
     // Set header values
     let headers = new Headers();
@@ -40,6 +47,9 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Load the data in local storage and set it as current user.
+   */
   getProfile() {
     // Set header values
     let headers = new Headers();
@@ -52,6 +62,11 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Store login information in local storage
+   * @param token: the token information of authentication
+   * @param user: the user information of login user
+   */
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
@@ -59,7 +74,9 @@ export class AuthService {
     this.user = user;
   }
 
-  // get token from local storage
+  /**
+   * Get token from local storage
+   */
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
@@ -68,10 +85,17 @@ export class AuthService {
   // loggedIn() {
   //   return tokenNotExpired();
   // }
+
+  /**
+   * Judge whether the token of login user has expired.
+   */
   isTokenExp(){
     return this.jwtHelper.isTokenExpired();
   }
 
+  /**
+   * Functionality of logout and set token and user information as null. Finally clear up the local storage.
+   */
   logout() {
     this.authToken = null;
     this.user = null;

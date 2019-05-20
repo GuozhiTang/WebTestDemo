@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       name: this.name,
       department: this.department
     }
-
     // data is what we store after sending this request
     this.authService.authenticateUser(user).subscribe(data => {
       // console.log(data);

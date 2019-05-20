@@ -25,19 +25,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   
+  /**
+   * Set limitations for submittig register form.
+   * Register the user information and then direct to login page.
+   */
   onRegisterSubmit() {
     const user = {
       name: this.name,
       department: this.department,
     }
-
     // Required Fields
     if (!this.validateService.validateRegister(user)) {
       // console.log('Please fill in all fields');
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
-
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {

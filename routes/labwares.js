@@ -5,6 +5,7 @@ const config = require('../config/database');
 const Labware = require('../models/labware');
 const request = require('request');
 
+// To pull labwares data from data server
 router.post('/grabLabwares', (req, res, next) => {
   Labware.grabLabwareSpecs((err, dataObj) => {
     if (err) {

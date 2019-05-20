@@ -34,14 +34,17 @@ const ProbemapSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Probemap = module.exports = mongoose.model('Probemap', ProbemapSchema);
 
+// To get all probemaps locally
 module.exports.getProbemaps = function (callback) {
   Probemap.find(callback);
 }
 
+// To add and save new probemaps locally
 module.exports.addProbemap = function (newProbemap, callback) {
   newProbemap.save(callback);
 }
 
+// To pull probemaps from data server
 module.exports.grabProbemaps = function (callback) {
   request.post('http://10.253.7.14:8000', {
     json: {
@@ -74,21 +77,25 @@ module.exports.grabProbemaps = function (callback) {
   })
 }
 
+// Search by moduleName
 module.exports.getByModuleName = function(moduleName, callback) {
   const query = {moduleName: moduleName}
   Probemap.find(query, callback);
 }
 
+// Search by Name
 module.exports.getByName = function(name, callback) {
   const query = {name: name}
   Probemap.find(query, callback);
 }
 
+// Search by probemap_id
 module.exports.getById = function(id, callback) {
   const query = {id: id}
   Probemap.find(query, callback);
 }
 
+// Search by both moduleName and name
 module.exports.getByConditions = function(moduleName, name, callback) {
   const query = {
     moduleName: moduleName,
@@ -97,6 +104,7 @@ module.exports.getByConditions = function(moduleName, name, callback) {
   Probemap.find(query, callback);
 }
 
+// Search by creatorName
 module.exports.getByCreatorName = function(creatorName, callback) {
   const query = {'creator.requestor_id.name' : creatorName}
   Probemap.find(query, callback);

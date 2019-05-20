@@ -31,10 +31,12 @@ const RoleSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Role = module.exports = mongoose.model('Role', RoleSchema);
 
+// To get all roles locally
 module.exports.getRoles = function (callback) {
   Role.find(callback);
 }
 
+// To add and save new roles locally
 module.exports.addRole = function (newRole, callback) {
   newRole.save(callback);
 }
@@ -53,6 +55,7 @@ module.exports.addRole = function (newRole, callback) {
 //   })
 // }
 
+// To pull roles from data server
 module.exports.grabRoles = function (callback) {
   request.post('http://10.253.7.14:8000', {
     json: {
@@ -88,21 +91,25 @@ module.exports.grabRoles = function (callback) {
   })
 }
 
+// Search by Role
 module.exports.getByRole = function(role, callback) {
   const query = {role: role}
   Role.find(query, callback);
 }
 
+// Search by Liquid_class
 module.exports.getByLiquidClass = function(liquid_class, callback) {
   const query = {liquid_class: liquid_class}
   Role.find(query, callback);
 }
 
+// Search by role_id
 module.exports.getById = function(id, callback) {
   const query = {id: id}
   Role.find(query, callback);
 }
 
+// Search by both role and liquid_class
 module.exports.getByConditions = function(role, liquid_class, callback) {
   const query = {
     role: role,

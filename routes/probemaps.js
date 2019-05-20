@@ -3,8 +3,8 @@ const router = express.Router();
 const config = require('../config/database');
 // Bring in our models
 const Probemap = require('../models/probemap');
-const request = require('request');
 
+// To get all probemaps locally
 router.get('/getProbemaps', (req, res, next) => {
   Probemap.find((err, probemap) => {
     if (err) {
@@ -15,6 +15,7 @@ router.get('/getProbemaps', (req, res, next) => {
   });
 });
 
+// To add and save new probemaps locally
 router.post('/addProbemap', (req, res, next) => {
   let newProbemap = new Probemap({
     moduleName: req.body.moduleName,
@@ -34,6 +35,7 @@ router.post('/addProbemap', (req, res, next) => {
   });
 });
 
+// To pull probemaps from data server
 router.post('/grabProbemaps', (req, res, next) => {
   Probemap.grabProbemaps((err, dataObj) => {
     if (err) {
@@ -50,6 +52,7 @@ router.post('/grabProbemaps', (req, res, next) => {
   });
 });
 
+// Search by moduleName
 router.post('/searchbymoduleName', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -62,6 +65,7 @@ router.post('/searchbymoduleName', (req, res, next) => {
   });
 });
 
+// Search by Name
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -74,6 +78,7 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
+// Search by probemap_id
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -86,6 +91,7 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
+// Search by both moduleName and name
 router.post('/searchbyconditions', (req, res, next) => {
   const moduleName = req.body.moduleName;
   const name = req.body.name;
@@ -99,6 +105,7 @@ router.post('/searchbyconditions', (req, res, next) => {
   });
 });
 
+// Search by creatorName
 router.post('/searchbycreatorname', (req, res, next) => {
   const creatorName = req.body.creatorName;
 

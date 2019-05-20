@@ -8,6 +8,7 @@ const config = require('../config/database');
 const User = require('../models/user');
 
 // Register - /users/register
+// To register and add new users
 router.post('/register', (req, res, next) => {
   //  res.send('REGISTER');
   let newUser = new User({
@@ -24,6 +25,7 @@ router.post('/register', (req, res, next) => {
   });
 });
 
+// Search users by Name
 router.post('/getuserbyname', (req, res, next) => {
   const name = req.body.name;
   User.getUserByName(name, (err, user) => {
@@ -36,6 +38,7 @@ router.post('/getuserbyname', (req, res, next) => {
 })
 
 // Authenticate- /users/authenticate
+// To authenticate that whether the login user has same information with register one.
 router.post('/authenticate', (req, res, next) => {
   // res.send('AUTHENTICATE');
   const name = req.body.name;

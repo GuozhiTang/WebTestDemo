@@ -3,8 +3,8 @@ const router = express.Router();
 const config = require('../config/database');
 // Bring in our models
 const Instrument = require('../models/instrument');
-const request = require('request');
 
+// To get all Instruments locally
 router.get('/getInstruments', (req, res, next) => {
   Instrument.find((err, instrument) => {
     if (err) {
@@ -15,6 +15,7 @@ router.get('/getInstruments', (req, res, next) => {
   });
 });
 
+// To add and save new Instrument locally
 router.post('/addInstrument', (req, res, next) => {
   let newInstrument = new Instrument({
     moduleName: req.body.moduleName,
@@ -32,6 +33,7 @@ router.post('/addInstrument', (req, res, next) => {
   });
 });
 
+// To pull Instruments remotely
 router.post('/grabInstruments', (req, res, next) => {
   Instrument.grabInstruments((err, dataObj) => {
     if (err) {
@@ -48,6 +50,7 @@ router.post('/grabInstruments', (req, res, next) => {
   });
 });
 
+// Search by moduleName
 router.post('/searchbymoduleName', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -60,6 +63,7 @@ router.post('/searchbymoduleName', (req, res, next) => {
   });
 });
 
+// Search by short
 router.post('/searchbyshort', (req, res, next) => {
   const short = req.body.short;
 
@@ -72,6 +76,7 @@ router.post('/searchbyshort', (req, res, next) => {
   });
 });
 
+// Search by instrument_id
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -84,6 +89,7 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
+// Search by both moduleName and short
 router.post('/searchbyconditions', (req, res, next) => {
   const moduleName = req.body.moduleName;
   const short = req.body.short;

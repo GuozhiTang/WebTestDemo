@@ -3,8 +3,8 @@ const router = express.Router();
 const config = require('../config/database');
 // Bring in our models
 const Role = require('../models/role');
-const request = require('request');
 
+// To get all roles locally
 router.get('/getroles', (req, res, next) => {
   Role.find((err, role) => {
     if (err) {
@@ -15,6 +15,7 @@ router.get('/getroles', (req, res, next) => {
   });
 });
 
+// To add and save new roles locally
 router.post('/addrole', (req, res, next) => {
   let newRole = new Role({
     moduleName: req.body.moduleName,
@@ -33,6 +34,7 @@ router.post('/addrole', (req, res, next) => {
   });
 });
 
+// To pull roles from data server
 router.post('/grabroles', (req, res, next) => {
   Role.grabRoles((err, dataObj) => {
     if (err) {
@@ -49,6 +51,7 @@ router.post('/grabroles', (req, res, next) => {
   });
 });
 
+// Search by Role
 router.post('/searchbyrole', (req, res, next) => {
   const rolename = req.body.role;
 
@@ -61,6 +64,7 @@ router.post('/searchbyrole', (req, res, next) => {
   });
 });
 
+// Search by Liquid_class
 router.post('/searchbyliquidclass', (req, res, next) => {
   const liquid_class = req.body.liquid_class;
 
@@ -73,6 +77,7 @@ router.post('/searchbyliquidclass', (req, res, next) => {
   });
 });
 
+// Search by role_id
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -85,6 +90,7 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
+// Search by both role and liquid_class
 router.post('/searchbyconditions', (req, res, next) => {
   const rolename = req.body.role;
   const liquid_class = req.body.liquid_class;

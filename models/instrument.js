@@ -28,14 +28,17 @@ const InstrumentSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Instrument = module.exports = mongoose.model('Instrument', InstrumentSchema);
 
+// To get all Instruments locally
 module.exports.getInstrument = function (callback) {
   Instrument.find(callback);
 }
 
+// To add and save new Instrument locally
 module.exports.addInstrument = function (newInstrument, callback) {
   newInstrument.save(callback);
 }
 
+// To pull Instruments remotely
 module.exports.grabInstruments = function (callback) {
   request.post('http://10.253.7.14:8000', {
     json: {
@@ -68,21 +71,25 @@ module.exports.grabInstruments = function (callback) {
   })
 }
 
+// Search by moduleName
 module.exports.getByModuleName = function(moduleName, callback) {
   const query = {moduleName: moduleName}
   Instrument.find(query, callback);
 }
 
+// Search by short
 module.exports.getByShort = function(short, callback) {
   const query = {short: short}
   Instrument.find(query, callback);
 }
 
+// Search by instrument_id
 module.exports.getById = function(id, callback) {
   const query = {id: id}
   Instrument.find(query, callback);
 }
 
+// Search by both moduleName and short
 module.exports.getByConditions = function(moduleName, short, callback) {
   const query = {
     moduleName: moduleName,

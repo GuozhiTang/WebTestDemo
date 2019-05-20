@@ -35,6 +35,7 @@ const LabwareSchema = mongoose.Schema({
 
 const Labware = module.exports = mongoose.model('Labware', LabwareSchema);
 
+// To pull labwares data from data server
 module.exports.grabLabwares = function (callback) {
   request.post('http://10.253.7.14:8000', {
     json: {

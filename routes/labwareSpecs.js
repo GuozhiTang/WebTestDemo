@@ -3,8 +3,8 @@ const router = express.Router();
 const config = require('../config/database');
 // Bring in our models
 const LabwareSpec = require('../models/labwareSpec');
-const request = require('request');
 
+// To get all labwarespecs
 router.get('/getlwarespec', (req, res, next) => {
   LabwareSpec.find((err, lwarespec) => {
     if (err) {
@@ -15,6 +15,7 @@ router.get('/getlwarespec', (req, res, next) => {
   });
 });
 
+// To add and save new labwarespecs locally
 router.post('/addlwarespec', (req, res, next) => {
   let newLwarespec = new LabwareSpec({
     moduleName: req.body.moduleName,
@@ -37,6 +38,7 @@ router.post('/addlwarespec', (req, res, next) => {
   });
 });
 
+// To pull labwarespecs remotely
 router.post('/grablabwareSpecs', (req, res, next) => {
   LabwareSpec.grabLabwareSpecs((err, dataObj) => {
     if (err) {
@@ -55,6 +57,7 @@ router.post('/grablabwareSpecs', (req, res, next) => {
   });
 });
 
+// Search by name
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -67,6 +70,7 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
+// Search by manufacturer
 router.post('/searchbymanufacturer', (req, res, next) => {
   const manufacturer = req.body.manufacturer;
 
@@ -79,6 +83,7 @@ router.post('/searchbymanufacturer', (req, res, next) => {
   });
 });
 
+// Search by labwarespec_id
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -91,6 +96,7 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
+// Search by name and manufacturer
 router.post('/searchbyconditions', (req, res, next) => {
   const name = req.body.name;
   const manufacturer = req.body.manufacturer;
