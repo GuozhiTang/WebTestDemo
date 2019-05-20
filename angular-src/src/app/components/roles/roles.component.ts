@@ -33,10 +33,12 @@ export class RolesComponent implements OnInit {
   constructor(
     private flashMessage: FlashMessagesService,
     private rolesService: RolesService) {
+      // show all roles locally
       this.rolesService.getRoles().subscribe(roles => {
         this.roles = roles;
       });
 
+      // show all roles remotely
       this.rolesService.getremoteRoles().subscribe(remoteroles => {
         this.remoteroles = remoteroles;
       });
@@ -45,6 +47,9 @@ export class RolesComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Add new Roles with necessary parameters.
+   */
   onAddRoles() {
     const role = {
       moduleName: this.moduleName_add,
@@ -54,7 +59,6 @@ export class RolesComponent implements OnInit {
       reagent: this.reagent_add,
       id: this.id_add,
     }
-
     // Add Role
     this.rolesService.addRole(role).subscribe(data => {
       if (data.success) {
@@ -68,19 +72,29 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Functionality to pull all roles data from data server.
+   */
   onGrabRoles() {
-    this.rolesService.grabRoles().subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // console.log('Grab Successfully!');
-        location.reload();
-      } else {
-        this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Grab Failed!');
-      }
-    });
+    if (this.roles.length == 0) {
+      this.rolesService.grabRoles().subscribe(data => {
+        if (data.success) {
+          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
+          // console.log('Grab Successfully!');
+          location.reload();
+        } else {
+          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
+          // console.log('Grab Failed!');
+        }
+      });
+    } else {
+      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeout: 3000});
+    }
   }
 
+  /**
+   * Search Roles by Role
+   */
   onSearchRolesByRole() {
     const searchRole = {
       role: this.role,
@@ -90,6 +104,9 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Roles by Liquid_class
+   */
   onSearchRolesByLiquidClass() {
     const searchLiquidClass = {
       liquid_class: this.liquid_class
@@ -99,6 +116,9 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Roles by Roles_id
+   */
   onSearchRolesById() {
     const searchId = {
       id: this.id
@@ -108,6 +128,9 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Roles by both role and liquid_class
+   */
   onSearchRolesByConditions() {
     const conditions = {
       role: this.role_condition,

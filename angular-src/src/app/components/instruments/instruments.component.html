@@ -1,16 +1,22 @@
+<!-- Area for display Instrument data -->
 <div class="container" style="margin-top: 15px;">
+  <!-- Instruction of Instrument component -->
   <div class="row">
     <div class="col jumbotron" style="padding-top: 25px; height: 150px;">
       <h5>Instruments list shows all the instruments which will be tracked by developers in the database. The robot could be a huge instruments with many smaller instruments such as Tips Arm and Tips Carrier. It is beneficial to both users and developers. Because if we want the robot to do sth, we need to come here to choose instruments.</h5>
     </div>
   </div>
+
+  <!-- To show local and remote Instruments data -->
   <div class="row">
+    <!-- Area to update and show Instruments locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Update and Show All Instruments Locally</b></h2>
       <form (submit)="onGrabInstruments()" style="margin-bottom: 15px">
           <button type="submit" class="btn btn-primary">Update Instruments</button>
       </form>
       <hr>
+      <!-- table to show instruments locally -->
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -29,10 +35,12 @@
       </table>
     </div>
 
+    <!-- Area to show Instruments remotely -->
     <div class="col" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Show All Instruments Remotely</b></h2>
       <p>According to: <a href="http://10.253.7.14:8000/?request=getAllInstruments">http://10.253.7.14:8000/?request=getAllInstruments</a></p>
       <hr>
+      <!-- table to show instruments remotely -->
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -53,9 +61,11 @@
   </div>
 </div>
 <hr>
-  
+
+<!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
+    <!-- Search by moduleName -->
     <div class="col">
       <h2><b>Search by moduleName</b></h2>
       <hr>
@@ -86,6 +96,7 @@
       </div>
     </div>
 
+    <!-- Search by short -->
     <div class="col">
       <h2><b>Search by Short</b></h2>
       <hr>
@@ -118,6 +129,7 @@
   </div>
 
   <div class="row">
+    <!-- Search by instrument_id -->
     <div class="col">
       <h2><b>Search by Id</b></h2>
       <hr>
@@ -148,6 +160,7 @@
       </div>
     </div>
     
+    <!-- Search by moduleName and short -->
     <div class="col">
       <h2><b>Search by Conditions</b></h2>
       <hr>
@@ -185,6 +198,7 @@
 </div>
 <hr>
 
+<!-- Area for adding new Instruments -->
 <div class="container">
   <div class="row">
     <div class="col">

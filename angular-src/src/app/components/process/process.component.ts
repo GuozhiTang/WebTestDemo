@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProcessService } from '../../services/process.service';
-// import { Process } from '../../../Instrument';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

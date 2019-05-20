@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
     this.ngOnInit();
   }
 
+  /**
+   * Submit the login information to authenticate.
+   */
   onLoginSubmit() {
     // console.log(this.username);
     const user = {

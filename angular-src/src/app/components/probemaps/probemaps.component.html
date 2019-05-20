@@ -1,17 +1,22 @@
+<!-- Area for display Probemaps data -->
 <div class="container" style="margin-top: 15px;">
+  <!-- Instruction of Probemaps component -->
   <div class="row">
     <div class="col jumbotron" style="padding-top: 25px; height: 100px;">
       <h5>Probemaps list shows the details for users to create the panel. Moreover, we can see details of all probes in each probemap by clicking the id of each Probemap. It is more beneficial on user side.</h5>
     </div>
   </div>
 
+  <!-- To show local and remote Probemaps data -->
   <div class="row">
+    <!-- Area to update and show Probemaps locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Update and Show All Probemaps Locally</b></h2>
       <form (submit)="onGrabProbemaps()" style="margin-bottom: 15px">
           <button type="submit" class="btn btn-primary">Update Probemaps</button>
       </form>
       <hr>
+      <!-- table to show probemaps locally -->
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -35,9 +40,11 @@
       </table>
     </div>
 
+    <!-- Area to show probes -->
     <div class="col" *ngIf="probeRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
       <h2 style="margin-top: 15px"><b>Show Probes -- ProbemapId: </b><span class="badge badge-pill badge-dark">{{probemapId}}</span></h2>
       <hr>
+      <!-- Table to display probes -->
       <table class="table-striped table-bordered table-dark"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -62,11 +69,12 @@
       </table>
     </div>
     
-
+    <!-- Area to show Probemaps remotely -->
     <div class="col" *ngIf="!probeRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Show All Probemaps Remotely</b></h2>
       <p>According to: <a href="http://10.253.7.14:8000/?request=getAllProbemaps">http://10.253.7.14:8000/?request=getAllProbemaps</a></p>
       <hr>
+      <!-- table to show probemaps remotely -->
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -92,8 +100,10 @@
 </div>
 <hr>
   
+<!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
+    <!-- Search by creatorName -->
     <div class="col">
       <h2><b>Search by creatorName</b></h2>
       <hr>
@@ -128,6 +138,7 @@
       </div>
     </div>
 
+    <!-- Search by Name -->
     <div class="col">
       <h2><b>Search by Name</b></h2>
       <hr>
@@ -164,6 +175,7 @@
   </div>
 
   <div class="row">
+    <!-- Search by Role_id -->
     <div class="col">
       <h2><b>Search by Id</b></h2>
       <hr>
@@ -198,6 +210,7 @@
       </div>
     </div>
     
+    <!-- Search by moduleName and name -->
     <div class="col">
       <h2><b>Search by Conditions</b></h2>
       <hr>
@@ -239,6 +252,7 @@
 </div>
 <hr>
 
+<!-- Area for adding new Probemaps -->
 <div class="container">
   <div class="row">
     <div class="col">

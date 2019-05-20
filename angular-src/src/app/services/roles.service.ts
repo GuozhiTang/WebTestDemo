@@ -11,21 +11,28 @@ export class RolesService {
     private http:Http
   ) { }
 
-  // Function to get all roles locally
+  /**
+   * Function to get all roles locally
+   */
   getRoles() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/roles/getroles', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  // Function to get all roles remotely
+  /**
+   * Function to get all roles remotely
+   */
   getremoteRoles() {
     let headers = new Headers();
     return this.http.get('http://10.253.7.14:8000/?request=getRoles', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  // Function to add role to the roles
+  /**
+   * Function to add role to the roles
+   * @param role: json sent to local server conatining all information for adding new Roles
+   */
   addRole(role) {
     // Set header values
     let headers = new Headers();
@@ -34,7 +41,9 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
-  // Function to grab roles remotely
+  /**
+   * Function to grab roles remotely
+   */
   grabRoles () {
     // Set header values
     let headers = new Headers();
@@ -43,6 +52,10 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Search Roles by Role
+   * @param rolename: json sent to local server conatining roleName
+   */
   searchRolesByRole(rolename) {
     // this.searchUrl = 'https://api.spotify.com/v1/search?query='+str+'&offset=0&limit=20&type='+type+'&market=US';
     // return this.http.get(this.searchUrl)
@@ -53,6 +66,10 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Search Roles by Liquid_class
+   * @param liquid_class: json sent to local server conatining liquid_class
+   */
   searchRolesByLiquidClass(liquid_class) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -60,6 +77,10 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Search Roles by Roles_id
+   * @param id: json sent to local server conatining role_id
+   */
   searchRolesById(id) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -67,6 +88,10 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Search Roles by both role and liquid_class
+   * @param conditions: json sent to local server conatining role and liquid_class
+   */
   searchRolesByConditions(conditions) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

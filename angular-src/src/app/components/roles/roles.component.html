@@ -1,4 +1,6 @@
+<!-- Area for display Role data -->
 <div class="container" style="margin-top: 15px;">
+  <!-- Instruction of Role component -->
   <div class="row">
     <div class="col jumbotron" style="padding-top: 25px; height: 170px;">
       <h5>Roles list shows the types of labwares. It could be the content in the labware such as CEA Code Mix, or it could be one with many types such as Filter Plate. It is more beneficial on developer side. This gives us a quick view on what type we will send to robot.</h5>
@@ -6,13 +8,16 @@
     </div>
   </div>
 
+  <!-- To show local and remote Roles data -->
   <div class="row">
+    <!-- Area to update and show Roles locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Update and Show All Roles Locally</b></h2>
       <form (submit)="onGrabRoles()" style="margin-bottom: 15px">
           <button type="submit" class="btn btn-primary">Update Roles</button>
       </form>
       <hr>
+      <!-- table to show roles locally -->
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -33,10 +38,12 @@
       </table>
     </div>
 
+    <!-- Area to show Roles remotely -->
     <div class="col" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Show All Roles Remotely</b></h2>
       <p>According to: <a href="http://10.253.7.14:8000/?request=getRoles">http://10.253.7.14:8000/?request=getRoles</a></p>
       <hr>
+      <!-- table to show roles remotely -->
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -60,8 +67,10 @@
 </div>
 <hr>
 
+<!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
+    <!-- Search by Role -->
     <div class="col">
       <h2><b>Search by Role</b></h2>
       <hr>
@@ -94,6 +103,7 @@
       </div>
     </div>
 
+    <!-- Search by Liquid_class -->
     <div class="col">
       <h2><b>Search by Liquid_Class</b></h2>
       <hr>
@@ -128,6 +138,7 @@
   </div>
 
   <div class="row">
+    <!-- Search by Role_id -->
     <div class="col">
       <h2><b>Search by Id</b></h2>
       <hr>
@@ -160,6 +171,7 @@
       </div>
     </div>
     
+    <!-- Search by role and liquid_class -->
     <div class="col">
       <h2><b>Search by Conditions</b></h2>
       <hr>
@@ -199,6 +211,7 @@
 </div>
 <hr>
 
+<!-- Area for adding new Roles -->
 <div class="container">
   <div class="row">
     <div class="col">

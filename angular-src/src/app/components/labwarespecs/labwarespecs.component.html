@@ -1,17 +1,22 @@
+<!-- Area for display Labwarespecs data -->
 <div class="container" style="margin-top: 15px;">
+  <!-- Instruction of Labwarespec component -->
   <div class="row">
     <div class="col jumbotron" style="padding-top: 25px; height: 110px;">
       <h5>LabwareSpecs list is to define the labware. It shows all types of labwares which can be used in the database with their details. It is beneficial for both users and developers. If we want to create a new labware, then we can come here and see.</h5>
     </div>
   </div>
   
+  <!-- To show local and remote Labwarespecs data -->
   <div class="row">
+    <!-- Area to update and show Labwarespecs locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Update and Show All LabwareSpecs Locally</b></h2>
       <form (submit)="onGrabLwareSpecs()" style="margin-bottom: 15px">
           <button type="submit" class="btn btn-primary">Update LabwareSpecs</button>
       </form>
       <hr>
+      <!-- table to show Labwarespecs locally -->
       <table class="table-striped" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -40,10 +45,12 @@
       </table>
     </div>
 
+    <!-- Area to show Labwarespecs remotely -->
     <div class="col" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
       <h2 style="margin-top: 15px"><b>Show All LabwareSpecs Remotely</b></h2>
       <p>According to: <a href="http://10.253.7.14:8000/?request=getLabwareSpecs">http://10.253.7.14:8000/?request=getLabwareSpecs</a></p>
       <hr>
+      <!-- table to show labwarespecs remotely -->
       <table class="table-striped"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -75,8 +82,10 @@
 </div>
 <hr>
   
+<!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
+    <!-- Search by Name -->
     <div class="col">
       <h2><b>Search by Name</b></h2>
       <hr>
@@ -117,6 +126,7 @@
       </div>
     </div>
 
+    <!-- Search by Manufacturer -->
     <div class="col">
       <h2><b>Search by Manufacturer</b></h2>
       <hr>
@@ -159,6 +169,7 @@
   </div>
 
   <div class="row">
+    <!-- Search by Labwarespec_id -->
     <div class="col">
       <h2><b>Search by Id</b></h2>
       <hr>
@@ -199,6 +210,7 @@
       </div>
     </div>
     
+    <!-- Search by name and manufacturer -->
     <div class="col">
       <h2><b>Search by Conditions</b></h2>
       <hr>
@@ -246,6 +258,7 @@
 </div>
 <hr>
 
+<!-- Area for adding new Labwarespecs -->
 <div class="container">
   <div class="row">
     <div class="col">

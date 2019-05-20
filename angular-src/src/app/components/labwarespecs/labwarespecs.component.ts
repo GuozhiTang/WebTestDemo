@@ -41,10 +41,12 @@ export class LabwarespecsComponent implements OnInit {
   constructor(
     private flashMessage: FlashMessagesService,
     private labwarespecsService: LabwarespecsService) {
+      // show labwarespecs locally
       this.labwarespecsService.getLabwareSpecs().subscribe(lwarespecs => {
         this.lwarespecs = lwarespecs;
       });
 
+      // show labwarespecs remotely
       this.labwarespecsService.getremoteLabwareSpecs().subscribe(remotelwarespecs => {
         this.remotelwarespecs = remotelwarespecs;
       });
@@ -53,6 +55,9 @@ export class LabwarespecsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Add new Labwarespecs with necessary parameters.
+   */
   onAddLwareSpecs() {
     const lwarespecs = {
       className: this.className_add,
@@ -66,7 +71,6 @@ export class LabwarespecsComponent implements OnInit {
       manufacturer: this.manufacturer_add,
       id: this.id_add,
     }
-
     // Add LabwareSpec
     this.labwarespecsService.addLabwareSpec(lwarespecs).subscribe(data => {
       if (data.success) {
@@ -80,19 +84,30 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Functionality to pull all labwarespecs data from data server.
+   */
   onGrabLwareSpecs() {
-    this.labwarespecsService.grabLabwareSpecs().subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // console.log('Grab Successfully!');
-        location.reload();
-      } else {
-        this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Grab Failed!');
-      }
-    });
+    if (this.lwarespecs.length == 0) {
+      this.labwarespecsService.grabLabwareSpecs().subscribe(data => {
+        if (data.success) {
+          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
+          // console.log('Grab Successfully!');
+          location.reload();
+        } else {
+          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
+          // console.log('Grab Failed!');
+        }
+      });
+    } else {
+      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeour: 3000});
+    }
+
   }
 
+  /**
+   * Search Labwarespecs by Name
+   */
   onSearchLwareSpecsByName() {
     const searchName = {
       name: this.name,
@@ -102,6 +117,9 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Labwarespecs by Manufacturer
+   */
   onSearchLwareSpecsByManufacturer() {
     const searchManufacturer = {
       manufacturer: this.manufacturer
@@ -111,6 +129,9 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Labwarespecs by Labwarespecs_id
+   */
   onSearchLwareSpecsById() {
     const searchId = {
       id: this.id
@@ -120,6 +141,9 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search Labwarespecs by both name and manufacturer
+   */
   onSearchLwareSpecsByConditions() {
     const conditions = {
       name: this.name_condition,
