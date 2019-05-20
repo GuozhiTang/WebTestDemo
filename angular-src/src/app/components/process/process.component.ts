@@ -86,7 +86,7 @@ export class ProcessComponent implements OnInit {
 
   /**
    * Get work-orders according to selected instruments
-   * @param instrument 
+   * @param instrument: input selected instrument
    */
   getWorkorders(instrument) {
     if (instrument == 'Manual' && this.user.department == 'HT Assay Dept') {
@@ -103,7 +103,7 @@ export class ProcessComponent implements OnInit {
 
   /**
    * Get protocols according to selected work-orders
-   * @param type 
+   * @param type: input selected work-order type
    */
   getProtocols(type) {
     if (type == 'Assay Request' && this.user.department == 'HT Assay Dept') {
@@ -131,7 +131,7 @@ export class ProcessComponent implements OnInit {
 
   /**
    * Get request items by request ID
-   * @param reqId 
+   * @param reqId: request Id
    */
   onShowRequest(reqId) {
     const ReqId = {
@@ -146,12 +146,18 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  // open the modal for setup the request
+  /**
+   * open the modal for setup the request
+   * @param content: content area for request setup modal
+   */
   openModalforRequest(content) {
     this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
   }
 
-  // Show status according to the request Id
+  /**
+   * Show status according to the request Id
+   * @param reqId: request Id
+   */
   onShowStatus(reqId) {
     const showComment = {
       request: "fpStatusForReq",
@@ -169,10 +175,10 @@ export class ProcessComponent implements OnInit {
 
   /**
    * Open the modal for update the status
-   * @param content 
+   * @param content2: content area for status update modal
    */
-  openModalforStatus(content) {
-    this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
+  openModalforStatus(content2) {
+    this.modalService.open(content2, { backdrop: 'static', keyboard: false});
   }
 
   // innerDiv() {
@@ -253,6 +259,9 @@ export class ProcessComponent implements OnInit {
       // console.log(newTable);
       this.newtable = newTable;
       this.statusRes.unshift(this.newtable);
+      if (this.newtable) {
+        this.flashMessage.show('Update new status successfully!', {cssClass: 'alert-success', timeout: 3000});
+      }
       this.comments = undefined;
     });
   }

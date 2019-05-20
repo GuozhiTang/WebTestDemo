@@ -44,6 +44,7 @@
       </div>
     </div>
 
+    <!-- display area -->
     <div class="row" *ngIf="Requests">
 
       <!-- Get all Requests by work-order type -->
@@ -61,7 +62,7 @@
             <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
           </tr>
           <tr *ngFor="let req of Requests">
-            <!-- Two functionalities for ID button -->
+            <!-- Three functionalities for ID button (dropdown) -->
             <td style="padding-right: 2px">
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button type="button" class="btn btn-outline-dark" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
@@ -72,6 +73,7 @@
                     <button class="dropdown-item" type="button" (click)="openModalforRequest(content)">Setup Work-order</button>
                     <button class="dropdown-item" type="button" (click)="onShowStatus(req.requestId)">Show Status</button>
 
+                    <!-- modal content for reqeust setup -->
                     <ng-template #content let-modal>
                       <div class="modal-header">
                         <h4 class="modal-title">Modal title</h4>
@@ -105,7 +107,6 @@
                         <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
                       </div>
                     </ng-template>
-
                   </div>
                 </div>
               </div>
@@ -165,8 +166,8 @@
       <div class="col" *ngIf="statusRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
         <h2 style="margin-top: 15px"><b>Show Status -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
 
-        <!-- Select Status Type -->
-        <form class="form-inline" (submit)="openModalforRequest(content2)">
+        <!-- Select Status Type for Update -->
+        <form class="form-inline" (submit)="openModalforStatus(content2)">
           <div class="form-group">
             <label for="updateStatus" style="margin-right: 10px;">Select Status Type:</label>
             <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
@@ -211,23 +212,23 @@
           </div>
         </ng-template>
 
-        <!-- Display Table -->  
-          <table class="table-striped table-bordered table-dark"  style="text-align: center">
-            <tr>
-              <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
-              <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
-              <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
-              <th style="padding-left: 2px; padding-right: 2px">Comments</th>
-              <th style="padding-left: 2px; padding-right: 2px">Requested</th>
-            </tr>
-            <tr *ngFor="let status of statusRes">
-              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
-              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
-              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
-              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
-              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
-            </tr>
-          </table>
+        <!-- Table for status -->  
+        <table class="table-striped table-bordered table-dark"  style="text-align: center">
+          <tr>
+            <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
+            <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
+            <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
+            <th style="padding-left: 2px; padding-right: 2px">Comments</th>
+            <th style="padding-left: 2px; padding-right: 2px">Requested</th>
+          </tr>
+          <tr *ngFor="let status of statusRes">
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
+            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
