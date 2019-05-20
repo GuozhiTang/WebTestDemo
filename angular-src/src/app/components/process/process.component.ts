@@ -4,8 +4,7 @@ import { ProcessService } from '../../services/process.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LabwareSpec } from '../../../LabwareSpec';
-import { LabwarespecsService } from '../../services/labwarespecs.service';
+import { StatusRes } from '../../../StatusRes';
 import { ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -36,31 +35,7 @@ export class ProcessComponent implements OnInit {
   protocol: String;
   instrument: String;
   // statusRes: any;
-  statusRes: {
-    requested: String;
-    status_op: {
-      comment: String;
-      requested: String;
-      moduleName: String;
-      requestor_id: {
-        moduleName: String;
-        name: String;
-        admin: Boolean;
-        className: String;
-        active: Boolean;
-        manufacturing: Boolean;
-        id: Number;
-      }
-      className: String;
-      spec_id: Object;
-      id: Number;
-    }
-    requestor_id: Object;
-    dept_spec: Object;
-    className: String;
-    moduleNAme: String;
-    completed_op: Object;
-  }
+  statusRes: StatusRes[];
   typeRes: {
     moduleName: String;
     description: String;
@@ -73,6 +48,9 @@ export class ProcessComponent implements OnInit {
   operatorName: String;
   comments: String;
   opSpecId: Number;
+  newtable: any;
+  newstatus: StatusRes[];
+  showUpdate: any = undefined;
 
   constructor(
     public authService:AuthService,
@@ -80,6 +58,7 @@ export class ProcessComponent implements OnInit {
     private processService: ProcessService,
     private modalService: NgbModal,) {
     
+      // get status types here
       const info ={
         request: "fpReqStatusList"
       }
@@ -87,6 +66,7 @@ export class ProcessComponent implements OnInit {
         this.typeRes = types;
       });
 
+      // get user information as well as instruments here
       this.authService.getProfile().subscribe(profile => {
         // console.log(profile.user.department);
         // console.log(typeof(profile.user.department));
@@ -104,7 +84,11 @@ export class ProcessComponent implements OnInit {
   ngOnInit() {
   }
 
-  getTypes(instrument) {
+  /**
+   * Get work-orders according to selected instruments
+   * @param instrument 
+   */
+  getWorkorders(instrument) {
     if (instrument == 'Manual' && this.user.department == 'HT Assay Dept') {
       this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
       // console.log('successful!');
@@ -117,6 +101,10 @@ export class ProcessComponent implements OnInit {
     }
   }
 
+  /**
+   * Get protocols according to selected work-orders
+   * @param type 
+   */
   getProtocols(type) {
     if (type == 'Assay Request' && this.user.department == 'HT Assay Dept') {
       this.protocols = ['HT Immunoassay Conjugation V1-2-With-Tips Short'];
@@ -125,14 +113,15 @@ export class ProcessComponent implements OnInit {
     }
   }
 
-  // get requests by request type
+  /**
+   * Get requests (work-orders) by request type
+   */
   getRequests() {
     const getReq = {
       request: "fpGetReqDT",
       dept: this.user.department,
       reqType: this.type
     }
-    
     // console.log(getReq);
     this.processService.getRequests(getReq).subscribe(req => {
       this.Requests = req;
@@ -140,13 +129,15 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  // get request items by request ID
+  /**
+   * Get request items by request ID
+   * @param reqId 
+   */
   onShowRequest(reqId) {
     const ReqId = {
       request: "fpGetReqDetails",
       reqId: reqId
     }
-
     // console.log('Successful!');
     this.requestId = reqId;
     this.statusRes = undefined;
@@ -160,12 +151,12 @@ export class ProcessComponent implements OnInit {
     this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
   }
 
+  // Show status according to the request Id
   onShowStatus(reqId) {
     const showComment = {
       request: "fpStatusForReq",
       requestId: reqId
     }
-
     this.requestId = reqId;
     this.reqRes = undefined;
     this.processService.showStatus(showComment).subscribe(status => {
@@ -176,27 +167,93 @@ export class ProcessComponent implements OnInit {
     });
   }
 
-  // open the modal for update the status
+  /**
+   * Open the modal for update the status
+   * @param content 
+   */
   openModalforStatus(content) {
     this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
   }
 
+  // innerDiv() {
+  //   document.getElementById("statusTable").innerHTML = 
+  //   "<table class='table-striped table-bordered table-dark'  style='text-align: center'>" + 
+  //   "<tr>" +
+  //     "<th style='padding-left: 2px; padding-right: 2px'>Status Id</th>" +
+  //     "<th style='padding-left: 2px; padding-right: 2px'>Spec Name</th>" +
+  //     "<th style='padding-left: 2px; padding-right: 2px'>Requestor</th>" +
+  //     "<th style='padding-left: 2px; padding-right: 2px'>Comments</th>" +
+  //     "<th style='padding-left: 2px; padding-right: 2px'>Requested</th>" +
+  //   "</tr>" + 
+  //   "<tr *ngFor='let status of statusRes'>" +
+  //     "<td style='padding-left: 2px; padding-right: 2px'>{{status.status_op.id}}</td>" +
+  //     "<td style='padding-left: 2px; padding-right: 2px'>{{status.status_op.spec_id.name}}</td>" +
+  //     "<td style='padding-left: 2px; padding-right: 2px'>{{status.status_op.requestor_id.name}}</td>" +
+  //     "<td style='padding-left: 2px; padding-right: 2px'>{{status.status_op.comment}}</td>" +
+  //     "<td style='padding-left: 2px; padding-right: 2px'>{{status.status_op.requested}}</td>" +
+  //   "</tr>" +
+  // "</table>"
+  // }
+
+  // showUpdates() {
+  //   this.showUpdate = ! this.showUpdate;
+  // }
+
+  /**
+   * Add new status for updates
+   */
   addStatus() {
     const add = {
       request: "fpAddReqStatus",
       requestId: this.requestId,
-      operatorName: "Felix Green",
+      operatorName: this.user.name,
       opSpecId: this.opSpecId,
       statusComment: this.comments
     }
-
+    // console.log(this.requestId);
+    // console.log(this.opSpecId);
+    // console.log(this.comments);
     this.processService.addStatus(add).subscribe(newStatus => {
-      console.log(newStatus);
+      // console.log(newStatus);
+      this.newstatus = newStatus;
+      // console.log(this.newstatus[0]);
+      const newTable = {
+        requested: this.newstatus[0].requested,
+        status_op: {
+          comment: this.newstatus[0].status_op.comment,
+          requested: this.newstatus[0].status_op.requested,
+          moduleName: this.newstatus[0].status_op.moduleName,
+          requestor_id: {
+            moduleName: this.newstatus[0].status_op.requestor_id.moduleName,
+            name: this.newstatus[0].status_op.requestor_id.name,
+            admin: this.newstatus[0].status_op.requestor_id.admin,
+            className: this.newstatus[0].status_op.requestor_id.className,
+            active: this.newstatus[0].status_op.requestor_id.active,
+            manufacturing: this.newstatus[0].status_op.requestor_id.manufacturing,
+            id: this.newstatus[0].status_op.requestor_id.id,
+          },
+          className: this.newstatus[0].status_op.className,
+          spec_id: {
+            moduleName: this.newstatus[0].status_op.spec_id.moduleName,
+            description: this.newstatus[0].status_op.spec_id.description,
+            approver_id: this.newstatus[0].status_op.spec_id.approver_id,
+            name: this.newstatus[0].status_op.spec_id.name,
+            className: this.newstatus[0].status_op.spec_id.className,
+            sop_id: this.newstatus[0].status_op.spec_id.sop_id,
+            id: this.newstatus[0].status_op.spec_id.id
+          },
+          id: this.newstatus[0].status_op.id,
+        },
+        requestor_id: this.newstatus[0].requestor_id,
+        dept_spec: this.newstatus[0].dept_spec,
+        className: this.newstatus[0].className,
+        moduleName: this.newstatus[0].moduleName,
+        completed_op: this.newstatus[0].completed_op
+      }
+      // console.log(newTable);
+      this.newtable = newTable;
+      this.statusRes.unshift(this.newtable);
+      this.comments = undefined;
     });
-  }
-
-  showSth() {
-    console.log(this.requestId);
-    console.log(this.opSpecId);
   }
 }

@@ -18,7 +18,7 @@
               </tr>
               <tr>
                 <td>
-                  <select class="form-control" id="selectIns" [(ngModel)]="instrument" name="instrument" (change)="getTypes($event.target.value)">
+                  <select class="form-control" id="selectIns" [(ngModel)]="instrument" name="instrument" (change)="getWorkorders($event.target.value)">
                     <option>Select Instrument...</option>
                     <option [value]="instrument" *ngFor='let instrument of instruments'>{{instrument}}</option>
                   </select>
@@ -44,9 +44,10 @@
       </div>
     </div>
 
-    <!-- Get all Requests by work-order type -->
     <div class="row" *ngIf="Requests">
-      <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+
+      <!-- Get all Requests by work-order type -->
+      <div class="col" style="margin-left: -150px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
         <h2 style="margin-top: 15px"><b>Work-orders:</b></h2>
         <hr>
         <!-- table to show all requests -->
@@ -164,17 +165,30 @@
       <div class="col" *ngIf="statusRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
         <h2 style="margin-top: 15px"><b>Show Status -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
 
-        <form (submit)="openModalforStatus(content2)">
+        <!-- Select Status Type -->
+        <form class="form-inline" (submit)="openModalforRequest(content2)">
+          <div class="form-group">
+            <label for="updateStatus" style="margin-right: 10px;">Select Status Type:</label>
+            <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
+              <option>Select Status Type...</option>
+              <option *ngFor='let types of typeRes' [value]= types.id>{{types.name}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-outline-dark" style="margin-left: 10px;">Update</button>
+        </form>
+        <hr>
+
+        <!-- <div *ngIf=showUpdate>
+          <form (submit)="innerDiv()">
             <div class="form-group">
-              <label for="updateStatus">Select Status Type: </label>
-              <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
-                <option>Select Status Type...</option>
-                <option *ngFor='let types of typeRes' [value]= types.id>{{types.name}}</option>
-              </select>
+              <label for="statusTextarea">Type in your comments: </label>
+              <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
-
+        </div> -->
+        
+        <!-- Modal for status updates -->
         <ng-template #content2 let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Update Status</h4>
@@ -189,29 +203,31 @@
                 <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+
           </div>
         </ng-template>
 
-        <table class="table-striped table-bordered table-dark"  style="text-align: center">
-          <tr>
-            <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
-            <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
-            <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
-            <th style="padding-left: 2px; padding-right: 2px">Comments</th>
-            <th style="padding-left: 2px; padding-right: 2px">Requested</th>
-          </tr>
-          <tr *ngFor="let status of statusRes">
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
-          </tr>
-        </table>
+        <!-- Display Table -->  
+          <table class="table-striped table-bordered table-dark"  style="text-align: center">
+            <tr>
+              <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
+              <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
+              <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
+              <th style="padding-left: 2px; padding-right: 2px">Comments</th>
+              <th style="padding-left: 2px; padding-right: 2px">Requested</th>
+            </tr>
+            <tr *ngFor="let status of statusRes">
+              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
+              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
+              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
+              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
+              <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
+            </tr>
+          </table>
       </div>
     </div>
   </div>
