@@ -17,6 +17,7 @@ export class InstrumentsService {
   getInstruments() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/instruments/getInstruments', {headers: headers})
+    // return this.http.get('instruments/getInstruments', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -37,7 +38,8 @@ export class InstrumentsService {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/instruments/addInstrument', instruments, {headers: headers})
+    // return this.http.post('http://localhost:3000/instruments/addInstrument', instruments, {headers: headers})
+    return this.http.post('instruments/addInstrument', instruments, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -49,6 +51,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/grabInstruments', {headers: headers})
+    // return this.http.post('instruments/grabInstruments', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -63,6 +66,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbymoduleName', moduleName, {headers: headers})
+    // return this.http.post('instruments/searchbymoduleName', moduleName, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -74,6 +78,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbyshort', short, {headers: headers})
+    // return this.http.post('instruments/searchbyshort', short, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -85,6 +90,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbyid', id, {headers: headers})
+    return this.http.post('instruments/sea/rchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -96,6 +102,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbyconditions', conditions, {headers: headers})
+    // return this.http.post('instruments/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

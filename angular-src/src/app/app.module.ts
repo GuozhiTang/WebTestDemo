@@ -36,12 +36,12 @@ import { ProcessComponent } from './components/process/process.component';
 import { EntryComponent } from './components/entry/entry.component';
 import { ModalComponent } from './components/modal/modal.component';
 
-export const appRoutes: Routes = [
+const appRoutes: Routes = [
   // This could be the home page
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always'},
-  {path: 'dashboard', component: DashboardComponent, runGuardsAndResolvers: 'always', canActivate:[AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'specs', component: SpecsComponent},
   {path: 'plate', component: PlateComponent},
@@ -94,7 +94,7 @@ export function tokenGetter() {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
+    RouterModule.forRoot(appRoutes),
     // FlashMessagesModule
     FlashMessagesModule.forRoot(),
     JwtModule.forRoot({

@@ -17,6 +17,7 @@ export class ProbemapsService {
   getProbemaps() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/probemaps/getProbemaps', {headers: headers})
+    // return this.http.get('probemaps/getProbemaps', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -38,6 +39,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/addProbemap', probemaps, {headers: headers})
+    // return this.http.post('probemaps/addProbemap', probemaps, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -49,6 +51,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/grabProbemaps', {headers: headers})
+    // return this.http.post('probemaps/grabProbemaps', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -60,6 +63,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbymoduleName', moduleName, {headers: headers})
+    // return this.http.post('probemaps/searchbymoduleName', moduleName, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -71,6 +75,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbyname', name, {headers: headers})
+    // return this.http.post('probemaps/searchbyname', name, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -82,6 +87,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbyid', id, {headers: headers})
+    // return this.http.post('probemaps/searchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -93,6 +99,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbyconditions', conditions, {headers: headers})
+    // return this.http.post('probemaps/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -104,6 +111,7 @@ export class ProbemapsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/probemaps/searchbycreatorname', creatorname, {headers: headers})
+    // return this.http.post('probemaps/searchbycreatorname', creatorname, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -115,6 +123,7 @@ export class ProbemapsService {
     let headers = new Headers();
     // headers.append('Content-Type', 'application/json');
     return this.http.post('http://127.0.0.1:3000/probes/showProbes', mapId, {headers: headers})
+    // return this.http.post('probes/showProbes', mapId, {headers: headers})
     .pipe(map(res => res.json()));
   }
 }

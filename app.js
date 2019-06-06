@@ -84,10 +84,10 @@ app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
-// // All of other routes will lead to index.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
+// All of other routes will lead to index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // Start Server
 app.listen(port, () => {

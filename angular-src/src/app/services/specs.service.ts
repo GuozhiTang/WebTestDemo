@@ -19,6 +19,7 @@ export class SpecsService {
   getSpecs() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/specs/getspecs', {headers: headers})
+    // return this.http.get('specs/getspecs', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -35,6 +36,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/addspecs', specs, {headers: headers})
+    // return this.http.post('specs/addspecs', specs, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -44,6 +46,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/grabspecs', {headers: headers})
+    // return this.http.post('specs/grabspecs', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -54,6 +57,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/searchbyname', name, {headers: headers})
+    // return this.http.post('specs/searchbyname', name, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -61,6 +65,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/searchbymodulename', moduleName, {headers: headers})
+    // return this.http.post('specs/searchbymodulename', moduleName, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -68,6 +73,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/searchbyid', id, {headers: headers})
+    // return this.http.post('specs/searchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -75,6 +81,7 @@ export class SpecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/specs/searchbyconditions', conditions, {headers: headers})
+    // return this.http.post('specs/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

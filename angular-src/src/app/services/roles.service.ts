@@ -17,6 +17,7 @@ export class RolesService {
   getRoles() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/roles/getroles', {headers: headers})
+    // return this.http.get('roles/getroles', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -38,6 +39,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/addrole', role, {headers: headers})
+    // return this.http.post('roles/addrole', role, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -49,6 +51,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/grabroles', {headers: headers})
+    // return this.http.post('roles/grabroles', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -63,6 +66,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/searchbyrole', rolename, {headers: headers})
+    // return this.http.post('roles/searchbyrole', rolename, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -74,6 +78,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/searchbyliquidclass', liquid_class, {headers: headers})
+    // return this.http.post('roles/searchbyliquidclass', liquid_class, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -85,6 +90,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/searchbyid', id, {headers: headers})
+    // return this.http.post('roles/searchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -96,6 +102,7 @@ export class RolesService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/roles/searchbyconditions', conditions, {headers: headers})
+    // return this.http.post('roles/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

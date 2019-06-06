@@ -20,7 +20,7 @@ export class TargetplateComponent {
   searchCoorRes: Plate[];
   emptyCoorRes: Plate[];
   results: object;
-  // @Input() targetbarcode: Number;
+  @Input() targetbarcode: Number;
   // barcode_typeintarget: String;
   // barcode_sourcejudge: String;
   // @Input() showTarget: boolean = true;
@@ -79,7 +79,7 @@ export class TargetplateComponent {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/transfer/sourceplate']);
-        window.location.href = "/transfer/sourceplate";
+        // window.location.href = "/transfer/sourceplate";
         // this.barcode_sourcejudge = res[0].barcode;
         // this.targetbarcode = undefined;
         // this.showTarget2 = ! this.showTarget2;
@@ -92,7 +92,10 @@ export class TargetplateComponent {
         // console.log(res);
       }
     });
+  }
 
-
+  onSubmitTransfers() {
+    this.flashMessage.show('Submit transfer successully!', {cssClass: 'alert-success', timeout: 3000});
+    this.router.navigate(['/']);
   }
 }

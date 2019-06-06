@@ -17,7 +17,7 @@
       </form>
       <hr>
       <!-- table to show probemaps locally -->
-      <table class="table-striped" style="text-align: center">
+      <table class="table-striped table-hover" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
           <th style="padding-left: 2px; padding-right: 2px">name</th>
@@ -45,7 +45,7 @@
       <h2 style="margin-top: 15px"><b>Show Probes -- ProbemapId: </b><span class="badge badge-pill badge-dark">{{probemapId}}</span></h2>
       <hr>
       <!-- Table to display probes -->
-      <table class="table-striped table-bordered table-dark"  style="text-align: center">
+      <table class="table-striped table-bordered table-dark table-hover"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
           <th style="padding-left: 2px; padding-right: 2px">map_id.name</th>
@@ -75,7 +75,7 @@
       <p>According to: <a href="http://10.253.7.14:8000/?request=getAllProbemaps">http://10.253.7.14:8000/?request=getAllProbemaps</a></p>
       <hr>
       <!-- table to show probemaps remotely -->
-      <table class="table-striped"  style="text-align: center">
+      <table class="table-striped table-hover"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
           <th style="padding-left: 2px; padding-right: 2px">name</th>
@@ -115,7 +115,7 @@
         <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchCreatorRes">
-        <table class="table-primary table-bordered" style="text-align: center">
+        <table class="table-primary table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
@@ -150,7 +150,7 @@
         <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchNameRes">
-        <table class="table-info table-bordered" style="text-align: center">
+        <table class="table-info table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
@@ -187,7 +187,7 @@
         <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchIdRes">
-        <table class="table-warning table-bordered" style="text-align: center">
+        <table class="table-warning table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>
@@ -226,7 +226,7 @@
         <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchConRes">
-        <table class="table-secondary table-bordered" style="text-align: center">
+        <table class="table-secondary table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">name</th>

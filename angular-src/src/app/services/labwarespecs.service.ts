@@ -17,6 +17,7 @@ export class LabwarespecsService {
   getLabwareSpecs() {
     let headers = new Headers();
     return this.http.get('http://localhost:3000/labwarespecs/getlwarespec', {headers: headers})
+    // return this.http.get('labwarespecs/getlwarespec', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -38,6 +39,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/addlwarespec', lwarespec, {headers: headers})
+    // return this.http.post('labwarespecs/addlwarespec', lwarespec, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -49,6 +51,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/grablabwareSpecs', {headers: headers})
+    // return this.http.post('labwarespecs/grablabwareSpecs', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -63,6 +66,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/searchbyname', name, {headers: headers})
+    // return this.http.post('labwarespecs/searchbyname', name, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -74,6 +78,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/searchbymanufacturer', manufacturer, {headers: headers})
+    // return this.http.post('labwarespecs/searchbymanufacturer', manufacturer, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -85,6 +90,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/searchbyid', id, {headers: headers})
+    // return this.http.post('labwarespecs/searchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -96,6 +102,7 @@ export class LabwarespecsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/labwarespecs/searchbyconditions', conditions, {headers: headers})
+    // return this.http.post('labwarespecs/searchbyconditions', conditions, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

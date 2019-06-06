@@ -38,7 +38,7 @@ export class TransferComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.showTransfer);
+    // console.log(this.showTransfer);
   }
 
   onSearchPlateByBar() {
@@ -49,12 +49,12 @@ export class TransferComponent implements OnInit {
     this.plateService.searchPlateByBar(searchBar).subscribe(res => {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // this.targetjudge = ! this.targetjudge;
-        this.router.navigate(['/transfer/targetplate']);
-        window.location.href = "/transfer/targetplate";
+        this.targetjudge = false;
+        // this.router.navigate(['/transfer/targetplate']);
+        // window.location.href = "/transfer/targetplate";
         this.barcode_targetjudge = res[0].barcode;
         // this.transferjudge = undefined;
-        // this.showTransfer = ! this.showTransfer;
+        this.showTransfer = true;
         // console.log('Submit successfully!');
         // console.log(res);
       } else {

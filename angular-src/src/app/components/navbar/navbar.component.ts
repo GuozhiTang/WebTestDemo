@@ -22,18 +22,13 @@ export class NavbarComponent implements OnInit {
     private flashMessage:FlashMessagesService
     ) {
       this.authService.getProfile().subscribe(profile => {
-        // console.log(profile.user);
+        // console.log(profile);
         this.user = profile.user;
-      },
-      err => {
-        console.log(err);
-        return false;
-      });
-     }
+        // console.log(this.user);
+      }
+    )}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   onLogoutClick() {
     this.authService.logout();
@@ -41,7 +36,7 @@ export class NavbarComponent implements OnInit {
       cssClass: 'alert-success',
       timeout: 3000
     });
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
     window.location.href = "/login";
     return false;
   }

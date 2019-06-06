@@ -13,15 +13,15 @@
   background-color: rgb(
     calc(
       120 * var(--isEmpty) +
-      63 * (1 - var(--isEmpty))
+      52 * (1 - var(--isEmpty))
     ),
     calc(
       194 * var(--isEmpty) +
-      71 * (1 - var(--isEmpty))
+      58 * (1 - var(--isEmpty))
     ),
     calc(
       173 * var(--isEmpty) +
-      79 * (1 - var(--isEmpty))
+      64 * (1 - var(--isEmpty))
     )
   );
   }
@@ -35,7 +35,7 @@
     width: 32px;
     height: 32px;
     position: relative;
-    background-color: #3f474f;
+    background-color: #343a40;
     border-radius: 50%;
     align-items: center;
     cursor: pointer;
@@ -44,7 +44,7 @@
       width: 32px;
       height: 32px;
       position: relative;
-      background-color: #78c2ad;
+      background-color: #78C2AD;
       border-radius: 50%;
       align-items: center;
       cursor: pointer;
@@ -60,11 +60,11 @@
     width: 300px;
     height: 300px;
     position: relative;
-    background-color: #3f474e;
+    background-color: #343a40;
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
-    border: 5px dashed #000000
+    border: 5px dashed #fff;
   }
   .circlebigempty{
     width: 300px;
@@ -74,7 +74,7 @@
     border-radius: 50%;
     cursor: pointer;
     text-align: center;
-    border: 5px dashed #000000
+    border: 5px dashed #fff;
   }
   </style>
 </head>
@@ -86,9 +86,10 @@
         <!-- <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">"Barcode here..."</span> -->
         <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">{{targetbarcode}}</span>
       </h3>
-      <p style="font-size: 17px; margin-left: 15px;"><i class="fas fa-angle-double-down"></i> Select your <b>TARGET</b> wells:</p>
+      <p style="font-size: 17px; margin-left: 15px;"><i class="fas fa-angle-double-down"></i> Select your <b>TARGET</b> wells <b class="text-warning">[Drag to Select]</b> <b class="text-warning">[Click to Show]</b>:</p>
+      <p class="text-warning" style="font-size: 17px;">(Only the first row and the first column have exact test data to show)</p>
       <div id="Target_display_selection">
-        <div id="Target_display_selection_plate" style="float: left; background-color: #e3edf0; padding-bottom: 15px; width: 590px; border-radius: 15px;">
+        <div id="Target_display_selection_plate" style="float: left; background-color: #5a7e8a; padding-bottom: 15px; width: 590px; border-radius: 15px;">
           <div class="row" id="numtitle">
             <div class="col-1" id="emptytitle"></div>
             <div class="col-11" id="numbertitle_area" style="margin-left: -40px; font-size: 28px; text-align: center;">
@@ -256,7 +257,14 @@
 
         <div class="col" id="Target_display_button" style="margin-top: 25px;">
           <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#toSource">Submit <b>TARGET</b> and select <b>SOURCE</b></button> -->
-          <form (submit)="onSearchPlateByBar()">
+          <form (submit)="onSubmitTransfers()">
+            <div class="form-group">
+              <label>Type in the <b>VOLUME</b> of <b>TRANSFER</b>:</label>
+              <input class="form-control" type="text" placeholder="volume here..." style="width: 300px;">
+            </div>
+            <button class="btn btn-info" type="submit">Submit the <b>TRANSFER</b></button>
+          </form>
+          <!-- <form (submit)="onSearchPlateByBar()">
             <div class="form-group">
               <label>Type in your <b>BARCODE</b> for <b>SOURCE</b>:</label>
               <input class="form-control" type="text" [(ngModel)]="barcode" name="barcode" placeholder="barcode here..." style="width: 300px;">
@@ -266,7 +274,7 @@
               <input class="form-control" type="text" placeholder="volume here..." style="width: 300px;">
             </div>
             <button class="btn btn-info" type="submit">Submit and Get the <b>SOURCE</b> Plate</button>
-          </form>
+          </form> -->
           <!-- <div class="modal fade" id="toSource" tabindex="-1" role="dialog" aria-labelledby="toSourceLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

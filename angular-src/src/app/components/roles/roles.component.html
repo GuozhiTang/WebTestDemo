@@ -2,7 +2,7 @@
 <div class="container" style="margin-top: 15px;">
   <!-- Instruction of Role component -->
   <div class="row">
-    <div class="col jumbotron" style="padding-top: 25px; height: 170px;">
+    <div class="col jumbotron" style="padding-top: 25px; height: 155px;">
       <h5>Roles list shows the types of labwares. It could be the content in the labware such as CEA Code Mix, or it could be one with many types such as Filter Plate. It is more beneficial on developer side. This gives us a quick view on what type we will send to robot.</h5>
       <h5>Here labware means tube or plate. According to the barcode of the labware, we can access the specific role information.</h5>
     </div>
@@ -18,7 +18,7 @@
       </form>
       <hr>
       <!-- table to show roles locally -->
-      <table class="table-striped" style="text-align: center">
+      <table class="table-striped table-hover" style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
           <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
@@ -44,7 +44,7 @@
       <p>According to: <a href="http://10.253.7.14:8000/?request=getRoles">http://10.253.7.14:8000/?request=getRoles</a></p>
       <hr>
       <!-- table to show roles remotely -->
-      <table class="table-striped"  style="text-align: center">
+      <table class="table-striped table-hover"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
           <th style="padding-left: 2px; padding-right: 2px">liquid_class</th>
@@ -82,7 +82,7 @@
         <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchRoleRes">
-        <table class="table-primary table-bordered" style="text-align: center">
+        <table class="table-primary table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
@@ -115,7 +115,7 @@
         <button type="submit" class="btn btn-info" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchLiquidClassRes">
-        <table class="table-info table-bordered" style="text-align: center">
+        <table class="table-info table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
@@ -150,7 +150,7 @@
         <button type="submit" class="btn btn-warning" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchIdRes">
-        <table class="table-warning table-bordered" style="text-align: center">
+        <table class="table-warning table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
@@ -187,7 +187,7 @@
         <button type="submit" class="btn btn-secondary" style="margin-bottom: 15px">Search</button>
       </form>
       <div *ngIf="searchConRes">
-        <table class="table-secondary table-bordered" style="text-align: center">
+        <table class="table-secondary table-bordered table-hover" style="text-align: center">
           <tr>
             <th style="padding-right: 10px">id</th>
             <th style="padding-left: 10px; padding-right: 10px">liquid_class</th>
