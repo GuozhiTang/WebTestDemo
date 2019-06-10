@@ -4,8 +4,11 @@
   <hr>
   <p class="lead">This is a MEAN Stack App(MongoDB/Mongoose, Express, Angular-CLI, NodeJS) including functionalities: </p>
   <p class="lead">Login/Logout, Register, Dashboard, Transfer porcess, Grab and show specific components.</p>
-  <div>
-    <a class="btn btn-info" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a> &nbsp; <a class="btn btn-success" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</a>
+  <div *ngIf="authService.isTokenExp()">
+    <button class="btn btn-info" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</button> &nbsp; <button class="btn btn-success" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</button>
+  </div>
+  <div *ngIf="!authService.isTokenExp()">
+    <button class="btn btn-primary" (click)="onLogoutClick()">Logout</button>
   </div>
 </div>
 <hr>

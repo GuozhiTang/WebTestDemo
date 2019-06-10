@@ -50,7 +50,7 @@
     </ul>
   </div>
   <!-- <h6 *ngIf="!authService.isTokenExp() && user" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}" style="color:white; margin-top: 7px; float: right;"> -->
-  <p *ngIf="user" style="color:white; margin-bottom: -3px; float: right;">
+  <p *ngIf="!authService.isTokenExp() && user" style="color:white; margin-bottom: -3px; float: right;">
     <i class="fas fa-user-circle"></i> {{user.name}} <i class="fas fa-angle-double-right"></i> {{user.department}}
   </p>
 </nav>
