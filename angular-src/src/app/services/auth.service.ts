@@ -54,12 +54,19 @@ export class AuthService {
     // Set header values
     let headers = new Headers();
     this.loadToken();
-    // Use the token here
-    headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/profile', {headers: headers})
-    // return this.http.get('users/profile', {headers: headers})
-      .pipe(map(res => res.json()));
+    if (this.authToken) {
+      // console.log("We can access here!!!");
+      // Use the token here
+      headers.append('Authorization', this.authToken);
+      headers.append('Content-Type','application/json');
+      return this.http.get('http://localhost:3000/users/profile', {headers: headers})
+      // return this.http.get('users/profile', {headers: headers})
+        .pipe(map(res => res.json()));
+    } else {
+      headers.append('Content-Type','application/json');
+      return this.http.get('http://localhost:3000/users/nulluser', {headers: headers})
+        .pipe(map(res => res.json()));
+    }
   }
 
   /**

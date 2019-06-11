@@ -77,9 +77,20 @@ router.post('/authenticate', (req, res, next) => {
 // Profile - /users/profile
 // one of the routes we will protect with our aithenticate with our token
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    // res.send('PROFILE');
-    // res.json({msg: "success profile"});
-    res.json({user: req.user});
-  });
+  // res.send('PROFILE');
+  // res.json({msg: "success profile"});
+  res.json({user: req.user});
+});
+
+router.get('/nulluser', (req, res, next) => {
+  const name = undefined;
+  const department = undefined;
+  const user = {
+    name: name,
+    department: department
+  }
+
+  res.json({user: user});
+});
 
 module.exports = router;
