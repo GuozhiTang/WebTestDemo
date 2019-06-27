@@ -24,6 +24,7 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.onChange(file);
     this.file = file;
     
+    // Set "this" as object in order to use it inside of function onload()
     var object = this;
     var reader = new FileReader();
     reader.onload = function(evt) {

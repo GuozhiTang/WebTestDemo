@@ -1,4 +1,3 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { requiredFileType } from './upload-file-validators';
@@ -13,6 +12,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   templateUrl: './matrixtubecarrier.component.html',
   styleUrls: ['./matrixtubecarrier.component.css']
 })
+
 export class MatrixtubecarrierComponent {
   progress = 0;
   // control: FormControl;
@@ -35,9 +35,12 @@ export class MatrixtubecarrierComponent {
     public authService:AuthService,
     private flashMessage:FlashMessagesService,
     ) {
+      // Get the work-order id list here
       this.workorderService.getWorkorderId().subscribe(res => {
         this.workorderids = res.results;
       });
+
+      // Get the user information here
       this.authService.getProfile().subscribe(profile => {
         // console.log(profile);
         this.user = profile.user;
@@ -45,6 +48,9 @@ export class MatrixtubecarrierComponent {
       });
   }
 
+  /**
+   * First Submit -- In order to get the details of work-oder
+   */
   onSubmit() {
     // console.log(this.childUpload.content);
     // console.log(this.signup.value.workorderid);
@@ -71,6 +77,10 @@ export class MatrixtubecarrierComponent {
     }
   }
 
+  /**
+   * Second Submit -- Check the boolean of match, if it is false, ban submitting it
+   * if not, submit and store the data in the remote server
+   */
   onSubmit2() {
     this.matchJudge = true;
     for (let workorder of this.workorders) {
@@ -94,6 +104,7 @@ export class MatrixtubecarrierComponent {
         this.flashMessage.show(res, {cssClass: 'alert-success', timeout: 5000});
       });
     } else {
+      // console.log('Test Here!');
       this.flashMessage.show('Not Match! Cannot Store the Data!', {cssClass: 'alert-danger', timeout: 5000});
     }
   }
