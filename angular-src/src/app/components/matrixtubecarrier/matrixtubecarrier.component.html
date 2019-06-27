@@ -3,7 +3,7 @@
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Matrix Tube Carrier UI</b></h1>
 
-      <form [formGroup]="signup" (ngSubmit)="onSubmit2(check)">
+      <form [formGroup]="signup" (submit)="onSubmit()">
         <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;" for="selectWoid">Work-order id:</label>
           <select class="form-control" id="selectWoid" formControlName="workorderid" name="workorderid">
@@ -16,15 +16,15 @@
         </div>
 
         <div class="form-group">
-          <app-file-upload formControlName="csv" [progress]="progress"></app-file-upload>
+          <app-file-upload formControlName="csv"></app-file-upload>
           <div class="invalid-feedback" style="display: block">
             <ng-container *ngIf="hasError('csv', 'required')">This field is required!</ng-container>
             <ng-container *ngIf="hasError('csv', 'requiredFileType')">Only .csv file is allowed!</ng-container>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info" ng-click="check=true">Show Details</button>
-        <button type="button" class="btn btn-success" style="margin-left: 5px;" ng-click="check=false">Submit</button>
+        <button type="submit" class="btn btn-info">Show Details</button>
+        <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="onSubmit2()">Submit</button>
       </form>
     </div>
   </div>

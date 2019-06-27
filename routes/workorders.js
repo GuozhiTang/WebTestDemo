@@ -7,7 +7,7 @@ router.post('/matrixtubecarrier', (req, res, next) => {
   // console.log(req.files); // List of the files
   // console.log(req.body); // request body, like email
 
-  console.log(req.files);
+  console.log(req.body);
   // let file = req.files.image;
 
   // file.mv(file.name, function(err, success) {

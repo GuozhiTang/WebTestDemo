@@ -23,4 +23,11 @@ export class WorkorderService {
     return this.http.get('http://10.253.7.14:8000/?request=fpAntibodyMatrixReq', {headers: headers})
       .pipe(map(res => res.json()));
   }
+
+  storeMatrixTube(storeData) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://10.253.7.14:8000', storeData, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 }
