@@ -49,6 +49,7 @@ export class AuthService {
 
   /**
    * Load the data in local storage and set it as current user.
+   * Before login there should be a null user from users/nulluser.
    */
   getProfile() {
     // Set header values

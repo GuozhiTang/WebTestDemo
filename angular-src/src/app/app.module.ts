@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -35,6 +37,9 @@ import { ProbemapsComponent } from './components/probemaps/probemaps.component';
 import { ProcessComponent } from './components/process/process.component';
 import { EntryComponent } from './components/entry/entry.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
+import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
+import { ProgressComponent } from './components/matrixtubecarrier/progress/progress.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -57,6 +62,7 @@ const appRoutes: Routes = [
   {path: 'process', component: ProcessComponent},
   {path: 'entry', component: EntryComponent},
   {path: 'modal', component: ModalComponent},
+  {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -88,6 +94,9 @@ export function tokenGetter() {
     ProcessComponent,
     EntryComponent,
     ModalComponent,
+    MatrixtubecarrierComponent,
+    FileUploadComponent,
+    ProgressComponent,
   ],
   // Modules should be put into imports
   imports: [
@@ -103,6 +112,8 @@ export function tokenGetter() {
       },
     }),
     NgbModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   // Services should be put into providers
   providers: [ValidateService, AuthService, AuthGuard, SpecsService],
