@@ -39,7 +39,6 @@ import { EntryComponent } from './components/entry/entry.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
-import { ProgressComponent } from './components/matrixtubecarrier/progress/progress.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -96,7 +95,6 @@ export function tokenGetter() {
     ModalComponent,
     MatrixtubecarrierComponent,
     FileUploadComponent,
-    ProgressComponent,
   ],
   // Modules should be put into imports
   imports: [
