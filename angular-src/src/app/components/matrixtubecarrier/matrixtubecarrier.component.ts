@@ -24,11 +24,11 @@ export class MatrixtubecarrierComponent {
     name: String;
     department: String;
   };
-  matchJudge: Boolean = true;
   signup = new FormGroup({
     workorderid: new FormControl(null, Validators.required),
     csv: new FormControl(null, [Validators.required, requiredFileType('csv')])
   });
+  checkSubmit: Boolean = false;
 
   constructor(
     private workorderService: WorkorderService,
@@ -71,6 +71,9 @@ export class MatrixtubecarrierComponent {
       }
     });
 
+    // Keep the second submit button as disable every time we get a new deatils table
+    this.checkSubmit = false;
+
     if ( !this.signup.valid ) {
       markAllAsDirty(this.signup);
       return;
@@ -78,43 +81,36 @@ export class MatrixtubecarrierComponent {
   }
 
   /**
-   * Second Submit -- Check the boolean of match, if it is false, ban submitting it
-   * if not, submit and store the data in the remote server
+   * Second Submit -- When submit button is active, submit to store data in the remote server
    */
   onSubmit2() {
-    this.matchJudge = true;
-    for (let workorder of this.workorders) {
-      // console.log(workorder);
-      if (workorder.match == false) {
-        this.matchJudge = false;
-        break;
-      }
+    const storeData = {
+      request: "fpAntibodyMatrixCarrierReqData",
+      // requestId: this.workorderid,
+      requestId: this.signup.value.workorderid,
+      scannedData: this.childUpload.content
     }
-
-    if (this.matchJudge) {
-      const storeData = {
-        request: "fpAntibodyMatrixCarrierReqData",
-        // requestId: this.workorderid,
-        requestId: this.signup.value.workorderid,
-        scannedData: this.childUpload.content
-      }
-      
-      this.workorderService.storeMatrixTube(storeData).subscribe(res => {
-        // console.log(res);
-        this.flashMessage.show(res, {cssClass: 'alert-success', timeout: 5000});
-      });
-    } else {
-      // console.log('Test Here!');
-      this.flashMessage.show('Not Match! Cannot Store the Data!', {cssClass: 'alert-danger', timeout: 5000});
-    }
+    
+    this.workorderService.storeMatrixTube(storeData).subscribe(res => {
+      // console.log(res);
+      this.flashMessage.show(res, {cssClass: 'alert-success', timeout: 5000});
+    });
   }
 
-  colorChange() {
-    var table = document.getElementsByTagName('table');
-    var rows;
-    for (var i = 1; i < table.length; i++) {
-      rows = table[i].getElementsByTagName('tr');
-      console.log(rows);
+  /**
+   * Function to check the match results of details which will influence the active of second submit buttom
+   * Only if all match results are true, the second submit buttom can become active, otherwise, it is disabled
+   */
+  checkSubmitFunc() {
+    // Set the default status as active
+    this.checkSubmit = true;
+    for (let workorder of this.workorders) {
+      // console.log(workorder.match);
+      if (workorder.match == false) {
+        this.checkSubmit = false;
+        this.flashMessage.show('Not Match Completely!', {cssClass: 'alert-danger', timeout: 5000});
+        break;
+      }
     }
   }
 

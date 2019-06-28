@@ -23,8 +23,9 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info">Show Details</button>
-        <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="onSubmit2()">Submit</button>
+        <button type="submit" class="btn btn-info" style="margin-bottom: 10px;">Show Details</button>
+        <p><i class="fas fa-exclamation-triangle"></i> Click Match button to check before submit!</p>
+        <button type="button" class="btn btn-success" style="margin-top: -8px;" (click)="onSubmit2()" [disabled]="!checkSubmit">Submit</button>
       </form>
     </div>
   </div>
@@ -32,7 +33,7 @@
   <div class="row" *ngIf="workorders">
     <div class="col">
       <h2 style="margin-top: 15px;">Details of the work-order</h2>
-      <table id="colorChange" class="table-striped table-bordered table-hover" style="text-align: center" (click)="colorChange()">
+      <table id="colorChange" class="table-striped table-bordered table-hover" style="text-align: center">
         <tr>
           <th style="padding-right: 10px">Index</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Name</th>
@@ -42,7 +43,7 @@
           <th style="padding-left: 10px; padding-right: 10px">Lot Num</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Tube Barcode</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Matrix Tube Barcode</th>
-          <th style="padding-left: 10px; padding-right: 10px">Match</th>
+          <th style="padding-left: 10px; padding-right: 10px"><button class="btn btn-outline-light btn-sm" type="button" (click)="checkSubmitFunc()">Match</button></th>
           <th style="padding-left: 10px; padding-right: 10px">Message</th>
           <th style="padding-left: 10px; padding-right: 10px">DeptName</th>
           <th style="padding-left: 10px; padding-right: 10px">Requestor</th>
@@ -56,7 +57,7 @@
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.lotNum}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.antibodyBarcode}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.antibodyMatrixBarcode}}</td>
-          <td style="padding-left: 10px; padding-right: 10px">{{workorder.match}}</td>
+          <td id="matchColor" [style.background-color]="workorder.match ? '#008000' : '#ff0000'" style="padding-left: 10px; padding-right: 10px">{{workorder.match}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.msg}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{user.department}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{user.name}}</td>
