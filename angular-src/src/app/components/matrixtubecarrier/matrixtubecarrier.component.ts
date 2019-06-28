@@ -109,6 +109,15 @@ export class MatrixtubecarrierComponent {
     }
   }
 
+  colorChange() {
+    var table = document.getElementsByTagName('table');
+    var rows;
+    for (var i = 1; i < table.length; i++) {
+      rows = table[i].getElementsByTagName('tr');
+      console.log(rows);
+    }
+  }
+
   hasError( field: string, error: string ) {
     const control = this.signup.get(field);
     return control.dirty && control.hasError(error);

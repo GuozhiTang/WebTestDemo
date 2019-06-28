@@ -32,7 +32,7 @@
   <div class="row" *ngIf="workorders">
     <div class="col">
       <h2 style="margin-top: 15px;">Details of the work-order</h2>
-      <table class="table-info table-striped table-bordered table-hover" style="text-align: center">
+      <table id="colorChange" class="table-striped table-bordered table-hover" style="text-align: center" (click)="colorChange()">
         <tr>
           <th style="padding-right: 10px">Index</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Name</th>
