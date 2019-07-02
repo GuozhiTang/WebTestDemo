@@ -87,8 +87,6 @@ export class MatrixtubecarrierComponent {
     // Keep the second submit button as disable every time we get a new deatils table
     // this.checkSubmit = false;
 
-
-
     if ( !this.signup.valid ) {
       markAllAsDirty(this.signup);
       return;
