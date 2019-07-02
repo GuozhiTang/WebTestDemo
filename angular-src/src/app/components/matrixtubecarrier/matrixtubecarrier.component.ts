@@ -50,6 +50,8 @@ export class MatrixtubecarrierComponent {
 
   /**
    * First Submit -- In order to get the details of work-oder
+   * Function to check the match results of details which will influence the active of second submit buttom
+   * Only if all match results are true, the second submit buttom can become active, otherwise, it is disabled
    */
   onSubmit() {
     // console.log(this.childUpload.content);
@@ -66,13 +68,26 @@ export class MatrixtubecarrierComponent {
         this.workorders = res;
         // console.log(res);
         // console.log(this.workorders.antibodyName);
+
+        // Set the default status as active
+        this.checkSubmit = true;
+        for (let workorder of this.workorders) {
+          // console.log(workorder.match);
+          if (workorder.match == false) {
+            this.checkSubmit = false;
+            this.flashMessage.show('Not Match Completely!', {cssClass: 'alert-danger', timeout: 5000});
+            break;
+          }
+        }
       } else {
         this.flashMessage.show('Selection cannot be empty or error exists!', {cssClass: 'alert-danger', timeout: 5000});
       }
     });
 
     // Keep the second submit button as disable every time we get a new deatils table
-    this.checkSubmit = false;
+    // this.checkSubmit = false;
+
+
 
     if ( !this.signup.valid ) {
       markAllAsDirty(this.signup);
@@ -101,18 +116,18 @@ export class MatrixtubecarrierComponent {
    * Function to check the match results of details which will influence the active of second submit buttom
    * Only if all match results are true, the second submit buttom can become active, otherwise, it is disabled
    */
-  checkSubmitFunc() {
-    // Set the default status as active
-    this.checkSubmit = true;
-    for (let workorder of this.workorders) {
-      // console.log(workorder.match);
-      if (workorder.match == false) {
-        this.checkSubmit = false;
-        this.flashMessage.show('Not Match Completely!', {cssClass: 'alert-danger', timeout: 5000});
-        break;
-      }
-    }
-  }
+  // checkSubmitFunc() {
+  //   // Set the default status as active
+  //   this.checkSubmit = true;
+  //   for (let workorder of this.workorders) {
+  //     // console.log(workorder.match);
+  //     if (workorder.match == false) {
+  //       this.checkSubmit = false;
+  //       this.flashMessage.show('Not Match Completely!', {cssClass: 'alert-danger', timeout: 5000});
+  //       break;
+  //     }
+  //   }
+  // }
 
   hasError( field: string, error: string ) {
     const control = this.signup.get(field);

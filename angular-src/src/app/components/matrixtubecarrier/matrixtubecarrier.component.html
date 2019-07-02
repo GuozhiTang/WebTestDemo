@@ -23,9 +23,9 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info" style="margin-bottom: 10px;">Show Details</button>
-        <p><i class="fas fa-exclamation-triangle"></i> Click Match button to check before submit!</p>
-        <button type="button" class="btn btn-success" style="margin-top: -8px;" (click)="onSubmit2()" [disabled]="!checkSubmit">Submit</button>
+        <button type="submit" class="btn btn-info">Show Details</button>
+        <!-- <p><i class="fas fa-exclamation-triangle"></i> Click Match button to check before submit!</p> -->
+        <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="onSubmit2()" [disabled]="!checkSubmit">Submit</button>
       </form>
     </div>
   </div>
@@ -43,7 +43,7 @@
           <th style="padding-left: 10px; padding-right: 10px">Lot Num</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Tube Barcode</th>
           <th style="padding-left: 10px; padding-right: 10px">Antibody Matrix Tube Barcode</th>
-          <th style="padding-left: 10px; padding-right: 10px"><button class="btn btn-outline-light btn-sm" type="button" (click)="checkSubmitFunc()">Match</button></th>
+          <th style="padding-left: 10px; padding-right: 10px">Match</th>
           <th style="padding-left: 10px; padding-right: 10px">Message</th>
           <th style="padding-left: 10px; padding-right: 10px">DeptName</th>
           <th style="padding-left: 10px; padding-right: 10px">Requestor</th>
