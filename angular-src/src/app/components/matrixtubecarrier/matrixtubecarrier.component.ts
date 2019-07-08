@@ -66,7 +66,7 @@ export class MatrixtubecarrierComponent {
     this.workorderService.uploadMatrixTube(matrixtube).subscribe(res => {
       if (res) {
         this.workorders = res;
-        // console.log(res);
+        console.log(res);
         // console.log(this.workorders.antibodyName);
 
         // Set the default status as active
@@ -105,8 +105,13 @@ export class MatrixtubecarrierComponent {
     }
     
     this.workorderService.storeMatrixTube(storeData).subscribe(res => {
-      // console.log(res);
-      this.flashMessage.show(res, {cssClass: 'alert-success', timeout: 5000});
+      console.log(res.results);
+      if (res.results == null || res.results.length == 0) {
+        this.flashMessage.show("Stored Successfully!", {cssClass: 'alert-success', timeout: 5000});
+        window.location.href = "/matrixtubecarrier";
+      } else {
+        this.flashMessage.show(res.results, {cssClass: 'alert-danger', timeout: 5000});
+      }
     });
   }
 
