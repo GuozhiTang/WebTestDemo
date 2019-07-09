@@ -17,6 +17,10 @@ export class GenerateworkorderComponent implements OnInit {
   assayCodeType: String;
   assayCodeId1s: Number[];
   assayCodeId2s: Number[];
+  UC2Cy31A: Number;
+  UC2NF: Number;
+  UC3Cy31A: Number;
+  UC3NF: Number;
 
   constructor(
     private workorderService: WorkorderService,
