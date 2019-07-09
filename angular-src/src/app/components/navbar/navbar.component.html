@@ -25,11 +25,12 @@
         <a class="nav-link" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a>
       </li>
       <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Request</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Work-orders</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" [routerLink]="['/generateworkorder']"><i class="fas fa-sign-in-alt"></i> Generate Work-order</a>
-          <a class="dropdown-item" [routerLink]="['/process']"><i class="fas fa-hourglass-start"></i> Setup</a>
+          <a class="dropdown-item" [routerLink]="['/process']"><i class="fas fa-hourglass-start"></i> Setup Process</a>
           <a class="dropdown-item" href="/transfer"><i class="fas fa-vials"></i> Transfer</a>
+          <a class="dropdown-item" [routerLink]="['/matrixtubecarrier']"><i class="fas fa-file-upload"></i> Matrix Tube Carrier</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
@@ -40,9 +41,6 @@
           <a class="dropdown-item" [routerLink]="['/roles']"><i class="fas fa-file"></i> Roles</a>
           <a class="dropdown-item" [routerLink]="['/labwarespecs']"><i class="fas fa-file"></i> LabwareSpecs</a>
         </div>
-      </li>
-      <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact: true}">
-        <a class="nav-link"  [routerLink]="['/matrixtubecarrier']"><i class="fas fa-file-upload"></i> Matrix Tube Carrier</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
