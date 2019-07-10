@@ -3,42 +3,42 @@
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Generate Work-order UI</b></h1>
       <h5 class="text-warning">Fill in the fields with Nanodrop Reading:</h5>
-      <form class="uk-form-horizontal">
+      <form class="uk-form-horizontal" (submit)="onCalculate()">
         <div class="form-group" style="width: 150px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">UC2-Cy3+1A</label>
-          <input class="form-control" type="number" [(ngModel)]="UC2Cy31A" name="UC2Cy31A">
+          <input class="form-control" type="number" [(ngModel)]="UC2Cy31A" name="UC2Cy31A" placeholder="40.575" disabled>
         </div>
         <div class="form-group" style="width: 150px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">UC2-NF</label>
-          <input class="form-control" type="number" [(ngModel)]="UC2NF" name="UC2NF">
+          <input class="form-control" type="number" [(ngModel)]="UC2NF" name="UC2NF" placeholder="26.175" disabled>
         </div>
         <div class="form-group" style="width: 150px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">UC3-Cy3+1A</label>
-          <input class="form-control" type="number" [(ngModel)]="UC3Cy31A" name="UC3Cy31A">
+          <input class="form-control" type="number" [(ngModel)]="UC3Cy31A" name="UC3Cy31A" placeholder="39.5" disabled>
         </div>
         <div class="form-group" style="width: 150px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">UC3-NF</label>
-          <input class="form-control" type="number" [(ngModel)]="UC3NF" name="UC3NF">
+          <input class="form-control" type="number" [(ngModel)]="UC3NF" name="UC3NF" placeholder="34.1" disabled>
         </div>
         <div class="form-group" style="width: 150px; margin-right: 5px;">
           <label style="font-size: 16px;">Volume (mL)</label>
-          <input class="form-control" type="number" [(ngModel)]="Volume" name="Volume">
+          <input class="form-control" type="number" [(ngModel)]="Volume" name="Volume" placeholder="2" disabled>
         </div>
         <button class="btn btn-primary" type="submit">Calculate</button>
       </form>
     </div>
   </div>
-  <div class="row" style="margin-top: 10px;">
+  <div class="row" style="margin-top: 10px;" *ngIf="UC2Cy31AArray">
     <div class="col">
-      <h5 class="text-warning">Check the display and create the Work-order: </h5>
+      <h5 class="text-warning">Check the preview and create the Work-order: </h5>
       <form (submit)="onCreateReq()">
         <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">Type in your department ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="Default: 2864165 - HT Assay Dept" disabled>
+          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2864165 - HT Assay Dept" disabled>
         </div>
         <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">Type in your employee ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="employeeId" name="employeeId" placeholder="Default: 1587869 - Felix Green" disabled>
+          <input class="form-control" type="text" [(ngModel)]="employeeId" name="employeeId" placeholder="1587869 - Felix Green" disabled>
         </div>
         <div class="form-group" style="width: 350px;">
           <label style="font-size: 16px;" for="selectopSpecName">Select the type of request:</label>
@@ -63,48 +63,32 @@
   <div class="row">
     <div class="col">
       <h5 class="text-warning">Preview of Work-order:</h5>
-      <table class="table-striped table-hover" style="text-align: center">
+      <table class="table-striped table-hover" style="text-align: center; display: inline; margin-right: 30px;" *ngIf="tableCode1">
         <tr>
           <th style="padding-right: 2px">Code 1</th>
-          <th style="padding-left: 2px; padding-right: 2px">Details</th>
-          <th style="padding-left: 2px; padding-right: 2px">Code 2</th>
-          <th style="padding-left: 2px; padding-right: 2px">Details</th>
+          <th style="padding-left: 2px; padding-right: 2px">UC2-NF</th>
+          <th style="padding-left: 2px; padding-right: 2px">UC2-Cy3+1A</th>
+          <th style="padding-left: 2px; padding-right: 2px">Fraction Cy3</th>
         </tr>
+        <tr *ngFor="let code1 of tableCode1">
+          <td style="padding-right: 2px">{{code1.code1Num}}</td>
+          <td style="padding-right: 2px">{{code1.UC2NF}}</td>
+          <td style="padding-right: 2px">{{code1.UC2Cy31A}}</td>
+          <td style="padding-right: 2px">{{code1.Franction}}</td>
+        </tr>
+      </table>
+      <table class="table-striped table-hover" style="text-align: center; display: inline;" *ngIf="tableCode2">
         <tr>
-          <td style="padding-right: 2px">1</td>
-          <td style="padding-left: 2px; padding-right: 2px">
-            <table class="table-striped table-hover" style="text-align: center">
-              <tr>
-                <th>UC2-NF</th>
-                <td></td>
-              </tr>
-              <tr>
-                <th>UC2-Cy3+1A</th>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Fraction Cy3</th>
-                <td></td>
-              </tr>
-            </table>
-          </td>
-          <td style="padding-left: 2px; padding-right: 2px">1</td>
-          <td style="padding-left: 2px; padding-right: 2px">
-            <table class="table-striped table-hover" style="text-align: center">
-              <tr>
-                <th>UC2-NF</th>
-                <td></td>
-              </tr>
-              <tr>
-                <th>UC2-Cy3+1A</th>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Fraction Cy3</th>
-                <td></td>
-              </tr>
-            </table>
-          </td>
+          <th style="padding-right: 2px">Code 2</th>
+          <th style="padding-left: 2px; padding-right: 2px">UC3-NF</th>
+          <th style="padding-left: 2px; padding-right: 2px">UC3-Cy3+1A</th>
+          <th style="padding-left: 2px; padding-right: 2px">Fraction Cy3</th>
+        </tr>
+        <tr *ngFor="let code2 of tableCode2">
+          <td style="padding-right: 2px">{{code2.code1Num}}</td>
+          <td style="padding-right: 2px">{{code2.UC3NF}}</td>
+          <td style="padding-right: 2px">{{code2.UC3Cy31A}}</td>
+          <td style="padding-right: 2px">{{code2.Franction}}</td>
         </tr>
       </table>
     </div>

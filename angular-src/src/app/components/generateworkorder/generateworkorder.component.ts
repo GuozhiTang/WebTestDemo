@@ -9,18 +9,25 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./generateworkorder.component.css']
 })
 export class GenerateworkorderComponent implements OnInit {
-  deptSpecId: Number;
-  employeeId: Number;
+  deptSpecId: number;
+  employeeId: number;
   opSpecNames: String[] = ['Assay Request', 'Code Dilution Request', 'Code Mix Request', 'Particle Coding Request', 'Transfer Request'];
   opSpecName: String;
   assayCodeTypes: String[];
   assayCodeType: String;
-  assayCodeId1s: Number[];
-  assayCodeId2s: Number[];
-  UC2Cy31A: Number;
-  UC2NF: Number;
-  UC3Cy31A: Number;
-  UC3NF: Number;
+  assayCodeId1s: number[];
+  assayCodeId2s: number[];
+  UC2Cy31A: number = 40.575;
+  UC2NF: number = 26.175;
+  UC3Cy31A: number = 39.5;
+  UC3NF: number = 34.1;
+  Volume: number = 2;
+  Franction: number[] = [1, 0.730902563, 0.531633462, 0.382791365, 0.270895615, 0.186366526, 0.122276884, 0.073549421, 0.036423685, 0.008091924,
+                          1, 0.506270091, 0.26124365, 0.132317345, 0.062389175, 0.023835757, 0.002388402]
+  UC2Cy31AArray: number[];
+  UC2NFArray: number[];
+  tableCode1: any[];
+  tableCode2: any[];
 
   constructor(
     private workorderService: WorkorderService,
@@ -82,13 +89,14 @@ export class GenerateworkorderComponent implements OnInit {
 
     // Define and get the subReqOptions
     var subReqOptions = [];
+    const valueArray = this.UC2Cy31AArray;
     // Add Code1 IDs to the subReqOptions
     this.assayCodeId1s.forEach(function(val, index) {
       // console.log(index, val);
       const subReqData = {
-        value: 0,
+        value: valueArray[index],
         units: "",
-        ordNum: index + 1,
+        ordNum: index,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
         roleName: roleName,
@@ -100,12 +108,12 @@ export class GenerateworkorderComponent implements OnInit {
     // Add Code2 IDs to the subReqOptions
     this.assayCodeId2s.forEach(function(val, index) {
       var subReqData = {
-        value: 0,
+        value: valueArray[index + 10],
         units: "",
-        ordNum: index + 11,
+        ordNum: index + 10,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
-        roleName: roleName,
+        roleName: "",
         reqElemSpecName: localAssayCodeType,
       }
       subReqOptions.push(subReqData);
@@ -132,5 +140,67 @@ export class GenerateworkorderComponent implements OnInit {
         this.flashMessage.show('Error Exists! Check again!');
       }
     });
+  }
+
+  /**
+   * Do the calculation according to four inputs from user
+   * Then give a display for the calculated data
+   * Creation of request is allowed only after this calculation
+   */
+  onCalculate() {
+    var C4 = this.UC2Cy31A * 1000 / 4023.9;
+    var D4 = this.UC2NF * 1000 / 3370.2;
+    var E4 = this.UC3Cy31A * 1000 / 4103.9;
+    var F4 = this.UC3NF * 1000 / 3450.2;
+    var Array = [];
+    var NFArray = [];
+    // Get the array of UC2-Cy3+1A and UC3-Cy3+1A
+    for (var i = 0; i < this.Franction.length; i++) {
+      if (i <= 9) {
+        Array.push((this.Franction[i]*1000*this.Volume*D4/(C4+this.Franction[i]*D4-this.Franction[i]*C4)).toFixed(1));
+      } else {
+        Array.push((this.Franction[i]*1000*this.Volume*F4/(E4+this.Franction[i]*F4-this.Franction[i]*E4)).toFixed(1));
+      }
+    }
+    this.UC2Cy31AArray = Array;
+    // console.log(this.UC2Cy31AArray);
+
+    // Get the array of UC2-NF and UC3-NF
+    for (var j = 0; j < Array.length; j++) {
+      if (i <= 9) {
+        NFArray.push(Array[0] - Array[j]);
+      } else {
+        NFArray.push(Array[10] - Array[j]);
+      }
+    }
+    this.UC2NFArray = NFArray;
+    // console.log(this.UC2NFArray);
+
+    // To combine the data which should be displayed in a json Array
+    var tableData1 = [];
+    var tableData2 = [];
+    var Far = this.Franction;
+
+    for (var i = 0; i <= 9; i++) {
+      var Data1 = {
+        code1Num: i + 1,
+        UC2NF: NFArray[i],
+        UC2Cy31A: Array[i],
+        Franction: Far[i]
+      } 
+      tableData1.push(Data1);
+    }
+    this.tableCode1 = tableData1;
+
+    for (var j = 10; j < Array.length; j++) {
+      var Data2 = {
+        code1Num: j - 9,
+        UC3NF: NFArray[j],
+        UC3Cy31A: Array[j],
+        Franction: Far[j]
+      } 
+      tableData2.push(Data2);
+    }
+    this.tableCode2 = tableData2;
   }
 }
