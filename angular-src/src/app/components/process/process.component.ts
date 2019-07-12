@@ -124,7 +124,7 @@ export class ProcessComponent implements OnInit {
     // console.log(getReq);
     this.processService.getRequests(getReq).subscribe(req => {
       this.Requests = req;
-      // console.log(this.Requests);
+      // console.log(this.Requests);0
     });
   }
 

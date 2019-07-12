@@ -94,7 +94,7 @@ export class GenerateworkorderComponent implements OnInit {
       // console.log(index, val);
       const subReqData = {
         value: valueArray[index],
-        units: "",
+        units: "UC1-Bodipy",
         ordNum: index,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
@@ -112,7 +112,7 @@ export class GenerateworkorderComponent implements OnInit {
         ordNum: index + 10,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
-        roleName: "",
+        roleName: "HB",
         reqElemSpecName: localAssayCodeType,
       }
       subReqOptions.push(subReqData);
@@ -122,7 +122,7 @@ export class GenerateworkorderComponent implements OnInit {
     // Define the json set to sent in order to generate the request
     const generate = {
       request: "generateRequest",
-      deptSpecId: 2864165,
+      deptSpecId: 2865407,
       employeeId: 1587869,
       opSpecName: this.opSpecName,
       parentOptions: parentOptions,
