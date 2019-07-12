@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkorderService } from '../../services/workorder.service';
-import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
