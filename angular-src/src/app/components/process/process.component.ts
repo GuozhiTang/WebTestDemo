@@ -89,7 +89,7 @@ export class ProcessComponent implements OnInit {
    */
   getWorkorders(instrument) {
     if (instrument == 'Manual' && this.user.department == 'HT Assay Dept') {
-      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
+      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request', 'Antibody Matrix Tube Carrier Request'];
       // console.log('successful!');
     } else if (instrument == 'Hamilton RBT1') {
       this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
