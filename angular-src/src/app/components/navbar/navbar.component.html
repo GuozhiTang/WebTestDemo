@@ -42,6 +42,9 @@
           <a class="dropdown-item" [routerLink]="['/labwarespecs']"><i class="fas fa-file"></i> LabwareSpecs</a>
         </div>
       </li>
+      <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" [routerLink]="['/reset']"><i class="fas fa-tachometer-alt"></i> reset</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
       </li>

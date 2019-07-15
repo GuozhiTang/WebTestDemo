@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Create Operator</h5>
+      <form (submit)="createOperator()">
+        <div class="form-group">
+          <label>Name</label>
+          <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here...">
+        </div>
+        <div class="form-group">
+          <label>Manufacturing</label>
+          <select class="form-control" [(ngModel)]="Manufacturing" name="Manufacturing">
+            <option>true</option>
+            <option>false</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create an operator</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Reset Operators</h5>
+      <form (submit)="onGrabOperators()">
+        <button type="submit" class="btn btn-primary">Reset Operators</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Show Operators Locally</h5>
+      <table class="table-striped table-hover" style="text-align: center;" *ngIf="operators">
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Manufacturing</th>
+        </tr>
+        <tr *ngFor="let operator of operators">
+          <td>{{operator.id}}</td>
+          <td>{{operator.name}}</td>
+          <td>{{operator.manufacturing}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col">
+      <h5 class="text-warning">Show Operators Remotely</h5>
+      <table class="table-striped table-hover" style="text-align: center;" *ngIf="operators">
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Manufacturing</th>
+        </tr>
+        <tr *ngFor="let reoperator of remoteoperators">
+          <td>{{reoperator.id}}</td>
+          <td>{{reoperator.name}}</td>
+          <td>{{reoperator.manufacturing}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col">
+        <h5 class="text-warning">Search by Name</h5>
+        <form (submit)="searchByName()">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here...">
+          </div>
+          <div class="form-group">
+            <label>Manufacturing</label>
+            <select class="form-control" [(ngModel)]="Manufacturing" name="Manufacturing">
+              <option>true</option>
+              <option>false</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Create an operator</button>
+        </form>
+      </div>
+    </div>
+</div>

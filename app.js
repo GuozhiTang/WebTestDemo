@@ -40,6 +40,7 @@ const instruments = require('./routes/instruments');
 const probemaps = require('./routes/probemaps');
 const probes = require('./routes/probes');
 const workorders = require('./routes/workorders');
+const operators = require('./routes/operators');
 
 // Port Number
 const port = 3000;
@@ -80,6 +81,7 @@ app.use('/instruments', instruments);
 app.use('/probemaps', probemaps);
 app.use('/probes', probes);
 app.use('/workorders', workorders);
+app.use('/operators', operators);
 
 // Index Route to the home page
 app.get('/', (req, res) => {

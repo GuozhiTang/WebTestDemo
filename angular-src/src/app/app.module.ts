@@ -39,6 +39,7 @@ import { GenerateworkorderComponent } from './components/generateworkorder/gener
 import { ModalComponent } from './components/modal/modal.component';
 import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
+import { ResetComponent } from './components/reset/reset.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
   {path: 'generateworkorder', component: GenerateworkorderComponent},
   {path: 'modal', component: ModalComponent},
   {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
+  {path: 'reset', component: ResetComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -95,6 +97,7 @@ export function tokenGetter() {
     ModalComponent,
     MatrixtubecarrierComponent,
     FileUploadComponent,
+    ResetComponent,
   ],
   // Modules should be put into imports
   imports: [
