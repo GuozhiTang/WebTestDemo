@@ -12,6 +12,8 @@ export class ResetComponent implements OnInit {
   remoteoperators: Object;
   Name: String;
   Manufacturing: Boolean;
+  checkExist: Boolean = true;
+  warningMsg: String;
 
   constructor(
     private validate: ValidateService,
@@ -79,21 +81,30 @@ export class ResetComponent implements OnInit {
       }
       Obj.validate.addOperators(localCreate).subscribe(data => {
         if (data.success) {
-          Obj.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
+          Obj.flashMessage.show('Create New Operator Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
         } else {
-          Obj.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
+          Obj.flashMessage.show('Create Operator Failed!', {cssClass: 'alert-danger', timeout: 3000});
         }
       });
     });
   }
 
-  searchByName() {
+  searchByName(name) {
     const operator = {
-      name: this.Name,
+      name: name,
     }
     this.validate.searchByName(operator).subscribe(res => {
-      console.log(res);
+      // console.log(res[0]);
+      if (res[0]) {
+        // console.log('Name already exists in database!');
+        this.warningMsg = 'Name already exists in database!';
+        this.checkExist = true;
+      } else {
+        // console.log('Can be used!');
+        this.warningMsg = undefined;
+        this.checkExist = false;
+      }
     });
   }
 }

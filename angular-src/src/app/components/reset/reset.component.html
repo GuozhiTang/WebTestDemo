@@ -1,33 +1,30 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h5 class="text-warning">Create Operator</h5>
+      <h1 style="margin-top: 15px;"><b>Register New Operator</b></h1>
+      <h5 class="text-warning" style="margin-top: 15px;">Register Operator</h5>
       <form (submit)="createOperator()">
-        <div class="form-group">
-          <label>Name</label>
-          <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here...">
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Name</label>
+          <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here..." (change)="searchByName($event.target.value)">
         </div>
-        <div class="form-group">
-          <label>Manufacturing</label>
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Manufacturing</label>
           <select class="form-control" [(ngModel)]="Manufacturing" name="Manufacturing">
             <option>true</option>
             <option>false</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create an operator</button>
-      </form>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h5 class="text-warning">Reset Operators</h5>
-      <form (submit)="onGrabOperators()">
-        <button type="submit" class="btn btn-primary">Reset Operators</button>
+        <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Make sure that the name is not existed in the database!</p>
+        <button type="submit" class="btn btn-primary" [disabled]="checkExist">Create an operator</button>
       </form>
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" style="margin-top: 15px;">
   <div class="row">
     <div class="col">
       <h5 class="text-warning">Show Operators Locally</h5>
@@ -60,23 +57,15 @@
       </table>
     </div>
   </div>
+</div>
+<div class="container" style="margin-top: 15px;">
   <div class="row">
-      <div class="col">
-        <h5 class="text-warning">Search by Name</h5>
-        <form (submit)="searchByName()">
-          <div class="form-group">
-            <label>Name</label>
-            <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here...">
-          </div>
-          <div class="form-group">
-            <label>Manufacturing</label>
-            <select class="form-control" [(ngModel)]="Manufacturing" name="Manufacturing">
-              <option>true</option>
-              <option>false</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Create an operator</button>
-        </form>
-      </div>
+    <div class="col">
+      <h4 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset Operators</h4>
+      <form (submit)="onGrabOperators()">
+        <button type="submit" class="btn btn-danger">Reset Operators</button>
+      </form>
+      <hr>
     </div>
+  </div>
 </div>
