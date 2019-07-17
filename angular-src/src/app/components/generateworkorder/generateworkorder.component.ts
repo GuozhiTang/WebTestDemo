@@ -16,17 +16,24 @@ export class GenerateworkorderComponent implements OnInit {
   assayCodeType: String;
   assayCodeId1s: number[];
   assayCodeId2s: number[];
-  UC2Cy31A: number = 40.575;
-  UC2NF: number = 26.175;
-  UC3Cy31A: number = 39.5;
-  UC3NF: number = 34.1;
-  Volume: number = 2;
-  Franction: number[] = [1, 0.730902563, 0.531633462, 0.382791365, 0.270895615, 0.186366526, 0.122276884, 0.073549421, 0.036423685, 0.008091924,
-                          1, 0.506270091, 0.26124365, 0.132317345, 0.062389175, 0.023835757, 0.002388402]
-  UC2Cy31AArray: number[];
-  UC2NFArray: number[];
-  tableCode1: any[];
-  tableCode2: any[];
+  UC21A: number = 41.2;
+  UC2NF: number = 30.3;
+  UC31A: number = 41.478;
+  UC3NF: number = 30.675;
+  Volume: number = 500;
+  Maxlin1: number = 0.50;
+  Maxlin2: number = 1.45;
+  Minlin: number = 0.046;
+  MAX1: number = 0.5;
+  MAX2: number = 1.45;
+  MIN: number = 0.042;
+  UC2: number = 1.269776;
+  UC3: number = 1.405181;
+  Grid: number[] = [1,2,3,4,5,6,7,8,9,10,
+                    1,2,3,4,5,6,7];
+  percentages: number[];
+  tableCode1: number[];
+  tableCode2: number[];
 
   constructor(
     private workorderService: WorkorderService,
@@ -88,17 +95,17 @@ export class GenerateworkorderComponent implements OnInit {
 
     // Define and get the subReqOptions
     var subReqOptions = [];
-    const valueArray = this.UC2Cy31AArray;
+    const percentageArray = this.percentages;
     // Add Code1 IDs to the subReqOptions
     this.assayCodeId1s.forEach(function(val, index) {
       // console.log(index, val);
       const subReqData = {
-        value: valueArray[index],
-        units: "UC1-Bodipy",
+        value: percentageArray[index],
+        units: "",
         ordNum: index,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
-        roleName: roleName,
+        roleName: "UC1-Bodipy",
         reqElemSpecName: localAssayCodeType,
       }
       subReqOptions.push(subReqData);
@@ -106,8 +113,8 @@ export class GenerateworkorderComponent implements OnInit {
 
     // Add Code2 IDs to the subReqOptions
     this.assayCodeId2s.forEach(function(val, index) {
-      var subReqData = {
-        value: valueArray[index + 10],
+      const subReqData = {
+        value: percentageArray[index + 10],
         units: "",
         ordNum: index + 10,
         assayCodeId: val,
@@ -122,7 +129,7 @@ export class GenerateworkorderComponent implements OnInit {
     // Define the json set to sent in order to generate the request
     const generate = {
       request: "generateRequest",
-      deptSpecId: 2865407,
+      deptSpecId: 2866379,
       employeeId: 1587869,
       opSpecName: this.opSpecName,
       parentOptions: parentOptions,
@@ -131,7 +138,7 @@ export class GenerateworkorderComponent implements OnInit {
     // console.log(generate);
 
     this.workorderService.generateRequest(generate).subscribe(res => {
-      // console.log(res);
+      console.log(res);
       if (res) {
         this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});
         window.location.reload();
@@ -147,59 +154,75 @@ export class GenerateworkorderComponent implements OnInit {
    * Creation of request is allowed only after this calculation
    */
   onCalculate() {
-    var C4 = this.UC2Cy31A * 1000 / 4023.9;
-    var D4 = this.UC2NF * 1000 / 3370.2;
-    var E4 = this.UC3Cy31A * 1000 / 4103.9;
-    var F4 = this.UC3NF * 1000 / 3450.2;
-    var Array = [];
+    var H9 = this.UC21A * 1000 / 4023.9;
+    var I9 = this.UC2NF * 1000 / 3370.2;
+    var J9 = this.UC31A * 1000 / 4103.9;
+    var K9 = this.UC3NF * 1000 / 3450.2;
+    var spacing1 = (Math.log10(this.Maxlin1) - Math.log10(this.Minlin)) / 9;
+    var spacing2 = (Math.log10(this.Maxlin2) - Math.log10(this.Minlin)) / 6;
+    var percent = ADJ / (1 + ADJ);
+    var ADJ;
+    var FNF;
+    var position;
+    var percentRes = [];
+    var Cy3Array = [];
     var NFArray = [];
-    // Get the array of UC2-Cy3+1A and UC3-Cy3+1A
-    for (var i = 0; i < this.Franction.length; i++) {
-      if (i <= 9) {
-        Array.push((this.Franction[i]*1000*this.Volume*D4/(C4+this.Franction[i]*D4-this.Franction[i]*C4)).toFixed(1));
-      } else {
-        Array.push((this.Franction[i]*1000*this.Volume*F4/(E4+this.Franction[i]*F4-this.Franction[i]*E4)).toFixed(1));
-      }
-    }
-    this.UC2Cy31AArray = Array;
-    // console.log(this.UC2Cy31AArray);
 
-    // Get the array of UC2-NF and UC3-NF
-    for (var j = 0; j < Array.length; j++) {
-      if (i <= 9) {
-        NFArray.push(Array[0] - Array[j]);
-      } else {
-        NFArray.push(Array[10] - Array[j]);
+    for (var i = 0; i < this.Grid.length; i++) {
+      if (i == 0) {
+        percentRes[i] = 100.0;
+        continue;
       }
+      if (i == 10) {
+        percentRes[i] = 100.0;
+        continue;
+      }
+      if (i < 10) {
+        position = Math.pow(10, Math.log10(this.Maxlin1) - i * spacing1);
+        FNF = (position - this.MIN) / (this.UC2 * (this.MAX1 - position));
+        ADJ = FNF * I9 / H9;
+      } else if (i > 10) {
+        position = Math.pow(10, Math.log10(this.Maxlin2) - (i - 10) * spacing2);
+        FNF = (position - this.MIN) / (this.UC3 * (this.MAX2 - position));
+        ADJ = FNF * K9 / J9;
+      }
+      percent = ADJ / (1 + ADJ);
+      percentRes[i] = (percent * 100).toFixed(4);
     }
-    this.UC2NFArray = NFArray;
-    // console.log(this.UC2NFArray);
+    // console.log(percentRes);
+    this.percentages = percentRes;
+    // console.log(this.percentages);
 
-    // To combine the data which should be displayed in a json Array
+    for (var j = 0; j < percentRes.length; j++) {
+      Cy3Array[j] = ((percentRes[j] / 100) * this.Volume).toFixed(2);
+      NFArray[j] = (this.Volume - Cy3Array[j]).toFixed(2);
+    }
+    // console.log(Cy3Array);
+    // console.log(NFArray);
+
     var tableData1 = [];
     var tableData2 = [];
-    var Far = this.Franction;
 
-    for (var i = 0; i <= 9; i++) {
+    for (var i = 0; i < 10; i++) {
       var Data1 = {
         code1Num: i + 1,
-        UC2NF: NFArray[i],
-        UC2Cy31A: Array[i],
-        Franction: Far[i]
-      } 
+        Cy3: Cy3Array[i],
+        NF: NFArray[i]
+      }
       tableData1.push(Data1);
     }
     this.tableCode1 = tableData1;
+    // console.log(this.tableCode1);
 
-    for (var j = 10; j < Array.length; j++) {
+    for (var j = 10; j < 17; j++) {
       var Data2 = {
         code1Num: j - 9,
-        UC3NF: NFArray[j],
-        UC3Cy31A: Array[j],
-        Franction: Far[j]
-      } 
+        Cy3: Cy3Array[j],
+        NF: NFArray[j]
+      }
       tableData2.push(Data2);
     }
     this.tableCode2 = tableData2;
+    // console.log(this.tableCode2);
   }
 }
