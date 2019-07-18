@@ -30,6 +30,13 @@ export class RolesService {
       .pipe(map(res => res.json()));
   }
 
+  createRoles(create) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   /**
    * Function to add role to the roles
    * @param role: json sent to local server conatining all information for adding new Roles

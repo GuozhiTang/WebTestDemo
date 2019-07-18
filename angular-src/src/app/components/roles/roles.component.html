@@ -2,9 +2,9 @@
 <div class="container" style="margin-top: 15px;">
   <!-- Instruction of Role component -->
   <div class="row">
-    <div class="col jumbotron" style="padding-top: 25px; height: 155px;">
+    <div class="col jumbotron" style="padding-top: 15px; height: 155px;">
       <h5>Roles list shows the types of labwares. It could be the content in the labware such as CEA Code Mix, or it could be one with many types such as Filter Plate. It is more beneficial on developer side. This gives us a quick view on what type we will send to robot.</h5>
-      <h5>Here labware means tube or plate. According to the barcode of the labware, we can access the specific role information.</h5>
+      <h5 style="margin-bottom: 125px;">Here labware means tube or plate. According to the barcode of the labware, we can access the specific role information.</h5>
     </div>
   </div>
 
@@ -67,8 +67,41 @@
 </div>
 <hr>
 
-<!-- Area for search functionalities -->
+<!-- Area for adding new Roles -->
 <div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="page-header" style="margin-top: 15px"><b>Create Roles Manually</b></h2>
+      <h5 class="text-warning" style="margin-top: 15px;">Create Roles</h5>
+      <form (submit)="createRole()">
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Role</label>
+          <input class="form-control" type="text" [(ngModel)]="role_add" name="role_add" placeholder="role here..." (change)="searchByRole($event.target.value)">
+        </div>
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Liquid Class</label>
+          <input class="form-control" type="text" [(ngModel)]="liquid_class_add" name="liquid_class_add" placeholder="liquid class here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Reagent</label>
+          <select class="form-control" [(ngModel)]="reagent_add" name="reagent_add">
+            <option>true</option>
+            <option>false</option>
+          </select>
+        </div>
+        <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Make sure that the role is not existed in the database!</p>
+        <button type="submit" class="btn btn-primary" [disabled]="checkExist">Create a Role</button>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+
+  <!-- Area for search functionalities -->
+<div class="container" style="margin-top: 15px">
   <div class="row">
     <!-- Search by Role -->
     <div class="col">
@@ -210,39 +243,3 @@
   </div>
 </div>
 <hr>
-
-<!-- Area for adding new Roles -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 class="page-header" style="margin-top: 15px"><b>Add Roles Manually</b></h2>
-      <form (submit)="onAddRoles()">
-        <div class="form-group">
-          <label>id:</label>
-          <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">
-        </div>
-        <div class="form-group">
-          <label>className:</label>
-          <input type="text" class="form-control" [(ngModel)]="className_add" name="className_add" placeholder="Add new className...">
-        </div>
-        <div class="form-group">
-            <label>moduleName:</label>
-            <input type="text" class="form-control" [(ngModel)]="moduleName_add" name="moduleName_add" placeholder="Add new moduleName...">
-          </div>
-        <div class="form-group">
-            <label>liquid_class:</label>
-            <input type="text" class="form-control" [(ngModel)]="liquid_class_add" name="liquid_class_add" placeholder="Add new liquid_class...">
-        </div>
-        <div class="form-group">
-            <label>role:</label>
-            <input type="text" class="form-control" [(ngModel)]="role_add" name="role_add" placeholder="Add new role...">
-        </div>
-        <div class="form-group">
-          <label>reagent:</label>
-          <input type="text" class="form-control" [(ngModel)]="reagent_add" name="reagent_add" placeholder="Add new reagent...">
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add Roles</button>
-      </form>
-    </div>
-  </div>
-</div>

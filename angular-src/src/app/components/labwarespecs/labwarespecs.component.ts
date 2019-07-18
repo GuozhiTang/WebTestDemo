@@ -12,9 +12,7 @@ export class LabwarespecsComponent implements OnInit {
   lwarespecs: LabwareSpec[];
   remotelwarespecs: LabwareSpec[];
   className: String;
-  className_add: String;
   moduleName: String;
-  moduleName_add: String;
   map_id: Object;
   map_id_add: Object;
   name: String;
@@ -37,6 +35,8 @@ export class LabwarespecsComponent implements OnInit {
   searchManufacturerRes: LabwareSpec[];
   searchIdRes: LabwareSpec[];
   searchConRes: LabwareSpec[]; 
+  warningMsg: String;
+  checkExist: Boolean = true;
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -53,35 +53,6 @@ export class LabwarespecsComponent implements OnInit {
     }
 
   ngOnInit() {
-  }
-
-  /**
-   * Add new Labwarespecs with necessary parameters.
-   */
-  onAddLwareSpecs() {
-    const lwarespecs = {
-      className: this.className_add,
-      moduleName: this.moduleName_add,
-      map_id: this.map_id_add,
-      name: this.name_add,
-      description: this.description_add,
-      material: this.material_add,
-      volume: this.volume_add,
-      cat_num: this.cat_num_add,
-      manufacturer: this.manufacturer_add,
-      id: this.id_add,
-    }
-    // Add LabwareSpec
-    this.labwarespecsService.addLabwareSpec(lwarespecs).subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // console.log('Add Successfully!');
-        location.reload();
-      } else {
-        this.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Add Failed!');
-      }
-    });
   }
 
   /**
@@ -151,6 +122,70 @@ export class LabwarespecsComponent implements OnInit {
     }
     this.labwarespecsService.searchLwarespecsByConditions(conditions).subscribe(res => {
       this.searchConRes = res;
+    });
+  }
+
+  createLabwareSpec() {
+    const remoteCreate = {
+      request: "fireplexCoreDaoCreation",
+      coreDaoReqData: {
+        coreDao: {
+          moduleName: "fireplex.data.backend.core",
+          name: this.name_add,
+          className: "LabwareSpec",
+          description: this.description_add,
+          material: this.material_add,
+          volume: this.volume_add,
+          cat_num: this.cat_num_add,
+          manufacturer: this.manufacturer_add,
+          map_id: this.map_id_add,
+          id: null
+        },
+        pKey: "id",
+        searchKey: "name"
+      }
+    }
+    const Obj = this;
+    this.labwarespecsService.createLabwareSpec(remoteCreate).subscribe(res => {
+      // console.log(res);
+      var newid = res.results[0].id;
+      // console.log(newid);
+      const localCreate = {
+        moduleName: "fireplex.data.backend.core",
+        name: Obj.name_add,
+        className: "LabwareSpec",
+        description: Obj.description_add,
+        material: Obj.material_add,
+        volume: Obj.volume_add,
+        cat_num: Obj.cat_num_add,
+        manufacturer: Obj.manufacturer_add,
+        map_id: Obj.map_id_add,
+        id: newid
+      }
+      Obj.labwarespecsService.addLabwareSpec(localCreate).subscribe(data => {
+        if (data.success) {
+          Obj.flashMessage.show('Create New LabwareSpec Successfully!', {cssClass: 'alert-success', timeout: 3000});
+          window.location.reload();
+        } else {
+          Obj.flashMessage.show('Create LabwareSpec Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        }
+      });
+    });
+  }
+
+  searchByName(name) {
+    const searchname = {
+      name: name,
+    }
+    this.labwarespecsService.searchLwarespecsByName(searchname).subscribe(res => {
+      // console.log(res[0]);
+      if (res[0]) {
+        this.warningMsg = 'Name already exists in database!';
+        this.checkExist = true;
+      } else {
+        this.warningMsg = undefined;
+        this.checkExist = false;
+      }
     });
   }
 }

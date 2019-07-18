@@ -12,9 +12,7 @@ export class InstrumentsComponent implements OnInit {
   instruments: Instrument[];
   remoteinstruments: Instrument[];
   className: String;
-  className_add: String;
   moduleName: String;
-  moduleName_add: String;
   moduleName_condition: String;
   short: String;
   short_add: String;
@@ -27,6 +25,24 @@ export class InstrumentsComponent implements OnInit {
   searchShortRes: Instrument[];
   searchIdRes: Instrument[];
   searchConRes: Instrument[];
+  instrumentSpecs: {
+    moduleName: String;
+    className: String;
+    model: String;
+    manufacturer: String;
+    type: String;
+    id: number;
+  };
+  instrumentSpec: {
+    moduleName: String;
+    className: String;
+    model: String;
+    manufacturer: String;
+    type: String;
+    id: number;
+  };
+  warningMsg: String;
+  checkExist: Boolean = true;
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -34,6 +50,7 @@ export class InstrumentsComponent implements OnInit {
       // show all instruments locally
       this.instrumentsService.getInstruments().subscribe(instruments => {
         this.instruments = instruments;
+        // console.log(this.instruments);
       });
 
       // show all instruments remotely
@@ -41,33 +58,28 @@ export class InstrumentsComponent implements OnInit {
         this.remoteinstruments = remoteinstruments;
         // console.log(this.remoteinstruments);
       });
+
+      const spec = {
+        request: "fireplexCoreDaoRetrieval",
+        coreDaoReqData: {
+          attrName: "id",
+              colNames: ["id"],
+              coreDao: {
+                id: null,
+                  className: "InstrumentSpec",
+                  moduleName: "fireplex.data.backend.core"
+              },
+              dataRange: {},
+              loadAll: "true"
+            }
+      }
+      this.instrumentsService.getInstrumentSpecs(spec).subscribe(specs => {
+        this.instrumentSpecs = specs.results;
+        // console.log(this.instrumentSpecs);
+      });
     }
 
   ngOnInit() {
-  }
-
-  /**
-   * Add new Instrument with necessary parameters.
-   */
-  onAddInstruments() {
-    const instruments = {
-      className: this.className_add,
-      moduleName: this.moduleName_add,
-      short: this.short_add,
-      spec_id: this.spec_id_add,
-      id: this.id_add,
-    }
-    // Add Instrument
-    this.instrumentsService.addInstrument(instruments).subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // console.log('Add Successfully!');
-        location.reload();
-      } else {
-        this.flashMessage.show('Add Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Add Failed!');
-      }
-    });
   }
 
   /**
@@ -143,6 +155,59 @@ export class InstrumentsComponent implements OnInit {
     }
     this.instrumentsService.searchInstrumentsByConditions(conditions).subscribe(res => {
       this.searchConRes = res;
+    });
+  }
+
+  createInstrument() {
+    const remoteCreate = {
+      request: "fireplexCoreDaoCreation",
+      coreDaoReqData: {
+        coreDao: {
+          moduleName: "fireplex.data.backend.core",
+          short: this.short_add,
+          className: "Instrument",
+          spec_id: this.spec_id_add,
+          id: null
+        },
+        pKey: "id",
+        searchKey: "short"
+      }
+    }
+    const Obj = this;
+    this.instrumentsService.createInstrument(remoteCreate).subscribe(res => {
+      // console.log(res);
+      var newid = res.results[0].id;
+      // console.log(newid);
+      const localCreate = {
+        moduleName: "fireplex.data.backend.core",
+        short: this.short_add,
+        className: "Instrument",
+        spec_id: this.spec_id_add,
+        id: newid
+      }
+      Obj.instrumentsService.addInstrument(localCreate).subscribe(data => {
+        if (data.success) {
+          Obj.flashMessage.show('Create New Role Successfully!', {cssClass: 'alert-success', timeout: 3000});
+          window.location.reload();
+        } else {
+          Obj.flashMessage.show('Create Role Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        }
+      });
+    });
+  }
+  searchByShort(short) {
+    const shortname = {
+      short: short,
+    }
+    this.instrumentsService.searchInstrumentsByShort(shortname).subscribe(res => {
+      // console.log(res[0]);
+      if (res[0]) {
+        this.warningMsg = 'Role already exists in database!';
+        this.checkExist = true;
+      } else {
+        this.warningMsg = undefined;
+        this.checkExist = false;
+      }
     });
   }
 }

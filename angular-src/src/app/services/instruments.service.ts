@@ -21,6 +21,13 @@ export class InstrumentsService {
       .pipe(map(res => res.json()));
   }
 
+  createInstrument(create) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   /**
    * Function to get all instruments remotely
    */
@@ -38,8 +45,8 @@ export class InstrumentsService {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3000/instruments/addInstrument', instruments, {headers: headers})
-    return this.http.post('instruments/addInstrument', instruments, {headers: headers})
+    return this.http.post('http://localhost:3000/instruments/addInstrument', instruments, {headers: headers})
+    // return this.http.post('instruments/addInstrument', instruments, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -103,6 +110,13 @@ export class InstrumentsService {
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbyconditions', conditions, {headers: headers})
     // return this.http.post('instruments/searchbyconditions', conditions, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  getInstrumentSpecs(spec) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://10.253.7.14:8000', spec, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

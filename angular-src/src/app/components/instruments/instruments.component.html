@@ -62,6 +62,35 @@
 </div>
 <hr>
 
+<!-- Area for adding new Instruments -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="page-header" style="margin-top: 15px"><b>Create Instruments Manually</b></h2>
+      <h5 class="text-warning" style="margin-top: 15px;">Create Instruments</h5>
+      <form (submit)="createInstrument()">
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Short</label>
+          <input class="form-control" type="text" [(ngModel)]="short_add" name="short_add" placeholder="short here..." (change)="searchByShort($event.target.value)">
+        </div>
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Spec_id</label>
+          <select class="form-control" [(ngModel)]="spec_id_add" name="spec_id_add">
+            <option>Select the id of request...</option>
+            <option *ngFor='let instrumentSpec of instrumentSpecs'>{{instrumentSpec.id}}</option>
+          </select>
+        </div>
+        <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Make sure that the short is not existed in the database!</p>
+        <button type="submit" class="btn btn-primary" [disabled]="checkExist">Create an Instrument</button>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+
 <!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
@@ -197,35 +226,3 @@
   </div>
 </div>
 <hr>
-
-<!-- Area for adding new Instruments -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 class="page-header" style="margin-top: 15px"><b>Add Instruments Manually</b></h2>
-      <form (submit)="onAddInstruments()">
-        <div class="form-group">
-          <label>id:</label>
-          <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">
-        </div>
-        <div class="form-group">
-          <label>className:</label>
-          <input type="text" class="form-control" [(ngModel)]="className_add" name="className_add" placeholder="Add new className...">
-        </div>
-        <div class="form-group">
-          <label>moduleName:</label>
-          <input type="text" class="form-control" [(ngModel)]="moduleName_add" name="moduleName_add" placeholder="Add new moduleName...">
-        </div>
-        <div class="form-group">
-          <label>short:</label>
-          <input type="text" class="form-control" [(ngModel)]="short_add" name="short_add" placeholder="Add new short...">
-        </div>
-        <div class="form-group">
-          <label>spec_id:</label>
-          <input type="text" class="form-control" [(ngModel)]="spec_id_add" name="spec_id_add" placeholder="Add new spec_id...">
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add Instruments</button>
-      </form>
-    </div>
-  </div>
-</div>

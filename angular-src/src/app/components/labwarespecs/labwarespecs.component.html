@@ -81,7 +81,53 @@
   </div>
 </div>
 <hr>
-  
+
+<!-- Area for adding new Labwarespecs -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="page-header" style="margin-top: 15px"><b>Create LabwareSpecs Manually</b></h2>
+      <h5 class="text-warning" style="margin-top: 15px;">Create LabwareSpecs</h5>
+      <form (submit)="createLabwareSpec()">
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Name</label>
+          <input class="form-control" type="text" [(ngModel)]="name_add" name="name_add" placeholder="name here..." (change)="searchByName($event.target.value)">
+        </div>
+        <div class="invalid-feedback" style="display: block">
+          <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Description</label>
+          <input class="form-control" type="text" [(ngModel)]="description_add" name="description_add" placeholder="description here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Material</label>
+          <input class="form-control" type="text" [(ngModel)]="material_add" name="material_add" placeholder="material here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Volume</label>
+          <input class="form-control" type="text" [(ngModel)]="volume_add" name="volume_add" placeholder="volume here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Cat_num</label>
+          <input class="form-control" type="text" [(ngModel)]="cat_num_add" name="cat_num_add" placeholder="cat_num here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Manufacturer</label>
+          <input class="form-control" type="text" [(ngModel)]="manufacturer_add" name="manufacturer_add" placeholder="manufacturer here...">
+        </div>
+        <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Map_id</label>
+          <input class="form-control" type="text" [(ngModel)]="map_id_add" name="map_id_add" placeholder="map_id here...">
+        </div>
+        <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Make sure that the name is not existed in the database!</p>
+        <button type="submit" class="btn btn-primary" [disabled]="checkExist">Create a LabwareSpec</button>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+
 <!-- Area for search functionalities -->
 <div class="container">
   <div class="row">
@@ -257,55 +303,3 @@
   </div>
 </div>
 <hr>
-
-<!-- Area for adding new Labwarespecs -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 class="page-header" style="margin-top: 15px"><b>Add LabwareSpec Manually</b></h2>
-      <form (submit)="onAddLwareSpecs()">
-        <div class="form-group">
-          <label>id:</label>
-          <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">
-        </div>
-        <div class="form-group">
-          <label>className:</label>
-          <input type="text" class="form-control" [(ngModel)]="className_add" name="className_add" placeholder="Add new className...">
-        </div>
-        <div class="form-group">
-          <label>moduleName:</label>
-          <input type="text" class="form-control" [(ngModel)]="moduleName_add" name="moduleName_add" placeholder="Add new moduleName...">
-        </div>
-        <div class="form-group">
-            <label>name:</label>
-            <input type="text" class="form-control" [(ngModel)]="name_add" name="name_add" placeholder="Add new name...">
-          </div>
-        <div class="form-group">
-            <label>description:</label>
-            <input type="text" class="form-control" [(ngModel)]="description_add" name="description_add" placeholder="Add new description...">
-        </div>
-        <div class="form-group">
-            <label>material:</label>
-            <input type="text" class="form-control" [(ngModel)]="material_add" name="material_add" placeholder="Add new material...">
-        </div>
-        <div class="form-group">
-          <label>volume:</label>
-          <input type="text" class="form-control" [(ngModel)]="volume_add" name="volume_add" placeholder="Add new volume...">
-        </div>
-        <div class="form-group">
-          <label>cat_num:</label>
-          <input type="text" class="form-control" [(ngModel)]="cat_num_add" name="cat_num_add" placeholder="Add new cat_num...">
-        </div>
-        <div class="form-group">
-          <label>manufacturer:</label>
-          <input type="text" class="form-control" [(ngModel)]="manufacturer_add" name="manufacturer_add" placeholder="Add new manufacturer...">
-        </div>
-        <div class="form-group">
-          <label>map_id:</label>
-          <input type="text" class="form-control" [(ngModel)]="map_id_add" name="map_id_add" placeholder="Add new map_id...">
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add LabwareSpec</button>
-      </form>
-    </div>
-  </div>
-</div>

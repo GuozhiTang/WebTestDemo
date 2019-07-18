@@ -65,7 +65,7 @@ export class ResetComponent implements OnInit {
         searchKey: "name"
       }
     }
-    var Obj = this;
+    const Obj = this;
     this.validate.createOperators(remoteCreate).subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
