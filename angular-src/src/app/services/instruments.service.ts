@@ -21,21 +21,21 @@ export class InstrumentsService {
       .pipe(map(res => res.json()));
   }
 
-  createInstrument(create) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // createInstrument(create) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   /**
    * Function to get all instruments remotely
    */
-  getremoteInstruments() {
-    let headers = new Headers();
-    return this.http.get('http://10.253.7.14:8000/?request=getAllInstruments', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // getremoteInstruments() {
+  //   let headers = new Headers();
+  //   return this.http.get('http://10.253.7.14:8000/?request=getAllInstruments', {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   /**
    * Function to add instrument to the instruments
@@ -97,7 +97,7 @@ export class InstrumentsService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/instruments/searchbyid', id, {headers: headers})
-    return this.http.post('instruments/sea/rchbyid', id, {headers: headers})
+    // return this.http.post('instruments/sea/rchbyid', id, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -113,10 +113,10 @@ export class InstrumentsService {
       .pipe(map(res => res.json()));
   }
 
-  getInstrumentSpecs(spec) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', spec, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // getInstrumentSpecs(spec) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://10.253.7.14:8000', spec, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 }

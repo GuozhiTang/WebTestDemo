@@ -79,8 +79,8 @@
         <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;">Spec_id</label>
           <select class="form-control" [(ngModel)]="spec_id_add" name="spec_id_add">
-            <option>Select the id of request...</option>
-            <option *ngFor='let instrumentSpec of instrumentSpecs'>{{instrumentSpec.id}}</option>
+            <option>Select the instrument spec...</option>
+            <option *ngFor='let instrumentSpec of instrumentSpecs' value="{{instrumentSpec.id}}">{{instrumentSpec.type}}</option>
           </select>
         </div>
         <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Make sure that the short is not existed in the database!</p>

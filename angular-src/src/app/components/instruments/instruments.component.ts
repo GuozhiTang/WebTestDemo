@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InstrumentsService } from '../../services/instruments.service';
 import { Instrument } from '../../../Instrument';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-instruments',
@@ -46,7 +47,8 @@ export class InstrumentsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private instrumentsService: InstrumentsService) {
+    private instrumentsService: InstrumentsService,
+    private remoteService: RemotereqService) {
       // show all instruments locally
       this.instrumentsService.getInstruments().subscribe(instruments => {
         this.instruments = instruments;
@@ -54,12 +56,15 @@ export class InstrumentsComponent implements OnInit {
       });
 
       // show all instruments remotely
-      this.instrumentsService.getremoteInstruments().subscribe(remoteinstruments => {
+      const getremoteInstruments = {
+        request: "getAllInstruments"
+      }
+      this.remoteService.remotePostReq(getremoteInstruments).subscribe(remoteinstruments => {
         this.remoteinstruments = remoteinstruments;
         // console.log(this.remoteinstruments);
       });
 
-      const spec = {
+      const getInstrumentSpecs = {
         request: "fireplexCoreDaoRetrieval",
         coreDaoReqData: {
           attrName: "id",
@@ -73,7 +78,7 @@ export class InstrumentsComponent implements OnInit {
               loadAll: "true"
             }
       }
-      this.instrumentsService.getInstrumentSpecs(spec).subscribe(specs => {
+      this.remoteService.remotePostReq(getInstrumentSpecs).subscribe(specs => {
         this.instrumentSpecs = specs.results;
         // console.log(this.instrumentSpecs);
       });
@@ -174,7 +179,7 @@ export class InstrumentsComponent implements OnInit {
       }
     }
     const Obj = this;
-    this.instrumentsService.createInstrument(remoteCreate).subscribe(res => {
+    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);
@@ -195,6 +200,7 @@ export class InstrumentsComponent implements OnInit {
       });
     });
   }
+
   searchByShort(short) {
     const shortname = {
       short: short,

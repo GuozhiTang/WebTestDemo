@@ -3,6 +3,7 @@ import { ProbemapsService } from '../../services/probemaps.service';
 import { Probemap } from '../../../Probemap';
 import { Probe } from '../../../Probe';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-probemaps',
@@ -39,14 +40,18 @@ export class ProbemapsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private probemapsService: ProbemapsService) {
+    private probemapsService: ProbemapsService,
+    private remoteService: RemotereqService) {
       // show all probemaps locally
       this.probemapsService.getProbemaps().subscribe(probemaps => {
         this.probemaps = probemaps;
       });
 
       // show all probemaps remotely
-      this.probemapsService.getremoteProbemaps().subscribe(remoteprobemaps => {
+      const getremoteProbemaps = {
+        request: "getAllProbemaps"
+      }
+      this.remoteService.remotePostReq(getremoteProbemaps).subscribe(remoteprobemaps => {
         this.remoteprobemaps = remoteprobemaps;
         // console.log(this.remoteprobemaps);
       });

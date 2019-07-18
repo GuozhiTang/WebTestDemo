@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatusRes } from '../../../StatusRes';
 import { ViewEncapsulation } from '@angular/core';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-process',
@@ -55,13 +56,15 @@ export class ProcessComponent implements OnInit {
     public authService:AuthService,
     private flashMessage: FlashMessagesService,
     private processService: ProcessService,
-    private modalService: NgbModal,) {
+    private modalService: NgbModal,
+    private remoteService: RemotereqService,
+    ) {
     
       // get status types here
-      const info ={
+      const getStatusTypes ={
         request: "fpReqStatusList"
       }
-      this.processService.getStatusTypes(info).subscribe(types => {
+      this.remoteService.remotePostReq(getStatusTypes).subscribe(types => {
         this.typeRes = types;
       });
 
@@ -116,13 +119,13 @@ export class ProcessComponent implements OnInit {
    * Get requests (work-orders) by request type
    */
   getRequests() {
-    const getReq = {
+    const getRequests = {
       request: "fpGetReqDT",
       dept: this.user.department,
       reqType: this.type
     }
     // console.log(getReq);
-    this.processService.getRequests(getReq).subscribe(req => {
+    this.remoteService.remotePostReq(getRequests).subscribe(req => {
       this.Requests = req;
       // console.log(this.Requests);
     });
@@ -133,14 +136,14 @@ export class ProcessComponent implements OnInit {
    * @param reqId: request Id
    */
   onShowRequest(reqId) {
-    const ReqId = {
+    const getByReqId = {
       request: "fpGetReqDetails",
       reqId: reqId
     }
     // console.log('Successful!');
     this.requestId = reqId;
     this.statusRes = undefined;
-    this.processService.getByReqId(ReqId).subscribe(reqres => {
+    this.remoteService.remotePostReq(getByReqId).subscribe(reqres => {
       this.reqRes = reqres;
     });
   }
@@ -158,13 +161,13 @@ export class ProcessComponent implements OnInit {
    * @param reqId: request Id
    */
   onShowStatus(reqId) {
-    const showComment = {
+    const showStatus = {
       request: "fpStatusForReq",
       requestId: reqId
     }
     this.requestId = reqId;
     this.reqRes = undefined;
-    this.processService.showStatus(showComment).subscribe(status => {
+    this.remoteService.remotePostReq(showStatus).subscribe(status => {
       // console.log("status"+status);
       this.statusRes = status;
       // console.log(this.statusRes);
@@ -208,7 +211,7 @@ export class ProcessComponent implements OnInit {
    * Add new status for updates
    */
   addStatus() {
-    const add = {
+    const addStatus = {
       request: "fpAddReqStatus",
       requestId: this.requestId,
       operatorName: this.user.name,
@@ -218,7 +221,7 @@ export class ProcessComponent implements OnInit {
     // console.log(this.requestId);
     // console.log(this.opSpecId);
     // console.log(this.comments);
-    this.processService.addStatus(add).subscribe(newStatus => {
+    this.remoteService.remotePostReq(addStatus).subscribe(newStatus => {
       // console.log(newStatus);
       this.newstatus = newStatus;
       // console.log(this.newstatus[0]);

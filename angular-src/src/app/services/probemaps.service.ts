@@ -24,11 +24,11 @@ export class ProbemapsService {
   /**
    * Function to get all probemaps remotely
    */
-  getremoteProbemaps() {
-    let headers = new Headers();
-    return this.http.get('http://10.253.7.14:8000/?request=getAllProbemaps', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // getremoteProbemaps() {
+  //   let headers = new Headers();
+  //   return this.http.get('http://10.253.7.14:8000/?request=getAllProbemaps', {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   /**
    * Function to add probemap to the probemaps

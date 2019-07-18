@@ -3,6 +3,7 @@ import { PlateService } from '../../services/plate.service';
 import { Plate } from '../../../Plate';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-transfer',
@@ -31,6 +32,7 @@ export class TransferComponent implements OnInit {
     private plateService: PlateService,
     private router: Router,
     private flashMessage: FlashMessagesService,
+    private remoteService: RemotereqService,
   ) {
     this.plateService.getPlates().subscribe(plates => {
       this.plates = plates;

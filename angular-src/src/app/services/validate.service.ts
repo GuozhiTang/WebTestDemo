@@ -30,12 +30,12 @@ export class ValidateService {
       .pipe(map(res => res.json()));
   }
 
-  getRemoteOperators(remoteReq) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', remoteReq, {headers: headers})
-    .pipe(map(res => res.json()));
-  }
+  // getRemoteOperators(remoteReq) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://10.253.7.14:8000', remoteReq, {headers: headers})
+  //   .pipe(map(res => res.json()));
+  // }
 
   grabOperators () {
     let headers = new Headers();
@@ -44,12 +44,12 @@ export class ValidateService {
       .pipe(map(res => res.json()));
   }
 
-  createOperators(create) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // createOperators(create) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   addOperators(operator) {
     let headers = new Headers();

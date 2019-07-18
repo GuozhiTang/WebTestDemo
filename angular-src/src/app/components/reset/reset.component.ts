@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidateService } from '../../services/validate.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-reset',
@@ -18,6 +19,7 @@ export class ResetComponent implements OnInit {
   constructor(
     private validate: ValidateService,
     private flashMessage: FlashMessagesService,
+    private remoteService: RemotereqService,
   ) {
     this.validate.getOperators().subscribe(operators => {
       this.operators = operators;
@@ -27,7 +29,7 @@ export class ResetComponent implements OnInit {
     const remoteReq = {
       request: "getOperators"
     }
-    this.validate.getRemoteOperators(remoteReq).subscribe(remote => {
+    this.remoteService.remotePostReq(remoteReq).subscribe(remote => {
       this.remoteoperators = remote;
     })
   }
@@ -66,7 +68,7 @@ export class ResetComponent implements OnInit {
       }
     }
     const Obj = this;
-    this.validate.createOperators(remoteCreate).subscribe(res => {
+    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);

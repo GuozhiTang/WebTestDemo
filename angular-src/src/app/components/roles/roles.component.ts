@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RolesService } from '../../services/roles.service';
 import { Role } from '../../../Role';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-roles',
@@ -31,14 +32,18 @@ export class RolesComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private rolesService: RolesService) {
+    private rolesService: RolesService,
+    private remoteService: RemotereqService) {
       // show all roles locally
       this.rolesService.getRoles().subscribe(roles => {
         this.roles = roles;
       });
 
       // show all roles remotely
-      this.rolesService.getremoteRoles().subscribe(remoteroles => {
+      const getremoteRoles = {
+        request: "getRoles"
+      }
+      this.remoteService.remotePostReq(getremoteRoles).subscribe(remoteroles => {
         this.remoteroles = remoteroles;
       });
     }
@@ -132,7 +137,7 @@ export class RolesComponent implements OnInit {
       }
     }
     const Obj = this;
-    this.rolesService.createRoles(remoteCreate).subscribe(res => {
+    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LabwarespecsService } from '../../services/labwarespecs.service';
 import { LabwareSpec } from '../../../LabwareSpec';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-labwarespecs',
@@ -40,14 +41,18 @@ export class LabwarespecsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private labwarespecsService: LabwarespecsService) {
+    private labwarespecsService: LabwarespecsService,
+    private remoteService: RemotereqService) {
       // show labwarespecs locally
       this.labwarespecsService.getLabwareSpecs().subscribe(lwarespecs => {
         this.lwarespecs = lwarespecs;
       });
 
       // show labwarespecs remotely
-      this.labwarespecsService.getremoteLabwareSpecs().subscribe(remotelwarespecs => {
+      const getremoteLabwareSpecs = {
+        request: "getLabwareSpecs"
+      }
+      this.remoteService.remotePostReq(getremoteLabwareSpecs).subscribe(remotelwarespecs => {
         this.remotelwarespecs = remotelwarespecs;
       });
     }
@@ -146,7 +151,7 @@ export class LabwarespecsComponent implements OnInit {
       }
     }
     const Obj = this;
-    this.labwarespecsService.createLabwareSpec(remoteCreate).subscribe(res => {
+    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);

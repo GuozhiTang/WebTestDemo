@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkorderService } from '../../services/workorder.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-generateworkorder',
@@ -38,19 +39,27 @@ export class GenerateworkorderComponent implements OnInit {
   constructor(
     private workorderService: WorkorderService,
     private flashMessage:FlashMessagesService,
+    private remoteService: RemotereqService,
   ) {
     // Get the set of Code1 IDs
     var codeId1s = [];
-    this.workorderService.getSingleCode1().subscribe(res => {
+    const getSingleCode1 = {
+      request: "fpGetSingleCode1"
+    }
+    this.remoteService.remotePostReq(getSingleCode1).subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
         codeId1s.unshift(res[i].id);
       }
       this.assayCodeId1s = codeId1s;
     });
+
     // Get the set of Code2 IDs
     var codeId2s = [];
-    this.workorderService.getSingleCode2().subscribe(res => {
+    const getSingleCode2 = {
+      request: "fpGetSingleCode2"
+    }
+    this.remoteService.remotePostReq(getSingleCode2).subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
         codeId2s.unshift(res[i].id);
@@ -127,7 +136,7 @@ export class GenerateworkorderComponent implements OnInit {
     // console.log(subReqOptions);
 
     // Define the json set to sent in order to generate the request
-    const generate = {
+    const generateRequest = {
       request: "generateRequest",
       deptSpecId: 2866379,
       employeeId: 1587869,
@@ -137,7 +146,7 @@ export class GenerateworkorderComponent implements OnInit {
     }
     // console.log(generate);
 
-    this.workorderService.generateRequest(generate).subscribe(res => {
+    this.remoteService.remotePostReq(generateRequest).subscribe(res => {
       console.log(res);
       if (res) {
         this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});

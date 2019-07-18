@@ -6,6 +6,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { AuthService } from '../../services/auth.service';
 import { Workorder } from '../../../Workorder';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-matrixtubecarrier',
@@ -34,9 +35,13 @@ export class MatrixtubecarrierComponent {
     private workorderService: WorkorderService,
     public authService:AuthService,
     private flashMessage:FlashMessagesService,
+    private remoteService: RemotereqService,
     ) {
       // Get the work-order id list here
-      this.workorderService.getWorkorderId().subscribe(res => {
+      const getWorkorderId = {
+        request: "fpAntibodyMatrixReq"
+      }
+      this.remoteService.remotePostReq(getWorkorderId).subscribe(res => {
         this.workorderids = res.results;
       });
 
@@ -56,14 +61,14 @@ export class MatrixtubecarrierComponent {
   onSubmit() {
     // console.log(this.childUpload.content);
     // console.log(this.signup.value.workorderid);
-    const matrixtube = {
+    const uploadMatrixTube = {
       request: "fpAntibodyMatrixCarrierDet",
       // requestId: this.workorderid,
       requestId: this.signup.value.workorderid,
       scannedData: this.childUpload.content
     }
 
-    this.workorderService.uploadMatrixTube(matrixtube).subscribe(res => {
+    this.remoteService.remotePostReq(uploadMatrixTube).subscribe(res => {
       if (res) {
         this.workorders = res;
         console.log(res);
@@ -97,14 +102,14 @@ export class MatrixtubecarrierComponent {
    * Second Submit -- When submit button is active, submit to store data in the remote server
    */
   onSubmit2() {
-    const storeData = {
+    const storeMatrixTube = {
       request: "fpAntibodyMatrixCarrierReqData",
       // requestId: this.workorderid,
       requestId: this.signup.value.workorderid,
       scannedData: this.childUpload.content
     }
     
-    this.workorderService.storeMatrixTube(storeData).subscribe(res => {
+    this.remoteService.remotePostReq(storeMatrixTube).subscribe(res => {
       console.log(res.results);
       if (res.results == null || res.results.length == 0) {
         this.flashMessage.show("Stored Successfully!", {cssClass: 'alert-success', timeout: 5000});

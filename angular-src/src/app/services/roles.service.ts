@@ -24,18 +24,18 @@ export class RolesService {
   /**
    * Function to get all roles remotely
    */
-  getremoteRoles() {
-    let headers = new Headers();
-    return this.http.get('http://10.253.7.14:8000/?request=getRoles', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // getremoteRoles() {
+  //   let headers = new Headers();
+  //   return this.http.get('http://10.253.7.14:8000/?request=getRoles', {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
-  createRoles(create) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // createRoles(create) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   /**
    * Function to add role to the roles
