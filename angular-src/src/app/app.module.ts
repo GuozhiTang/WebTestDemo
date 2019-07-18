@@ -16,8 +16,6 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SpecsComponent } from './components/specs/specs.component';
-import { PlateComponent } from './components/plate/plate.component';
-import { PlatelistComponent } from './components/platelist/platelist.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
@@ -49,8 +47,6 @@ const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'specs', component: SpecsComponent},
-  {path: 'plate', component: PlateComponent},
-  {path: 'platelist', component: PlatelistComponent},
   {path: 'transfer', component: TransferComponent},
   {path: 'transfer/targetplate', component: TargetplateComponent},
   {path: 'transfer/sourceplate', component: SourceplateComponent},
@@ -82,8 +78,6 @@ export function tokenGetter() {
     DashboardComponent,
     ProfileComponent,
     SpecsComponent,
-    PlateComponent,
-    PlatelistComponent,
     TransferComponent,
     TargetplateComponent,
     SourceplateComponent,

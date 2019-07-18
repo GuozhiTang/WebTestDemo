@@ -24,11 +24,11 @@ export class SpecsService {
   }
 
   // Function to get all specs remotely
-  getremoteSpecs() {
-    let headers = new Headers();
-    return this.http.get('http://10.253.7.14:8000/?request=getSpecs', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // getremoteSpecs() {
+  //   let headers = new Headers();
+  //   return this.http.get('http://10.253.7.14:8000/?request=getSpecs', {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   // Function to add spec to the specs
   addSpec(specs) {

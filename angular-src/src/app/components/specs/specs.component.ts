@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpecsService } from '../../services/specs.service';
 import { Spec } from '../../../Spec';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-specs',
@@ -24,12 +25,17 @@ export class SpecsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private specsService: SpecsService) {
+    private specsService: SpecsService,
+    private remoteService: RemotereqService,
+    ) {
       this.specsService.getSpecs().subscribe(specs => {
         this.specs = specs;
       });
 
-      this.specsService.getremoteSpecs().subscribe(remotespecs => {
+      const getremoteSpecs = {
+        request: "getSpecs"
+      }
+      this.remoteService.remotePostReq(getremoteSpecs).subscribe(remotespecs => {
         this.remotespecs = remotespecs;
       });
     }
