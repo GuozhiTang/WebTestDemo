@@ -3,6 +3,7 @@ import { InstrumentsService } from '../../services/instruments.service';
 import { Instrument } from '../../../Instrument';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-instruments',
@@ -48,11 +49,13 @@ export class InstrumentsComponent implements OnInit {
   constructor(
     private flashMessage: FlashMessagesService,
     private instrumentsService: InstrumentsService,
-    private remoteService: RemotereqService) {
+    private remoteService: RemotereqService,
+    private dataService: DataService,
+    ) {
       // show all instruments locally
-      this.instrumentsService.getInstruments().subscribe(instruments => {
+      this.dataService.getData('Instrument').subscribe(instruments => {
         this.instruments = instruments;
-        // console.log(this.instruments);
+        console.log(this.instruments);
       });
 
       // show all instruments remotely
