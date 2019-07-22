@@ -54,7 +54,11 @@ module.exports.addLabwareSpec = function (newLabwareSpec, callback) {
 }
 
 // To pull labwarespecs remotely
-module.exports.grabLabwareSpecs = function (callback) {
+module.exports.resetLabwareSpecs = function (callback) {
+  mongoose.connection.collection("labwarespecs").drop(function(err) {
+    console.log('Collection Dropped Firstly!');
+  });
+
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "fireplexCoreDaoRetrieval",

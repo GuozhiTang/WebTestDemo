@@ -12,8 +12,9 @@
     <!-- Area to update and show Labwarespecs locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Update and Show All LabwareSpecs Locally</b></h2>
-      <form (submit)="onGrabLwareSpecs()" style="margin-bottom: 15px">
-          <button type="submit" class="btn btn-primary">Update LabwareSpecs</button>
+      <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset LabwareSpecs</h5>
+      <form (submit)="onResetLwareSpecs()" style="margin-bottom: 15px">
+          <button type="submit" class="btn btn-danger">Reset LabwareSpecs</button>
       </form>
       <hr>
       <!-- table to show Labwarespecs locally -->
@@ -88,7 +89,7 @@
     <div class="col">
       <h2 class="page-header" style="margin-top: 15px"><b>Create LabwareSpecs Manually</b></h2>
       <h5 class="text-warning" style="margin-top: 15px;">Create LabwareSpecs</h5>
-      <form (submit)="createLabwareSpec()">
+      <form (submit)="onCreateLabwareSpec()">
         <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;">Name</label>
           <input class="form-control" type="text" [(ngModel)]="name_add" name="name_add" placeholder="name here..." (change)="searchByName($event.target.value)">

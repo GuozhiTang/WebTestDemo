@@ -12,8 +12,9 @@
     <!-- Area to update and show Instruments locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Update and Show All Instruments Locally</b></h2>
-      <form (submit)="onGrabInstruments()" style="margin-bottom: 15px">
-          <button type="submit" class="btn btn-primary">Update Instruments</button>
+      <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset Instruments</h5>
+      <form (submit)="onResetInstruments()" style="margin-bottom: 15px">
+          <button type="submit" class="btn btn-danger">Reset Instruments</button>
       </form>
       <hr>
       <!-- table to show instruments locally -->
@@ -28,7 +29,7 @@
         <tr *ngFor="let instrument of instruments">
           <td style="padding-right: 2px">{{instrument.id}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{instrument.short}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">type: {{instrument.spec_id.type}}<br>manufacturer: {{instrument.spec_id.manufacturer}}<br>model: {{instrument.spec_id.model}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">type: {{instrument.spec_id.type}}<br>manufacturer: {{instrument.spec_id.manufacturer}}<br>model: {{instrument.spec_id.model}}</td>          
           <td style="padding-left: 2px; padding-right: 2px">{{instrument.className}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{instrument.moduleName}}</td>
         </tr>
@@ -68,10 +69,10 @@
     <div class="col">
       <h2 class="page-header" style="margin-top: 15px"><b>Create Instruments Manually</b></h2>
       <h5 class="text-warning" style="margin-top: 15px;">Create Instruments</h5>
-      <form (submit)="createInstrument()">
+      <form (submit)="onCreateInstrument()">
         <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;">Short</label>
-          <input class="form-control" type="text" [(ngModel)]="short_add" name="short_add" placeholder="short here..." (change)="searchByShort($event.target.value)">
+          <input class="form-control" type="text" [(ngModel)]="short_add" name="short_add" placeholder="short here..." (change)="onSearchByShort($event.target.value)">
         </div>
         <div class="invalid-feedback" style="display: block">
           <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>

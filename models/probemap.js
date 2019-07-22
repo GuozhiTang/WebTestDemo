@@ -45,7 +45,11 @@ module.exports.addProbemap = function (newProbemap, callback) {
 }
 
 // To pull probemaps from data server
-module.exports.grabProbemaps = function (callback) {
+module.exports.resetProbemaps = function (callback) {
+  mongoose.connection.collection("probemaps").drop(function(err) {
+    console.log('Collection Dropped Firstly!');
+  });
+
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "fireplexCoreDaoRetrieval",

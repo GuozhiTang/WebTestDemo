@@ -34,13 +34,13 @@ router.post('/addInstrument', (req, res, next) => {
 });
 
 // To pull Instruments remotely
-router.post('/grabInstruments', (req, res, next) => {
-  Instrument.grabInstruments((err, dataObj) => {
+router.post('/resetInstruments', (req, res, next) => {
+  Instrument.resetInstruments((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab Instruments!'});
+      res.json({success: false, msg:'Failed to reset Instruments!'});
     } else {
       try {
-        res.json({success: true, msg:'Grab Instruments successfully!'});
+        res.json({success: true, msg:'Reset Instruments successfully!'});
         // console.log(res);
         // res.end();
       } catch (err) {

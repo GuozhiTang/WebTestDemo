@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RolesService } from '../../services/roles.service';
 import { Role } from '../../../Role';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-roles',
@@ -32,10 +32,11 @@ export class RolesComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private rolesService: RolesService,
-    private remoteService: RemotereqService) {
+    private remoteService: RemotereqService,
+    private dataService: DataService,
+    ) {
       // show all roles locally
-      this.rolesService.getRoles().subscribe(roles => {
+      this.dataService.getData('Role').subscribe(roles => {
         this.roles = roles;
       });
 
@@ -54,31 +55,27 @@ export class RolesComponent implements OnInit {
   /**
    * Functionality to pull all roles data from data server.
    */
-  onGrabRoles() {
-    if (this.roles.length == 0) {
-      this.rolesService.grabRoles().subscribe(data => {
-        if (data.success) {
-          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-          // console.log('Grab Successfully!');
-          location.reload();
-        } else {
-          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-          // console.log('Grab Failed!');
-        }
-      });
-    } else {
-      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeout: 3000});
-    }
+  onResetRoles() {
+    this.dataService.resetData('Role').subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
+        window.location.reload();
+      } else {
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
+      }
+    });
   }
 
   /**
    * Search Roles by Role
    */
   onSearchRolesByRole() {
-    const searchRole = {
+    const searchData = {
       role: this.role,
     }
-    this.rolesService.searchRolesByRole(searchRole).subscribe(res => {
+    this.dataService.searchData('Role_role', searchData).subscribe(res => {
       this.searchRoleRes = res;
     });
   }
@@ -87,10 +84,10 @@ export class RolesComponent implements OnInit {
    * Search Roles by Liquid_class
    */
   onSearchRolesByLiquidClass() {
-    const searchLiquidClass = {
+    const searchData = {
       liquid_class: this.liquid_class
     }
-    this.rolesService.searchRolesByLiquidClass(searchLiquidClass).subscribe(res => {
+    this.dataService.searchData('Role_liquidClass', searchData).subscribe(res => {
       this.searchLiquidClassRes = res;
     });
   }
@@ -99,10 +96,10 @@ export class RolesComponent implements OnInit {
    * Search Roles by Roles_id
    */
   onSearchRolesById() {
-    const searchId = {
+    const searchData = {
       id: this.id
     }
-    this.rolesService.searchRolesById(searchId).subscribe(res => {
+    this.dataService.searchData('Role_id', searchData).subscribe(res => {
       this.searchIdRes = res;
     });
   }
@@ -111,16 +108,16 @@ export class RolesComponent implements OnInit {
    * Search Roles by both role and liquid_class
    */
   onSearchRolesByConditions() {
-    const conditions = {
+    const searchData = {
       role: this.role_condition,
       liquid_class: this.liquid_class_condition
     }
-    this.rolesService.searchRolesByConditions(conditions).subscribe(res => {
+    this.dataService.searchData('Role_conditions', searchData).subscribe(res => {
       this.searchConRes = res;
     });
   }
 
-  createRole() {
+  onCreateRole() {
     const remoteCreate = {
       request: "fireplexCoreDaoCreation",
       coreDaoReqData: {
@@ -149,7 +146,7 @@ export class RolesComponent implements OnInit {
         liquid_class: Obj.liquid_class_add,
         id: newid
       }
-      Obj.rolesService.addRole(localCreate).subscribe(data => {
+      Obj.dataService.addData('Role', localCreate).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Role Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
@@ -161,13 +158,13 @@ export class RolesComponent implements OnInit {
   }
 
   searchByRole(role) {
-    const rolename = {
+    const searchData = {
       role: role,
     }
-    this.rolesService.searchRolesByRole(rolename).subscribe(res => {
+    this.dataService.searchData('Role_role', searchData).subscribe(res => {
       // console.log(res[0]);
       if (res[0]) {
-        this.warningMsg = 'Role already exists in database!';
+        this.warningMsg = 'Role Name already exists in database!';
         this.checkExist = true;
       } else {
         this.warningMsg = undefined;

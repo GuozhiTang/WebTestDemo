@@ -56,7 +56,11 @@ module.exports.addRole = function (newRole, callback) {
 // }
 
 // To pull roles from data server
-module.exports.grabRoles = function (callback) {
+module.exports.resetRoles = function (callback) {
+  mongoose.connection.collection("roles").drop(function(err) {
+    console.log('Collection Dropped Firstly!');
+  });
+
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "fireplexCoreDaoRetrieval",

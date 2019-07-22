@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from 'rxjs/operators';
-import { RoutesRecognized } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +13,78 @@ export class DataService {
 
   getData(component) {
     let headers = new Headers();
-    var routes;
+    var route;
     switch (component) {
-      case 'Instrument': routes = 'instruments/getInstruments'; break;
+      case 'Instrument': route = 'instruments/getInstruments'; break;
+      case 'Operator': route = 'operators/getoperators'; break;
+      case 'Role': route = 'roles/getroles'; break;
+      case 'LabwareSpec': route = 'labwarespecs/getlwarespec'; break;
+      case 'Probemap': route = 'probemaps/getProbemaps'; break;
     }
-    return this.http.get('http://localhost:3000/' + routes, {headers: headers})
+    return this.http.get('http://localhost:3000/' + route, {headers: headers})
+    // return this.http.get(routes, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
-  getInstruments() {
+  addData(component, addData) {
     let headers = new Headers();
-    return this.http.get('http://localhost:3000/instruments/getInstruments', {headers: headers})
-    // return this.http.get('instruments/getInstruments', {headers: headers})
+    var route;
+    switch (component) {
+      case 'Operator': route = 'operators/addoperator'; break;
+      case 'Role': route = 'roles/addrole'; break;
+      case 'Instrument': route = 'instruments/addInstrument'; break;
+      case 'LabwareSpec': route = 'labwarespecs/addlwarespec'; break;
+      // case 'Probemap': route = 'probemaps/addProbemap'; break;
+    }
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/' + route, addData, {headers: headers})
+    // return this.http.post(routes, component, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  resetData(component) {
+    let headers = new Headers();
+    var route;
+    switch (component) {
+      case 'Operator': route = 'operators/resetOperators'; break;
+      case 'Role': route = 'roles/resetroles'; break;
+      case 'Instrument': route = 'instruments/resetInstruments'; break;
+      case 'LabwareSpec': route = 'labwarespecs/resetLabwareSpecs'; break;
+      case 'Probemap': route = 'probemaps/resetProbemaps'; break;
+    }
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/' + route, {headers: headers})
+    // return this.http.post(routes, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  searchData(component, searchData) {
+    let headers = new Headers();
+    var route;
+    switch (component) {
+      case 'Operator_name': route = 'operators/searchbyname'; break;
+      case 'Role_role': route = 'roles/searchbyrole'; break;
+      case 'Role_liquidClass': route = 'roles/searchbyliquidclass'; break;
+      case 'Role_id': route = 'roles/searchbyid'; break;
+      case 'Role_conditions': route = 'roles/searchbyconditions'; break;
+      case 'Instrument_moduleName': route = 'instruments/searchbymoduleName'; break;
+      case 'Instrument_short': route = 'instruments/searchbyshort'; break;
+      case 'Instrument_id': route = 'instruments/searchbyid'; break;
+      case 'Instrument_conditions': route = 'instruments/searchbyconditions'; break;
+      case 'LabwareSpec_name': route = 'labwarespecs/searchbyname'; break;
+      case 'LabwareSpec_manufacturer': route = 'labwarespecs/searchbymanufacturer'; break;
+      case 'LabwareSpec_id': route = 'labwarespecs/searchbyid'; break;
+      case 'LabwareSpec_conditions': route = 'labwarespecs/searchbyconditions'; break;
+      case 'Probemap_moduleName': route = 'probemaps/searchbymoduleName'; break;
+      case 'Probemap_name': route = 'probemaps/searchbyname'; break;
+      case 'Probemap_id': route = 'probemaps/searchbyid'; break;
+      case 'Probemap_conditions': route = 'probemaps/searchbyconditions'; break;
+      case 'Probemap_creator': route = 'probemaps/searchbycreatorname'; break;
+      case 'Probemap_probemapId': route = 'probes/showProbes'; break;
+    }
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/' + route, searchData, {headers: headers})
+    // return this.http.post(route, searchData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }

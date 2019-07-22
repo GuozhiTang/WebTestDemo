@@ -35,10 +35,10 @@ module.exports.addOperator = function (newOperator, callback) {
   newOperator.save(callback);
 }
 
-module.exports.grabOperators = function (callback) {
+module.exports.resetOperators = function (callback) {
   mongoose.connection.collection("operators").drop(function(err) {
     console.log('Collection Dropped Firstly!');
-  })
+  });
 
   request.post('http://10.253.7.14:8000', {
     json: {

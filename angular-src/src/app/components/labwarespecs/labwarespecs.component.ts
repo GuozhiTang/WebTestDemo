@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LabwarespecsService } from '../../services/labwarespecs.service';
 import { LabwareSpec } from '../../../LabwareSpec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-labwarespecs',
@@ -41,10 +41,11 @@ export class LabwarespecsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private labwarespecsService: LabwarespecsService,
-    private remoteService: RemotereqService) {
+    private remoteService: RemotereqService,
+    private dataService: DataService,
+    ) {
       // show labwarespecs locally
-      this.labwarespecsService.getLabwareSpecs().subscribe(lwarespecs => {
+      this.dataService.getData('LabwareSpec').subscribe(lwarespecs => {
         this.lwarespecs = lwarespecs;
       });
 
@@ -63,32 +64,27 @@ export class LabwarespecsComponent implements OnInit {
   /**
    * Functionality to pull all labwarespecs data from data server.
    */
-  onGrabLwareSpecs() {
-    if (this.lwarespecs.length == 0) {
-      this.labwarespecsService.grabLabwareSpecs().subscribe(data => {
-        if (data.success) {
-          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-          // console.log('Grab Successfully!');
-          location.reload();
-        } else {
-          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-          // console.log('Grab Failed!');
-        }
-      });
-    } else {
-      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeour: 3000});
-    }
-
+  onResetLwareSpecs() {
+    this.dataService.resetData('LabwareSpec').subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
+        location.reload();
+      } else {
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
+      }
+    });
   }
 
   /**
    * Search Labwarespecs by Name
    */
   onSearchLwareSpecsByName() {
-    const searchName = {
+    const searchData = {
       name: this.name,
     }
-    this.labwarespecsService.searchLwarespecsByName(searchName).subscribe(res => {
+    this.dataService.searchData('LabwareSpec_name', searchData).subscribe(res => {
       this.searchNameRes = res;
     });
   }
@@ -97,10 +93,10 @@ export class LabwarespecsComponent implements OnInit {
    * Search Labwarespecs by Manufacturer
    */
   onSearchLwareSpecsByManufacturer() {
-    const searchManufacturer = {
+    const searchData = {
       manufacturer: this.manufacturer
     }
-    this.labwarespecsService.searchLwarespecsByManufacturer(searchManufacturer).subscribe(res => {
+    this.dataService.searchData('LabwareSpec_manufacturer', searchData).subscribe(res => {
       this.searchManufacturerRes = res;
     });
   }
@@ -109,10 +105,10 @@ export class LabwarespecsComponent implements OnInit {
    * Search Labwarespecs by Labwarespecs_id
    */
   onSearchLwareSpecsById() {
-    const searchId = {
+    const searchData = {
       id: this.id
     }
-    this.labwarespecsService.searchLwarespecsById(searchId).subscribe(res => {
+    this.dataService.searchData('LabwareSpec_id', searchData).subscribe(res => {
       this.searchIdRes = res;
     });
   }
@@ -121,16 +117,16 @@ export class LabwarespecsComponent implements OnInit {
    * Search Labwarespecs by both name and manufacturer
    */
   onSearchLwareSpecsByConditions() {
-    const conditions = {
+    const searchData = {
       name: this.name_condition,
       manufacturer: this.manufacturer_condition
     }
-    this.labwarespecsService.searchLwarespecsByConditions(conditions).subscribe(res => {
+    this.dataService.searchData('LabwareSpec_conditions', searchData).subscribe(res => {
       this.searchConRes = res;
     });
   }
 
-  createLabwareSpec() {
+  onCreateLabwareSpec() {
     const remoteCreate = {
       request: "fireplexCoreDaoCreation",
       coreDaoReqData: {
@@ -167,7 +163,7 @@ export class LabwarespecsComponent implements OnInit {
         map_id: Obj.map_id_add,
         id: newid
       }
-      Obj.labwarespecsService.addLabwareSpec(localCreate).subscribe(data => {
+      Obj.dataService.addData('LabwareSpec', localCreate).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New LabwareSpec Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
@@ -179,10 +175,10 @@ export class LabwarespecsComponent implements OnInit {
   }
 
   searchByName(name) {
-    const searchname = {
+    const searchData = {
       name: name,
     }
-    this.labwarespecsService.searchLwarespecsByName(searchname).subscribe(res => {
+    this.dataService.searchData('LabwareSpec_name', searchData).subscribe(res => {
       // console.log(res[0]);
       if (res[0]) {
         this.warningMsg = 'Name already exists in database!';

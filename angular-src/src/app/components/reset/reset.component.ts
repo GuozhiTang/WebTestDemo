@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ValidateService } from '../../services/validate.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-reset',
@@ -17,11 +17,11 @@ export class ResetComponent implements OnInit {
   warningMsg: String;
 
   constructor(
-    private validate: ValidateService,
     private flashMessage: FlashMessagesService,
     private remoteService: RemotereqService,
+    private dataService: DataService,
   ) {
-    this.validate.getOperators().subscribe(operators => {
+    this.dataService.getData('Operator').subscribe(operators => {
       this.operators = operators;
       // console.log(this.operators);
     });
@@ -37,20 +37,20 @@ export class ResetComponent implements OnInit {
   ngOnInit() {
   }
 
-  onGrabOperators() {
-    this.validate.grabOperators().subscribe(data => {
+  onResetOperators() {
+    this.dataService.resetData('Operator').subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        // console.log('Grab Successfully!');
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
         location.reload();
       } else {
-        this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Grab Failed!');
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
       }
     });
   }
 
-  createOperator() {
+  onCreateOperator() {
     const remoteCreate = {
       request: "fireplexCoreDaoCreation",
       coreDaoReqData: {
@@ -81,7 +81,7 @@ export class ResetComponent implements OnInit {
         manufacturing: Obj.Manufacturing,
         id: newid
       }
-      Obj.validate.addOperators(localCreate).subscribe(data => {
+      Obj.dataService.addData('Operator', localCreate).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Operator Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
@@ -92,11 +92,11 @@ export class ResetComponent implements OnInit {
     });
   }
 
-  searchByName(name) {
-    const operator = {
+  onSearchByName(name) {
+    const searchData = {
       name: name,
     }
-    this.validate.searchByName(operator).subscribe(res => {
+    this.dataService.searchData('Operator_name', searchData).subscribe(res => {
       // console.log(res[0]);
       if (res[0]) {
         // console.log('Name already exists in database!');

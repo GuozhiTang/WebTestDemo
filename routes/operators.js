@@ -36,13 +36,13 @@ router.post('/addoperator', (req, res, next) => {
   });
 });
 
-router.post('/graboperators', (req, res, next) => {
-  Operator.grabOperators((err, dataObj) => {
+router.post('/resetOperators', (req, res, next) => {
+  Operator.resetOperators((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab Operators!'});
+      res.json({success: false, msg:'Failed to reset Operators!'});
     } else {
       try {
-        res.json({success: true, msg: 'Grab Operators Successfully!'});
+        res.json({success: true, msg: 'Reset Operators Successfully!'});
       } catch (err) {
         res.end();
       }

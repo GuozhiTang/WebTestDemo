@@ -36,13 +36,13 @@ router.post('/addProbemap', (req, res, next) => {
 });
 
 // To pull probemaps from data server
-router.post('/grabProbemaps', (req, res, next) => {
-  Probemap.grabProbemaps((err, dataObj) => {
+router.post('/resetProbemaps', (req, res, next) => {
+  Probemap.resetProbemaps((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab Probemaps!'});
+      res.json({success: false, msg:'Failed to reset Probemaps!'});
     } else {
       try {
-        res.json({success: true, msg:'Grab Probemaps successfully!'});
+        res.json({success: true, msg:'Reset Probemaps successfully!'});
         // console.log(res);
         // res.end();
       } catch (err) {

@@ -35,13 +35,13 @@ router.post('/addrole', (req, res, next) => {
 });
 
 // To pull roles from data server
-router.post('/grabroles', (req, res, next) => {
-  Role.grabRoles((err, dataObj) => {
+router.post('/resetroles', (req, res, next) => {
+  Role.resetRoles((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab Roles!'});
+      res.json({success: false, msg:'Failed to reset Roles!'});
     } else {
       try {
-        res.json({success: true, msg:'Grab Roles successfully!'});
+        res.json({success: true, msg:'Reset Roles successfully!'});
         // console.log(res);
         // res.end();
       } catch (err) {

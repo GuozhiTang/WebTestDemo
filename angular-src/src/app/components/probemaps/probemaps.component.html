@@ -12,8 +12,9 @@
     <!-- Area to update and show Probemaps locally -->
     <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Update and Show All Probemaps Locally</b></h2>
-      <form (submit)="onGrabProbemaps()" style="margin-bottom: 15px">
-          <button type="submit" class="btn btn-primary">Update Probemaps</button>
+      <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset Probemaps</h5>
+      <form (submit)="onResetProbemaps()" style="margin-bottom: 15px">
+          <button type="submit" class="btn btn-danger">Update Probemaps</button>
       </form>
       <hr>
       <!-- table to show probemaps locally -->
@@ -257,7 +258,7 @@
   <div class="row">
     <div class="col">
       <h2 class="page-header" style="margin-top: 15px"><b>Add Probemaps Manually</b></h2>
-      <form (submit)="onAddProbemaps()">
+      <form (submit)="onCreateProbemaps()">
         <div class="form-group">
           <label>id:</label>
           <input type="text" class="form-control" [(ngModel)]="id_add" name="id_add" placeholder="Add new id...">

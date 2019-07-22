@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProbemapsService } from '../../services/probemaps.service';
 import { Probemap } from '../../../Probemap';
 import { Probe } from '../../../Probe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-probemaps',
@@ -40,10 +40,11 @@ export class ProbemapsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private probemapsService: ProbemapsService,
-    private remoteService: RemotereqService) {
+    private remoteService: RemotereqService,
+    private dataService: DataService,
+    ) {
       // show all probemaps locally
-      this.probemapsService.getProbemaps().subscribe(probemaps => {
+      this.dataService.getData('Probemap').subscribe(probemaps => {
         this.probemaps = probemaps;
       });
 
@@ -63,7 +64,7 @@ export class ProbemapsComponent implements OnInit {
   /**
    * Add new Probemaps with necessary parameters.
    */
-  onAddProbemaps() {
+  onCreateProbemaps() {
     const probemaps = {
       className: this.className_add,
       moduleName: this.moduleName_add,
@@ -74,7 +75,7 @@ export class ProbemapsComponent implements OnInit {
       id: this.id_add,
     }
     // Add Probemap
-    this.probemapsService.addProbemap(probemaps).subscribe(data => {
+    this.dataService.addData('Probemap', probemaps).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Add Successfully!', {cssClass: 'alert-success', timeout: 3000});
         // console.log('Add Successfully!');
@@ -89,32 +90,27 @@ export class ProbemapsComponent implements OnInit {
   /**
    * Functionality to pull all probemaps data from data server.
    */
-  onGrabProbemaps() {
-    if (this.probemaps.length == 0) {
-      this.probemapsService.grabProbemaps().subscribe(data => {
-        if (data.success) {
-          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-          // console.log('Grab Successfully!');
-          location.reload();
-        } else {
-          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-          // console.log('Grab Failed!');
-        }
-      });
-    } else {
-      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeout: 3000});
-    }
-
+  onResetProbemaps() {
+    this.dataService.resetData('Probemap').subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
+        location.reload();
+      } else {
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
+      }
+    });
   }
 
   /**
    * Search Probemaps by moduleName
    */
   onSearchProbemapsBymoduleName() {
-    const searchmoduleName = {
+    const searchData = {
       moduleName: this.moduleName,
     }
-    this.probemapsService.searchProbemapsBymoduleName(searchmoduleName).subscribe(res => {
+    this.dataService.searchData('Probemap_moduleName', searchData).subscribe(res => {
       this.searchmoduleNameRes = res;
     });
   }
@@ -123,10 +119,10 @@ export class ProbemapsComponent implements OnInit {
    * Search Probemaps by Name
    */
   onSearchProbemapsByName() {
-    const searchShort = {
+    const searchData = {
       name: this.name
     }
-    this.probemapsService.searchProbemapsByName(searchShort).subscribe(res => {
+    this.dataService.searchData('Probemap_name', searchData).subscribe(res => {
       this.searchNameRes = res;
     });
   }
@@ -135,10 +131,10 @@ export class ProbemapsComponent implements OnInit {
    * Search Probemaps by probemaps_id
    */
   onSearchProbemapsById() {
-    const searchId = {
+    const searchData = {
       id: this.id
     }
-    this.probemapsService.searchProbemapsById(searchId).subscribe(res => {
+    this.dataService.searchData('Probemap_id', searchData).subscribe(res => {
       this.searchIdRes = res;
     });
   }
@@ -147,11 +143,11 @@ export class ProbemapsComponent implements OnInit {
    * Search Probemaps by both moduleName and Name
    */
   onSearchProbemapsByConditions() {
-    const conditions = {
+    const searchData = {
       moduleName: this.moduleName_condition,
       name: this.name_condition
     }
-    this.probemapsService.searchProbemapsByConditions(conditions).subscribe(res => {
+    this.dataService.searchData('Probemap_conditions', searchData).subscribe(res => {
       this.searchConRes = res;
     });
   }
@@ -160,10 +156,10 @@ export class ProbemapsComponent implements OnInit {
    * Search Probemaps by creatorName
    */
   onSearchProbemapsByCreator() {
-    const creatorName = {
+    const searchData = {
       creatorName: this.creatorName
     }
-    this.probemapsService.searchProbemapsByCreator(creatorName).subscribe(res => {
+    this.dataService.searchData('Probemap_creator', searchData).subscribe(res => {
       this.searchCreatorRes = res;
       // console.log(res);
     });
@@ -174,11 +170,11 @@ export class ProbemapsComponent implements OnInit {
    * @param mapId: Probemap Id
    */
   onShowProbe(mapId) {
-    const probemapId = {
+    const searchData = {
       mapId: mapId
     }
     this.probemapId = mapId;
-    this.probemapsService.showProbes3(probemapId).subscribe(res => {
+    this.dataService.searchData('Probemap_probemapId', searchData).subscribe(res => {
       this.probeRes = res;
       // console.log("res: " + res.length); 
     });

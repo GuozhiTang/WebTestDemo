@@ -3,10 +3,10 @@
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Register New Operator</b></h1>
       <h5 class="text-warning" style="margin-top: 15px;">Register Operator</h5>
-      <form (submit)="createOperator()">
+      <form (submit)="onCreateOperator()">
         <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;">Name</label>
-          <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here..." (change)="searchByName($event.target.value)">
+          <input class="form-control" type="text" [(ngModel)]="Name" name="Name" placeholder="name here..." (change)="onSearchByName($event.target.value)">
         </div>
         <div class="invalid-feedback" style="display: block">
           <ng-container *ngIf="warningMsg"><i class="fas fa-exclamation-triangle"></i> {{warningMsg}}</ng-container>
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col">
       <h4 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset Operators</h4>
-      <form (submit)="onGrabOperators()">
+      <form (submit)="onResetOperators()">
         <button type="submit" class="btn btn-danger">Reset Operators</button>
       </form>
       <hr>

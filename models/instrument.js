@@ -39,7 +39,11 @@ module.exports.addInstrument = function (newInstrument, callback) {
 }
 
 // To pull Instruments remotely
-module.exports.grabInstruments = function (callback) {
+module.exports.resetInstruments = function (callback) {
+  mongoose.connection.collection("instruments").drop(function(err) {
+    console.log('Collection Dropped Firstly!');
+  });
+  
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "fireplexCoreDaoRetrieval",

@@ -39,14 +39,14 @@ router.post('/addlwarespec', (req, res, next) => {
 });
 
 // To pull labwarespecs remotely
-router.post('/grablabwareSpecs', (req, res, next) => {
-  LabwareSpec.grabLabwareSpecs((err, dataObj) => {
+router.post('/resetLabwareSpecs', (req, res, next) => {
+  LabwareSpec.resetLabwareSpecs((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab LabwareSpecs!'});
+      res.json({success: false, msg:'Failed to reset LabwareSpecs!'});
       // console.log('Failed to grab specs!');
     } else {
       try {
-        res.json({success: true, msg:'Grab LabwareSpecs successfully!'});
+        res.json({success: true, msg:'Reset LabwareSpecs successfully!'});
         // console.log(res);
         // console.log('Grab specs successfully!');
         // res.end();

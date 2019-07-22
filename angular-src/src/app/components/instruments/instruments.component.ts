@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InstrumentsService } from '../../services/instruments.service';
 import { Instrument } from '../../../Instrument';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
@@ -48,14 +47,13 @@ export class InstrumentsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private instrumentsService: InstrumentsService,
     private remoteService: RemotereqService,
     private dataService: DataService,
     ) {
       // show all instruments locally
       this.dataService.getData('Instrument').subscribe(instruments => {
         this.instruments = instruments;
-        console.log(this.instruments);
+        // console.log(this.instruments);
       });
 
       // show all instruments remotely
@@ -93,38 +91,33 @@ export class InstrumentsComponent implements OnInit {
   /**
    * Functionality to pull all instruments data from data server.
    */
-  onGrabInstruments() {
+  onResetInstruments() {
     // console.log(this.instruments);
     // if (this.instruments.length == 0) {
     //   console.log('No data in instruments!');
     // } else {
     //   console.log('Data already in instruments!');
     // }
-    if (this.instruments.length == 0) {
-      this.instrumentsService.grabInstruments().subscribe(data => {
-        if (data.success) {
-          this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-          // console.log('Grab Successfully!');
-          location.reload();
-        } else {
-          this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-          // console.log('Grab Failed!');
-        }
-      });
-    } else {
-      this.flashMessage.show('Data already in database!', {cssClass: 'alert-danger', timeout: 3000});
-    }
-
+    this.dataService.resetData('Instrument').subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
+        window.location.reload();
+      } else {
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
+      }
+    });
   }
 
   /**
    * Search Instruments by moduleName
    */
   onSearchInstrumentsBymoduleName() {
-    const searchmoduleName = {
+    const searchData = {
       moduleName: this.moduleName,
     }
-    this.instrumentsService.searchInstrumentsBymoduleName(searchmoduleName).subscribe(res => {
+    this.dataService.searchData('Instrument_moduleName', searchData).subscribe(res => {
       this.searchmoduleNameRes = res;
     });
   }
@@ -133,10 +126,10 @@ export class InstrumentsComponent implements OnInit {
    * Search Instruments by short
    */
   onSearchInstrumentsByShort() {
-    const searchShort = {
+    const searchData = {
       short: this.short
     }
-    this.instrumentsService.searchInstrumentsByShort(searchShort).subscribe(res => {
+    this.dataService.searchData('Instrument_short', searchData).subscribe(res => {
       this.searchShortRes = res;
     });
   }
@@ -145,10 +138,10 @@ export class InstrumentsComponent implements OnInit {
    * Search Instruments by instrument_id
    */
   onSearchInstrumentsById() {
-    const searchId = {
+    const searchData = {
       id: this.id
     }
-    this.instrumentsService.searchInstrumentsById(searchId).subscribe(res => {
+    this.dataService.searchData('Instrument_id', searchData).subscribe(res => {
       this.searchIdRes = res;
     });
   }
@@ -157,16 +150,16 @@ export class InstrumentsComponent implements OnInit {
    * Search Instrumenbrts by both moduleName and short
    */
   onSearchInstrumentsByConditions() {
-    const conditions = {
+    const searchData = {
       moduleName: this.moduleName_condition,
       short: this.short_condition
     }
-    this.instrumentsService.searchInstrumentsByConditions(conditions).subscribe(res => {
+    this.dataService.searchData('Instrument_conditions', searchData).subscribe(res => {
       this.searchConRes = res;
     });
   }
 
-  createInstrument() {
+  onCreateInstrument() {
     const remoteCreate = {
       request: "fireplexCoreDaoCreation",
       coreDaoReqData: {
@@ -193,7 +186,7 @@ export class InstrumentsComponent implements OnInit {
         spec_id: this.spec_id_add,
         id: newid
       }
-      Obj.instrumentsService.addInstrument(localCreate).subscribe(data => {
+      Obj.dataService.addData('Instrument', localCreate).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Role Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
@@ -204,11 +197,11 @@ export class InstrumentsComponent implements OnInit {
     });
   }
 
-  searchByShort(short) {
-    const shortname = {
+  onSearchByShort(short) {
+    const searchData = {
       short: short,
     }
-    this.instrumentsService.searchInstrumentsByShort(shortname).subscribe(res => {
+    this.dataService.searchData('Instrument_short', searchData).subscribe(res => {
       // console.log(res[0]);
       if (res[0]) {
         this.warningMsg = 'Role already exists in database!';

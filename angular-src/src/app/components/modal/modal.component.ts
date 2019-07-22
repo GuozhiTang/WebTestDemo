@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LabwareSpec } from '../../../LabwareSpec';
-import { LabwarespecsService } from '../../services/labwarespecs.service';
 import { ViewEncapsulation } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-modal',
@@ -21,9 +21,9 @@ export class ModalComponent {
 
   constructor(
     private modalService: NgbModal,
-    private labwarespecsService: LabwarespecsService,
+    private dataService: DataService,
     ) {
-      this.labwarespecsService.getLabwareSpecs().subscribe(lwarespecs => {
+      this.dataService.getData('LabwareSpec').subscribe(lwarespecs => {
         this.lwarespecs = lwarespecs;
       });
     }
