@@ -51,7 +51,11 @@ module.exports.grabSpecsv1 = function (callback) {
   })
 }
 
-module.exports.grabSpecs = function (callback) {
+module.exports.resetSpecs = function (callback) {
+  mongoose.connection.collection("specs").drop(function(err) {
+    console.log('Collection Dropped Firstly!');
+  });
+
   request.post('http://10.253.7.14:8000', {
     json: {
       request: "fireplexCoreDaoRetrieval",

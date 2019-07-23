@@ -21,6 +21,7 @@ export class DataService {
       case 'LabwareSpec': route = 'labwarespecs/getlwarespec'; break;
       case 'Probemap': route = 'probemaps/getProbemaps'; break;
       case 'Plate': route = 'plates/getplates'; break;
+      case 'Spec': route = 'specs/getspecs'; break;
     }
     return this.http.get('http://localhost:3000/' + route, {headers: headers})
     // return this.http.get(routes, {headers: headers})
@@ -36,6 +37,7 @@ export class DataService {
       case 'Instrument': route = 'instruments/addInstrument'; break;
       case 'LabwareSpec': route = 'labwarespecs/addlwarespec'; break;
       // case 'Probemap': route = 'probemaps/addProbemap'; break;
+      // case 'Spec': route = 'specs/addspecs'; break;
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/' + route, addData, {headers: headers})
@@ -52,6 +54,7 @@ export class DataService {
       case 'Instrument': route = 'instruments/resetInstruments'; break;
       case 'LabwareSpec': route = 'labwarespecs/resetLabwareSpecs'; break;
       case 'Probemap': route = 'probemaps/resetProbemaps'; break;
+      case 'Spec': route = 'specs/resetspecs'; break;
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/' + route, {headers: headers})
@@ -84,6 +87,10 @@ export class DataService {
       case 'Probemap_probemapId': route = 'probes/showProbes'; break;
       case 'Plate_barcode': route = 'plates/searchbybarcode'; break;
       case 'Plate_coor': route = 'plates/searchbycoor'; break;
+      case 'Spec_name': route = 'specs/searchbyname'; break;
+      case 'Spec_moduleName': route = 'specs/searchbymodulename'; break;
+      case 'Spec_id': route = 'specs/searchbyid'; break;
+      case 'Spec_conditions': route = 'specs/searchbyconditions'; break;
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/' + route, searchData, {headers: headers})

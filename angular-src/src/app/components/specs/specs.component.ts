@@ -3,6 +3,7 @@ import { SpecsService } from '../../services/specs.service';
 import { Spec } from '../../../Spec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-specs',
@@ -27,8 +28,9 @@ export class SpecsComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private specsService: SpecsService,
     private remoteService: RemotereqService,
+    private dataService: DataService,
     ) {
-      this.specsService.getSpecs().subscribe(specs => {
+      this.dataService.getData('Spec').subscribe(specs => {
         this.specs = specs;
       });
 
@@ -44,7 +46,7 @@ export class SpecsComponent implements OnInit {
   }
 
   onAddSpecs() {
-    const spec = {
+    const addData = {
       className: this.className,
       moduleName: this.moduleName,
       description: this.description,
@@ -53,7 +55,7 @@ export class SpecsComponent implements OnInit {
     }
 
     // Add Spec
-    this.specsService.addSpec(spec).subscribe(data => {
+    this.dataService.addData('Spec', addData).subscribe(data => {
       if (data.success) {
         console.log('Add Successfully!');
       } else {
@@ -62,14 +64,14 @@ export class SpecsComponent implements OnInit {
     });
   }
 
-  onGrabSpecs() {
-    this.specsService.grabSpecs().subscribe(data => {
+  onResetSpecs() {
+    this.dataService.resetData('Spec').subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('Grab Successfully!', {cssClass: 'alert-success', timeout: 3000});
-        console.log('Grab Successfully!');
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
       } else {
-        this.flashMessage.show('Grab Failed!', {cssClass: 'alert-danger', timeout: 3000});
-        console.log('Grab Failed!');
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
       }
     });
   }
@@ -82,38 +84,38 @@ export class SpecsComponent implements OnInit {
     //   .subscribe(res => {
     //     console.log(res.artists.items);
     //   });
-    const searchName = {
+    const searchData = {
       name: this.name
     }
-    this.specsService.searchSpecsByName(searchName).subscribe(res => {
+    this.dataService.searchData('Spec_name', searchData).subscribe(res => {
       this.searchNameRes = res;
     });
   }
 
   onSearchSpecsByModuleName() {
-    const searchModuleName = {
+    const searchData = {
       moduleName: this.moduleName
     }
-    this.specsService.searchSpecsByModuleName(searchModuleName).subscribe(res => {
+    this.dataService.searchData('Spec_moduleName', searchData).subscribe(res => {
       this.searchModuleNameRes = res;
     });
   }
 
   onSearchSpecsById() {
-    const searchId = {
+    const searchData = {
       id: this.id
     }
-    this.specsService.searchSpecsById(searchId).subscribe(res => {
+    this.dataService.searchData('Spec_id', searchData).subscribe(res => {
       this.searchIdRes = res;
     });
   }
 
   onSearchSpecsByConditions() {
-    const conditions = {
+    const searchData = {
       name: this.name,
       moduleName: this.moduleName
     }
-    this.specsService.searchSpecsByConditions(conditions).subscribe(res => {
+    this.dataService.searchData('Spec_conditions', searchData).subscribe(res => {
       this.searchConRes = res;
     });
   }

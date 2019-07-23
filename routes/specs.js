@@ -35,14 +35,14 @@ router.post('/addspecs', (req, res, next) => {
   });
 });
 
-router.post('/grabspecs', (req, res, next) => {
-  Spec.grabSpecs((err, dataObj) => {
+router.post('/resetspecs', (req, res, next) => {
+  Spec.resetSpecs((err, dataObj) => {
     if (err) {
-      res.json({success: false, msg:'Failed to grab specs!'});
+      res.json({success: false, msg:'Failed to reset specs!'});
       // console.log('Failed to grab specs!');
     } else {
       try {
-        res.json({success: true, msg:'Grab Specs successfully!'});
+        res.json({success: true, msg:'Reset Specs successfully!'});
         // console.log(res);
         // console.log('Grab specs successfully!');
         // res.end();
