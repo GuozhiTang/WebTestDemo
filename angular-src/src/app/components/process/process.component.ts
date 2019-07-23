@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProcessService } from '../../services/process.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -55,7 +54,6 @@ export class ProcessComponent implements OnInit {
   constructor(
     public authService:AuthService,
     private flashMessage: FlashMessagesService,
-    private processService: ProcessService,
     private modalService: NgbModal,
     private remoteService: RemotereqService,
     ) {
