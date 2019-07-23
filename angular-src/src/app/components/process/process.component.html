@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col">
         <h1 style="margin-top: 15px;"><b>Setup Process UI</b></h1>
-        <form (submit)="getRequests()">
+        <form (submit)="onGetRequests()">
           <div class="form-group">
             <table>
               <tr>
@@ -198,7 +198,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form (submit)="addStatus()">
+            <form (submit)="onAddStatus()">
               <div class="form-group">
                 <label for="statusTextarea">Type in your comments: </label>
                 <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>

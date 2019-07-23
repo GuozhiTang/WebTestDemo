@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PlateService } from '../../../services/plate.service';
 import { Plate } from '../../../../Plate';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-targetplate',
@@ -27,11 +27,11 @@ export class TargetplateComponent {
   // showTarget2: boolean = true;
 
   constructor(
-    private plateService: PlateService,
     private router: Router,
     private flashMessage: FlashMessagesService,
+    private dataService: DataService,
   ) {
-    this.plateService.getPlates().subscribe(plates => {
+    this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
     });
   }
@@ -39,16 +39,8 @@ export class TargetplateComponent {
   ngOnInit() {
   }
 
-  onClick() {
-    console.log('Click Successfully!');
-  }
-
-  onClickTube() {
-    console.log('Click tube successfully!');
-  }
-
   onSearchPlatesByCoor(coor) {
-    const searchCoor = {
+    const searchData = {
       coor: coor
     }
     // this.plateService.searchPlatesByCoor(searchCoor).subscribe(res => {
@@ -57,7 +49,7 @@ export class TargetplateComponent {
     //   this.searchCoorRes = res;
     //   // console.log(typeof(this.searchCoorRes));
     // });
-    this.plateService.searchPlatesByCoor(searchCoor).subscribe(res => {
+    this.dataService.searchData('Plate_coor', searchData).subscribe(res => {
       // console.log(typeof(res));
       // console.log(res);
       if (res[0].volume != null && res[0] != "") {
@@ -71,11 +63,11 @@ export class TargetplateComponent {
   }
 
   onSearchPlateByBar() {
-    const searchBar = {
+    const searchData = {
       barcode: this.barcode
     }
 
-    this.plateService.searchPlateByBar(searchBar).subscribe(res => {
+    this.dataService.searchData('Plate_barcode', searchData).subscribe(res => {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/transfer/sourceplate']);

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PlateService } from '../../services/plate.service';
 import { Plate } from '../../../Plate';
-import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { RemotereqService } from '../../services/remotereq.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-transfer',
@@ -29,13 +27,12 @@ export class TransferComponent implements OnInit {
   showTransfer: boolean = false;
 
   constructor(
-    private plateService: PlateService,
-    private router: Router,
     private flashMessage: FlashMessagesService,
-    private remoteService: RemotereqService,
+    private dataService: DataService,
   ) {
-    this.plateService.getPlates().subscribe(plates => {
+    this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
+      // console.log(this.plates);
     });
   }
 
@@ -44,11 +41,10 @@ export class TransferComponent implements OnInit {
   }
 
   onSearchPlateByBar() {
-    const searchBar = {
+    const searchData = {
       barcode: this.barcode
     }
-
-    this.plateService.searchPlateByBar(searchBar).subscribe(res => {
+    this.dataService.searchData('Plate_barcode', searchData).subscribe(res => {
       if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
         this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
         this.targetjudge = false;

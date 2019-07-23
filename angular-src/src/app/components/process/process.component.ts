@@ -116,7 +116,7 @@ export class ProcessComponent implements OnInit {
   /**
    * Get requests (work-orders) by request type
    */
-  getRequests() {
+  onGetRequests() {
     const getRequests = {
       request: "fpGetReqDT",
       dept: this.user.department,
@@ -208,7 +208,7 @@ export class ProcessComponent implements OnInit {
   /**
    * Add new status for updates
    */
-  addStatus() {
+  onAddStatus() {
     const addStatus = {
       request: "fpAddReqStatus",
       requestId: this.requestId,

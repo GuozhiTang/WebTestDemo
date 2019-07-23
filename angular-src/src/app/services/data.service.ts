@@ -20,6 +20,7 @@ export class DataService {
       case 'Role': route = 'roles/getroles'; break;
       case 'LabwareSpec': route = 'labwarespecs/getlwarespec'; break;
       case 'Probemap': route = 'probemaps/getProbemaps'; break;
+      case 'Plate': route = 'plates/getplates'; break;
     }
     return this.http.get('http://localhost:3000/' + route, {headers: headers})
     // return this.http.get(routes, {headers: headers})
@@ -81,6 +82,8 @@ export class DataService {
       case 'Probemap_conditions': route = 'probemaps/searchbyconditions'; break;
       case 'Probemap_creator': route = 'probemaps/searchbycreatorname'; break;
       case 'Probemap_probemapId': route = 'probes/showProbes'; break;
+      case 'Plate_barcode': route = 'plates/searchbybarcode'; break;
+      case 'Plate_coor': route = 'plates/searchbycoor'; break;
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/' + route, searchData, {headers: headers})
