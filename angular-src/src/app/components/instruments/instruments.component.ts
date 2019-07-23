@@ -60,7 +60,7 @@ export class InstrumentsComponent implements OnInit {
       // show all instruments remotely
       this.remoteService.retrievalData('getAllInstruments').subscribe(remoteinstruments => {
         this.remoteinstruments = remoteinstruments;
-        console.log(this.remoteinstruments);
+        // console.log(this.remoteinstruments);
       });
 
       // const getInstrumentSpecs = {
@@ -80,7 +80,7 @@ export class InstrumentsComponent implements OnInit {
       var coreDaoReqData = this.remoteService.getCoreDaoReqData('InstrumentSpec', ['id'], this.module, 'true');
       this.remoteService.retrievalData(coreDaoReqData).subscribe(specs => {
         this.instrumentSpecs = specs.results;
-        console.log(this.instrumentSpecs);
+        // console.log(this.instrumentSpecs);
       });
     }
 

@@ -59,10 +59,7 @@ export class ProcessComponent implements OnInit {
     ) {
     
       // get status types here
-      const getStatusTypes ={
-        request: "fpReqStatusList"
-      }
-      this.remoteService.remotePostReq(getStatusTypes).subscribe(types => {
+      this.remoteService.remotePostReq('fpReqStatusList').subscribe(types => {
         this.typeRes = types;
       });
 
