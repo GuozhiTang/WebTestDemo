@@ -29,6 +29,7 @@ export class RolesComponent implements OnInit {
   searchConRes: Role[];
   warningMsg: String;
   checkExist: Boolean = true;
+  module: String = "fireplex.data.backend.core";
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -41,10 +42,7 @@ export class RolesComponent implements OnInit {
       });
 
       // show all roles remotely
-      const getremoteRoles = {
-        request: "getRoles"
-      }
-      this.remoteService.remotePostReq(getremoteRoles).subscribe(remoteroles => {
+      this.remoteService.retrievalData('getRoles').subscribe(remoteroles => {
         this.remoteroles = remoteroles;
       });
     }
@@ -118,35 +116,44 @@ export class RolesComponent implements OnInit {
   }
 
   onCreateRole() {
-    const remoteCreate = {
-      request: "fireplexCoreDaoCreation",
-      coreDaoReqData: {
-        coreDao: {
-          moduleName: "fireplex.data.backend.core",
-          role: this.role_add,
-          className: "Role",
-          reagent: this.reagent_add,
-          liquid_class: this.liquid_class_add,
-          id: null
-        },
-        pKey: "id",
-        searchKey: "role"
-      }
+    // const remoteCreate = {
+    //   request: "fireplexCoreDaoCreation",
+    //   coreDaoReqData: {
+    //     coreDao: {
+    //       moduleName: "fireplex.data.backend.core",
+    //       role: this.role_add,
+    //       className: "Role",
+    //       reagent: this.reagent_add,
+    //       liquid_class: this.liquid_class_add,
+    //       id: null
+    //     },
+    //     pKey: "id",
+    //     searchKey: "role"
+    //   }
+    // }
+    const coreDao = {
+      moduleName: this.module,
+      role: this.role_add,
+      className: "Role",
+      reagent: this.reagent_add,
+      liquid_class: this.liquid_class_add,
+      id: null
     }
     const Obj = this;
-    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
+    this.remoteService.createData(coreDao, 'id', 'role').subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);
-      const localCreate = {
-        moduleName: "fireplex.data.backend.core",
-        role: Obj.role_add,
-        className: "Role",
-        reagent: Obj.reagent_add,
-        liquid_class: Obj.liquid_class_add,
-        id: newid
-      }
-      Obj.dataService.addData('Role', localCreate).subscribe(data => {
+      // const localCreate = {
+      //   moduleName: Obj.module,
+      //   role: Obj.role_add,
+      //   className: "Role",
+      //   reagent: Obj.reagent_add,
+      //   liquid_class: Obj.liquid_class_add,
+      //   id: newid
+      // }
+      coreDao.id = newid;
+      Obj.dataService.addData('Role', coreDao).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Role Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();

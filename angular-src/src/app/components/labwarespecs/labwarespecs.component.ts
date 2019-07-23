@@ -38,6 +38,7 @@ export class LabwarespecsComponent implements OnInit {
   searchConRes: LabwareSpec[]; 
   warningMsg: String;
   checkExist: Boolean = true;
+  module: String = 'fireplex.data.backend.core';
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -50,10 +51,7 @@ export class LabwarespecsComponent implements OnInit {
       });
 
       // show labwarespecs remotely
-      const getremoteLabwareSpecs = {
-        request: "getLabwareSpecs"
-      }
-      this.remoteService.remotePostReq(getremoteLabwareSpecs).subscribe(remotelwarespecs => {
+      this.remoteService.retrievalData('getLabwareSpecs').subscribe(remotelwarespecs => {
         this.remotelwarespecs = remotelwarespecs;
       });
     }
@@ -127,43 +125,56 @@ export class LabwarespecsComponent implements OnInit {
   }
 
   onCreateLabwareSpec() {
-    const remoteCreate = {
-      request: "fireplexCoreDaoCreation",
-      coreDaoReqData: {
-        coreDao: {
-          moduleName: "fireplex.data.backend.core",
-          name: this.name_add,
-          className: "LabwareSpec",
-          description: this.description_add,
-          material: this.material_add,
-          volume: this.volume_add,
-          cat_num: this.cat_num_add,
-          manufacturer: this.manufacturer_add,
-          map_id: this.map_id_add,
-          id: null
-        },
-        pKey: "id",
-        searchKey: "name"
-      }
-    }
+    // const remoteCreate = {
+    //   request: "fireplexCoreDaoCreation",
+    //   coreDaoReqData: {
+    //     coreDao: {
+    //       moduleName: this.module,
+    //       name: this.name_add,
+    //       className: "LabwareSpec",
+    //       description: this.description_add,
+    //       material: this.material_add,
+    //       volume: this.volume_add,
+    //       cat_num: this.cat_num_add,
+    //       manufacturer: this.manufacturer_add,
+    //       map_id: this.map_id_add,
+    //       id: null
+    //     },
+    //     pKey: "id",
+    //     searchKey: "name"
+    //   }
+    // }
+    const coreDao = {
+      moduleName: this.module,
+      name: this.name_add,
+      className: "LabwareSpec",
+      description: this.description_add,
+      material: this.material_add,
+      volume: this.volume_add,
+      cat_num: this.cat_num_add,
+      manufacturer: this.manufacturer_add,
+      map_id: this.map_id_add,
+      id: null
+    };
     const Obj = this;
-    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
+    this.remoteService.createData(coreDao, 'id', 'name').subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);
-      const localCreate = {
-        moduleName: "fireplex.data.backend.core",
-        name: Obj.name_add,
-        className: "LabwareSpec",
-        description: Obj.description_add,
-        material: Obj.material_add,
-        volume: Obj.volume_add,
-        cat_num: Obj.cat_num_add,
-        manufacturer: Obj.manufacturer_add,
-        map_id: Obj.map_id_add,
-        id: newid
-      }
-      Obj.dataService.addData('LabwareSpec', localCreate).subscribe(data => {
+      // const localCreate = {
+      //   moduleName: "fireplex.data.backend.core",
+      //   name: Obj.name_add,
+      //   className: "LabwareSpec",
+      //   description: Obj.description_add,
+      //   material: Obj.material_add,
+      //   volume: Obj.volume_add,
+      //   cat_num: Obj.cat_num_add,
+      //   manufacturer: Obj.manufacturer_add,
+      //   map_id: Obj.map_id_add,
+      //   id: newid
+      // }
+      coreDao.id = newid;
+      Obj.dataService.addData('LabwareSpec', coreDao).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New LabwareSpec Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();

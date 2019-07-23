@@ -15,21 +15,21 @@ export class ResetComponent implements OnInit {
   Manufacturing: Boolean;
   checkExist: Boolean = true;
   warningMsg: String;
+  module: String = 'fireplex.data.backend.core';
 
   constructor(
     private flashMessage: FlashMessagesService,
     private remoteService: RemotereqService,
     private dataService: DataService,
   ) {
+    // show all operators locally
     this.dataService.getData('Operator').subscribe(operators => {
       this.operators = operators;
       // console.log(this.operators);
     });
     
-    const remoteReq = {
-      request: "getOperators"
-    }
-    this.remoteService.remotePostReq(remoteReq).subscribe(remote => {
+    // show all operators remotely
+    this.remoteService.retrievalData('getOperators').subscribe(remote => {
       this.remoteoperators = remote;
     })
   }
@@ -51,37 +51,49 @@ export class ResetComponent implements OnInit {
   }
 
   onCreateOperator() {
-    const remoteCreate = {
-      request: "fireplexCoreDaoCreation",
-      coreDaoReqData: {
-        coreDao: {
-          moduleName: "fireplex.data.backend.core",
-          name: this.Name,
-          admin: true,
-          className: "Operator",
-          active: true,
-          manufacturing: this.Manufacturing,
-          id: null
-        },
-        pKey: "id",
-        searchKey: "name"
-      }
+    // const remoteCreate = {
+    //   request: "fireplexCoreDaoCreation",
+    //   coreDaoReqData: {
+    //     coreDao: {
+    //       moduleName: "fireplex.data.backend.core",
+    //       name: this.Name,
+    //       admin: true,
+    //       className: "Operator",
+    //       active: true,
+    //       manufacturing: this.Manufacturing,
+    //       id: null
+    //     },
+    //     pKey: "id",
+    //     searchKey: "name"
+    //   }
+    // }
+    const coreDao = {
+      moduleName: this.module,
+      name: this.Name,
+      admin: true,
+      className: "Operator",
+      active: true,
+      manufacturing: this.Manufacturing,
+      id: null
     }
+    // console.log(coreDao);
     const Obj = this;
-    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
+    this.remoteService.createData(coreDao, 'id', 'name').subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);
-      const localCreate = {
-        moduleName: "fireplex.data.backend.core",
-        name: Obj.Name,
-        admin: true,
-        className: "Operator",
-        active: true,
-        manufacturing: Obj.Manufacturing,
-        id: newid
-      }
-      Obj.dataService.addData('Operator', localCreate).subscribe(data => {
+      // const localCreate = {
+      //   moduleName: Obj.module,
+      //   name: Obj.Name,
+      //   admin: true,
+      //   className: "Operator",
+      //   active: true,
+      //   manufacturing: Obj.Manufacturing,
+      //   id: newid
+      // }
+      coreDao.id = newid;
+      // console.log(coreDao);
+      Obj.dataService.addData('Operator', coreDao).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Operator Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();

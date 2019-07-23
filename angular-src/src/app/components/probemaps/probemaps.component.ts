@@ -49,10 +49,7 @@ export class ProbemapsComponent implements OnInit {
       });
 
       // show all probemaps remotely
-      const getremoteProbemaps = {
-        request: "getAllProbemaps"
-      }
-      this.remoteService.remotePostReq(getremoteProbemaps).subscribe(remoteprobemaps => {
+      this.remoteService.retrievalData('getAllProbemaps').subscribe(remoteprobemaps => {
         this.remoteprobemaps = remoteprobemaps;
         // console.log(this.remoteprobemaps);
       });

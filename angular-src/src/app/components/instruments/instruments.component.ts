@@ -44,6 +44,7 @@ export class InstrumentsComponent implements OnInit {
   };
   warningMsg: String;
   checkExist: Boolean = true;
+  module: String = 'fireplex.data.backend.core';
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -57,31 +58,29 @@ export class InstrumentsComponent implements OnInit {
       });
 
       // show all instruments remotely
-      const getremoteInstruments = {
-        request: "getAllInstruments"
-      }
-      this.remoteService.remotePostReq(getremoteInstruments).subscribe(remoteinstruments => {
+      this.remoteService.retrievalData('getAllInstruments').subscribe(remoteinstruments => {
         this.remoteinstruments = remoteinstruments;
-        // console.log(this.remoteinstruments);
+        console.log(this.remoteinstruments);
       });
 
-      const getInstrumentSpecs = {
-        request: "fireplexCoreDaoRetrieval",
-        coreDaoReqData: {
-          attrName: "id",
-              colNames: ["id"],
-              coreDao: {
-                id: null,
-                  className: "InstrumentSpec",
-                  moduleName: "fireplex.data.backend.core"
-              },
-              dataRange: {},
-              loadAll: "true"
-            }
-      }
-      this.remoteService.remotePostReq(getInstrumentSpecs).subscribe(specs => {
+      // const getInstrumentSpecs = {
+      //   request: "fireplexCoreDaoRetrieval",
+      //   coreDaoReqData: {
+      //     attrName: "id",
+      //     colNames: ["id"],
+      //     coreDao: {
+      //       id: null,
+      //       className: "InstrumentSpec",
+      //       moduleName: this.module
+      //     },
+      //     dataRange: {},
+      //     loadAll: "true"
+      //   }
+      // }
+      var coreDaoReqData = this.remoteService.getCoreDaoReqData('InstrumentSpec', ['id'], this.module, 'true');
+      this.remoteService.retrievalData(coreDaoReqData).subscribe(specs => {
         this.instrumentSpecs = specs.results;
-        // console.log(this.instrumentSpecs);
+        console.log(this.instrumentSpecs);
       });
     }
 
@@ -160,33 +159,41 @@ export class InstrumentsComponent implements OnInit {
   }
 
   onCreateInstrument() {
-    const remoteCreate = {
-      request: "fireplexCoreDaoCreation",
-      coreDaoReqData: {
-        coreDao: {
-          moduleName: "fireplex.data.backend.core",
-          short: this.short_add,
-          className: "Instrument",
-          spec_id: this.spec_id_add,
-          id: null
-        },
-        pKey: "id",
-        searchKey: "short"
-      }
+    // const remoteCreate = {
+    //   request: "fireplexCoreDaoCreation",
+    //   coreDaoReqData: {
+    //     coreDao: {
+    //       moduleName: "fireplex.data.backend.core",
+    //       short: this.short_add,
+    //       className: "Instrument",
+    //       spec_id: this.spec_id_add,
+    //       id: null
+    //     },
+    //     pKey: "id",
+    //     searchKey: "short"
+    //   }
+    // }
+    const coreDao = {
+      moduleName: this.module,
+      short: this.short_add,
+      className: "Instrument",
+      spec_id: this.spec_id_add,
+      id: null
     }
     const Obj = this;
-    this.remoteService.remotePostReq(remoteCreate).subscribe(res => {
+    this.remoteService.createData(coreDao, 'id', 'short').subscribe(res => {
       // console.log(res);
       var newid = res.results[0].id;
       // console.log(newid);
-      const localCreate = {
-        moduleName: "fireplex.data.backend.core",
-        short: this.short_add,
-        className: "Instrument",
-        spec_id: this.spec_id_add,
-        id: newid
-      }
-      Obj.dataService.addData('Instrument', localCreate).subscribe(data => {
+      // const localCreate = {
+      //   moduleName: "fireplex.data.backend.core",
+      //   short: this.short_add,
+      //   className: "Instrument",
+      //   spec_id: this.spec_id_add,
+      //   id: newid
+      // }
+      coreDao.id = newid;
+      Obj.dataService.addData('Instrument', coreDao).subscribe(data => {
         if (data.success) {
           Obj.flashMessage.show('Create New Role Successfully!', {cssClass: 'alert-success', timeout: 3000});
           window.location.reload();
