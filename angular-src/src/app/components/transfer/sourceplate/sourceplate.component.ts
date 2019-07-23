@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PlateService } from '../../../services/plate.service';
 import { Plate } from '../../../../Plate';
-import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-sourceplate',
@@ -25,27 +23,18 @@ export class SourceplateComponent implements OnInit {
   // @Input() showSource : boolean = true;
 
   constructor(
-    private plateService: PlateService,
-    private router: Router,
-    private flashMessage: FlashMessagesService,
+    private dataService: DataService,
   ) {
-    this.plateService.getPlates().subscribe(plates => {
+    this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
     });
   }
 
   ngOnInit() {
   }
-  onClick() {
-    console.log('Click Successfully!');
-  }
-
-  onClickTube() {
-    console.log('Click tube successfully!');
-  }
 
   onSearchPlatesByCoor(coor) {
-    const searchCoor = {
+    const searchData = {
       coor: coor
     }
     // this.plateService.searchPlatesByCoor(searchCoor).subscribe(res => {
@@ -54,7 +43,7 @@ export class SourceplateComponent implements OnInit {
     //   this.searchCoorRes = res;
     //   // console.log(typeof(this.searchCoorRes));
     // });
-    this.plateService.searchPlatesByCoor(searchCoor).subscribe(res => {
+    this.dataService.searchData('Plate_coor', searchData).subscribe(res => {
       // console.log(typeof(res));
       if (res[0].volume != null && res[0] != "") {
         this.emptyCoorRes = undefined;

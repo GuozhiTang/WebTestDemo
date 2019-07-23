@@ -18,13 +18,13 @@ export class PlateService {
   //     .pipe(map(res => res.json()));
   // }
 
-  searchPlatesByCoor(coor) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/plates/searchbycoor', coor, {headers: headers})
-    // return this.http.post('plates/searchbycoor', coor, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  // searchPlatesByCoor(coor) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.post('http://localhost:3000/plates/searchbycoor', coor, {headers: headers})
+  //   // return this.http.post('plates/searchbycoor', coor, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 
   // searchPlateByBar(barcode) {
   //   let headers = new Headers();
