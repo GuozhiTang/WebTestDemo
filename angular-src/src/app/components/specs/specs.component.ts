@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SpecsService } from '../../services/specs.service';
 import { Spec } from '../../../Spec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
@@ -26,7 +25,6 @@ export class SpecsComponent implements OnInit {
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private specsService: SpecsService,
     private remoteService: RemotereqService,
     private dataService: DataService,
     ) {
@@ -77,13 +75,6 @@ export class SpecsComponent implements OnInit {
   }
 
   onSearchSpecsByName() {
-    // console.log('Test');
-    // console.log(this.searchName);
-    // const name = this.name;
-    // this.specsService.searchSpecs(this.searchName)
-    //   .subscribe(res => {
-    //     console.log(res.artists.items);
-    //   });
     const searchData = {
       name: this.name
     }

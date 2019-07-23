@@ -22,47 +22,4 @@ export class ValidateService {
       return true;
     }
   }
-
-  // getOperators() {
-  //   let headers = new Headers();
-  //   return this.http.get('http://localhost:3000/operators/getoperators', {headers: headers})
-  //   // return this.http.post('roles/addrole', role, {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // getRemoteOperators(remoteReq) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://10.253.7.14:8000', remoteReq, {headers: headers})
-  //   .pipe(map(res => res.json()));
-  // }
-
-  // resetOperators () {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://localhost:3000/operators/resetOperators', {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // createOperators(create) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://10.253.7.14:8000', create, {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // addOperators(operator) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://localhost:3000/operators/addoperator', operator, {headers: headers})
-  //   // return this.http.post('roles/addrole', role, {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // searchByName(name) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.post('http://localhost:3000/operators/searchbyname', name, {headers: headers})
-  //     .pipe(map(res => res.json()));
-  // }
 }

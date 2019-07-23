@@ -19,7 +19,8 @@ import { SpecsComponent } from './components/specs/specs.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { SpecsService } from './services/specs.service';
+import { DataService } from './services/data.service';
+import { RemotereqService } from './services/remotereq.service';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
@@ -111,7 +112,7 @@ export function tokenGetter() {
     HttpClientModule
   ],
   // Services should be put into providers
-  providers: [ValidateService, AuthService, AuthGuard, SpecsService],
+  providers: [ValidateService, AuthService, AuthGuard, DataService, RemotereqService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
