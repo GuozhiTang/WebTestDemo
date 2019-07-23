@@ -11,6 +11,10 @@ export class DataService {
     private http: Http
   ) { }
 
+  /**
+   * Send a get request to the server for a set of data
+   * @param component Specify the component that this method applying to
+   */
   getData(component) {
     let headers = new Headers();
     var route;
@@ -28,6 +32,11 @@ export class DataService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Send a post reqeust to the server to add new data to the specific collection
+   * @param component Specify the component that this method applying to
+   * @param addData Specify the json-type data which will be added to the specific collenction
+   */
   addData(component, addData) {
     let headers = new Headers();
     var route;
@@ -45,6 +54,13 @@ export class DataService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Send a post request to the server to
+   * 1.drop the specific collection 
+   * 2.grab the specific collection from the data server
+   * which means to reset the specific collection
+   * @param component Specify the component that this method applying to
+   */
   resetData(component) {
     let headers = new Headers();
     var route;
@@ -62,6 +78,11 @@ export class DataService {
       .pipe(map(res => res.json()));
   }
 
+  /**
+   * Send a post request to the server to search for exact data according to the searchData
+   * @param component Specify the component that this method applying to
+   * @param searchData Specify the json-type data which will be set as the search resource
+   */
   searchData(component, searchData) {
     let headers = new Headers();
     var route;

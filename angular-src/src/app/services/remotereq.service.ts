@@ -11,6 +11,11 @@ export class RemotereqService {
     private http: Http
   ) { }
 
+  /**
+   * Method of connecting with the data server
+   * Post Request will be sent to the data server with specific content or requestHandler
+   * @param req Json-type request or requestHandler which will be sent to the data server
+   */
   remotePostReq (req) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
