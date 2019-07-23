@@ -28,14 +28,13 @@ export class SpecsComponent implements OnInit {
     private remoteService: RemotereqService,
     private dataService: DataService,
     ) {
+      // show all specs locally
       this.dataService.getData('Spec').subscribe(specs => {
         this.specs = specs;
       });
 
-      const getremoteSpecs = {
-        request: "getSpecs"
-      }
-      this.remoteService.remotePostReq(getremoteSpecs).subscribe(remotespecs => {
+      // show all specs remotely
+      this.remoteService.retrievalData('getSpecs').subscribe(remotespecs => {
         this.remotespecs = remotespecs;
       });
     }

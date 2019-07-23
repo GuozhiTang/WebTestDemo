@@ -41,10 +41,7 @@ export class GenerateworkorderComponent implements OnInit {
   ) {
     // Get the set of Code1 IDs
     var codeId1s = [];
-    const getSingleCode1 = {
-      request: "fpGetSingleCode1"
-    }
-    this.remoteService.remotePostReq(getSingleCode1).subscribe(res => {
+    this.remoteService.retrievalData('fpGetSingleCode1').subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
         codeId1s.unshift(res[i].id);
@@ -54,10 +51,7 @@ export class GenerateworkorderComponent implements OnInit {
 
     // Get the set of Code2 IDs
     var codeId2s = [];
-    const getSingleCode2 = {
-      request: "fpGetSingleCode2"
-    }
-    this.remoteService.remotePostReq(getSingleCode2).subscribe(res => {
+    this.remoteService.retrievalData('fpGetSingleCode2').subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
         codeId2s.unshift(res[i].id);

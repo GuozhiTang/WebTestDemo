@@ -36,10 +36,7 @@ export class MatrixtubecarrierComponent {
     private remoteService: RemotereqService,
     ) {
       // Get the work-order id list here
-      const getWorkorderId = {
-        request: "fpAntibodyMatrixReq"
-      }
-      this.remoteService.remotePostReq(getWorkorderId).subscribe(res => {
+      this.remoteService.retrievalData('fpAntibodyMatrixReq').subscribe(res => {
         this.workorderids = res.results;
       });
 
