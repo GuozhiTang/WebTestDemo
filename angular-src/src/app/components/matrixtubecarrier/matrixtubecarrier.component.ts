@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { requiredFileType } from './upload-file-validators';
-import { WorkorderService } from '../../services/workorder.service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { AuthService } from '../../services/auth.service';
 import { Workorder } from '../../../Workorder';
@@ -32,7 +31,6 @@ export class MatrixtubecarrierComponent {
   checkSubmit: Boolean = false;
 
   constructor(
-    private workorderService: WorkorderService,
     public authService:AuthService,
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,

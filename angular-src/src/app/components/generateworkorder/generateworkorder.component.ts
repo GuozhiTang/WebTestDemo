@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkorderService } from '../../services/workorder.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 
@@ -37,7 +36,6 @@ export class GenerateworkorderComponent implements OnInit {
   tableCode2: number[];
 
   constructor(
-    private workorderService: WorkorderService,
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,
   ) {
