@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';
+import { Operator } from '../../../models/Operator';
 
 @Component({
-  selector: 'app-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.css']
+  selector: 'app-operators',
+  templateUrl: './operators.component.html',
+  styleUrls: ['./operators.component.css']
 })
-export class ResetComponent implements OnInit {
-  operators: Object;
-  remoteoperators: Object;
+export class OperatorsComponent implements OnInit {
+  operators: Operator[];
+  remoteoperators: Operator[];
   Name: String;
   Manufacturing: Boolean;
   checkExist: Boolean = true;
