@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Spec } from '../../../Spec';
+import { Spec } from '../../../models/Spec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';

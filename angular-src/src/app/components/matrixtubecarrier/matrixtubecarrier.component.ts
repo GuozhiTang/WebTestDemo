@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { requiredFileType } from './upload-file-validators';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { AuthService } from '../../services/auth.service';
-import { Workorder } from '../../../Workorder';
+import { Workorder } from '../../../models/Workorder';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Instrument } from '../../../Instrument';
+import { Instrument } from '../../../models/Instrument';
+import { InstrumentSpec } from '../../../models/InstrumentSpec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';
@@ -26,22 +27,8 @@ export class InstrumentsComponent implements OnInit {
   searchShortRes: Instrument[];
   searchIdRes: Instrument[];
   searchConRes: Instrument[];
-  instrumentSpecs: {
-    moduleName: String;
-    className: String;
-    model: String;
-    manufacturer: String;
-    type: String;
-    id: number;
-  };
-  instrumentSpec: {
-    moduleName: String;
-    className: String;
-    model: String;
-    manufacturer: String;
-    type: String;
-    id: number;
-  };
+  instrumentSpecs: InstrumentSpec[];
+  instrumentSpec: InstrumentSpec[];
   warningMsg: String;
   checkExist: Boolean = true;
   module: String = 'fireplex.data.backend.core';

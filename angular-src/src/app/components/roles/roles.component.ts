@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '../../../Role';
+import { Role } from '../../../models/Role';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';

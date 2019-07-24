@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Plate } from '../../../Plate';
+import { Plate } from '../../../models/Plate';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { DataService } from '../../services/data.service';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Probemap } from '../../../Probemap';
-import { Probe } from '../../../Probe';
+import { Probemap } from '../../../models/Probemap';
+import { Probe } from '../../../models/Probe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';

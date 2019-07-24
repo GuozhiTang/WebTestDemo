@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LabwareSpec } from '../../../LabwareSpec';
+import { LabwareSpec } from '../../../models/LabwareSpec';
 import { ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../services/data.service';
 

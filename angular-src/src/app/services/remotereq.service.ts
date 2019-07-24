@@ -18,6 +18,7 @@ export class RemotereqService {
    */
   remotePostReq (req) {
     let headers = new Headers();
+    console.log(req);
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://10.253.7.14:8000', req, {headers: headers})
       .pipe(map(res => res.json()));

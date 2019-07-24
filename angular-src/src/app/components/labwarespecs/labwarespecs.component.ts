@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LabwareSpec } from '../../../LabwareSpec';
+import { LabwareSpec } from '../../../models/LabwareSpec';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';

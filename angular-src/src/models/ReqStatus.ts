@@ -1,4 +1,4 @@
-export class StatusRes {
+export class ReqStatus {
   requested: String;
   status_op: {
     comment: String;

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StatusRes } from '../../../StatusRes';
+import { ReqStatus } from '../../../models/ReqStatus';
+import { StatusList } from '../../../models/StatusList';
 import { ViewEncapsulation } from '@angular/core';
 import { RemotereqService } from '../../services/remotereq.service';
 
@@ -34,21 +35,13 @@ export class ProcessComponent implements OnInit {
   protocol: String;
   instrument: String;
   // statusRes: any;
-  statusRes: StatusRes[];
-  typeRes: {
-    moduleName: String;
-    description: String;
-    approber_id: Number;
-    name: String;
-    className: String;
-    sop_id: Number;
-    id: Number;
-  }
+  statusRes: ReqStatus[];
+  typeRes: StatusList[];
   operatorName: String;
   comments: String;
   opSpecId: Number;
   newtable: any;
-  newstatus: StatusRes[];
+  newstatus: ReqStatus[];
   showUpdate: any = undefined;
 
   constructor(
@@ -59,8 +52,9 @@ export class ProcessComponent implements OnInit {
     ) {
     
       // get status types here
-      this.remoteService.remotePostReq('fpReqStatusList').subscribe(types => {
+      this.remoteService.retrievalData('fpReqStatusList').subscribe(types => {
         this.typeRes = types;
+        // console.log(this.typeRes);
       });
 
       // get user information as well as instruments here
