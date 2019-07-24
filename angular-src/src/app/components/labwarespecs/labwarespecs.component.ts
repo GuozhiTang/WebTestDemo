@@ -60,7 +60,8 @@ export class LabwarespecsComponent implements OnInit {
   }
 
   /**
-   * Functionality to pull all labwarespecs data from data server.
+   * Drop the previous labwareSpecs collection
+   * Pull newest labwareSpecs collection from data server to local database
    */
   onResetLwareSpecs() {
     this.dataService.resetData('LabwareSpec').subscribe(data => {
@@ -124,6 +125,9 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Create new labwareSpec both locally and remotely
+   */
   onCreateLabwareSpec() {
     // const remoteCreate = {
     //   request: "fireplexCoreDaoCreation",
@@ -185,6 +189,10 @@ export class LabwarespecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search by name in order to check if it is existed in the local database
+   * @param name name of the labwareSpec which will be created
+   */
   searchByName(name) {
     const searchData = {
       name: name,

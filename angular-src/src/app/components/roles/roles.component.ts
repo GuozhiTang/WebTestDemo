@@ -51,7 +51,8 @@ export class RolesComponent implements OnInit {
   }
 
   /**
-   * Functionality to pull all roles data from data server.
+   * Drop the previous roles collection
+   * Pull newest roles collection from data server to local database
    */
   onResetRoles() {
     this.dataService.resetData('Role').subscribe(data => {
@@ -115,6 +116,9 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Create new role both locally and remotely
+   */
   onCreateRole() {
     // const remoteCreate = {
     //   request: "fireplexCoreDaoCreation",
@@ -164,6 +168,10 @@ export class RolesComponent implements OnInit {
     });
   }
 
+  /**
+   * Search by role name in order to check if it is existed in the local database
+   * @param role role name of the role which will be created
+   */
   searchByRole(role) {
     const searchData = {
       role: role,

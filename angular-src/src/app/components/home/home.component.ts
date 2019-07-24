@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     public authService:AuthService,
     private flashMessage:FlashMessagesService,
     ) {
+      // Get users locally
       this.authService.getProfile().subscribe(profile => {
         // console.log(profile);
         this.user = profile.user;
@@ -29,6 +30,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * To log out of the system
+   * To clear the data in the local storage
+   */
   onLogoutClick() {
     this.authService.logout();
     this.flashMessage.show('You are logged out', {

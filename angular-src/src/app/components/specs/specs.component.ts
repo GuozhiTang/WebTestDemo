@@ -42,6 +42,9 @@ export class SpecsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method of adding a new spec to the database
+   */
   onAddSpecs() {
     const addData = {
       className: this.className,
@@ -61,6 +64,9 @@ export class SpecsComponent implements OnInit {
     });
   }
 
+  /**
+   * For this method, for the time being, it is just for pulling data from data server
+   */
   onResetSpecs() {
     this.dataService.resetData('Spec').subscribe(data => {
       if (data.success) {
@@ -73,6 +79,9 @@ export class SpecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search specs by name
+   */
   onSearchSpecsByName() {
     const searchData = {
       name: this.name
@@ -82,6 +91,9 @@ export class SpecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search specs by moduleName
+   */
   onSearchSpecsByModuleName() {
     const searchData = {
       moduleName: this.moduleName
@@ -91,6 +103,9 @@ export class SpecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search specs by id
+   */
   onSearchSpecsById() {
     const searchData = {
       id: this.id
@@ -100,6 +115,9 @@ export class SpecsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search specs by conditions
+   */
   onSearchSpecsByConditions() {
     const searchData = {
       name: this.name,

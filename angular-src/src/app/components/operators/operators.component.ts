@@ -38,6 +38,10 @@ export class OperatorsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Drop the previous operators collection
+   * Pull newest operators collection from data server to local database
+   */
   onResetOperators() {
     this.dataService.resetData('Operator').subscribe(data => {
       if (data.success) {
@@ -51,6 +55,9 @@ export class OperatorsComponent implements OnInit {
     });
   }
 
+  /**
+   * Create new operator both locally and remotely
+   */
   onCreateOperator() {
     // const remoteCreate = {
     //   request: "fireplexCoreDaoCreation",
@@ -105,6 +112,10 @@ export class OperatorsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search by name in order to check if it is existed in the local database
+   * @param name name of the operator which will be created
+   */
   onSearchByName(name) {
     const searchData = {
       name: name,

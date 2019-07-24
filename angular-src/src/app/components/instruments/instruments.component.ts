@@ -64,6 +64,8 @@ export class InstrumentsComponent implements OnInit {
       //     loadAll: "true"
       //   }
       // }
+
+      // Get InstrumentSpecs remotely
       var coreDaoReqData = this.remoteService.getCoreDaoReqData('InstrumentSpec', ['id'], this.module, 'true');
       this.remoteService.retrievalData(coreDaoReqData).subscribe(specs => {
         this.instrumentSpecs = specs.results;
@@ -75,7 +77,8 @@ export class InstrumentsComponent implements OnInit {
   }
 
   /**
-   * Functionality to pull all instruments data from data server.
+   * Drop the previous instruments collection
+   * Pull newest instruments collection from data server to local database
    */
   onResetInstruments() {
     // console.log(this.instruments);
@@ -145,6 +148,9 @@ export class InstrumentsComponent implements OnInit {
     });
   }
 
+  /**
+   * Create new Instrument both locally and remotely
+   */
   onCreateInstrument() {
     // const remoteCreate = {
     //   request: "fireplexCoreDaoCreation",
@@ -191,6 +197,10 @@ export class InstrumentsComponent implements OnInit {
     });
   }
 
+  /**
+   * Search by short name in order to check if it is existed in the local database
+   * @param short short name of the instrument which will be created
+   */
   onSearchByShort(short) {
     const searchData = {
       short: short,

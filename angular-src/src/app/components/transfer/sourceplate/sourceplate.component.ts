@@ -25,6 +25,7 @@ export class SourceplateComponent implements OnInit {
   constructor(
     private dataService: DataService,
   ) {
+    // Show all plates locally
     this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
     });
@@ -33,6 +34,10 @@ export class SourceplateComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Search plates by coor
+   * @param coor the coor of the well on the plate, which means the position
+   */
   onSearchPlatesByCoor(coor) {
     const searchData = {
       coor: coor

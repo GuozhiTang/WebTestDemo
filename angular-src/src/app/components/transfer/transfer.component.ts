@@ -30,6 +30,7 @@ export class TransferComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private dataService: DataService,
   ) {
+    // Show all plates locally
     this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
       // console.log(this.plates);
@@ -40,6 +41,9 @@ export class TransferComponent implements OnInit {
     // console.log(this.showTransfer);
   }
 
+  /**
+   * Search plates by barcode
+   */
   onSearchPlateByBar() {
     const searchData = {
       barcode: this.barcode
@@ -63,6 +67,9 @@ export class TransferComponent implements OnInit {
     });
   }
 
+  /**
+   * Show the exact barcode of the plate
+   */
   showBarcode() {
     const showBar = {
       barcode: this.barcode

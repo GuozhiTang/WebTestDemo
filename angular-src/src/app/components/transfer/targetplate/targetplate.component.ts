@@ -31,6 +31,7 @@ export class TargetplateComponent {
     private flashMessage: FlashMessagesService,
     private dataService: DataService,
   ) {
+    // Show all plates locally
     this.dataService.getData('Plate').subscribe(plates => {
       this.plates = plates;
     });
@@ -39,6 +40,10 @@ export class TargetplateComponent {
   ngOnInit() {
   }
 
+  /**
+   * Search plates by coor
+   * @param coor the coor of the well on the plate, which means the position
+   */
   onSearchPlatesByCoor(coor) {
     const searchData = {
       coor: coor
@@ -62,6 +67,9 @@ export class TargetplateComponent {
     });
   }
 
+  /**
+   * Search plates by barcode
+   */
   onSearchPlateByBar() {
     const searchData = {
       barcode: this.barcode
@@ -86,6 +94,9 @@ export class TargetplateComponent {
     });
   }
 
+  /**
+   * To submit the selected plates
+   */
   onSubmitTransfers() {
     this.flashMessage.show('Submit transfer successully!', {cssClass: 'alert-success', timeout: 3000});
     this.router.navigate(['/']);
