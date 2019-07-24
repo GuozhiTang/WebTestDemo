@@ -17,15 +17,7 @@ router.get('/getProbemaps', (req, res, next) => {
 
 // To add and save new probemaps locally
 router.post('/addProbemap', (req, res, next) => {
-  let newProbemap = new Probemap({
-    moduleName: req.body.moduleName,
-    className: req.body.className,
-    name: req.body.name,
-    creator: req.body.creator,
-    codemap_id: req.body.codemap_id,
-    most_current: req.body.most_current,
-    id: req.body.id
-  });
+  let newProbemap = new Probemap(req.body);
   Probemap.addProbemap(newProbemap, (err, probemap) => {
     if (err) {
       res.json({success: false, msg:'Failed to add Probemaps!'});

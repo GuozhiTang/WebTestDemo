@@ -17,18 +17,7 @@ router.get('/getlwarespec', (req, res, next) => {
 
 // To add and save new labwarespecs locally
 router.post('/addlwarespec', (req, res, next) => {
-  let newLwarespec = new LabwareSpec({
-    moduleName: req.body.moduleName,
-    className: req.body.className,
-    map_id: req.body.map_id,
-    name: req.body.name,
-    description: req.body.description,
-    material: req.body.material,
-    volume: req.body.volume,
-    cat_num: req.body.cat_num,
-    manufacturer: req.body.manufacturer,
-    id: req.body.id
-  });
+  let newLwarespec = new LabwareSpec(req.body);
   LabwareSpec.addLabwareSpec(newLwarespec, (err, lwarespec) => {
     if (err) {
       res.json({success: false, msg:'Failed to add LabwareSpecs!'});

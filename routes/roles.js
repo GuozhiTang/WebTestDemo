@@ -17,14 +17,8 @@ router.get('/getroles', (req, res, next) => {
 
 // To add and save new roles locally
 router.post('/addrole', (req, res, next) => {
-  let newRole = new Role({
-    moduleName: req.body.moduleName,
-    className: req.body.className,
-    liquid_class: req.body.liquid_class,
-    role: req.body.role,
-    reagent: req.body.reagent,
-    id: req.body.id
-  });
+  // console.log(req.body);
+  let newRole = new Role(req.body);
   Role.addRole(newRole, (err, role) => {
     if (err) {
       res.json({success: false, msg:'Failed to add Roles!'});

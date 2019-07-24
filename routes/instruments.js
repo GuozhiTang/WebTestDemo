@@ -17,13 +17,7 @@ router.get('/getInstruments', (req, res, next) => {
 
 // To add and save new Instrument locally
 router.post('/addInstrument', (req, res, next) => {
-  let newInstrument = new Instrument({
-    moduleName: req.body.moduleName,
-    className: req.body.className,
-    short: req.body.short,
-    spec_id: req.body.spec_id,
-    id: req.body.id
-  });
+  let newInstrument = new Instrument(req.body);
   Instrument.addInstrument(newInstrument, (err, instrument) => {
     if (err) {
       res.json({success: false, msg:'Failed to add Instruments!'});

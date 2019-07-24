@@ -20,15 +20,7 @@ router.get('/getoperators', (req, res, next) => {
 
 // To add and save new Operators locally
 router.post('/addoperator', (req, res, next) => {
-  let newOperator = new Operator({
-    moduleName: req.body.moduleName,
-    name: req.body.name,
-    admin: req.body.admin,
-    className: req.body.className,
-    active: req.body.active,
-    manufacturing: req.body.manufacturing,
-    id: req.body.id
-  });
+  let newOperator = new Operator(req.body);
   Operator.addOperator(newOperator, (err, operator) => {
     if (err) {
       res.json({success: false, msg: 'Failed to add operators!'});

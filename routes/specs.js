@@ -20,13 +20,7 @@ router.get('/getspecs', (req, res, next) => {
 
 // To add and save new Specs locally
 router.post('/addspecs', (req, res, next) => {
-  let newSpec = new Spec({
-    className: req.body.className,
-    moduleName: req.body.moduleName,
-    description: req.body.description,
-    name: req.body.name,
-    id: req.body.id
-  });
+  let newSpec = new Spec(req.body);
   // addspec inside the model
   Spec.addSpec(newSpec, (err, spec) => {
     if (err) {

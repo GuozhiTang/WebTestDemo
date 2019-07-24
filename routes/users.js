@@ -11,10 +11,7 @@ const User = require('../models/user');
 // To register and add new users
 router.post('/register', (req, res, next) => {
   //  res.send('REGISTER');
-  let newUser = new User({
-    name: req.body.name,
-    department: req.body.department
-  });
+  let newUser = new User(req.body);
   // adduser inside the model
   User.addUser(newUser, (err, user) => {
     if (err) {
