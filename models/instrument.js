@@ -38,7 +38,8 @@ module.exports.addInstrument = function (newInstrument, callback) {
   newInstrument.save(callback);
 }
 
-// To pull Instruments remotely
+// 1. Drop the current Instrument collection locally
+// 2. To pull Instruments from remote server to local database
 module.exports.resetInstruments = function (callback) {
   mongoose.connection.collection("instruments").drop(function(err) {
     console.log('Collection Dropped Firstly!');

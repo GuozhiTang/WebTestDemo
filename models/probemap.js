@@ -44,7 +44,8 @@ module.exports.addProbemap = function (newProbemap, callback) {
   newProbemap.save(callback);
 }
 
-// To pull probemaps from data server
+// 1. Drop the current Probemap collection locally
+// 2. To pull Probemaps from remote server to local database
 module.exports.resetProbemaps = function (callback) {
   mongoose.connection.collection("probemaps").drop(function(err) {
     console.log('Collection Dropped Firstly!');

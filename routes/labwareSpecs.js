@@ -38,7 +38,8 @@ router.post('/addlwarespec', (req, res, next) => {
   });
 });
 
-// To pull labwarespecs remotely
+// 1. Drop the current LabwareSpec collection locally
+// 2. To pull LabwareSpecs from remote server to local database
 router.post('/resetLabwareSpecs', (req, res, next) => {
   LabwareSpec.resetLabwareSpecs((err, dataObj) => {
     if (err) {

@@ -47,7 +47,6 @@ router.post('/authenticate', (req, res, next) => {
   // if (name == undefined || department == undefined) {
   //   res.json({success: false, msg:'Please complete each blank!'});
   
-
   User.getUserByName(name, (err, user) => {
     if (err) {
       res.json({success: false, msg:'Error exists for authentication!'});

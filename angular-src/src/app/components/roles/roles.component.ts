@@ -51,7 +51,7 @@ export class RolesComponent implements OnInit {
   }
 
   /**
-   * Drop the previous roles collection
+   * Drop the previous role collection
    * Pull newest roles collection from data server to local database
    */
   onResetRoles() {

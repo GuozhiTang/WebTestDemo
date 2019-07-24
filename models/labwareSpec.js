@@ -53,7 +53,8 @@ module.exports.addLabwareSpec = function (newLabwareSpec, callback) {
   newLabwareSpec.save(callback);
 }
 
-// To pull labwarespecs remotely
+// 1. Drop the current LabwareSpec collection locally
+// 2. To pull LabwareSpecs from remote server to local database
 module.exports.resetLabwareSpecs = function (callback) {
   mongoose.connection.collection("labwarespecs").drop(function(err) {
     console.log('Collection Dropped Firstly!');

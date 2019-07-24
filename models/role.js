@@ -55,7 +55,8 @@ module.exports.addRole = function (newRole, callback) {
 //   })
 // }
 
-// To pull roles from data server
+// 1. Drop the current Role collection locally
+// 2. To pull Roles from remote server to local database
 module.exports.resetRoles = function (callback) {
   mongoose.connection.collection("roles").drop(function(err) {
     console.log('Collection Dropped Firstly!');

@@ -65,7 +65,8 @@ export class SpecsComponent implements OnInit {
   }
 
   /**
-   * For this method, for the time being, it is just for pulling data from data server
+   * Drop the previous spec collection
+   * Pull newest specs collection from data server to local database
    */
   onResetSpecs() {
     this.dataService.resetData('Spec').subscribe(data => {

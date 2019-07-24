@@ -5,6 +5,7 @@ const config = require('../config/database');
 const Plate = require('../models/plate');
 const request = require('request');
 
+// To get all plates
 router.get('/getplates', (req, res, next) => {
   // res.send('getplates');
   Plate.find((err, plate) => {
@@ -16,6 +17,7 @@ router.get('/getplates', (req, res, next) => {
   });
 })
 
+// Search by coor
 router.post('/searchbycoor', (req, res, next) => {
   const coor = req.body.coor;
 
@@ -28,6 +30,7 @@ router.post('/searchbycoor', (req, res, next) => {
   });
 });
 
+// Search by barcode
 router.post('/searchbybarcode', (req, res, next) => {
   const barcode = req.body.barcode;
 

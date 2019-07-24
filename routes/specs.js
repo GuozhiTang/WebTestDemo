@@ -6,6 +6,7 @@ const config = require('../config/database');
 const Spec = require('../models/spec');
 const request = require('request');
 
+// To get all Specs
 router.get('/getspecs', (req, res, next) => {
   // res.send('GETSPECS');
   Spec.find((err, spec) => {
@@ -17,6 +18,7 @@ router.get('/getspecs', (req, res, next) => {
   });
 });
 
+// To add and save new Specs locally
 router.post('/addspecs', (req, res, next) => {
   let newSpec = new Spec({
     className: req.body.className,
@@ -35,6 +37,8 @@ router.post('/addspecs', (req, res, next) => {
   });
 });
 
+// 1. Drop the current Spec collection locally
+// 2. To pull Specs from remote server to local database
 router.post('/resetspecs', (req, res, next) => {
   Spec.resetSpecs((err, dataObj) => {
     if (err) {
@@ -84,6 +88,7 @@ router.post('/resetspecs', (req, res, next) => {
   // });
 });
 
+// Search by name
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -96,6 +101,7 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
+// Search by moduleName
 router.post('/searchbymodulename', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -108,6 +114,7 @@ router.post('/searchbymodulename', (req, res, next) => {
   });
 });
 
+// Search by id
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -120,6 +127,7 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
+// Search by conditions
 router.post('/searchbyconditions', (req, res, next) => {
   const name = req.body.name;
   const moduleName = req.body.moduleName;

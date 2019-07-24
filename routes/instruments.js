@@ -33,7 +33,8 @@ router.post('/addInstrument', (req, res, next) => {
   });
 });
 
-// To pull Instruments remotely
+// 1. Drop the current Instrument collection locally
+// 2. To pull Instruments from remote server to local database
 router.post('/resetInstruments', (req, res, next) => {
   Instrument.resetInstruments((err, dataObj) => {
     if (err) {

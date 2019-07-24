@@ -30,8 +30,6 @@ const app = express();
 const users = require('./routes/users');
 // Include all files of spec routes
 const specs = require('./routes/specs');
-// Include all files of test spec routes
-const testspecs = require('./routes/testspecs');
 const labwareSpecs = require('./routes/labwareSpecs');
 const labwares = require('./routes/labwares');
 const plates = require('./routes/plates');
@@ -39,7 +37,6 @@ const roles = require('./routes/roles');
 const instruments = require('./routes/instruments');
 const probemaps = require('./routes/probemaps');
 const probes = require('./routes/probes');
-const workorders = require('./routes/workorders');
 const operators = require('./routes/operators');
 
 // Port Number
@@ -71,8 +68,6 @@ require('./config/passport')(passport);
 app.use('/users', users);
 // Anything like 'localhose:3000/specs/xxx' will go to users file
 app.use('/specs', specs);
-// Anything like 'localhose:3000/testspecs/xxx' will go to users file
-app.use('/testspecs', testspecs);
 app.use('/labwareSpecs', labwareSpecs);
 app.use('/labwares', labwares);
 app.use('/plates', plates);
@@ -80,7 +75,6 @@ app.use('/roles', roles);
 app.use('/instruments', instruments);
 app.use('/probemaps', probemaps);
 app.use('/probes', probes);
-app.use('/workorders', workorders);
 app.use('/operators', operators);
 
 // Index Route to the home page

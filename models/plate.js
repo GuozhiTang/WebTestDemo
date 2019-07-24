@@ -32,15 +32,18 @@ const PlateSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Plate = module.exports = mongoose.model('Plate', PlateSchema);
 
+// To get all plates
 module.exports.getPlates = function (callback) {
   Plate.find(callback);
 }
 
+// Search by coor
 module.exports.getByCoor = function(coor, callback) {
   const query = {coor: coor}
   Plate.find(query, callback);
 }
 
+// Search by barcode
 module.exports.getByBarcode = function(barcode, callback) {
   const query = {barcode: barcode}
   Plate.find(query, callback);

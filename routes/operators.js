@@ -7,6 +7,7 @@ const config = require('../config/database');
 // Bring in our models
 const Operator = require('../models/operator');
 
+// To get all Operators
 router.get('/getoperators', (req, res, next) => {
   Operator.find((err, operator) => {
     if (err) {
@@ -17,6 +18,7 @@ router.get('/getoperators', (req, res, next) => {
   });
 });
 
+// To add and save new Operators locally
 router.post('/addoperator', (req, res, next) => {
   let newOperator = new Operator({
     moduleName: req.body.moduleName,
@@ -36,6 +38,8 @@ router.post('/addoperator', (req, res, next) => {
   });
 });
 
+// 1. Drop the current Operator collection locally
+// 2. To pull Operators from remote server to local database
 router.post('/resetOperators', (req, res, next) => {
   Operator.resetOperators((err, dataObj) => {
     if (err) {
@@ -50,6 +54,7 @@ router.post('/resetOperators', (req, res, next) => {
   });
 });
 
+// Search by name
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 

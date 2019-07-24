@@ -31,10 +31,13 @@ const OperatorSchema = mongoose.Schema({
 
 const Operator = module.exports = mongoose.model('Operator', OperatorSchema);
 
+// To get all Operators
 module.exports.addOperator = function (newOperator, callback) {
   newOperator.save(callback);
 }
 
+// 1. Drop the current Operator collection locally
+// 2. To pull Operators from remote server to local database
 module.exports.resetOperators = function (callback) {
   mongoose.connection.collection("operators").drop(function(err) {
     console.log('Collection Dropped Firstly!');
@@ -56,6 +59,8 @@ module.exports.resetOperators = function (callback) {
   });
 }
 
+
+// Search by name
 module.exports.getByName = function(name, callback) {
   const query = {name: name}
   Operator.find(query, callback);

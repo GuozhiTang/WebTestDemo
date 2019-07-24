@@ -34,7 +34,8 @@ router.post('/addrole', (req, res, next) => {
   });
 });
 
-// To pull roles from data server
+// 1. Drop the current Role collection locally
+// 2. To pull Roles from remote server to local database
 router.post('/resetroles', (req, res, next) => {
   Role.resetRoles((err, dataObj) => {
     if (err) {

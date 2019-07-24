@@ -35,7 +35,8 @@ router.post('/addProbemap', (req, res, next) => {
   });
 });
 
-// To pull probemaps from data server
+// 1. Drop the current Probemap collection locally
+// 2. To pull Probemaps from remote server to local database
 router.post('/resetProbemaps', (req, res, next) => {
   Probemap.resetProbemaps((err, dataObj) => {
     if (err) {

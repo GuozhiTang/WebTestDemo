@@ -29,14 +29,17 @@ const SpecSchema = mongoose.Schema({
 // module.exports so that it can be used outside this file
 const Spec = module.exports = mongoose.model('Spec', SpecSchema);
 
+// To get all Specs
 module.exports.getSpecs = function (callback) {
   Spec.find(callback);
 }
 
+// To add and save new Specs locally
 module.exports.addSpec = function (newSpec, callback) {
       newSpec.save(callback);
 }
 
+// To pull Specs from data server to local database
 module.exports.grabSpecsv1 = function (callback) {
   request('http://10.253.7.14:8000/?request=getSpecs', function (error, response, body) {
     if (response && response.statusCode == 200) {
@@ -51,6 +54,8 @@ module.exports.grabSpecsv1 = function (callback) {
   })
 }
 
+// 1. Drop the current Spec collection locally
+// 2. To pull Specs from remote server to local database
 module.exports.resetSpecs = function (callback) {
   mongoose.connection.collection("specs").drop(function(err) {
     console.log('Collection Dropped Firstly!');
@@ -93,21 +98,25 @@ module.exports.resetSpecs = function (callback) {
   })
 }
 
+// Search by name
 module.exports.getByName = function(name, callback) {
   const query = {name: name}
   Spec.find(query, callback);
 }
 
+// Search by moduleName
 module.exports.getByModuleName = function(moduleName, callback) {
   const query = {moduleName: moduleName}
   Spec.find(query, callback);
 }
 
+// Search by id
 module.exports.getById = function(id, callback) {
   const query = {id: id}
   Spec.find(query, callback);
 }
 
+// Search by conditions
 module.exports.getByConditions = function(name, moduleName, callback) {
   const query = {
     name: name,
