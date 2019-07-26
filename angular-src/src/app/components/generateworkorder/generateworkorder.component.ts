@@ -21,16 +21,23 @@ export class GenerateworkorderComponent implements OnInit {
   UC31A: number = 41.478;
   UC3NF: number = 30.675;
   Volume: number = 500;
-  Maxlin1: number = 0.50;
-  Maxlin2: number = 1.45;
-  Minlin: number = 0.046;
-  MAX1: number = 0.5;
-  MAX2: number = 1.45;
-  MIN: number = 0.042;
-  UC2: number = 1.269776;
-  UC3: number = 1.405181;
-  Grid: number[] = [1,2,3,4,5,6,7,8,9,10,
-                    1,2,3,4,5,6,7];
+  H9: number = this.UC21A * 1000 / 4023.9;
+  I9: number = this.UC2NF * 1000 / 3370.2;
+  J9: number = this.UC31A * 1000 / 4103.9;
+  K9: number = this.UC3NF * 1000 / 3450.2;
+  Maxlin1: number;
+  Maxlin2: number;
+  Minlin1: number;
+  Minlin2: number;
+  spacing1: number;
+  spacing2: number;
+  MAX1: number;
+  MAX2: number;
+  MIN1: number;
+  MIN2: number;
+  UC2: number;
+  UC3: number;
+  Grid: number[];
   percentages: number[];
   tableCode1: number[];
   tableCode2: number[];
@@ -50,6 +57,7 @@ export class GenerateworkorderComponent implements OnInit {
         codeId1s.unshift(res[i].id);
       }
       this.assayCodeId1s = codeId1s;
+      console.log(this.assayCodeId1s);
     });
 
     // Get the set of Code2 IDs
@@ -60,6 +68,7 @@ export class GenerateworkorderComponent implements OnInit {
         codeId2s.unshift(res[i].id);
       }
       this.assayCodeId2s = codeId2s;
+      console.log(this.assayCodeId2s);
     });
   }
 
@@ -109,22 +118,38 @@ export class GenerateworkorderComponent implements OnInit {
    * Creation of request is allowed only after this calculation
    */
   onCalculate() {
-    if (this.check4x4) this.calculate4x4();
-    else if (this.check6x6) this.calculate6x6();
-    else if (this.check10x7) this.calculate10x7();
+    if (this.check4x4) {
+      this.getParameters([1,2,3,4,1,2,3,4], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
+                        3, 3, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
+      this.calculate(4, 4);
+    } else if (this.check6x6) {
+      this.getParameters([1,2,3,4,5,6,1,2,3,4,5,6], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
+                        5, 5, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
+      this.calculate(6, 6);
+    } else if (this.check10x7) {
+      this.getParameters([1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7], 0.50, 1.45, 0.046, 0.046, 9, 6,
+                          0.5, 1.45, 0.042, 0.042, 1.26977603033476, 1.40518121409196);
+      this.calculate(10, 7);
+    }
   }
 
-  calculate4x4() {}
+  getParameters(Grid, Maxlin1, Maxlin2, Minlin1, Minlin2, spacing1, spacing2, MAX1, MAX2, MIN1, MIN2, UC2, UC3) {
+    this.Grid = Grid;
+    this.Maxlin1 = Maxlin1;
+    this.Maxlin2 = Maxlin2;
+    this.Minlin1 = Minlin1;
+    this.Minlin2 = Minlin2;
+    this.spacing1 = (Math.log10(this.Maxlin1) - Math.log10(this.Minlin1)) / spacing1;
+    this.spacing2 = (Math.log10(this.Maxlin2) - Math.log10(this.Minlin2)) / spacing2;
+    this.MAX1 = MAX1;
+    this.MAX2 = MAX2;
+    this.MIN1 = MIN1;
+    this.MIN2 = MIN2;
+    this.UC2 = UC2;
+    this.UC3 = UC3;
+  }
 
-  calculate6x6() {}
-
-  calculate10x7() {
-    var H9 = this.UC21A * 1000 / 4023.9;
-    var I9 = this.UC2NF * 1000 / 3370.2;
-    var J9 = this.UC31A * 1000 / 4103.9;
-    var K9 = this.UC3NF * 1000 / 3450.2;
-    var spacing1 = (Math.log10(this.Maxlin1) - Math.log10(this.Minlin)) / 9;
-    var spacing2 = (Math.log10(this.Maxlin2) - Math.log10(this.Minlin)) / 6;
+  calculate(code1: number, code2: number) {
     var percent = ADJ / (1 + ADJ);
     var ADJ;
     var FNF;
@@ -135,40 +160,38 @@ export class GenerateworkorderComponent implements OnInit {
 
     for (var i = 0; i < this.Grid.length; i++) {
       if (i == 0) {
-        percentRes[i] = 100.0;
+        percentRes[i] = "100.0";
         continue;
       }
-      if (i == 10) {
-        percentRes[i] = 100.0;
+      if (i == code1) {
+        percentRes[i] = "100.0";
+        console.log('Here!');
         continue;
       }
-      if (i < 10) {
-        position = Math.pow(10, Math.log10(this.Maxlin1) - i * spacing1);
-        FNF = (position - this.MIN) / (this.UC2 * (this.MAX1 - position));
-        ADJ = FNF * I9 / H9;
-      } else if (i > 10) {
-        position = Math.pow(10, Math.log10(this.Maxlin2) - (i - 10) * spacing2);
-        FNF = (position - this.MIN) / (this.UC3 * (this.MAX2 - position));
-        ADJ = FNF * K9 / J9;
+      if (i < code1) {
+        position = Math.pow(10, Math.log10(this.Maxlin1) - i * this.spacing1);
+        FNF = (position - this.MIN1) / (this.UC2 * (this.MAX1 - position)); 
+        ADJ = FNF * this.I9 / this.H9;
+      } else if (i > code1) {
+        position = Math.pow(10, Math.log10(this.Maxlin2) - (i - code1) * this.spacing2);
+        FNF = (position - this.MIN2) / (this.UC3 * (this.MAX2 - position));
+        ADJ = FNF * this.K9 / this.J9;
       }
       percent = ADJ / (1 + ADJ);
       percentRes[i] = (percent * 100).toFixed(4);
     }
-    // console.log(percentRes);
     this.percentages = percentRes;
-    // console.log(this.percentages);
+    console.log(this.percentages);
 
     for (var j = 0; j < percentRes.length; j++) {
       Cy3Array[j] = ((percentRes[j] / 100) * this.Volume).toFixed(2);
       NFArray[j] = (this.Volume - Cy3Array[j]).toFixed(2);
     }
-    // console.log(Cy3Array);
-    // console.log(NFArray);
 
     var tableData1 = [];
     var tableData2 = [];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < code1; i++) {
       var Data1 = {
         code1Num: i + 1,
         Cy3: Cy3Array[i],
@@ -177,26 +200,22 @@ export class GenerateworkorderComponent implements OnInit {
       tableData1.push(Data1);
     }
     this.tableCode1 = tableData1;
-    // console.log(this.tableCode1);
 
-    for (var j = 10; j < 17; j++) {
+    for (var j = code1; j < code1 + code2; j++) {
       var Data2 = {
-        code1Num: j - 9,
+        code1Num: j - code1 + 1,
         Cy3: Cy3Array[j],
         NF: NFArray[j]
       }
       tableData2.push(Data2);
     }
     this.tableCode2 = tableData2;
-    // console.log(this.tableCode2);
   }
 
   /**
    * A submit functionality to generate a request
    */
   onCreateReq() {
-    // console.log(this.assayCodeId1s);
-    // console.log(this.assayCodeId2s);
     const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
     const localAssayCodeType = this.assayCodeType;
     // Define the parentOptions

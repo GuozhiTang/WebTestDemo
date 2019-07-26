@@ -78,7 +78,7 @@
 <!-- Show the Preview of 10x7 Code Dilutions Work-order -->
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col" *ngIf="percentages">
       <h5 class="text-warning">Preview of Work-order:</h5>
       <table class="table-striped table-hover" style="text-align: center; display: inline; margin-right: 30px;" *ngIf="tableCode1">
         <tr>
@@ -107,3 +107,4 @@
     </div>
   </div>
 </div>
+<hr>
