@@ -109,6 +109,16 @@ export class GenerateworkorderComponent implements OnInit {
    * Creation of request is allowed only after this calculation
    */
   onCalculate() {
+    if (this.check4x4) this.calculate4x4();
+    else if (this.check6x6) this.calculate6x6();
+    else if (this.check10x7) this.calculate10x7();
+  }
+
+  calculate4x4() {}
+
+  calculate6x6() {}
+
+  calculate10x7() {
     var H9 = this.UC21A * 1000 / 4023.9;
     var I9 = this.UC2NF * 1000 / 3370.2;
     var J9 = this.UC31A * 1000 / 4103.9;
