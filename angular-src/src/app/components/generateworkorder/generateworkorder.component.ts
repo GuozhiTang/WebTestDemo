@@ -57,7 +57,7 @@ export class GenerateworkorderComponent implements OnInit {
         codeId1s.unshift(res[i].id);
       }
       this.assayCodeId1s = codeId1s;
-      console.log(this.assayCodeId1s);
+      // console.log(this.assayCodeId1s);
     });
 
     // Get the set of Code2 IDs
@@ -68,13 +68,17 @@ export class GenerateworkorderComponent implements OnInit {
         codeId2s.unshift(res[i].id);
       }
       this.assayCodeId2s = codeId2s;
-      console.log(this.assayCodeId2s);
+      // console.log(this.assayCodeId2s);
     });
   }
 
   ngOnInit() {
   }
 
+  /**
+   * Method to get the code map type according to user's selection
+   * @param codeMap Selection of the type of Code Map
+   */
   getCodeMapType(codeMap) {
     if (codeMap == '4x4') {
       console.log('Code Map Type is 4x4!');
@@ -100,7 +104,7 @@ export class GenerateworkorderComponent implements OnInit {
 
   /**
    * Get Assay Code Types according to selected request type
-   * @param reqType: Input selected request type
+   * @param reqType Selection of request type
    */
   getAssayCodeType(reqType) {
     if (reqType == 'Assay Request') {
@@ -113,9 +117,8 @@ export class GenerateworkorderComponent implements OnInit {
   }
 
   /**
-   * Do the calculation according to four inputs from user
-   * Then give a display for the calculated data
-   * Creation of request is allowed only after this calculation
+   * Method to pass in the parameters based on different code map types
+   * Then call the calculation method according to the code map type
    */
   onCalculate() {
     if (this.check4x4) {
@@ -133,6 +136,22 @@ export class GenerateworkorderComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to get all values of necessary parameters according to passed in values 
+   * @param Grid Array-type Grid Loc values for combination of code1 and code2
+   * @param Maxlin1 Max(lin) value for code1
+   * @param Maxlin2 Max(lin) value for code2
+   * @param Minlin1 Min(lin) value for code1
+   * @param Minlin2 Min(lin) value for code2
+   * @param spacing1 The denominator of spacing1 calculation
+   * @param spacing2 The denominator of spacing2 calculation
+   * @param MAX1 MAX value for code1
+   * @param MAX2 MAX value for code2
+   * @param MIN1 MIN value for code1
+   * @param MIN2 MIN value for code2
+   * @param UC2 UC2 value for specific code map type
+   * @param UC3 UC3 value for specific code map type
+   */
   getParameters(Grid, Maxlin1, Maxlin2, Minlin1, Minlin2, spacing1, spacing2, MAX1, MAX2, MIN1, MIN2, UC2, UC3) {
     this.Grid = Grid;
     this.Maxlin1 = Maxlin1;
@@ -149,6 +168,11 @@ export class GenerateworkorderComponent implements OnInit {
     this.UC3 = UC3;
   }
 
+  /**
+   * The main method for calculation based on specific code map type
+   * @param code1 numbers of code1
+   * @param code2 numbers of code2
+   */
   calculate(code1: number, code2: number) {
     var percent = ADJ / (1 + ADJ);
     var ADJ;
@@ -213,7 +237,7 @@ export class GenerateworkorderComponent implements OnInit {
   }
 
   /**
-   * A submit functionality to generate a request
+   * A submit method to generate a request
    */
   onCreateReq() {
     const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
