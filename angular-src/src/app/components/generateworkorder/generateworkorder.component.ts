@@ -34,6 +34,9 @@ export class GenerateworkorderComponent implements OnInit {
   percentages: number[];
   tableCode1: number[];
   tableCode2: number[];
+  check10x7: Boolean = false;
+  check4x4: Boolean = true;
+  check6x6: Boolean = true; 
 
   constructor(
     private flashMessage:FlashMessagesService,
@@ -63,6 +66,29 @@ export class GenerateworkorderComponent implements OnInit {
   ngOnInit() {
   }
 
+  getCodeMapType(codeMap) {
+    if (codeMap == '4x4') {
+      console.log('Code Map Type is 4x4!');
+      this.check4x4 = true;
+      this.check6x6 = false;
+      this.check10x7 = false;
+    } else if (codeMap == '6x6') {
+      console.log('Code Map Type is 6x6!');
+      this.check4x4 = false;
+      this.check6x6 = true;
+      this.check10x7 = false;
+    } else if (codeMap == '10x7'){
+      console.log('Code Map Type is 10x7!')
+      this.check4x4 = false;
+      this.check6x6 = false;
+      this.check10x7 = true;
+    } else {
+      this.check4x4 = false;
+      this.check6x6 = false;
+      this.check10x7 = false;
+    }
+  }
+
   /**
    * Get Assay Code Types according to selected request type
    * @param reqType: Input selected request type
@@ -75,78 +101,6 @@ export class GenerateworkorderComponent implements OnInit {
     } else if (reqType == 'Code Mix Request' || reqType == 'Code Dilution Request') {
       this.assayCodeTypes = ['CEA Code Req Elem', 'miRNA Code Req Elem'];
     }
-  }
-
-  /**
-   * A submit functionality to generate a request
-   */
-  onCreateReq() {
-    // console.log(this.assayCodeId1s);
-    // console.log(this.assayCodeId2s);
-    const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
-    const localAssayCodeType = this.assayCodeType;
-    // Define the parentOptions
-    var parentOptions = {
-      roleName: roleName,
-      units: "",
-      value: 1,
-      ordNum: 0,
-      reqElemSpecName: this.assayCodeType,
-    }
-
-    // Define and get the subReqOptions
-    var subReqOptions = [];
-    const percentageArray = this.percentages;
-    // Add Code1 IDs to the subReqOptions
-    this.assayCodeId1s.forEach(function(val, index) {
-      // console.log(index, val);
-      const subReqData = {
-        value: percentageArray[index],
-        units: "",
-        ordNum: index,
-        assayCodeId: val,
-        codeReqElemSpecName: localAssayCodeType,
-        roleName: "UC1-Bodipy",
-        reqElemSpecName: localAssayCodeType,
-      }
-      subReqOptions.push(subReqData);
-    });
-
-    // Add Code2 IDs to the subReqOptions
-    this.assayCodeId2s.forEach(function(val, index) {
-      const subReqData = {
-        value: percentageArray[index + 10],
-        units: "",
-        ordNum: index + 10,
-        assayCodeId: val,
-        codeReqElemSpecName: localAssayCodeType,
-        roleName: "HB",
-        reqElemSpecName: localAssayCodeType,
-      }
-      subReqOptions.push(subReqData);
-    });
-    // console.log(subReqOptions);
-
-    // Define the json set to sent in order to generate the request
-    const generateRequest = {
-      request: "generateRequest",
-      deptSpecId: 2866379,
-      employeeId: 1587869,
-      opSpecName: this.opSpecName,
-      parentOptions: parentOptions,
-      subReqOptions: {"subReqOptionsList": subReqOptions},
-    }
-    // console.log(generate);
-
-    this.remoteService.remotePostReq(generateRequest).subscribe(res => {
-      console.log(res);
-      if (res) {
-        this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});
-        window.location.reload();
-      } else {
-        this.flashMessage.show('Error Exists! Check again!');
-      }
-    });
   }
 
   /**
@@ -225,5 +179,77 @@ export class GenerateworkorderComponent implements OnInit {
     }
     this.tableCode2 = tableData2;
     // console.log(this.tableCode2);
+  }
+
+  /**
+   * A submit functionality to generate a request
+   */
+  onCreateReq() {
+    // console.log(this.assayCodeId1s);
+    // console.log(this.assayCodeId2s);
+    const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
+    const localAssayCodeType = this.assayCodeType;
+    // Define the parentOptions
+    var parentOptions = {
+      roleName: roleName,
+      units: "",
+      value: 1,
+      ordNum: 0,
+      reqElemSpecName: this.assayCodeType,
+    }
+
+    // Define and get the subReqOptions
+    var subReqOptions = [];
+    const percentageArray = this.percentages;
+    // Add Code1 IDs to the subReqOptions
+    this.assayCodeId1s.forEach(function(val, index) {
+      // console.log(index, val);
+      const subReqData = {
+        value: percentageArray[index],
+        units: "",
+        ordNum: index,
+        assayCodeId: val,
+        codeReqElemSpecName: localAssayCodeType,
+        roleName: "UC1-Bodipy",
+        reqElemSpecName: localAssayCodeType,
+      }
+      subReqOptions.push(subReqData);
+    });
+
+    // Add Code2 IDs to the subReqOptions
+    this.assayCodeId2s.forEach(function(val, index) {
+      const subReqData = {
+        value: percentageArray[index + 10],
+        units: "",
+        ordNum: index + 10,
+        assayCodeId: val,
+        codeReqElemSpecName: localAssayCodeType,
+        roleName: "HB",
+        reqElemSpecName: localAssayCodeType,
+      }
+      subReqOptions.push(subReqData);
+    });
+    // console.log(subReqOptions);
+
+    // Define the json set to sent in order to generate the request
+    const generateRequest = {
+      request: "generateRequest",
+      deptSpecId: 2867745,
+      employeeId: 1587869,
+      opSpecName: this.opSpecName,
+      parentOptions: parentOptions,
+      subReqOptions: {"subReqOptionsList": subReqOptions},
+    }
+    // console.log(generate);
+
+    this.remoteService.remotePostReq(generateRequest).subscribe(res => {
+      console.log(res);
+      if (res) {
+        this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});
+        window.location.reload();
+      } else {
+        this.flashMessage.show('Error Exists! Check again!');
+      }
+    });
   }
 }

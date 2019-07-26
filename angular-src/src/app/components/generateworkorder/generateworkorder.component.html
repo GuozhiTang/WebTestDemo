@@ -1,7 +1,22 @@
+<!-- Area to Select the Code Map Type -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="margin-top: 15px;"><b>Generate Code Dilution Work-order</b></h1>
+      <h5 class="text-warning">Select the Code Map Type:</h5>
+      <select class="form-control" style="width: 200px;" (change)="getCodeMapType($event.target.value)">
+        <option>Code Map Types...</option>
+        <option>4x4</option>
+        <option>6x6</option>
+        <option>10x7</option>
+      </select>
+    </div>
+  </div>
+</div>
+<!-- Area for calculating 10x7 Code Dilutions Work-orders -->
 <div class="container" style="margin-top: 15px;">
   <div class="row">
     <div class="col">
-      <h1 style="margin-top: 15px;"><b>Generate Work-order UI</b></h1>
       <h5 class="text-warning">Fill in the fields with Nanodrop Reading:</h5>
       <form class="uk-form-horizontal" (submit)="onCalculate()">
         <div class="form-group" style="width: 150px; float: left; margin-right: 5px;">
@@ -28,13 +43,14 @@
       </form>
     </div>
   </div>
+  <!-- Form to Choose and Create the 10x7 Code Dilutions Work-order -->
   <div class="row" style="margin-top: 10px;" *ngIf="percentages">
     <div class="col">
       <h5 class="text-warning">Check the preview and create the Work-order: </h5>
       <form (submit)="onCreateReq()">
         <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">Type in your department ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2866379 - HT Assay Dept" disabled>
+          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2867745 - HT Assay Dept" disabled>
         </div>
         <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;">Type in your employee ID:</label>
@@ -59,6 +75,7 @@
     </div>
   </div>
 </div>
+<!-- Show the Preview of 10x7 Code Dilutions Work-order -->
 <div class="container">
   <div class="row">
     <div class="col">
