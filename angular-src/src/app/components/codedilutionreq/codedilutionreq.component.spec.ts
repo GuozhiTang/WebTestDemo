@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenerateworkorderComponent } from './generateworkorder.component';
+import { CodedilutionreqComponent } from './codedilutionreq.component';
 
 describe('GenerateworkorderComponent', () => {
-  let component: GenerateworkorderComponent;
-  let fixture: ComponentFixture<GenerateworkorderComponent>;
+  let component: CodedilutionreqComponent;
+  let fixture: ComponentFixture<CodedilutionreqComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenerateworkorderComponent ]
+      declarations: [ CodedilutionreqComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenerateworkorderComponent);
+    fixture = TestBed.createComponent(CodedilutionreqComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

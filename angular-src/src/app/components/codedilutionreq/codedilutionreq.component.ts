@@ -3,11 +3,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
-  selector: 'app-generateworkorder',
-  templateUrl: './generateworkorder.component.html',
-  styleUrls: ['./generateworkorder.component.css']
+  selector: 'app-codedilutionreq',
+  templateUrl: './codedilutionreq.component.html',
+  styleUrls: ['./codedilutionreq.component.css']
 })
-export class GenerateworkorderComponent implements OnInit {
+export class CodedilutionreqComponent implements OnInit {
   deptSpecId: number;
   employeeId: number;
   opSpecNames: String[] = ['Assay Request', 'Code Dilution Request', 'Code Mix Request', 'Particle Coding Request', 'Transfer Request'];

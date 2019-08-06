@@ -34,7 +34,7 @@ import { LabwarespecsComponent } from './components/labwarespecs/labwarespecs.co
 import { InstrumentsComponent } from './components/instruments/instruments.component';
 import { ProbemapsComponent } from './components/probemaps/probemaps.component';
 import { ProcessComponent } from './components/process/process.component';
-import { GenerateworkorderComponent } from './components/generateworkorder/generateworkorder.component';
+import { CodedilutionreqComponent } from './components/codedilutionreq/codedilutionreq.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
@@ -58,7 +58,7 @@ const appRoutes: Routes = [
   {path: 'instruments', component: InstrumentsComponent},
   {path: 'probemaps', component: ProbemapsComponent},
   {path: 'process', component: ProcessComponent},
-  {path: 'generateworkorder', component: GenerateworkorderComponent},
+  {path: 'codedilutionreq', component: CodedilutionreqComponent},
   {path: 'modal', component: ModalComponent},
   {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
   {path: 'operators', component: OperatorsComponent},
@@ -90,7 +90,7 @@ export function tokenGetter() {
     InstrumentsComponent,
     ProbemapsComponent,
     ProcessComponent,
-    GenerateworkorderComponent,
+    CodedilutionreqComponent,
     ModalComponent,
     MatrixtubecarrierComponent,
     FileUploadComponent,
