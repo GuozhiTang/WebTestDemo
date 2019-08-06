@@ -26,6 +26,7 @@ export class DataService {
       case 'Probemap': route = 'probemaps/getProbemaps'; break;
       case 'Plate': route = 'plates/getplates'; break;
       case 'Spec': route = 'specs/getspecs'; break;
+      case 'OperatorDept': route= 'operatordepts/getoperatordepts'; break;
     }
     return this.http.get('http://localhost:3000/' + route, {headers: headers})
     // return this.http.get(routes, {headers: headers})
@@ -45,6 +46,7 @@ export class DataService {
       case 'Role': route = 'roles/addrole'; break;
       case 'Instrument': route = 'instruments/addInstrument'; break;
       case 'LabwareSpec': route = 'labwarespecs/addlwarespec'; break;
+      case 'OperatorDept': route = 'operatordepts/addoperatordept'; break;
       // case 'Probemap': route = 'probemaps/addProbemap'; break;
       // case 'Spec': route = 'specs/addspecs'; break;
     }
@@ -71,6 +73,7 @@ export class DataService {
       case 'LabwareSpec': route = 'labwarespecs/resetLabwareSpecs'; break;
       case 'Probemap': route = 'probemaps/resetProbemaps'; break;
       case 'Spec': route = 'specs/resetspecs'; break;
+      case 'OperatorDept': route = 'operatordepts/resetoperatordepts'; break;
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/' + route, {headers: headers})

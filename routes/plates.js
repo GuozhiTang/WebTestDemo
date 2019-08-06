@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const config = require('../config/database');
 // Bring in our models
 const Plate = require('../models/plate');
-const request = require('request');
 
 // To get all plates
 router.get('/getplates', (req, res, next) => {

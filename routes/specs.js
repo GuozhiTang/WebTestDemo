@@ -1,10 +1,7 @@
-// All of our specs' routes
 const express = require('express');
 const router = express.Router();
-const config = require('../config/database');
 // Bring in our models
 const Spec = require('../models/spec');
-const request = require('request');
 
 // To get all Specs
 router.get('/getspecs', (req, res, next) => {

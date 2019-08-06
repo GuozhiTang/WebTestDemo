@@ -1,8 +1,6 @@
 // create models for our users, hold all the fields
 // fields: types of fields (name, password, email etc.), functions interacting with the database
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
 
 // User Schema
 const UserSchema = mongoose.Schema({

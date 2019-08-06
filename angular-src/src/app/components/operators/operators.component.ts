@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { DataService } from '../../services/data.service';
 import { Operator } from '../../../models/Operator';
+import { OperatorDept } from '../../../models/OperatorDept';
 
 @Component({
   selector: 'app-operators',
@@ -12,6 +13,8 @@ import { Operator } from '../../../models/Operator';
 export class OperatorsComponent implements OnInit {
   operators: Operator[];
   remoteoperators: Operator[];
+  operatordepts: OperatorDept[];
+  remoteoperatordepts: OperatorDept[];
   Name: String;
   Manufacturing: Boolean;
   checkExist: Boolean = true;
@@ -32,7 +35,20 @@ export class OperatorsComponent implements OnInit {
     // show all operators remotely
     this.remoteService.retrievalData('getOperators').subscribe(remote => {
       this.remoteoperators = remote;
-    })
+    });
+
+    // show all operatordepts locally
+    this.dataService.getData('OperatorDept').subscribe(operatordepts => {
+      this.operatordepts = operatordepts;
+      // console.log(this.operatordepts);
+    });
+    
+    // show all operatordepts remotely
+    var opDept = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', 'true');
+    this.remoteService.retrievalData(opDept).subscribe(remote => {
+      this.remoteoperatordepts = remote.results;
+      // console.log(this.remoteoperatordepts);
+    });
   }
 
   ngOnInit() {
@@ -130,6 +146,23 @@ export class OperatorsComponent implements OnInit {
         // console.log('Can be used!');
         this.warningMsg = undefined;
         this.checkExist = false;
+      }
+    });
+  }
+
+  /**
+   * Drop the previous operatordepts collection
+   * Pull newest operatordepts collection from data server to local database
+   */
+  onResetOperatorDepts() {
+    this.dataService.resetData('OperatorDept').subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show('Reset Successfully!', {cssClass: 'alert-success', timeout: 3000});
+        // console.log('Reset Successfully!');
+        location.reload();
+      } else {
+        this.flashMessage.show('Reset Failed!', {cssClass: 'alert-danger', timeout: 3000});
+        // console.log('Reset Failed!');
       }
     });
   }

@@ -16,6 +16,14 @@ export class GenerateworkorderComponent implements OnInit {
   assayCodeType: String;
   assayCodeId1s: number[];
   assayCodeId2s: number[];
+  codeMapTypes: String[];
+  codeMapType: String;
+  codeId14x4: number[];
+  codeId16x6: number[];
+  codeId110x7: number[];
+  codeId24x4: number[];
+  codeId26x6: number[];
+  codeId210x7: number[];
   UC21A: number = 41.2;
   UC2NF: number = 30.3;
   UC31A: number = 41.478;
@@ -49,52 +57,115 @@ export class GenerateworkorderComponent implements OnInit {
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,
   ) {
-    // Get the set of Code1 IDs
-    var codeId1s = [];
+
+    // To get all code map types remotely
+    var codeMapType = [];
+    var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', 'true');
+    this.remoteService.retrievalData(retrieval).subscribe(res => {
+      // console.log(res);
+      for (var i = 0; i < res.results.length; i++) {
+        codeMapType[i] = res.results[i].name;
+      }
+      this.codeMapTypes = codeMapType;
+      // console.log(this.codeMapTypes);
+    });
+
+    // To get single code1 Ids based on specific code map type remotely
+    var codeId14x4 = [];
+    var codeId16x6 = [];
+    var codeId110x7 = [];
     this.remoteService.retrievalData('fpGetSingleCode1').subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
-        codeId1s.unshift(res[i].id);
+        if (i < 4) {
+          codeId14x4.unshift(res[i].id);
+        } else if (i < 10) {
+          codeId16x6.unshift(res[i].id);
+        } else {
+          codeId110x7.unshift(res[i].id);
+        }
       }
-      this.assayCodeId1s = codeId1s;
-      // console.log(this.assayCodeId1s);
+      this.codeId14x4 = codeId14x4;
+      this.codeId16x6 = codeId16x6;
+      this.codeId110x7 = codeId110x7;
+      // console.log(codeId110x7);
     });
 
-    // Get the set of Code2 IDs
-    var codeId2s = [];
+    // To get single code2 Ids based on specific code map type remotely
+    var codeId24x4 = [];
+    var codeId26x6 = [];
+    var codeId210x7 = [];
     this.remoteService.retrievalData('fpGetSingleCode2').subscribe(res => {
       // console.log(res);
       for (var i = 0; i < res.length; i++) {
-        codeId2s.unshift(res[i].id);
+        if (i < 4) {
+          codeId24x4.unshift(res[i].id);
+        } else if (i < 10) {
+          codeId26x6.unshift(res[i].id);
+        } else {
+          codeId210x7.unshift(res[i].id);
+        }
       }
-      this.assayCodeId2s = codeId2s;
-      // console.log(this.assayCodeId2s);
+      this.codeId24x4 = codeId24x4;
+      this.codeId26x6 = codeId26x6;
+      this.codeId210x7 = codeId210x7;
+      // console.log(this.codeId24x4);
+      // console.log(this.codeId26x6);
+      // console.log(this.codeId210x7);
     });
+
+    // // Get the set of Code1 IDs
+    // var codeId1s = [];
+    // this.remoteService.retrievalData('fpGetSingleCode1').subscribe(res => {
+    //   console.log(res);
+    //   for (var i = 0; i < res.length; i++) {
+    //     codeId1s.unshift(res[i].id);
+    //   }
+    //   this.assayCodeId1s = codeId1s;
+    //   // console.log(this.assayCodeId1s);
+    // });
+
+    // // Get the set of Code2 IDs
+    // var codeId2s = [];
+    // this.remoteService.retrievalData('fpGetSingleCode2').subscribe(res => {
+    //   // console.log(res);
+    //   for (var i = 0; i < res.length; i++) {
+    //     codeId2s.unshift(res[i].id);
+    //   }
+    //   this.assayCodeId2s = codeId2s;
+    //   // console.log(this.assayCodeId2s);
+    // });
   }
 
   ngOnInit() {
   }
 
   /**
-   * Method to get the code map type according to user's selection
+   * Method to get the code map type and assay code id type according to user's selection
    * @param codeMap Selection of the type of Code Map
    */
   getCodeMapType(codeMap) {
-    if (codeMap == '4x4') {
+    if (codeMap == '16-Plex') {
       console.log('Code Map Type is 4x4!');
       this.check4x4 = true;
       this.check6x6 = false;
       this.check10x7 = false;
-    } else if (codeMap == '6x6') {
+      this.assayCodeId1s = this.codeId14x4;
+      this.assayCodeId2s = this.codeId24x4;
+    } else if (codeMap == '36-Plex') {
       console.log('Code Map Type is 6x6!');
       this.check4x4 = false;
       this.check6x6 = true;
       this.check10x7 = false;
-    } else if (codeMap == '10x7'){
+      this.assayCodeId1s = this.codeId16x6;
+      this.assayCodeId2s = this.codeId26x6;
+    } else if (codeMap == '70-Plex'){
       console.log('Code Map Type is 10x7!')
       this.check4x4 = false;
       this.check6x6 = false;
       this.check10x7 = true;
+      this.assayCodeId1s = this.codeId110x7;
+      this.assayCodeId2s = this.codeId210x7;
     } else {
       this.check4x4 = false;
       this.check6x6 = false;
@@ -189,7 +260,6 @@ export class GenerateworkorderComponent implements OnInit {
       }
       if (i == code1) {
         percentRes[i] = "100.0";
-        console.log('Here!');
         continue;
       }
       if (i < code1) {
@@ -205,7 +275,7 @@ export class GenerateworkorderComponent implements OnInit {
       percentRes[i] = (percent * 100).toFixed(4);
     }
     this.percentages = percentRes;
-    console.log(this.percentages);
+    // console.log(this.percentages);
 
     for (var j = 0; j < percentRes.length; j++) {
       Cy3Array[j] = ((percentRes[j] / 100) * this.Volume).toFixed(2);
@@ -240,6 +310,14 @@ export class GenerateworkorderComponent implements OnInit {
    * A submit method to generate a request
    */
   onCreateReq() {
+    var typeIndex;
+    if (this.check4x4) {
+      typeIndex = 4;
+    } else if (this.check6x6) {
+      typeIndex = 6;
+    } else if (this.check10x7){
+      typeIndex = 10;
+    }
     const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
     const localAssayCodeType = this.assayCodeType;
     // Define the parentOptions
@@ -255,6 +333,7 @@ export class GenerateworkorderComponent implements OnInit {
     var subReqOptions = [];
     const percentageArray = this.percentages;
     // Add Code1 IDs to the subReqOptions
+    console.log(this.assayCodeId1s);
     this.assayCodeId1s.forEach(function(val, index) {
       // console.log(index, val);
       const subReqData = {
@@ -270,11 +349,12 @@ export class GenerateworkorderComponent implements OnInit {
     });
 
     // Add Code2 IDs to the subReqOptions
+    console.log(this.assayCodeId2s);
     this.assayCodeId2s.forEach(function(val, index) {
       const subReqData = {
-        value: percentageArray[index + 10],
+        value: percentageArray[index + typeIndex],
         units: "",
-        ordNum: index + 10,
+        ordNum: index + typeIndex,
         assayCodeId: val,
         codeReqElemSpecName: localAssayCodeType,
         roleName: "HB",
@@ -287,16 +367,16 @@ export class GenerateworkorderComponent implements OnInit {
     // Define the json set to sent in order to generate the request
     const generateRequest = {
       request: "generateRequest",
-      deptSpecId: 2867745,
+      deptSpecId: 2873554,
       employeeId: 1587869,
       opSpecName: this.opSpecName,
       parentOptions: parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions},
     }
-    // console.log(generate);
+    console.log(generateRequest);
 
     this.remoteService.remotePostReq(generateRequest).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       if (res) {
         this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});
         window.location.reload();

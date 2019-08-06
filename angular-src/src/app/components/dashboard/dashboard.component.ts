@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     public authService:AuthService,
     ) {
+      // Get user information in local database
       this.authService.getProfile().subscribe(profile => {
         // console.log(profile.user);
         this.user = profile.user;

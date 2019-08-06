@@ -38,6 +38,7 @@ const instruments = require('./routes/instruments');
 const probemaps = require('./routes/probemaps');
 const probes = require('./routes/probes');
 const operators = require('./routes/operators');
+const operatordepts = require('./routes/operatordepts');
 
 // Port Number
 const port = 3000;
@@ -76,6 +77,7 @@ app.use('/instruments', instruments);
 app.use('/probemaps', probemaps);
 app.use('/probes', probes);
 app.use('/operators', operators);
+app.use('/operatordepts', operatordepts);
 
 // Index Route to the home page
 app.get('/', (req, res) => {

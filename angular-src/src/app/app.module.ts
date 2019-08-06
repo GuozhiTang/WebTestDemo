@@ -39,6 +39,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
 import { OperatorsComponent } from './components/operators/operators.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
   {path: 'modal', component: ModalComponent},
   {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
   {path: 'operators', component: OperatorsComponent},
+  {path: 'fpadmin', component: AdminComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -93,6 +95,7 @@ export function tokenGetter() {
     MatrixtubecarrierComponent,
     FileUploadComponent,
     OperatorsComponent,
+    AdminComponent,
   ],
   // Modules should be put into imports
   imports: [

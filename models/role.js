@@ -1,10 +1,7 @@
-// create models for our specs, hold all the fields
-// fields: types of fields, functions interacting with the database
 const mongoose = require('mongoose');
-const config = require('../config/database');
 const request = require('request');
 
-// Spec Schema
+// Role Schema
 const RoleSchema = mongoose.Schema({
   // Attributes
   moduleName: {
