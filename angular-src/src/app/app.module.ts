@@ -40,6 +40,7 @@ import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matri
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
 import { OperatorsComponent } from './components/operators/operators.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { CodemixreqComponent } from './components/codemixreq/codemixreq.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
   {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
   {path: 'operators', component: OperatorsComponent},
   {path: 'fpadmin', component: AdminComponent},
+  {path: 'codemixreq', component: CodemixreqComponent},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -96,6 +98,7 @@ export function tokenGetter() {
     FileUploadComponent,
     OperatorsComponent,
     AdminComponent,
+    CodemixreqComponent,
   ],
   // Modules should be put into imports
   imports: [

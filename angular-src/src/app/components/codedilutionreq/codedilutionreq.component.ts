@@ -50,8 +50,8 @@ export class CodedilutionreqComponent implements OnInit {
   tableCode1: number[];
   tableCode2: number[];
   check10x7: Boolean = false;
-  check4x4: Boolean = true;
-  check6x6: Boolean = true; 
+  check4x4: Boolean = false;
+  check6x6: Boolean = false; 
 
   constructor(
     private flashMessage:FlashMessagesService,
@@ -333,7 +333,7 @@ export class CodedilutionreqComponent implements OnInit {
     var subReqOptions = [];
     const percentageArray = this.percentages;
     // Add Code1 IDs to the subReqOptions
-    console.log(this.assayCodeId1s);
+    // console.log(this.assayCodeId1s);
     this.assayCodeId1s.forEach(function(val, index) {
       // console.log(index, val);
       const subReqData = {
@@ -349,7 +349,7 @@ export class CodedilutionreqComponent implements OnInit {
     });
 
     // Add Code2 IDs to the subReqOptions
-    console.log(this.assayCodeId2s);
+    // console.log(this.assayCodeId2s);
     this.assayCodeId2s.forEach(function(val, index) {
       const subReqData = {
         value: percentageArray[index + typeIndex],

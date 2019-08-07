@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="margin-top: 15px;"><b>Generate Code Mix Request</b></h1>
+      <h5 class="text-warning">Select the Code Map Type:</h5>
+      <select class="form-control" style="width: 200px;" name="codeMap2" [(ngModel)]="codeMap" (change)="getCodeMapType(codeMap)">
+        <option>Code Map Types...</option>
+        <option [ngValue]="codeMap" *ngFor="let codeMap of codeMaps">{{codeMap.name}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Create the PlexIdList:</h5>
+      <form autocomplete="off">
+        <div class="form-group" style="width: 350px;" *ngFor="let item of Group">
+          <label style="font-size: 16px;">PlexId:</label>
+          <input class="form-control" type="text" value="{{item.plexId}}" [(ngModel)]="item.plexId" name="item.plexId">{{item.plexId}}
+          <button class="btn btn-danger" (click)="removeInput(i)">Delete</button>
+        </div>
+        <button class="btn btn-success" (click)="addInput()" Style="margin-right: 5px;">Add</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        Group: 
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 15px;">
+  <!-- Form to Choose and Create the Code Mix Work-order -->
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Check the preview and create the Work-order: </h5>
+      <form (submit)="onCreateReq()">
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Type in your department ID:</label>
+          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2873561 - Manufacturing Dept" disabled>
+        </div>
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Type in your employee ID:</label>
+          <input class="form-control" type="text" [(ngModel)]="employeeId" name="employeeId" placeholder="1587869 - Felix Green" disabled>
+        </div>
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Select the Assay Code Type:</label>
+          <select class="form-control" [(ngModel)]="assayCodeType" name="assayCodeType">
+            <option>Select the Assay Code Type...</option>
+            <option [value]="assayCodeType" *ngFor='let assayCodeType of assayCodeTypes'>{{assayCodeType}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Work-order</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Show the Preview of Code Mix Work-order -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Preview of Work-order:</h5>
+      <table class="table-striped table-hover" style="text-align: center; display: inline; margin-right: 30px;">
+        <tr>
+          <th style="padding-right: 2px">Code 1</th>
+        </tr>
+        <tr *ngFor="let code1 of assayCodeId1s">
+          <td style="padding-right: 2px">{{code1}}</td>
+        </tr>
+      </table>
+      <table class="table-striped table-hover" style="text-align: center; display: inline;">
+        <tr>
+          <th style="padding-right: 2px">Code 2</th>
+        </tr>
+        <tr *ngFor="let code2 of assayCodeId2s">
+          <td style="padding-right: 2px">{{code2}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<hr>
