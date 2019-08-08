@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { CodeMap } from '../../../models/CodeMap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-codedilutionreq',
@@ -10,14 +12,12 @@ import { RemotereqService } from '../../services/remotereq.service';
 export class CodedilutionreqComponent implements OnInit {
   deptSpecId: number;
   employeeId: number;
-  opSpecNames: String[] = ['Assay Request', 'Code Dilution Request', 'Code Mix Request', 'Particle Coding Request', 'Transfer Request'];
-  opSpecName: String;
-  assayCodeTypes: String[];
+  codeMaps: CodeMap[];
+  codeMap: CodeMap;
+  assayCodeTypes: String[] = ['CEA Code Req Elem', 'miRNA Code Req Elem'];
   assayCodeType: String;
   assayCodeId1s: number[];
   assayCodeId2s: number[];
-  codeMapTypes: String[];
-  codeMapType: String;
   codeId14x4: number[];
   codeId16x6: number[];
   codeId110x7: number[];
@@ -49,25 +49,20 @@ export class CodedilutionreqComponent implements OnInit {
   percentages: number[];
   tableCode1: number[];
   tableCode2: number[];
-  check10x7: Boolean = false;
-  check4x4: Boolean = false;
-  check6x6: Boolean = false; 
+  newReqID: number;
 
   constructor(
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,
+    private modalService: NgbModal,
   ) {
 
     // To get all code map types remotely
-    var codeMapType = [];
     var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', 'true');
     this.remoteService.retrievalData(retrieval).subscribe(res => {
       // console.log(res);
-      for (var i = 0; i < res.results.length; i++) {
-        codeMapType[i] = res.results[i].name;
-      }
-      this.codeMapTypes = codeMapType;
-      // console.log(this.codeMapTypes);
+      this.codeMaps = res.results;
+      // console.log(this.codeMaps);
     });
 
     // To get single code1 Ids based on specific code map type remotely
@@ -113,98 +108,35 @@ export class CodedilutionreqComponent implements OnInit {
       // console.log(this.codeId26x6);
       // console.log(this.codeId210x7);
     });
-
-    // // Get the set of Code1 IDs
-    // var codeId1s = [];
-    // this.remoteService.retrievalData('fpGetSingleCode1').subscribe(res => {
-    //   console.log(res);
-    //   for (var i = 0; i < res.length; i++) {
-    //     codeId1s.unshift(res[i].id);
-    //   }
-    //   this.assayCodeId1s = codeId1s;
-    //   // console.log(this.assayCodeId1s);
-    // });
-
-    // // Get the set of Code2 IDs
-    // var codeId2s = [];
-    // this.remoteService.retrievalData('fpGetSingleCode2').subscribe(res => {
-    //   // console.log(res);
-    //   for (var i = 0; i < res.length; i++) {
-    //     codeId2s.unshift(res[i].id);
-    //   }
-    //   this.assayCodeId2s = codeId2s;
-    //   // console.log(this.assayCodeId2s);
-    // });
   }
 
   ngOnInit() {
   }
 
   /**
-   * Method to get the code map type and assay code id type according to user's selection
+   * Method to get the assay code id list and pass in the speicific data according to selected codemap type
    * @param codeMap Selection of the type of Code Map
    */
-  getCodeMapType(codeMap) {
-    if (codeMap == '16-Plex') {
+  getCodeMapType(codeMap: CodeMap) {
+    if (codeMap.name == '16-Plex') {
       console.log('Code Map Type is 4x4!');
-      this.check4x4 = true;
-      this.check6x6 = false;
-      this.check10x7 = false;
       this.assayCodeId1s = this.codeId14x4;
       this.assayCodeId2s = this.codeId24x4;
-    } else if (codeMap == '36-Plex') {
+      this.getParameters([1,2,3,4,1,2,3,4], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
+        3, 3, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
+    } else if (codeMap.name == '36-Plex') {
       console.log('Code Map Type is 6x6!');
-      this.check4x4 = false;
-      this.check6x6 = true;
-      this.check10x7 = false;
       this.assayCodeId1s = this.codeId16x6;
       this.assayCodeId2s = this.codeId26x6;
-    } else if (codeMap == '70-Plex'){
-      console.log('Code Map Type is 10x7!')
-      this.check4x4 = false;
-      this.check6x6 = false;
-      this.check10x7 = true;
+      this.getParameters([1,2,3,4,5,6,1,2,3,4,5,6], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
+        5, 5, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
+    } else if (codeMap.name == '70-Plex'){
+      console.log('Code Map Type is 10x7!');
       this.assayCodeId1s = this.codeId110x7;
       this.assayCodeId2s = this.codeId210x7;
-    } else {
-      this.check4x4 = false;
-      this.check6x6 = false;
-      this.check10x7 = false;
-    }
-  }
-
-  /**
-   * Get Assay Code Types according to selected request type
-   * @param reqType Selection of request type
-   */
-  getAssayCodeType(reqType) {
-    if (reqType == 'Assay Request') {
-      this.assayCodeTypes = ['Assay Req Elem'];
-    } else if (reqType == 'Particle Coding Request') {
-      this.assayCodeTypes = ['Particle Req Elem'];
-    } else if (reqType == 'Code Mix Request' || reqType == 'Code Dilution Request') {
-      this.assayCodeTypes = ['CEA Code Req Elem', 'miRNA Code Req Elem'];
-    }
-  }
-
-  /**
-   * Method to pass in the parameters based on different code map types
-   * Then call the calculation method according to the code map type
-   */
-  onCalculate() {
-    if (this.check4x4) {
-      this.getParameters([1,2,3,4,1,2,3,4], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
-                        3, 3, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
-      this.calculate(4, 4);
-    } else if (this.check6x6) {
-      this.getParameters([1,2,3,4,5,6,1,2,3,4,5,6], 1.47287763166735, 2.67968245856451, 0.216645663311592, 0.384960940481029,
-                        5, 5, 1.47288, 2.67968, 0.11769, 0.1855, 1.1978575844656, 1.38027132448778);
-      this.calculate(6, 6);
-    } else if (this.check10x7) {
       this.getParameters([1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7], 0.50, 1.45, 0.046, 0.046, 9, 6,
-                          0.5, 1.45, 0.042, 0.042, 1.26977603033476, 1.40518121409196);
-      this.calculate(10, 7);
-    }
+        0.5, 1.45, 0.042, 0.042, 1.26977603033476, 1.40518121409196);
+    } 
   }
 
   /**
@@ -241,10 +173,12 @@ export class CodedilutionreqComponent implements OnInit {
 
   /**
    * The main method for calculation based on specific code map type
-   * @param code1 numbers of code1
-   * @param code2 numbers of code2
    */
-  calculate(code1: number, code2: number) {
+  onCalculate() {
+    // Get the amount of code1 and code2 according to different code map types
+    var code1 = this.assayCodeId1s.length; 
+    var code2 = this.assayCodeId2s.length;
+
     var percent = ADJ / (1 + ADJ);
     var ADJ;
     var FNF;
@@ -275,7 +209,7 @@ export class CodedilutionreqComponent implements OnInit {
       percentRes[i] = (percent * 100).toFixed(4);
     }
     this.percentages = percentRes;
-    // console.log(this.percentages);
+    console.log(this.percentages);
 
     for (var j = 0; j < percentRes.length; j++) {
       Cy3Array[j] = ((percentRes[j] / 100) * this.Volume).toFixed(2);
@@ -307,22 +241,17 @@ export class CodedilutionreqComponent implements OnInit {
   }
 
   /**
-   * A submit method to generate a request
+   * A submit method to generate code dilution request
+   * @param content content area for successful result modal
    */
-  onCreateReq() {
-    var typeIndex;
-    if (this.check4x4) {
-      typeIndex = 4;
-    } else if (this.check6x6) {
-      typeIndex = 6;
-    } else if (this.check10x7){
-      typeIndex = 10;
-    }
-    const roleName = (this.opSpecName == 'Code Mix Request') ? 'Code Mixes' : 'Code Dils';
+  onCreateReq(content) {
+    // To judge which code map type is chosen
+    var typeIndex = this.assayCodeId1s.length;
+    
     const localAssayCodeType = this.assayCodeType;
     // Define the parentOptions
     var parentOptions = {
-      roleName: roleName,
+      roleName: 'Code Dils',
       units: "",
       value: 1,
       ordNum: 0,
@@ -364,12 +293,12 @@ export class CodedilutionreqComponent implements OnInit {
     });
     // console.log(subReqOptions);
 
-    // Define the json set to sent in order to generate the request
+    // Define the json set to generate the request
     const generateRequest = {
       request: "generateRequest",
-      deptSpecId: 2873554,
+      deptSpecId: 2873561,
       employeeId: 1587869,
-      opSpecName: this.opSpecName,
+      opSpecName: 'Code Dilution Request',
       parentOptions: parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions},
     }
@@ -378,11 +307,20 @@ export class CodedilutionreqComponent implements OnInit {
     this.remoteService.remotePostReq(generateRequest).subscribe(res => {
       // console.log(res);
       if (res) {
-        this.flashMessage.show('Create Work-order Successfully!', {cssClass: 'alert-success', timeout: 5000});
-        window.location.reload();
+        this.newReqID = res.requestId;
+        this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
       } else {
-        this.flashMessage.show('Error Exists! Check again!');
+        this.flashMessage.show('There exists some errors! Please re-check!');
       }
     });
+  }
+
+  /**
+   * Method overridden to set the close functionality of the modal
+   * If it succeed, then after close the webpage should be reloaded.
+   */
+  closeModal() {
+    this.modalService.dismissAll();
+    window.location.reload();
   }
 }

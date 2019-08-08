@@ -4,9 +4,9 @@
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Generate Code Dilution Request</b></h1>
       <h5 class="text-warning">Select the Code Map Type:</h5>
-      <select class="form-control" style="width: 200px;" name="codeMapType" [(ngModel)]="codeMapType" (change)="getCodeMapType($event.target.value)">
+      <select class="form-control" style="width: 200px;" name="codeMap" [(ngModel)]="codeMap" (change)="getCodeMapType(codeMap)">
         <option>Code Map Types...</option>
-        <option *ngFor="let type of codeMapTypes">{{type}}</option>
+        <option [ngValue]="codeMap" *ngFor="let codeMap of codeMaps">{{codeMap.name}}</option>
       </select>
     </div>
   </div>
@@ -45,38 +45,47 @@
   <div class="row" style="margin-top: 10px;" *ngIf="percentages">
     <div class="col">
       <h5 class="text-warning">Check the preview and create the Work-order: </h5>
-      <form (submit)="onCreateReq()">
-        <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
+      <form (submit)="onCreateReq(content)">
+        <div class="form-group" style="width: 350px;">
           <label style="font-size: 16px;">Type in your department ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2873554 - HT Assay Dept" disabled>
+          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2873561 - Manufacturing Dept" disabled>
         </div>
-        <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
+        <div class="form-group" style="width: 350px;">
           <label style="font-size: 16px;">Type in your employee ID:</label>
           <input class="form-control" type="text" [(ngModel)]="employeeId" name="employeeId" placeholder="1587869 - Felix Green" disabled>
         </div>
         <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;" for="selectopSpecName">Select the type of request:</label>
-          <select class="form-control" id="selectopSpecName" [(ngModel)]="opSpecName" name="opSpecName" (change)="getAssayCodeType($event.target.value)">
-            <option>Select the type of request...</option>
-            <option [value]="opSpecName" *ngFor='let opSpecName of opSpecNames'>{{opSpecName}}</option>
-          </select>
-        </div>
-        <div class="form-group" style="width: 350px; float: left; margin-right: 5px;">
           <label style="font-size: 16px;" for="selectAssayCodeType">Select the Assay Code Type:</label>
           <select class="form-control" id="selectAssayCodeType" [(ngModel)]="assayCodeType" name="assayCodeType">
             <option>Select the Assay Code Type...</option>
             <option [value]="assayCodeType" *ngFor='let assayCodeType of assayCodeTypes'>{{assayCodeType}}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary" style="float: left; margin-top: 31px;">Create Work-order</button>
+        <button type="submit" class="btn btn-primary">Create Work-order</button>
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Congratulations</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>You've successfully created a code dilution request!</p>
+            <P>The new request ID is: <b>{{newReqID}}</b></P>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closeModal()">Close</button>
+          </div>
+        </ng-template>
       </form>
     </div>
   </div>
 </div>
 <!-- Show the Preview of Code Dilutions Work-order -->
-<div class="container">
+<div class="container" style="margin-top: 15px;" *ngIf="percentages">
   <div class="row">
-    <div class="col" *ngIf="percentages">
+    <div class="col">
       <h5 class="text-warning">Preview of Work-order:</h5>
       <table class="table-striped table-hover" style="text-align: center; display: inline; margin-right: 30px;" *ngIf="tableCode1">
         <tr>
@@ -85,7 +94,7 @@
           <th style="padding-left: 2px; padding-right: 2px; width: 100px;">NF</th>
         </tr>
         <tr *ngFor="let code1 of tableCode1">
-          <td style="padding-right: 2px">{{code1.code1Num}}</td>
+          <td style="padding-right: 2px"><button class="btn btn-outline-light">{{code1.code1Num}}</button></td>
           <td style="padding-right: 2px">{{code1.Cy3}}</td>
           <td style="padding-right: 2px">{{code1.NF}}</td>
         </tr>
@@ -97,7 +106,7 @@
           <th style="padding-left: 2px; padding-right: 2px; width: 100px;">NF</th>
         </tr>
         <tr *ngFor="let code2 of tableCode2">
-          <td style="padding-right: 2px">{{code2.code1Num}}</td>
+          <td style="padding-right: 2px"><button class="btn btn-outline-light">{{code2.code1Num}}</button></td>
           <td style="padding-right: 2px">{{code2.Cy3}}</td>
           <td style="padding-right: 2px">{{code2.NF}}</td>
         </tr>
