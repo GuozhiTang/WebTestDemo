@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { Workorder } from '../../../models/Workorder';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
+import { Operator } from '../../../models/Operator';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-matrixtubecarrier',
@@ -14,17 +16,21 @@ import { RemotereqService } from '../../services/remotereq.service';
 })
 
 export class MatrixtubecarrierComponent {
+  operator: Operator;
+  department: Department;
+  departments: Department[];
   progress = 0;
   // control: FormControl;
   @ViewChild(FileUploadComponent) childUpload : FileUploadComponent;
   workorderids: BigInteger[];
   workorders: Workorder[];
   // workorderId: Workorder[];
-  user: {
-    name: String;
-    department: String;
-  };
+  // user: {
+  //   name: String;
+  //   department: String;
+  // };
   signup = new FormGroup({
+    department: new FormControl(null, Validators.required),
     workorderid: new FormControl(null, Validators.required),
     csv: new FormControl(null, [Validators.required, requiredFileType('csv')])
   });
@@ -35,16 +41,32 @@ export class MatrixtubecarrierComponent {
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,
     ) {
+
+      // Get operator information in local database
+      this.authService.getProfile().subscribe(profile => {
+        // console.log(profile);
+        this.operator = profile.operator;
+        // console.log(this.operator);
+
+        // Get departments according to specific operator information
+        var departments = [];
+        var data = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
+        this.remoteService.retrievalData(data).subscribe(res => {
+          // console.log(res.results);
+          for (var i = 0; i < res.results.length; i++) {
+            if (res.results[i].operator_id.id == profile.operator.id) {
+              // console.log(res.results[i].dept_spec);
+              departments.push(res.results[i].dept_spec);
+            }
+          }
+          this.departments = departments;
+          // console.log(this.departments);
+        });
+      });
+
       // Get the work-order id list here
       this.remoteService.retrievalData('fpAntibodyMatrixReq').subscribe(res => {
         this.workorderids = res.results;
-      });
-
-      // Get the user information here
-      this.authService.getProfile().subscribe(profile => {
-        // console.log(profile);
-        this.user = profile.user;
-        // console.log(this.user);
       });
   }
 
@@ -66,7 +88,7 @@ export class MatrixtubecarrierComponent {
     this.remoteService.remotePostReq(uploadMatrixTube).subscribe(res => {
       if (res) {
         this.workorders = res;
-        console.log(res);
+        // console.log(res);
         // console.log(this.workorders.antibodyName);
 
         // Set the default status as active

@@ -4,6 +4,7 @@ const router = express.Router();
 const Operator = require('../models/operator');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const passport = require('passport');
 
 // To get all Operators
 router.get('/getoperators', (req, res, next) => {
@@ -79,8 +80,8 @@ router.post('/authenticate', (req, res, next) => {
         success: true,
         token: 'JWT ' + token,
         operator: {
-          id: operator._id,
-          name: operator.name
+          id: operator[0]._id,
+          name: operator[0].name
         },
         msg:'Login Successfully!'
       });
@@ -88,23 +89,21 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-// Profile - /users/profile
 // one of the routes we will protect with our aithenticate with our token
-// router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-//   // res.send('PROFILE');
-//   // res.json({msg: "success profile"});
-//   res.json({user: req.user});
-// });
+router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  // res.send('PROFILE');
+  // res.json({msg: "success profile"});
+  res.json({operator: req.user});
+  // console.log(req.user);
+});
 
-// router.get('/nulluser', (req, res, next) => {
-//   const name = undefined;
-//   const department = undefined;
-//   const user = {
-//     name: name,
-//     department: department
-//   }
+router.get('/nulloperator', (req, res, next) => {
+  const name = undefined;
+  const operator = {
+    name: name
+  }
 
-//   res.json({user: user});
-// });
+  res.json({operator: operator});
+});
 
 module.exports = router;

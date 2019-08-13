@@ -45,7 +45,7 @@ import { CodemixreqComponent } from './components/codemixreq/codemixreq.componen
 const appRoutes: Routes = [
   // This could be the home page
   {path: '', component: HomeComponent},
-  {path: 'register', component: RegisterComponent},
+  // {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
@@ -78,7 +78,7 @@ export function tokenGetter() {
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent,
+    // RegisterComponent,
     HomeComponent,
     DashboardComponent,
     ProfileComponent,

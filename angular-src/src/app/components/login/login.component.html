@@ -3,15 +3,15 @@
 <form (submit)="onLoginSubmit()">
   <div class="form-group">
     <label>Name</label>
-    <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Type your name here...">
+    <input type="text" class="form-control" [(ngModel)]="name" name="name" style="width: 550px;" placeholder="Type your name here...">
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="selectDep">Department</label>
     <select class="form-control" id="selectDep" [(ngModel)]="department" name="department">
       <option>Select your department...</option>
       <option [value]="department" *ngFor='let department of departments'>{{department}}</option>
     </select>
-  </div>
+  </div> -->
   <!-- <div class="form-group">
       <label>Department</label>
       <input type="text" class="form-control" [(ngModel)]="department" name="department">

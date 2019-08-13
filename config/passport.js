@@ -1,6 +1,7 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const User = require('../models/user');
+// const User = require('../models/user');
+const Operator = require('../models/operator');
 const config = require('../config/database');
 
 module.exports = function (passport) {
@@ -14,15 +15,25 @@ module.exports = function (passport) {
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
     // It is very important to see what the jwt_payload is first and then we can get _id correctly!!!
     console.log(jwt_payload);
-    User.getUserById(jwt_payload.data._id, (err, user) => {
+    Operator.getById(jwt_payload.data._id, (err, operator) => {
       if (err) {
         return done(err, false);
       }
-      if (user) {
-        return done(null, user);
+      if (operator) {
+        return done(null, operator);
       } else {
         return done(null, false);
       }
     });
+    // User.getUserById(jwt_payload.data._id, (err, user) => {
+    //   if (err) {
+    //     return done(err, false);
+    //   }
+    //   if (user) {
+    //     return done(null, user);
+    //   } else {
+    //     return done(null, false);
+    //   }
+    // });
   }));
 }

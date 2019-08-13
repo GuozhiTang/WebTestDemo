@@ -4,6 +4,9 @@ import { RemotereqService } from '../../services/remotereq.service';
 import { CodeMap } from '../../../models/CodeMap';
 import { CodeData } from '../../../models/CodeData';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
+import { Operator } from '../../../models/Operator';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-codemixreq',
@@ -11,6 +14,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./codemixreq.component.css']
 })
 export class CodemixreqComponent implements OnInit {
+  operator: Operator;
+  departments: Department[];
+  deptSpecId: Number;
   codeMaps: CodeMap[];
   codeMap: CodeMap;
   assayCodeTypes: String[] = ['CEA Code Req Elem', 'miRNA Code Req Elem'];
@@ -25,10 +31,33 @@ export class CodemixreqComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private remoteService: RemotereqService,
     private modalService: NgbModal,
+    public authService:AuthService,
   ) {
 
+      // Get operator information in local database
+      this.authService.getProfile().subscribe(profile => {
+        // console.log(profile);
+        this.operator = profile.operator;
+        // console.log(this.operator);
+
+        // Get departments according to specific operator information
+        var departments = [];
+        var data = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
+        this.remoteService.retrievalData(data).subscribe(res => {
+          // console.log(res.results);
+          for (var i = 0; i < res.results.length; i++) {
+            if (res.results[i].operator_id.id == profile.operator.id) {
+              // console.log(res.results[i].dept_spec);
+              departments.push(res.results[i].dept_spec);
+            }
+          }
+          this.departments = departments;
+          // console.log(this.departments);
+        });
+      });
+
     // To get all code map objects remotely
-    var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', 'true');
+    var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(retrieval).subscribe(res => {
       // console.log(res);
       this.codeMaps = res.results;
@@ -146,15 +175,14 @@ export class CodemixreqComponent implements OnInit {
     // Define the json set to generate the request
     var generateReq = {
       request: "generateRequest",
-      deptSpecId: 2873561,
-      employeeId: 1587869,
+      deptSpecId: this.deptSpecId,
+      employeeId: this.operator.id,
       opSpecName: 'Code Mix Request',
       parentOptions: parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions},
     }
-    console.log(generateReq);
+    // console.log(generateReq);
 
-    
     this.remoteService.remotePostReq(generateReq).subscribe(res => {
       // console.log(res);
       if (res) {

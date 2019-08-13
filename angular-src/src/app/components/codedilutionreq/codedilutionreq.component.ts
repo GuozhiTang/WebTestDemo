@@ -3,6 +3,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
 import { CodeMap } from '../../../models/CodeMap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
+import { Operator } from '../../../models/Operator';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-codedilutionreq',
@@ -10,12 +13,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./codedilutionreq.component.css']
 })
 export class CodedilutionreqComponent implements OnInit {
-  deptSpecId: number;
-  employeeId: number;
+  operator: Operator;
+  departments: Department[];
+  deptSpecId: Number;
   codeMaps: CodeMap[];
   codeMap: CodeMap;
   assayCodeTypes: String[] = ['CEA Code Req Elem', 'miRNA Code Req Elem'];
-  assayCodeType: String;
+  assayCodeType: String = this.assayCodeTypes[1];
   assayCodeId1s: number[];
   assayCodeId2s: number[];
   codeId14x4: number[];
@@ -55,10 +59,33 @@ export class CodedilutionreqComponent implements OnInit {
     private flashMessage:FlashMessagesService,
     private remoteService: RemotereqService,
     private modalService: NgbModal,
+    public authService:AuthService,
   ) {
 
+    // Get operator information in local database
+    this.authService.getProfile().subscribe(profile => {
+      // console.log(profile);
+      this.operator = profile.operator;
+      // console.log(this.operator);
+
+      // Get departments according to specific operator information
+      var departments = [];
+      var data = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
+      this.remoteService.retrievalData(data).subscribe(res => {
+        // console.log(res.results);
+        for (var i = 0; i < res.results.length; i++) {
+          if (res.results[i].operator_id.id == profile.operator.id) {
+            // console.log(res.results[i].dept_spec);
+            departments.push(res.results[i].dept_spec);
+          }
+        }
+        this.departments = departments;
+        // console.log(this.departments);
+      });
+    });
+
     // To get all code map types remotely
-    var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', 'true');
+    var retrieval = this.remoteService.getCoreDaoReqData('Codemap', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(retrieval).subscribe(res => {
       // console.log(res);
       this.codeMaps = res.results;
@@ -296,13 +323,13 @@ export class CodedilutionreqComponent implements OnInit {
     // Define the json set to generate the request
     const generateRequest = {
       request: "generateRequest",
-      deptSpecId: 2873561,
-      employeeId: 1587869,
+      deptSpecId: this.deptSpecId,
+      employeeId: this.operator.id,
       opSpecName: 'Code Dilution Request',
       parentOptions: parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions},
     }
-    console.log(generateRequest);
+    // console.log(generateRequest);
 
     this.remoteService.remotePostReq(generateRequest).subscribe(res => {
       // console.log(res);

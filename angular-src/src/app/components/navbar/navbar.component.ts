@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Operator } from '../../../models/Operator';
 
 @Component({
   selector: 'app-navbar',
@@ -10,21 +11,23 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class NavbarComponent implements OnInit {
   name: String;
-  departmemt: String;
-  user: {
-    name: String;
-    department: String;
-  };
+  operator: Operator;
+  // departmemt: String;
+  // user: {
+  //   name: String;
+  //   department: String;
+  // };
 
   constructor(
     public authService:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService
     ) {
+      // Get operator information in local database
       this.authService.getProfile().subscribe(profile => {
         // console.log(profile);
-        this.user = profile.user;
-        // console.log(this.user);
+        this.operator = profile.operator;
+        // console.log(this.operator);
       }
     )}
 

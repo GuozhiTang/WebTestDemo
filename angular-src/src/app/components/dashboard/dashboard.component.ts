@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Operator } from '../../../models/Operator';
+import { Department } from '../../../models/Department';
+import { RemotereqService } from '../../services/remotereq.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,22 +11,39 @@ import { AuthService } from '../../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   name: String;
-  departmemt: String;
-  user: {
-    name: String;
-    department: String;
-  };
+  operator: Operator;
+  departments: Department[];
+  // user: {
+  //   name: String;
+  //   department: String;
+  // };
 
   constructor(
     public authService:AuthService,
+    private remoteService: RemotereqService,
     ) {
-      // Get user information in local database
+      // Get operator information in local database
       this.authService.getProfile().subscribe(profile => {
-        // console.log(profile.user);
-        this.user = profile.user;
-        // console.log(this.user);
-      }
-    )}
+        // console.log(profile);
+        this.operator = profile.operator;
+        // console.log(this.operator);
+
+        // Get departments according to specific operator information
+        var departments = [];
+        var data = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
+        this.remoteService.retrievalData(data).subscribe(res => {
+          // console.log(res.results);
+          for (var i = 0; i < res.results.length; i++) {
+            if (res.results[i].operator_id.id == profile.operator.id) {
+              // console.log(res.results[i].dept_spec);
+              departments.push(res.results[i].dept_spec);
+            }
+          }
+          this.departments = departments;
+          // console.log(this.departments);
+        });
+      });
+    }
 
   ngOnInit() {
   }

@@ -5,6 +5,13 @@
 
       <form [formGroup]="signup" (submit)="onSubmit()">
         <div class="form-group" style="width: 550px;">
+          <label style="font-size: 16px;">Select your department:</label>
+          <select class="form-control" formControlName="department" name="department">
+            <option>Select department...</option>
+            <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="width: 550px;">
           <label style="font-size: 16px;" for="selectWoid">Work-order id:</label>
           <select class="form-control" id="selectWoid" formControlName="workorderid" name="workorderid">
             <option>Select your work-order id...</option>
@@ -59,8 +66,8 @@
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.antibodyMatrixBarcode}}</td>
           <td id="matchColor" [style.background-color]="workorder.match ? '#008000' : '#ff0000'" style="padding-left: 10px; padding-right: 10px">{{workorder.match}}</td>
           <td style="padding-left: 10px; padding-right: 10px">{{workorder.msg}}</td>
-          <td style="padding-left: 10px; padding-right: 10px">{{user.department}}</td>
-          <td style="padding-left: 10px; padding-right: 10px">{{user.name}}</td>
+          <td style="padding-left: 10px; padding-right: 10px">{{signup.value.department.name}}</td>
+          <td style="padding-left: 10px; padding-right: 10px">{{operator.name}}</td>
         </tr>
       </table>
     </div>

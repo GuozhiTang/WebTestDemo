@@ -33,6 +33,11 @@ module.exports.addOperator = function (newOperator, callback) {
   newOperator.save(callback);
 }
 
+// Search by id
+module.exports.getById = function(id, callback) {
+  Operator.findById(id, callback);
+}
+
 // 1. Drop the current Operator collection locally
 // 2. To pull Operators from remote server to local database
 module.exports.resetOperators = function (callback) {

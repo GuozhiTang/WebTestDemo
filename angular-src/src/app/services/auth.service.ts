@@ -12,7 +12,8 @@ export class AuthService {
 
   // have a couple of properties in the auth service
   authToken: any;
-  user: any;
+  operator: any;
+  // user: any;
 
   // Inject the modules into the constructor
   constructor(
@@ -35,14 +36,14 @@ export class AuthService {
   }
 
   /**
-   * Authenticate the login information for the specific user.
-   * @param user: json sent to local server conatining all information for authenticating existed users.
+   * Authenticate the login information for the specific operator.
+   * @param operator: json sent to local server conatining all information for authenticating existed operators.
    */
-  authenticateUser(user) {
+  authenticateOperator(operator) {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
+    return this.http.post('http://localhost:3000/operators/authenticate', operator, {headers: headers})
     // return this.http.post('users/authent/icate', user, {headers: headers})
       .pipe(map(res => res.json()));
   }
@@ -60,12 +61,12 @@ export class AuthService {
       // Use the token here
       headers.append('Authorization', this.authToken);
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/users/profile', {headers: headers})
+      return this.http.get('http://localhost:3000/operators/profile', {headers: headers})
       // return this.http.get('users/profile', {headers: headers})
         .pipe(map(res => res.json()));
     } else {
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/users/nulluser', {headers: headers})
+      return this.http.get('http://localhost:3000/operators/nulloperator', {headers: headers})
         .pipe(map(res => res.json()));
     }
   }
@@ -73,13 +74,13 @@ export class AuthService {
   /**
    * Store login information in local storage
    * @param token: the token information of authentication
-   * @param user: the user information of login user
+   * @param operators: the operators information of login user
    */
-  storeUserData(token, user) {
+  storeUserData(token, operators) {
     localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('operator', JSON.stringify(operators));
     this.authToken = token;
-    this.user = user;
+    this.operator = operators;
   }
 
   /**
@@ -106,7 +107,21 @@ export class AuthService {
    */
   logout() {
     this.authToken = null;
-    this.user = null;
+    // this.user = null;
+    this.operator = null;
     localStorage.clear();
   }
+
+  /**
+   * Authenticate the login information for the specific user.
+   * @param user: json sent to local server conatining all information for authenticating existed users.
+   */
+  // authenticateUser(user) {
+  //   // Set header values
+  //   let headers = new Headers();
+  //   headers.append('Content-Type','application/json');
+  //   return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
+  //   // return this.http.post('users/authent/icate', user, {headers: headers})
+  //     .pipe(map(res => res.json()));
+  // }
 }

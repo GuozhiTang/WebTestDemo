@@ -47,12 +47,11 @@
       <h5 class="text-warning">Check the preview and create the Work-order: </h5>
       <form (submit)="onCreateReq(content)">
         <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;">Type in your department ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="deptSpecId" name="deptSpecId" placeholder="2873561 - Manufacturing Dept" disabled>
-        </div>
-        <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;">Type in your employee ID:</label>
-          <input class="form-control" type="text" [(ngModel)]="employeeId" name="employeeId" placeholder="1587869 - Felix Green" disabled>
+          <label style="font-size: 16px;">Select your department:</label>
+          <select class="form-control" [(ngModel)]="deptSpecId" name="deptSpecId">
+            <option>Select department...</option>
+            <option [value]="department.id" *ngFor='let department of departments'>{{department.name}}</option>
+          </select>
         </div>
         <div class="form-group" style="width: 350px;">
           <label style="font-size: 16px;" for="selectAssayCodeType">Select the Assay Code Type:</label>

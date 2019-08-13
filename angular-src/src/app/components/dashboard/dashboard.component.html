@@ -3,14 +3,18 @@
     <div class="col">
       <h1 class="page-header" style="margin-top: 15px"><b>Dashboard</b></h1>
       <hr>
-      <table class="table uk-form-horizontal table-striped table-hover table-bordered" *ngIf="user" style="width: 500px; font-size: 18px;">
+      <table class="table uk-form-horizontal table-striped table-hover table-bordered" *ngIf="operator" style="width: 500px; font-size: 18px;">
         <tr>
-          <th style="width: 100px;">Name</th>
-          <td style="text-align: center;">{{user.name}}</td>
+          <th style="width: 100px;">Operator</th>
+          <td style="text-align: center;">{{operator.name}}</td>
         </tr>
         <tr>
-          <th>Department</th>
-          <td style="text-align: center">{{user.department}}</td>
+          <th>ID</th>
+          <td style="text-align: center">{{operator.id}}</td>
+        </tr>
+        <tr *ngFor="let department of departments">
+          <th>Departments</th>
+          <td style="text-align: center">{{department.name}} <br> ID: {{department.id}}</td>
         </tr>
       </table>
     </div>

@@ -6,6 +6,8 @@ import { ReqStatus } from '../../../models/ReqStatus';
 import { StatusList } from '../../../models/StatusList';
 import { ViewEncapsulation } from '@angular/core';
 import { RemotereqService } from '../../services/remotereq.service';
+import { Operator } from '../../../models/Operator';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-process',
@@ -19,14 +21,17 @@ import { RemotereqService } from '../../services/remotereq.service';
 `]
 })
 export class ProcessComponent implements OnInit {
+  operator: Operator;
+  department: Department;
+  departments: Department[];
   instruments: String[];
   workorders: String[];
   protocols: String[];
   remoteprocess: any;
-  user: {
-    name: String;
-    department: String;
-  };
+  // user: {
+  //   name: String;
+  //   department: String;
+  // };
   type: String;
   Requests: any;
   requestId: Number;
@@ -51,44 +56,92 @@ export class ProcessComponent implements OnInit {
     private remoteService: RemotereqService,
     ) {
     
+      // Get operator information in local database
+      this.authService.getProfile().subscribe(profile => {
+        // console.log(profile);
+        this.operator = profile.operator;
+        // console.log(this.operator);
+
+        // Get departments according to specific operator information
+        var departments = [];
+        var data = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
+        this.remoteService.retrievalData(data).subscribe(res => {
+          // console.log(res.results);
+          for (var i = 0; i < res.results.length; i++) {
+            if (res.results[i].operator_id.id == profile.operator.id) {
+              // console.log(res.results[i].dept_spec);
+              departments.push(res.results[i].dept_spec);
+            }
+          }
+          this.departments = departments;
+          // console.log(this.departments);
+        });
+      });
+
       // get status types here
       this.remoteService.retrievalData('fpReqStatusList').subscribe(types => {
         this.typeRes = types;
         // console.log(this.typeRes);
       });
 
-      // get user information as well as instruments here
-      this.authService.getProfile().subscribe(profile => {
-        // console.log(profile.user.department);
-        // console.log(typeof(profile.user.department));
-        this.user = profile.user;
-        if (this.user.department == "Manufacturing Dept") {
-          // console.log("successful!");
-          this.instruments = ['Robot 2', 'Robot 3', 'Stamp 1', 'Nanodrop', 'Manual'];
-        } else if (this.user.department == "HT Assay Dept") {
-          // console.log("Failed!");
-          this.instruments = ['Hamilton RBT1', 'Manual'];
-        }
-      });
+      // // get user information as well as instruments here
+      // this.authService.getProfile().subscribe(profile => {
+      //   // console.log(profile.user.department);
+      //   // console.log(typeof(profile.user.department));
+      //   this.user = profile.user;
+      //   if (this.user.department == "Manufacturing Dept") {
+      //     // console.log("successful!");
+      //     this.instruments = ['Robot 2', 'Robot 3', 'Stamp 1', 'Nanodrop', 'Manual'];
+      //   } else if (this.user.department == "HT Assay Dept") {
+      //     // console.log("Failed!");
+      //     this.instruments = ['Hamilton RBT1', 'Manual'];
+      //   }
+      // });
     }
 
   ngOnInit() {
   }
 
   /**
-   * Get work-orders according to selected instruments
+   * Get Instrument according to selected department
+   * @param department input selected department
+   */
+  getInstruments(department) {
+    const data = {
+      request: "getInstrumentsByDept",
+      deptSpecId: department.id
+    }
+    var instruments = [];
+    this.remoteService.remotePostReq(data).subscribe(res => {
+      // console.log(res);
+      for (var i = 0; i < res.length; i++) {
+        instruments.push(res[i].instrument_id.short);
+      }
+      this.instruments = instruments;
+      // console.log(this.instruments);
+    });
+  }
+
+  /**
+   * Get work-orders according to selected instrument
    * @param instrument: input selected instrument
    */
   getWorkorders(instrument) {
-    if (instrument == 'Manual' && this.user.department == 'HT Assay Dept') {
-      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request', 'Antibody Matrix Tube Carrier Request'];
-      // console.log('successful!');
-    } else if (instrument == 'Hamilton RBT1') {
-      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
-    } else if (instrument == 'Robot 2' || instrument == 'Robot 3' || instrument == 'Stamp 1' || instrument == 'Nanodrop') {
-      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
-    } else if (instrument == 'Manual' && this.user.department == 'Manufacturing Dept') {
-      this.workorders = ['Code Mix Request', 'Code Dilution Request', 'Transfer Request', 'Cytometer Setup Kit Request', 'HCI Setup Kit Request', 'Particle Coding Request', 'Assay Request'];
+    if (instrument) {
+      var workorders = [];
+      var data = this.remoteService.getCoreDaoReqData('Spec', ['id'], 'fireplex.data.backend.core', true);
+      this.remoteService.retrievalData(data).subscribe(res => {
+        // console.log(res.results);
+        var searchAs = /.*request$/gi;
+        for (var i = 0; i < res.results.length; i++) {
+          // console.log(res.results[i].name.search(searchAs));
+          if (res.results[i].name.search(searchAs) != -1) {
+            workorders.push(res.results[i].name);
+          }
+        }
+        this.workorders = workorders;
+        // console.log(this.workorders);
+      });
     }
   }
 
@@ -97,7 +150,7 @@ export class ProcessComponent implements OnInit {
    * @param type: input selected work-order type
    */
   getProtocols(type) {
-    if (type == 'Assay Request' && this.user.department == 'HT Assay Dept') {
+    if (type == 'Immunoassay Request' && this.department.name == 'HT Assay Dept') {
       this.protocols = ['HT Immunoassay Conjugation V1-2-With-Tips Short'];
     } else if (type == 'Particle Coding Request') {
       // this.protocols = ['HT Immunoassay Conjugation V1-2-With-Tips Short'];
@@ -110,7 +163,7 @@ export class ProcessComponent implements OnInit {
   onGetRequests() {
     const getRequests = {
       request: "fpGetReqDT",
-      dept: this.user.department,
+      dept: this.department.name,
       reqType: this.type
     }
     // console.log(getReq);
@@ -203,7 +256,7 @@ export class ProcessComponent implements OnInit {
     const addStatus = {
       request: "fpAddReqStatus",
       requestId: this.requestId,
-      operatorName: this.user.name,
+      operatorName: this.operator.name,
       opSpecId: this.opSpecId,
       statusComment: this.comments
     }
