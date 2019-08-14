@@ -29,15 +29,76 @@
       </form>
     </div>
   </div>
-  
+
   <div class="row">
+    <div class="col">
+      <h5>Dynamic Test</h5>
+      <div class="form" (submit)="checkDynamic()">
+        <div class="form-group" *ngFor="let item of list">
+          <p>Order: {{item.ordNum}}</p>
+          <div class="form-group" style="width: 350px;">
+            <label style="font-size: 16px;">Select your department:</label>
+            <select class="form-control" [(ngModel)]="item.department" name="item.department">
+              <option>Select department...</option>
+              <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
+            </select>
+          </div>
+          <div class="form-group" style="width: 350px;">
+            <label style="font-size: 16px;">Select the Role Type:</label>
+            <select class="form-control" [(ngModel)]="item.role" name="item.role">
+              <option>Select role type...</option>
+              <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
+            </select>
+          </div>
+          <div class="form-group" style="width: 350px;">
+            <label style="font-size: 16px;">Select the LabwareSpec Type:</label>
+            <select class="form-control" [(ngModel)]="item.labwareSpec" name="item.labwareSpec">
+              <option>Select labwareSpec type...</option>
+              <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
+            </select>
+          </div>
+        </div>
+        <button (click)="add()">Add</button>
+
+
+        <!-- <div class="form-group form-group-sm" *ngFor="let i of login">
+          <label class="col-form-label">UserName</label>
+          <input class="form-control" [(ngModel)]="i.username" value="{{i.username}}">
+          <label class="col-form-label">Password</label>
+          <input class="form-control" [(ngModel)]="i.password" value="{{i.password}}">
+          <button class="btn btn-link" (click)="removeInput(i)">Deleted</button>
+        </div>
+        <button (click)="addInput()">Add</button>
+        {{ login | json }} -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="row">
+    <div class="col">
+      <h5>Dynamic Test2</h5>
+      <div class="form">
+        <div class="form-group form-group-sm" *ngFor="let i of login">
+          <label class="col-form-label">UserName</label>
+          <input class="form-control" [(ngModel)]="i.username" value="{{i.username}}">
+          <label class="col-form-label">Password</label>
+          <input class="form-control" [(ngModel)]="i.password" value="{{i.password}}">
+          <button class="btn btn-link" (click)="removeInput(i)">Deleted</button>
+        </div>
+        <button (click)="addInput()">Add</button>
+        {{ login | json }}
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="row">
     <div class="col">
       <h5 class="text-warning">Customize your Transfer Source:</h5>
       <form (submit)="onCreateReq(content)">
         
         <button type="submit" class="btn btn-primary">Create Work-order</button>
 
-        <!-- The modal content for successfully generation of work-order -->
+        The modal content for successfully generation of work-order
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Congratulations</h4>
@@ -55,5 +116,5 @@
         </ng-template>
       </form>
     </div>
-  </div>
+  </div> -->
 </div>

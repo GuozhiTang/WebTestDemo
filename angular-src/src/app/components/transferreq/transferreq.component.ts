@@ -21,6 +21,15 @@ export class TransferreqComponent implements OnInit {
   roles: Role[];
   labwareSpec: LabwareSpec;
   labwareSpecs: LabwareSpec[]
+  username: any;
+  id: number = 1;
+  login:any = [{"username": "username" + this.id,"password": "pwd" + this.id}];
+  list: any = [{
+    ordNum: this.id,
+    department: Department,
+    role: Role,
+    labwareSpec: LabwareSpec
+  }];
   newReqID: String;
 
   constructor(
@@ -129,6 +138,47 @@ export class TransferreqComponent implements OnInit {
     //   //   this.flashMessage.show('There exists some errors! Please re-check!');
     //   // }
     // });
+  }
+
+
+  addInput() {
+    console.log('点击');
+    console.log(this.login);
+    let number = this.login.length + 1;
+    this.login.push({"username": "username" + number, "password": "pwd" + number});
+    console.log(this.login);
+  }
+
+  add() {
+    console.log("Add!");
+    this.id += 1;
+    // this.list.push(this.id);
+    var data = {
+      ordNum: this.id,
+      department: Department,
+      role: Role,
+      labwareSpec: LabwareSpec
+    }
+    this.list.push(data);
+  }
+
+  checkDynamic() {
+    var parentOptions = {
+      roleName: this.role.role,
+      labwareSpec: this.labwareSpec.name,
+      units: "uL",
+      value: 1,
+      ordNum: 0,
+      reqElemSpecName: "Labware Req Elem"
+    }
+    console.log(parentOptions);
+  }
+ 
+  removeInput(item) {
+    console.log(item);
+    let i = this.login.indexOf(item);
+    console.log(i);
+    this.login.splice(i, 1);
   }
 
   /**
