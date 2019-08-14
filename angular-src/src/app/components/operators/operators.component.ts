@@ -44,7 +44,7 @@ export class OperatorsComponent implements OnInit {
     });
     
     // show all operatordepts remotely
-    var opDept = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', 'true');
+    var opDept = this.remoteService.getCoreDaoReqData('OperatorDept', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(opDept).subscribe(remote => {
       this.remoteoperatordepts = remote.results;
       // console.log(this.remoteoperatordepts);

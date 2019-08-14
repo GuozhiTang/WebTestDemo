@@ -1,3 +1,4 @@
+<!-- Area to add new Spec to the local database manually -->
 <h1 class="page-header" style="margin-top: 15px"><b>Add Specs Manually</b></h1>
 <hr>
 <form (submit)="onAddSpecs()">
@@ -24,8 +25,7 @@
   <button type="submit" class="btn btn-primary" style="margin-bottom: 15px">Add Specs</button>
 </form>
 
-
-
+<!-- Search Specs by Name -->
 <h1><b>Search by Name</b></h1>
 <hr>
 <form (submit)="onSearchSpecsByName()">
@@ -54,6 +54,7 @@
   </table>
 </div>
 
+<!-- Search Specs by ModuleName -->
 <h1><b>Search by ModuleName</b></h1>
 <hr>
 <form (submit)="onSearchSpecsByModuleName()">
@@ -82,6 +83,7 @@
   </table>
 </div>
 
+<!-- Search Spec by ID -->
 <h1><b>Search by Id</b></h1>
 <hr>
 <form (submit)="onSearchSpecsById()">
@@ -110,6 +112,7 @@
   </table>
 </div>
 
+<!-- Search Specs by Conditions such as Name and ModuleName -->
 <h1><b>Search by Conditions</b></h1>
 <hr>
 <form (submit)="onSearchSpecsByConditions()">
@@ -142,7 +145,7 @@
   </table>
 </div>
 
-
+<!-- Pull Specs database to local and show it locally -->
 <h1 style="margin-top: 15px"><b>Grab and Show All Specs Locally</b></h1>
 <form (submit)="onResetSpecs()" style="margin-bottom: 15px">
     <button type="submit" class="btn btn-primary">Grab Specs</button>

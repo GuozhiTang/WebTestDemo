@@ -1,243 +1,237 @@
-<!DOCTYPE html>
-
-<html>
-<body>
-  <!-- Total container -->
-  <div class="container">
-    <!-- Selections at the top -->
-    <div class="row">
-      <div class="col">
-        <h1 style="margin-top: 15px;"><b>Setup Process UI</b></h1>
-        <form (submit)="onGetRequests()">
-          <div class="form-group">
-            <table>
-              <tr>
-                <th><label>Departemnts</label></th>
-                <th><label>Instruments</label></th>
-                <th><label>Work-order Type</label></th>
-                <th><label>Protocols for work-order</label></th>
-              </tr>
-              <tr>
-                <td>
-                  <select class="form-control" [(ngModel)]="department" name="department" (change)="getInstruments(department)">
-                    <option>Select Departmemt...</option>
-                    <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control" [(ngModel)]="instrument" name="instrument" (change)="getWorkorders($event.target.value)">
-                    <option>Select Instrument...</option>
-                    <option *ngFor='let instrument of instruments'>{{instrument}}</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control" [(ngModel)]="type" name="type" (change)="getProtocols($event.target.value)">
-                    <option>Select Work-order...</option>
-                    <option *ngFor='let workorder of workorders'>{{workorder}}</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control" [(ngModel)]="protocol" name="protocol">
-                    <option>Select Protocol...</option>
-                    <option *ngFor='let protocol of protocols'>{{protocol}}</option>
-                  </select>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <button type="submit" class="btn btn-info">Get Work-orders</button>
-        </form>
-        <hr>
-      </div>
+<!-- Total container -->
+<div class="container">
+  <!-- Selections at the top -->
+  <div class="row">
+    <div class="col">
+      <h1 style="margin-top: 15px;"><b>Setup Process UI</b></h1>
+      <form (submit)="onGetRequests()">
+        <div class="form-group">
+          <table>
+            <tr>
+              <th><label>Departemnts</label></th>
+              <th><label>Instruments</label></th>
+              <th><label>Work-order Type</label></th>
+              <th><label>Protocols for work-order</label></th>
+            </tr>
+            <tr>
+              <td>
+                <select class="form-control" [(ngModel)]="department" name="department" (change)="getInstruments(department)">
+                  <option>Select Departmemt...</option>
+                  <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="instrument" name="instrument" (change)="getWorkorders($event.target.value)">
+                  <option>Select Instrument...</option>
+                  <option *ngFor='let instrument of instruments'>{{instrument}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="type" name="type" (change)="getProtocols($event.target.value)">
+                  <option>Select Work-order...</option>
+                  <option *ngFor='let workorder of workorders'>{{workorder}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="protocol" name="protocol">
+                  <option>Select Protocol...</option>
+                  <option *ngFor='let protocol of protocols'>{{protocol}}</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <button type="submit" class="btn btn-info">Get Work-orders</button>
+      </form>
+      <hr>
     </div>
+  </div>
 
-    <!-- display area -->
-    <div class="row" *ngIf="Requests">
+  <!-- display area -->
+  <div class="row" *ngIf="Requests">
 
-      <!-- Get all Requests by work-order type -->
-      <div class="col" style="margin-left: -150px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
-        <h2 style="margin-top: 15px"><b>Work-orders:</b></h2>
-        <hr>
-        <!-- table to show all requests -->
-        <table class="table-striped table-bordered table-hover" style="text-align: center">
-          <tr>
-            <th style="padding-right: 2px">Work-order ID</th>
-            <th style="padding-left: 2px; padding-right: 2px">Work-order Type</th>
-            <th style="padding-left: 2px; padding-right: 2px">Work-order Info</th>
-            <th style="padding-left: 2px; padding-right: 2px">Work-order Items</th>
-            <th style="padding-left: 2px; padding-right: 2px">Requested By</th>
-            <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
-          </tr>
-          <tr *ngFor="let req of Requests">
-            <!-- Three functionalities for ID button (dropdown) -->
-            <td style="padding-right: 2px">
-              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-outline-info" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
-                <div class="btn-group" role="group">
-                  <button id="btnGroupDrop1" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                    <button class="dropdown-item" type="button" (click)="onShowRequest(req.requestId)">Show Requests</button>
-                    <button class="dropdown-item" type="button" (click)="openModalforRequest(content)">Setup Work-order</button>
-                    <button class="dropdown-item" type="button" (click)="onShowStatus(req.requestId)">Show Status</button>
+    <!-- Get all Requests by work-order type -->
+    <div class="col" style="margin-left: -150px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+      <h2 style="margin-top: 15px"><b>Work-orders:</b></h2>
+      <hr>
+      <!-- table to show all requests -->
+      <table class="table-striped table-bordered table-hover" style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">Work-order ID</th>
+          <th style="padding-left: 2px; padding-right: 2px">Work-order Type</th>
+          <th style="padding-left: 2px; padding-right: 2px">Work-order Info</th>
+          <th style="padding-left: 2px; padding-right: 2px">Work-order Items</th>
+          <th style="padding-left: 2px; padding-right: 2px">Requested By</th>
+          <th style="padding-left: 2px; padding-right: 2px">Date Requested</th>
+        </tr>
+        <tr *ngFor="let req of Requests">
+          <!-- Three functionalities for ID button (dropdown) -->
+          <td style="padding-right: 2px">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-outline-info" (click)="onShowRequest(req.requestId)">{{req.requestId}}</button>
+              <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                  <button class="dropdown-item" type="button" (click)="onShowRequest(req.requestId)">Show Requests</button>
+                  <button class="dropdown-item" type="button" (click)="openModalforRequest(content)">Setup Work-order</button>
+                  <button class="dropdown-item" type="button" (click)="onShowStatus(req.requestId)">Show Status</button>
 
-                    <!-- modal content for reqeust setup -->
-                    <ng-template #content let-modal>
-                      <div class="modal-header">
-                        <h4 class="modal-title">Modal title</h4>
-                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+                  <!-- modal content for reqeust setup -->
+                  <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title">Setup Work-order</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div style="width: 1150px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
+                        <table class="table-striped table-hover" style="text-align: center">
+                          <tr>
+                            <th style="padding-right: 5px">Dept Name</th>
+                            <th style="padding-left: 5px; padding-right: 5px">User Name</th>
+                            <th style="padding-left: 5px; padding-right: 5px">Work-order ID</th>
+                            <th style="padding-left: 5px; padding-right: 5px">Work-order Type</th>
+                            <th style="padding-left: 5px; padding-right: 5px">Protocal Name</th>
+                            <th style="padding-left: 5px; padding-right: 5px">Instrument</th>
+                          </tr>
+                          <tr>
+                            <td style="padding-right: 5px">{{department.name}}</td>
+                            <td style="padding-left: 5px; padding-right: 5px">{{operator.name}}</td>
+                            <td style="padding-left: 5px; padding-right: 5px">{{req.requestId}}</td>
+                            <td style="padding-left: 5px; padding-right: 5px">{{req.reqType}}</td>
+                            <td style="padding-left: 5px; padding-right: 5px">{{protocol}}</td>
+                            <td style="padding-left: 5px; padding-right: 5px">{{instrument}}</td>
+                          </tr>
+                        </table>
                       </div>
-                      <div class="modal-body">
-                        <div style="width: 1150px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #3f474e">
-                          <table class="table-striped table-hover" style="text-align: center">
-                            <tr>
-                              <th style="padding-right: 5px">Dept Name</th>
-                              <th style="padding-left: 5px; padding-right: 5px">User Name</th>
-                              <th style="padding-left: 5px; padding-right: 5px">Work-order ID</th>
-                              <th style="padding-left: 5px; padding-right: 5px">Work-order Type</th>
-                              <th style="padding-left: 5px; padding-right: 5px">Protocal Name</th>
-                              <th style="padding-left: 5px; padding-right: 5px">Instrument</th>
-                            </tr>
-                            <tr>
-                              <td style="padding-right: 5px">{{department.name}}</td>
-                              <td style="padding-left: 5px; padding-right: 5px">{{operator.name}}</td>
-                              <td style="padding-left: 5px; padding-right: 5px">{{req.requestId}}</td>
-                              <td style="padding-left: 5px; padding-right: 5px">{{req.reqType}}</td>
-                              <td style="padding-left: 5px; padding-right: 5px">{{protocol}}</td>
-                              <td style="padding-left: 5px; padding-right: 5px">{{instrument}}</td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
-                      </div>
-                    </ng-template>
-                  </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
-            </td>
-            <td style="padding-left: 2px; padding-right: 2px">{{req.reqType}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">
-              <table>
-                <tr>
-                  <th>Plex</th>
-                  <th>Plex Label</th>
-                  <th>Barcode</th>
-                </tr>
-                <tr>
-                  <td>{{req.plex}}</td>
-                  <td>{{req.plexLabel}}</td>
-                  <td>{{req.labwareBarcode}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="padding-left: 2px; padding-right: 2px">{{req.requestItems}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{req.requestor}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{req.dateRequested}}</td>
-          </tr>
-        </table>
-      </div>
+            </div>
+          </td>
+          <td style="padding-left: 2px; padding-right: 2px">{{req.reqType}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">
+            <table>
+              <tr>
+                <th>Plex</th>
+                <th>Plex Label</th>
+                <th>Barcode</th>
+              </tr>
+              <tr>
+                <td>{{req.plex}}</td>
+                <td>{{req.plexLabel}}</td>
+                <td>{{req.labwareBarcode}}</td>
+              </tr>
+            </table>
+          </td>
+          <td style="padding-left: 2px; padding-right: 2px">{{req.requestItems}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{req.requestor}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{req.dateRequested}}</td>
+        </tr>
+      </table>
+    </div>
 
-      <!-- To show specific requests by ID -->
-      <div class="col" *ngIf="reqRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
-        <h2 style="margin-top: 15px"><b>Show Requests -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
-        <table class="table-striped table-bordered table-dark table-hover"  style="text-align: center">
-          <tr>
-            <th style="padding-right: 2px">Req Item</th>
-            <th style="padding-left: 2px; padding-right: 2px">HTID</th>
-            <th style="padding-left: 2px; padding-right: 2px">Antibody Name</th>
-            <th style="padding-left: 2px; padding-right: 2px">Antibody Type</th>
-            <th style="padding-left: 2px; padding-right: 2px">Antibody AbID</th>
-            <th style="padding-left: 2px; padding-right: 2px">Antibody Clone ID</th>
-            <th style="padding-left: 2px; padding-right: 2px">Assay Code</th>
-            <th style="padding-left: 2px; padding-right: 2px">Linked Req ID</th>
-            <th style="padding-left: 2px; padding-right: 2px">Antibody Tube Barcode</th>
-          </tr>
-          <tr *ngFor="let reqres of reqRes">
-            <td style="padding-right: 2px">{{reqres.ord + 1}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyHTID}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyName}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbType}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbId}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyCloneId}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.assayCode}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.linkedReq}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyLabwareBarcode}}</td>
-          </tr>
-        </table>
-      </div>
+    <!-- To show specific requests by ID -->
+    <div class="col" *ngIf="reqRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+      <h2 style="margin-top: 15px"><b>Show Requests -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
+      <table class="table-striped table-bordered table-dark table-hover"  style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">Req Item</th>
+          <th style="padding-left: 2px; padding-right: 2px">HTID</th>
+          <th style="padding-left: 2px; padding-right: 2px">Antibody Name</th>
+          <th style="padding-left: 2px; padding-right: 2px">Antibody Type</th>
+          <th style="padding-left: 2px; padding-right: 2px">Antibody AbID</th>
+          <th style="padding-left: 2px; padding-right: 2px">Antibody Clone ID</th>
+          <th style="padding-left: 2px; padding-right: 2px">Assay Code</th>
+          <th style="padding-left: 2px; padding-right: 2px">Linked Req ID</th>
+          <th style="padding-left: 2px; padding-right: 2px">Antibody Tube Barcode</th>
+        </tr>
+        <tr *ngFor="let reqres of reqRes">
+          <td style="padding-right: 2px">{{reqres.ord + 1}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyHTID}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyName}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbType}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyAbId}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyCloneId}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.assayCode}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.linkedReq}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{reqres.antibodyLabwareBarcode}}</td>
+        </tr>
+      </table>
+    </div>
 
-      <!-- To show all status by request ID -->
-      <div class="col" *ngIf="statusRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
-        <h2 style="margin-top: 15px"><b>Show Status -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
+    <!-- To show all status by request ID -->
+    <div class="col" *ngIf="statusRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+      <h2 style="margin-top: 15px"><b>Show Status -- RequestId: </b><span class="badge badge-pill badge-dark">{{requestId}}</span></h2>
 
-        <!-- Select Status Type for Update -->
-        <form class="form-inline" (submit)="openModalforStatus(content2)">
+      <!-- Select Status Type for Update -->
+      <form class="form-inline" (submit)="openModalforStatus(content2)">
+        <div class="form-group">
+          <label for="updateStatus" style="margin-right: 10px;">Select Status Type:</label>
+          <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
+            <option>Select Status Type...</option>
+            <option *ngFor='let types of typeRes' [value]= types.id>{{types.name}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-outline-info" style="margin-left: 10px;">Update</button>
+      </form>
+      <hr>
+
+      <!-- <div *ngIf=showUpdate>
+        <form (submit)="innerDiv()">
           <div class="form-group">
-            <label for="updateStatus" style="margin-right: 10px;">Select Status Type:</label>
-            <select class="form-control" id="updateStatus" [(ngModel)]="opSpecId" name="opSpecId">
-              <option>Select Status Type...</option>
-              <option *ngFor='let types of typeRes' [value]= types.id>{{types.name}}</option>
-            </select>
+            <label for="statusTextarea">Type in your comments: </label>
+            <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
           </div>
-          <button type="submit" class="btn btn-outline-info" style="margin-left: 10px;">Update</button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </form>
-        <hr>
-
-        <!-- <div *ngIf=showUpdate>
-          <form (submit)="innerDiv()">
+      </div> -->
+      
+      <!-- Modal for status updates -->
+      <ng-template #content2 let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Update Status</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="onAddStatus()">
             <div class="form-group">
               <label for="statusTextarea">Type in your comments: </label>
               <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
           </form>
-        </div> -->
-        
-        <!-- Modal for status updates -->
-        <ng-template #content2 let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title">Update Status</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form (submit)="onAddStatus()">
-              <div class="form-group">
-                <label for="statusTextarea">Type in your comments: </label>
-                <textarea class="form-control" id="statusTextarea" rows="3" [(ngModel)]="comments" name="comments"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Update</button>
-              <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
-            </form>
-          </div>
-          <div class="modal-footer">
+        </div>
+        <div class="modal-footer">
 
-          </div>
-        </ng-template>
+        </div>
+      </ng-template>
 
-        <!-- Table for status -->  
-        <table class="table-striped table-bordered table-dark table-hover"  style="text-align: center">
-          <tr>
-            <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
-            <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
-            <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
-            <th style="padding-left: 2px; padding-right: 2px">Comments</th>
-            <th style="padding-left: 2px; padding-right: 2px">Requested</th>
-          </tr>
-          <tr *ngFor="let status of statusRes">
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
-            <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
-          </tr>
-        </table>
-      </div>
+      <!-- Table for status -->  
+      <table class="table-striped table-bordered table-dark table-hover"  style="text-align: center">
+        <tr>
+          <th style="padding-left: 2px; padding-right: 2px">Status Id</th>
+          <th style="padding-left: 2px; padding-right: 2px">Spec Name</th>
+          <th style="padding-left: 2px; padding-right: 2px">Requestor</th>
+          <th style="padding-left: 2px; padding-right: 2px">Comments</th>
+          <th style="padding-left: 2px; padding-right: 2px">Requested</th>
+        </tr>
+        <tr *ngFor="let status of statusRes">
+          <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.spec_id.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requestor_id.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.comment}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{status.status_op.requested}}</td>
+        </tr>
+      </table>
     </div>
   </div>
-</body>
-</html>
+</div>

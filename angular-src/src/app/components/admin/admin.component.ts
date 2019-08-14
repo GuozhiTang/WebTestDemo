@@ -45,6 +45,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Initially set only display the admin login page
     this.hideEntry = false;
   }
 

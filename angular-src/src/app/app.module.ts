@@ -11,10 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { SpecsComponent } from './components/specs/specs.component';
 
 import { ValidateService } from './services/validate.service';
@@ -35,7 +34,6 @@ import { InstrumentsComponent } from './components/instruments/instruments.compo
 import { ProbemapsComponent } from './components/probemaps/probemaps.component';
 import { ProcessComponent } from './components/process/process.component';
 import { CodedilutionreqComponent } from './components/codedilutionreq/codedilutionreq.component';
-import { ModalComponent } from './components/modal/modal.component';
 import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
 import { OperatorsComponent } from './components/operators/operators.component';
@@ -48,7 +46,6 @@ const appRoutes: Routes = [
   // {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'specs', component: SpecsComponent},
   {path: 'transfer', component: TransferComponent},
   {path: 'transfer/targetplate', component: TargetplateComponent},
@@ -60,7 +57,6 @@ const appRoutes: Routes = [
   {path: 'probemaps', component: ProbemapsComponent},
   {path: 'process', component: ProcessComponent},
   {path: 'codedilutionreq', component: CodedilutionreqComponent},
-  {path: 'modal', component: ModalComponent},
   {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent},
   {path: 'operators', component: OperatorsComponent},
   {path: 'fpadmin', component: AdminComponent},
@@ -81,7 +77,6 @@ export function tokenGetter() {
     // RegisterComponent,
     HomeComponent,
     DashboardComponent,
-    ProfileComponent,
     SpecsComponent,
     TransferComponent,
     TargetplateComponent,
@@ -93,7 +88,6 @@ export function tokenGetter() {
     ProbemapsComponent,
     ProcessComponent,
     CodedilutionreqComponent,
-    ModalComponent,
     MatrixtubecarrierComponent,
     FileUploadComponent,
     OperatorsComponent,

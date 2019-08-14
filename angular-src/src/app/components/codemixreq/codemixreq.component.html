@@ -1,4 +1,6 @@
+<!-- The input and selection area -->
 <div class="container">
+  <!-- The code map type selection area -->
   <div class="row">
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Generate Code Mix Request</b></h1>
@@ -9,9 +11,7 @@
       </select>
     </div>
   </div>
-</div>
-
-<div class="container">
+  <!-- The input area for Plex IDs -->
   <div class="row">
     <div class="col">
       <h5 class="text-warning" style="margin-top: 15px;">Type in all PlexIds:</h5>
@@ -48,6 +48,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Create Work-order</button>
 
+        <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Congratulations</h4>
