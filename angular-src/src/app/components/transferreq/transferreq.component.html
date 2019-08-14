@@ -1,3 +1,59 @@
-<p>
-  transferreq works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="margin-top: 15px;"><b>Generate Transfer Request</b></h1>
+      <h5 class="text-warning">Customize your Transfer Target:</h5>
+      <form (submit)="onSubmitTarget()">
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Select your department:</label>
+          <select class="form-control" [(ngModel)]="department" name="department">
+            <option>Select department...</option>
+            <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Select the Role Type:</label>
+          <select class="form-control" [(ngModel)]="role" name="role">
+            <option>Select role type...</option>
+            <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="width: 350px;">
+          <label style="font-size: 16px;">Select the LabwareSpec Type:</label>
+          <select class="form-control" [(ngModel)]="labwareSpec" name="labwareSpec">
+            <option>Select labwareSpec type...</option>
+            <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Transfer Target</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <h5 class="text-warning">Customize your Transfer Source:</h5>
+      <form (submit)="onCreateReq(content)">
+        
+        <button type="submit" class="btn btn-primary">Create Work-order</button>
+
+        <!-- The modal content for successfully generation of work-order -->
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Congratulations</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>You've successfully created an Transfer request!</p>
+            <P>The new request ID is: <b>{{newReqID}}</b></P>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closeModal()">Close</button>
+          </div>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
