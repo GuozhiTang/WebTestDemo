@@ -31,7 +31,7 @@ export class CodemixreqComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private remoteService: RemotereqService,
     private modalService: NgbModal,
-    public authService:AuthService,
+    public authService: AuthService,
   ) {
 
       // Get operator information in local database

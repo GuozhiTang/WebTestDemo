@@ -39,6 +39,8 @@ import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/
 import { OperatorsComponent } from './components/operators/operators.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CodemixreqComponent } from './components/codemixreq/codemixreq.component';
+import { InstrumentreqComponent } from './components/instrumentreq/instrumentreq.component';
+import { TransferreqComponent } from './components/transferreq/transferreq.component';
 
 const appRoutes: Routes = [
   // This could be the home page
@@ -61,6 +63,8 @@ const appRoutes: Routes = [
   {path: 'operators', component: OperatorsComponent, canActivate:[AuthGuard]},
   {path: 'fpadmin', component: AdminComponent, canActivate:[AuthGuard]},
   {path: 'codemixreq', component: CodemixreqComponent, canActivate:[AuthGuard]},
+  {path: 'instrumentreq', component: InstrumentreqComponent, canActivate:[AuthGuard]},
+  {path: 'transferreq', component: TransferreqComponent, canActivate:[AuthGuard]},
 ]
 
 // id_token is from storeUserData(token, user) in auth.service.ts
@@ -93,6 +97,8 @@ export function tokenGetter() {
     OperatorsComponent,
     AdminComponent,
     CodemixreqComponent,
+    InstrumentreqComponent,
+    TransferreqComponent,
   ],
   // Modules should be put into imports
   imports: [
