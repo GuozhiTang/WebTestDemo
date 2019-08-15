@@ -1,9 +1,9 @@
 <!-- Header and Abstract -->
 <div class="jumbotron text-center" style="margin-top: 25px;">
-  <h1>MEAN Stack App for Manufacturing</h1>
+  <h1>FirePlex Web Application</h1>
   <hr>
-  <p class="lead">This is a MEAN Stack App(MongoDB/Mongoose, Express, Angular-CLI, NodeJS) including functionalities: </p>
-  <p class="lead">Login/Logout, Register, Dashboard, Transfer porcess, Grab and show specific components.</p>
+  <p class="lead">It is coded by using MEAN Stack(MongoDB, Express, Angular-CLI, Nodejs).</p>
+  <p class="lead">For the time being, these main components are created: Login, Dashboard, System, Generate Requests, Components and Data</p>
   <div *ngIf="authService.isTokenExp()">
     <!-- <button class="btn btn-info" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</button> &nbsp;  -->
     <button class="btn btn-success" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</button>
@@ -15,25 +15,85 @@
 <hr>
 
 <!-- Show all instructions and details -->
-<h2><b>Instructions:</b></h2>
-<div class="row">
-  <div class="col-md-3">
-    <h3>Register</h3>
-    <p>Click the register button to fill all the information correctly, especially the email format. Then you have the access to login.</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3><i class="fas fa-user"></i> Login</h3>
+      <p>Registered users can login to the application by:</p>
+      <p>1. Login selection at navbar</p>
+      <p>2. Login button in home page</p>
+      <p class="text-info"><i class="fas fa-info-circle"></i> Only operator (user) name is required to login.</p>
+      <p class="text-info"><i class="fas fa-info-circle"></i> Once login successfully, the login information will be kept in local storage for a week unless logging out of system.</p>
+    </div>
+    <div class="col">
+      <h3><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
+      <p>It shows basic information for an operator:</p>
+      <p>1. Name and EmployeeId</p>
+      <p>2. Associated department(s) and related Ids</p>
+      <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> The departments information for some operators could be empty which means they only have access to modify basic documents in the system.</p>
+    </div>
+    <div class="col">
+      <h3><i class="fas fa-user-cog"></i> System</h3>
+      <p>It contains some basic functions in system level:</p>
+      <p>1. Operator+</p>
+      <ul> 
+        <li>Register new operators</li>
+        <li>Display and synchronize operator information from data server</li>
+        <li class="text-info"><i class="fas fa-info-circle"></i> Only operator (user) name is required to register.</li>
+        <li class="text-warning"><i class="fas fa-info-circle"></i> Operators can only be registered by existed operator.</li>
+      </ul>
+      <p>2. Logout</p>
+      <ul>
+        <li>Logout of the application to the login page</li>
+        <li>Clear the login and operator information in the local storage</li>
+        <li class="text-info"><i class="fas fa-info-circle"></i> Operators can logout by access the botton in homepage or the selection in <b>"System"</b> at navbar.</li>
+        <li class="text-warning"><i class="fas fa-exclamation-triangle"></i> If not, the information will be kept login for a week.</li>
+      </ul>
+    </div>
   </div>
-  <div class="col-md-3">
-    <h3>Login/Logout</h3>
-    <p>After resgister successfully, go to login page to login. The dashboard of your account can been seen after that. Whenever you want to logout the account, just click the logout button.</p>
-  </div>
-  <div class="col-md-3">
-      <h3>Transfer</h3>
-      <p>After login to your account, you can access the transfer process by clicking transfer button. You need to type in the <b>barcode of the target plate</b> first and then modify it. 
-        After that, type in the <b>barcode of source plate with the volume you want to transfer</b>. Finally, after modification, click submit to submit the whole transfer process.</p>
-  </div>
-  <div class="col-md-3">
-      <h3>Components</h3>
-      <p>Show the exact data for each component at remote data server and can <b>grab and show</b> all the data to the <b>local database</b>. Show the <b>search</b> functionalities for each component.
-      Meanwhile, "add" functionalities are settled but not allowed for users right now in order to protect the robot.</p>
+  <div class="row">
+    <div class="col-md-4">
+      <h3><i class="fas fa-plus-square"></i> Generate Requests</h3>
+      <p>To generate different types of requests:</p>
+      <p>1. Code Dillution Request</p>
+      <p>2. Code Mix Request</p>
+      <p>3. Instrument Request</p>
+      <p>4. Transfer Request</p>
+      <p>5. Matrix Tube Carrier Request</p>
+      <li class="text-warning"><i class="fas fa-exclamation-triangle"></i> Associated and specific departemnt is required. If not, the operator has no authentication.</li>
+    </div>
+    <div class="col-md-4">
+      <h3><i class="fas fa-tasks"></i> Components</h3>
+      <p>Some individual components with different functioanlities:</p>
+      <p>1. Setup Process: To setup and display the work-orders.</p>
+      <ul>
+        <li>Show the list of requests and meanwhile the details of each work-order</li>
+        <li>Setup necessary information for each work-order</li>
+        <li>Display and update status for each work-order</li>
+        <li class="text-warning"><i class="fas fa-exclamation-triangle"></i> Associated and specific departemnt is required. If not, the operator has no authentication.</li>
+      </ul>
+      <p>2. Transfer:</p>
+      <ul>
+        <li>An old sample process for creating the transfer request</li>
+        <li>A sample for plate customization which can be edited and displayed in well-level of a plate</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <h3><i class="fas fa-file"></i> Data</h3>
+      <ul>
+        <li>It shows all the details for some tables (data) in database locally and remotely</li>
+        <li>It provide the function to synchronize these data from the data server</li>
+        <li>It provides the function to search for specific data with resonable conditions</li>
+        <li>It provides the function to create new data at the same time for local database and remote data server</li>
+        <li class="text-warning"><i class="fas fa-exclamation-triangle"></i> Create duplicated data is denied for the function.</li>
+        <li class="text-info"><i class="fas fa-info-circle"></i> All the new functions are not completely applied for <b>"Probemaps"</b> data component.</li>
+      </ul>
+      <p>These data are included:</p>
+      <p>1. Roles</p>
+      <p>2. Instruments</p>
+      <p>3. LabwareSpecs</p>
+      <p>4. Probemaps</p>
+    </div>
   </div>
 </div>
 <hr>

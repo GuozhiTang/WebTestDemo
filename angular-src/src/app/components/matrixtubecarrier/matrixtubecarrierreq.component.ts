@@ -10,12 +10,12 @@ import { Operator } from '../../../models/Operator';
 import { Department } from '../../../models/Department';
 
 @Component({
-  selector: 'app-matrixtubecarrier',
-  templateUrl: './matrixtubecarrier.component.html',
-  styleUrls: ['./matrixtubecarrier.component.css']
+  selector: 'app-matrixtubecarrierreq',
+  templateUrl: './matrixtubecarrierreq.component.html',
+  styleUrls: ['./matrixtubecarrierreq.component.css']
 })
 
-export class MatrixtubecarrierComponent {
+export class MatrixtubecarrierreqComponent {
   operator: Operator;
   department: Department;
   departments: Department[];

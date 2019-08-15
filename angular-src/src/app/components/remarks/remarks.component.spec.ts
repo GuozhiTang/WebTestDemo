@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatrixtubecarrierComponent } from './matrixtubecarrier.component';
+import { RemarksComponent } from './remarks.component';
 
-describe('SignUpFormComponent', () => {
-  let component: MatrixtubecarrierComponent;
-  let fixture: ComponentFixture<MatrixtubecarrierComponent>;
+describe('RemarksComponent', () => {
+  let component: RemarksComponent;
+  let fixture: ComponentFixture<RemarksComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatrixtubecarrierComponent ]
+      declarations: [ RemarksComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatrixtubecarrierComponent);
+    fixture = TestBed.createComponent(RemarksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

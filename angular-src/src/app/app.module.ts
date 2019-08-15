@@ -27,14 +27,14 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { TargetplateComponent } from './components/transfer/targetplate/targetplate.component';
 import { SourceplateComponent } from './components/transfer/sourceplate/sourceplate.component';
-import { HintComponent } from './components/hint/hint.component';
+import { RemarksComponent } from './components/remarks/remarks.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { LabwarespecsComponent } from './components/labwarespecs/labwarespecs.component';
 import { InstrumentsComponent } from './components/instruments/instruments.component';
 import { ProbemapsComponent } from './components/probemaps/probemaps.component';
 import { ProcessComponent } from './components/process/process.component';
 import { CodedilutionreqComponent } from './components/codedilutionreq/codedilutionreq.component';
-import { MatrixtubecarrierComponent } from './components/matrixtubecarrier/matrixtubecarrier.component';
+import { MatrixtubecarrierreqComponent } from './components/matrixtubecarrier/matrixtubecarrierreq.component';
 import { FileUploadComponent } from './components/matrixtubecarrier/file-upload/file-upload.component';
 import { OperatorsComponent } from './components/operators/operators.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -52,14 +52,14 @@ const appRoutes: Routes = [
   {path: 'transfer', component: TransferComponent, canActivate:[AuthGuard]},
   {path: 'transfer/targetplate', component: TargetplateComponent, canActivate:[AuthGuard]},
   {path: 'transfer/sourceplate', component: SourceplateComponent, canActivate:[AuthGuard]},
-  {path: 'hint', component: HintComponent},
+  {path: 'hint', component: RemarksComponent},
   {path: 'roles', component: RolesComponent, canActivate:[AuthGuard]},
   {path: 'labwarespecs', component: LabwarespecsComponent, canActivate:[AuthGuard]},
   {path: 'instruments', component: InstrumentsComponent, canActivate:[AuthGuard]},
   {path: 'probemaps', component: ProbemapsComponent, canActivate:[AuthGuard]},
   {path: 'process', component: ProcessComponent, canActivate:[AuthGuard]},
   {path: 'codedilutionreq', component: CodedilutionreqComponent, canActivate:[AuthGuard]},
-  {path: 'matrixtubecarrier', component: MatrixtubecarrierComponent, canActivate:[AuthGuard]},
+  {path: 'matrixtubecarrier', component: MatrixtubecarrierreqComponent, canActivate:[AuthGuard]},
   {path: 'operators', component: OperatorsComponent, canActivate:[AuthGuard]},
   {path: 'fpadmin', component: AdminComponent, canActivate:[AuthGuard]},
   {path: 'codemixreq', component: CodemixreqComponent, canActivate:[AuthGuard]},
@@ -85,14 +85,14 @@ export function tokenGetter() {
     TransferComponent,
     TargetplateComponent,
     SourceplateComponent,
-    HintComponent,
+    RemarksComponent,
     RolesComponent,
     LabwarespecsComponent,
     InstrumentsComponent,
     ProbemapsComponent,
     ProcessComponent,
     CodedilutionreqComponent,
-    MatrixtubecarrierComponent,
+    MatrixtubecarrierreqComponent,
     FileUploadComponent,
     OperatorsComponent,
     AdminComponent,

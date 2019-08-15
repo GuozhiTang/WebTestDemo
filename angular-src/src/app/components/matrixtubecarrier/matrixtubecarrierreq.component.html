@@ -3,7 +3,7 @@
   <!-- The form to show work-orders according to three components -->
   <div class="row">
     <div class="col">
-      <h1 style="margin-top: 15px;"><b>Matrix Tube Carrier UI</b></h1>
+      <h1 style="margin-top: 15px;"><b>Matrix Tube Carrier Request</b></h1>
 
       <form [formGroup]="signup" (submit)="onSubmit()">
         <div class="form-group" style="width: 550px;">
@@ -35,7 +35,7 @@
         <button type="submit" class="btn btn-info">Show Details</button>
         <!-- <p><i class="fas fa-exclamation-triangle"></i> Click Match button to check before submit!</p> -->
         <!-- Only all the "Math" area are green, it can be submitted -->
-        <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="onSubmit2()" [disabled]="!checkSubmit">Submit</button>
+        <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="onSubmit2()" [disabled]="!checkSubmit">Create Work-order</button>
       </form>
     </div>
   </div>

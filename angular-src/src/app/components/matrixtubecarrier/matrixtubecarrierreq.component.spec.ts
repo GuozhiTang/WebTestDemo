@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HintComponent } from './hint.component';
+import { MatrixtubecarrierreqComponent } from './matrixtubecarrierreq.component';
 
-describe('HintComponent', () => {
-  let component: HintComponent;
-  let fixture: ComponentFixture<HintComponent>;
+describe('SignUpFormComponent', () => {
+  let component: MatrixtubecarrierreqComponent;
+  let fixture: ComponentFixture<MatrixtubecarrierreqComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HintComponent ]
+      declarations: [ MatrixtubecarrierreqComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HintComponent);
+    fixture = TestBed.createComponent(MatrixtubecarrierreqComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
