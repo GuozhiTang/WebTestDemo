@@ -26,31 +26,37 @@
         <a class="nav-link" [routerLink]="['/register']"><i class="fas fa-user-plus"></i> Register</a>
       </li> -->
       <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Work-orders</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-square"></i> Generate Requests</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" [routerLink]="['/codedilutionreq']"><i class="fas fa-sign-in-alt"></i> Generate Code Dilution Request</a>
-          <a class="dropdown-item" [routerLink]="['/codemixreq']"><i class="fas fa-sign-in-alt"></i> Generate Code Mix Request</a>
-          <a class="dropdown-item" [routerLink]="['/instrumentreq']"><i class="fas fa-sign-in-alt"></i> Generate Instrument Request</a>
-          <a class="dropdown-item" [routerLink]="['/transferreq']"><i class="fas fa-sign-in-alt"></i> Generate Transfer Request</a>
+          <a class="dropdown-item" [routerLink]="['/codedilutionreq']"><i class="far fa-plus-square"></i> Code Dilution Request</a>
+          <a class="dropdown-item" [routerLink]="['/codemixreq']"><i class="far fa-plus-square"></i> Code Mix Request</a>
+          <a class="dropdown-item" [routerLink]="['/instrumentreq']"><i class="far fa-plus-square"></i> Instrument Request</a>
+          <a class="dropdown-item" [routerLink]="['/transferreq']"><i class="far fa-plus-square"></i> Transfer Request</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Components</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" [routerLink]="['/process']"><i class="fas fa-hourglass-start"></i> Setup Process</a>
           <a class="dropdown-item" href="/transfer"><i class="fas fa-vials"></i> Transfer</a>
           <a class="dropdown-item" [routerLink]="['/matrixtubecarrier']"><i class="fas fa-file-upload"></i> Matrix Tube Carrier</a>
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-file"></i> Components</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file"></i> Data</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" [routerLink]="['/roles']"><i class="fas fa-file"></i> Roles</a>
-          <a class="dropdown-item" [routerLink]="['/instruments']"><i class="fas fa-file"></i> Instruments</a>
-          <a class="dropdown-item" [routerLink]="['/labwarespecs']"><i class="fas fa-file"></i> LabwareSpecs</a>
-          <a class="dropdown-item" [routerLink]="['/probemaps']"><i class="fas fa-file"></i> Probemaps</a>
+          <a class="dropdown-item" [routerLink]="['/roles']"><i class="far fa-file"></i> Roles</a>
+          <a class="dropdown-item" [routerLink]="['/instruments']"><i class="far fa-file"></i> Instruments</a>
+          <a class="dropdown-item" [routerLink]="['/labwarespecs']"><i class="far fa-file"></i> LabwareSpecs</a>
+          <a class="dropdown-item" [routerLink]="['/probemaps']"><i class="far fa-file"></i> Probemaps</a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" [routerLink]="['/operators']"><i class="fas fa-user-plus"></i> Operators+</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="!authService.isTokenExp()" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
+      <li class="nav-item dropdown" *ngIf="!authService.isTokenExp()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> System</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" [routerLink]="['/operators']"><i class="fas fa-user-plus"></i> Operators+</a>
+          <a class="dropdown-item" (click)="onLogoutClick()" href="#"><i class="far fa-user"></i> Logout</a>
+        </div>
       </li>
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
         <a class="nav-link" [routerLink]="['/hint']"><i class="fas fa-lightbulb"></i> Hint</a>
