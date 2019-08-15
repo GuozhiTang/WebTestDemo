@@ -1,4 +1,6 @@
+<!-- The main area for content -->
 <div class="container">
+  <!-- The main area for creating target part of transfer request -->
   <div class="row">
     <div class="col">
       <h1 style="margin-top: 15px;"><b>Generate Transfer Request</b></h1>
@@ -29,76 +31,48 @@
       </form>
     </div>
   </div>
+  <hr>
 
-  <div class="row">
-    <div class="col">
-      <h5>Dynamic Test</h5>
-      <div class="form" (submit)="checkDynamic()">
-        <div class="form-group" *ngFor="let item of list">
-          <p>Order: {{item.ordNum}}</p>
-          <div class="form-group" style="width: 350px;">
-            <label style="font-size: 16px;">Select your department:</label>
-            <select class="form-control" [(ngModel)]="item.department" name="item.department">
-              <option>Select department...</option>
-              <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
-            </select>
-          </div>
-          <div class="form-group" style="width: 350px;">
-            <label style="font-size: 16px;">Select the Role Type:</label>
-            <select class="form-control" [(ngModel)]="item.role" name="item.role">
-              <option>Select role type...</option>
-              <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
-            </select>
-          </div>
-          <div class="form-group" style="width: 350px;">
-            <label style="font-size: 16px;">Select the LabwareSpec Type:</label>
-            <select class="form-control" [(ngModel)]="item.labwareSpec" name="item.labwareSpec">
-              <option>Select labwareSpec type...</option>
-              <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
-            </select>
-          </div>
-        </div>
-        <button (click)="add()">Add</button>
-
-
-        <!-- <div class="form-group form-group-sm" *ngFor="let i of login">
-          <label class="col-form-label">UserName</label>
-          <input class="form-control" [(ngModel)]="i.username" value="{{i.username}}">
-          <label class="col-form-label">Password</label>
-          <input class="form-control" [(ngModel)]="i.password" value="{{i.password}}">
-          <button class="btn btn-link" (click)="removeInput(i)">Deleted</button>
-        </div>
-        <button (click)="addInput()">Add</button>
-        {{ login | json }} -->
-      </div>
-    </div>
-  </div>
-  
-  <!-- <div class="row">
-    <div class="col">
-      <h5>Dynamic Test2</h5>
-      <div class="form">
-        <div class="form-group form-group-sm" *ngFor="let i of login">
-          <label class="col-form-label">UserName</label>
-          <input class="form-control" [(ngModel)]="i.username" value="{{i.username}}">
-          <label class="col-form-label">Password</label>
-          <input class="form-control" [(ngModel)]="i.password" value="{{i.password}}">
-          <button class="btn btn-link" (click)="removeInput(i)">Deleted</button>
-        </div>
-        <button (click)="addInput()">Add</button>
-        {{ login | json }}
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <div class="row">
+  <!-- The main area for creating source part of transfer request -->
+  <div class="row" *ngIf="parentOptions">
     <div class="col">
       <h5 class="text-warning">Customize your Transfer Source:</h5>
-      <form (submit)="onCreateReq(content)">
-        
-        <button type="submit" class="btn btn-primary">Create Work-order</button>
+      <div class="form">
+        <div class="form-group">
+          <table class="table-striped text-center">
+            <tr>
+              <th style="padding: 5px 15px 0px;"><label style="font-size: 16px;">No.</label></th>
+              <th><label style="font-size: 16px;">Role</label></th>
+              <th><label style="font-size: 16px;">LabwareSpec</label></th>
+            </tr>
+            <tr *ngFor="let source of sourceList">
+              <td>
+                <button class="btn btn-outline-light">{{source.ordNum}}</button>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="source.role" name="source.role">
+                  <option>Select role type...</option>
+                  <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="source.labwareSpec" name="source.labwareSpec">
+                  <option>Select labwareSpec type...</option>
+                  <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
+                </select>
+              </td>
+              <td>
+                <button class="btn" type="button" style="font-size: 28px;" (click)="addSource()"><i class="far fa-plus-square"></i></button>
+              </td>
+              <td>
+                <button class="btn" style="font-size: 28px;" (click)="deleteSource(source)"><i class="far fa-minus-square"></i></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <button class="btn btn-success" type="submit" (click)="onCreateReq(content)">Create Work-order</button>
 
-        The modal content for successfully generation of work-order
+        <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Congratulations</h4>
@@ -114,7 +88,6 @@
             <button type="button" class="btn btn-danger" (click)="closeModal()">Close</button>
           </div>
         </ng-template>
-      </form>
+      </div>
     </div>
-  </div> -->
 </div>

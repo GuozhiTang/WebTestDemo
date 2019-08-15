@@ -49,6 +49,7 @@ export class InstrumentreqComponent implements OnInit {
       });
     });
 
+    // Get all the instruments remotely
     var instruments = [];
     var data = this.remoteService.getCoreDaoReqData('Instrument', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(data).subscribe(res => {
@@ -64,6 +65,11 @@ export class InstrumentreqComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method to get the information for parentOptions 
+   * and generate the transfer request according to that
+   * @param content content area for successful result modal
+   */
   onCreateReq(content) {
     // Define the parentOptions
     var parentOptions = {

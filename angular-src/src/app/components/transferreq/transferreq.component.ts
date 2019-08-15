@@ -22,11 +22,10 @@ export class TransferreqComponent implements OnInit {
   labwareSpec: LabwareSpec;
   labwareSpecs: LabwareSpec[]
   username: any;
-  id: number = 1;
-  login:any = [{"username": "username" + this.id,"password": "pwd" + this.id}];
-  list: any = [{
-    ordNum: this.id,
-    department: Department,
+  parentOptions: Object;
+  num: number = 1;
+  sourceList: any = [{
+    ordNum: this.num,
     role: Role,
     labwareSpec: LabwareSpec
   }];
@@ -61,6 +60,7 @@ export class TransferreqComponent implements OnInit {
       });
     });
 
+    // Get all the role types remotely
     var roles = [];
     var data = this.remoteService.getCoreDaoReqData('Role', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(data).subscribe(res => {
@@ -71,6 +71,7 @@ export class TransferreqComponent implements OnInit {
       this.roles = roles;
     });
 
+    // Get all the labwareSpec types remotely
     var labwareSpecs = [];
     var data = this.remoteService.getCoreDaoReqData('LabwareSpec', ['id'], 'fireplex.data.backend.core', true);
     this.remoteService.retrievalData(data).subscribe(res => {
@@ -85,6 +86,9 @@ export class TransferreqComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Method to submit the target information for transfer request as the parent option
+   */
   onSubmitTarget() {
     var parentOptions = {
       roleName: this.role.role,
@@ -94,91 +98,76 @@ export class TransferreqComponent implements OnInit {
       ordNum: 0,
       reqElemSpecName: "Labware Req Elem"
     }
-    console.log(parentOptions);
+    this.parentOptions = parentOptions;
+    console.log(this.parentOptions);
   }
 
+  /**
+   * Method to get all the selected source information for transfer request 
+   * and generate the transfer request according to source and target data
+   * @param content content area for successful result modal
+   */
   onCreateReq(content) {
-    var parentOptions = {
-      roleName: this.role.role,
-      labwareSpec: this.labwareSpec.name,
-      units: "uL",
-      value: 1,
-      ordNum: 0,
-      reqElemSpecName: "Labware Req Elem"
-    }
-    // console.log(parentOptions);
-
+    // console.log(this.list);
     var subReqOptions = [];
-    const subReqData = {
-      roleName: "Antibody Matrix Tube",
-      labwareSpec: "0.5mL Matrix Tube",
-      value: 1,
-      units: "uL",
-      ordNum: 0,
-      reqElemSpecName: "Labware Req Elem"
+    for (var i = 0; i < this.sourceList.length; i++) {
+      const subReqData = {
+        roleName: this.sourceList[i].role.role,
+        labwareSpec: this.sourceList[i].labwareSpec.name,
+        value: 1,
+        units: "uL",
+        ordNum: i,
+        reqElemSpecName: "Labware Req Elem"
+      }
+      subReqOptions.push(subReqData);
     }
-    subReqOptions.push(subReqData);
+    // console.log(subReqOptions);
 
     var generateReq = {
       request: "generateRequest",
       deptSpecId: this.department.id,
       employeeId: this.operator.id,
       opSpecName: "Transfer Request",
-      parentOptions: parentOptions,
+      parentOptions: this.parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions}
     }
-    // console.log(generateReq);
+    console.log(generateReq);
 
-    // this.remoteService.remotePostReq(generateReq).subscribe(res => {
-    //   console.log(res);
-    //   // if (res) {
-    //   //   this.newReqID = res.requestId;
-    //   //   this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
-    //   // } else {
-    //   //   this.flashMessage.show('There exists some errors! Please re-check!');
-    //   // }
-    // });
+    this.remoteService.remotePostReq(generateReq).subscribe(res => {
+      // console.log(res);
+      if (res) {
+        this.newReqID = res.requestId;
+        this.modalService.open(content, { size:'lg', backdrop: 'static', keyboard: false});
+      } else {
+        this.flashMessage.show('There exists some errors! Please re-check!');
+      }
+    });
   }
 
-
-  addInput() {
-    console.log('点击');
-    console.log(this.login);
-    let number = this.login.length + 1;
-    this.login.push({"username": "username" + number, "password": "pwd" + number});
-    console.log(this.login);
-  }
-
-  add() {
-    console.log("Add!");
-    this.id += 1;
+  /**
+   * Method to add a new source object to the sourcelist
+   */
+  addSource() {
+    console.log("Add new source!");
+    this.num += 1;
     // this.list.push(this.id);
     var data = {
-      ordNum: this.id,
-      department: Department,
+      ordNum: this.num,
       role: Role,
       labwareSpec: LabwareSpec
     }
-    this.list.push(data);
+    this.sourceList.push(data);
   }
 
-  checkDynamic() {
-    var parentOptions = {
-      roleName: this.role.role,
-      labwareSpec: this.labwareSpec.name,
-      units: "uL",
-      value: 1,
-      ordNum: 0,
-      reqElemSpecName: "Labware Req Elem"
-    }
-    console.log(parentOptions);
-  }
- 
-  removeInput(item) {
-    console.log(item);
-    let i = this.login.indexOf(item);
-    console.log(i);
-    this.login.splice(i, 1);
+  /**
+   * Method to delete a source onject from the sourcelist
+   * @param source the exact source object which need to be deleted
+   */
+  deleteSource(source) {
+    // console.log(source);
+    var index = this.sourceList.indexOf(source);
+    console.log('delete index ' + index);
+    this.sourceList.splice(index, 1);
   }
 
   /**
