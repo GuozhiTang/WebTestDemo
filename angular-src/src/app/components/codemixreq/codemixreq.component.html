@@ -20,7 +20,7 @@
         <div class="form-group">
           <textarea class="form-control" [(ngModel)]="plexId" name="plexId" style="width: 350px; height: 150px;"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-info" type="submit">Get the Preview</button>
       </form>
     </div>
   </div>
@@ -46,7 +46,7 @@
             <option [value]="assayCodeType" *ngFor='let assayCodeType of assayCodeTypes'>{{assayCodeType}}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create Work-order</button>
+        <button type="submit" class="btn btn-success">Generate Work-order</button>
 
         <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>

@@ -27,7 +27,7 @@
             <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create Transfer Target</button>
+        <button type="submit" class="btn btn-info">Submit Target Info</button>
       </form>
     </div>
   </div>
@@ -70,7 +70,7 @@
             </tr>
           </table>
         </div>
-        <button class="btn btn-success" type="submit" (click)="onCreateReq(content)">Create Work-order</button>
+        <button class="btn btn-success" type="submit" (click)="onCreateReq(content)">Generate Work-order</button>
 
         <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>

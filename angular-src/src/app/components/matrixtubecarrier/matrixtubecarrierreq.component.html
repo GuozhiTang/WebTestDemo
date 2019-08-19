@@ -1,5 +1,5 @@
 <!-- The main area for this component -->
-<div class="container" style="margin-top: 15px;">
+<div class="container">
   <!-- The form to show work-orders according to three components -->
   <div class="row">
     <div class="col">
@@ -25,6 +25,7 @@
         </div>
 
         <div class="form-group">
+          <label style="font-size: 16px;">.csv File for Scanned Data:</label>
           <app-file-upload formControlName="csv"></app-file-upload>
           <div class="invalid-feedback" style="display: block">
             <ng-container *ngIf="hasError('csv', 'required')">This field is required!</ng-container>

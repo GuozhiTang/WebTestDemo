@@ -80,14 +80,23 @@
 </head>
 <body>
   <div class="container" id="Webpage_container">
+    <h3 style="text-align: left; margin-top: 15px;">
+      <!-- <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">"Barcode here..."</span> -->
+      <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">{{targetbarcode}}</span>
+    </h3>
+    <p class="text-warning" style="font-size: 17px;">If you want to show the deatils for wells, <b>Plate</b> collection should be created locally.</p>
+    <p class="text-info" style="font-size: 17px;">The Schema for <b>Plate</b> collection is shown below:</p>
+    <ul class="text-info" style="font-size: 17px;">
+      <li>id: Number</li>
+      <li>barcode: Number</li>
+      <li>name: String</li>
+      <li>coor: String</li>
+      <li>volume: String</li>
+      <li>description: String</li>
+    </ul>
     <hr>
     <div class="container" id="Target_display" style="height:480px; width: 1150px; overflow: scorll;">
-      <h3 style="text-align: left">
-        <!-- <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">"Barcode here..."</span> -->
-        <i class="fas fa-vials"></i> Target Plate: <span class="badge badge-pill badge-dark">{{targetbarcode}}</span>
-      </h3>
       <p style="font-size: 17px; margin-left: 15px;"><i class="fas fa-angle-double-down"></i> Select your <b>TARGET</b> wells <b class="text-warning">[Drag to Select]</b> <b class="text-warning">[Click to Show]</b>:</p>
-      <p class="text-warning" style="font-size: 17px;">(Only the first row and the first column have exact test data to show)</p>
       <div id="Target_display_selection">
         <div id="Target_display_selection_plate" style="float: left; background-color: #5a7e8a; padding-bottom: 15px; width: 590px; border-radius: 15px;">
           <div class="row" id="numtitle">
@@ -262,7 +271,7 @@
               <label>Type in the <b>VOLUME</b> of <b>TRANSFER</b>:</label>
               <input class="form-control" type="text" placeholder="volume here..." style="width: 300px;">
             </div>
-            <button class="btn btn-info" type="submit">Submit the <b>TRANSFER</b></button>
+            <button class="btn btn-success" type="submit">Submit the <b>TRANSFER</b></button>
           </form>
           <!-- <form (submit)="onSearchPlateByBar()">
             <div class="form-group">

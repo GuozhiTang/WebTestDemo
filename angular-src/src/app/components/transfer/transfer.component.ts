@@ -45,26 +45,34 @@ export class TransferComponent implements OnInit {
    * Search plates by barcode
    */
   onSearchPlateByBar() {
-    const searchData = {
-      barcode: this.barcode
+    if (this.barcode == 1001) {
+      this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
+      this.targetjudge = false;
+      this.barcode_targetjudge = this.barcode;
+      this.showTransfer = true;
+    } else {
+      this.flashMessage.show('Please type correct barcode!', {cssClass: 'alert-danger', timeout: 3000});
     }
-    this.dataService.searchData('Plate_barcode', searchData).subscribe(res => {
-      if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
-        this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
-        this.targetjudge = false;
-        // this.router.navigate(['/transfer/targetplate']);
-        // window.location.href = "/transfer/targetplate";
-        this.barcode_targetjudge = res[0].barcode;
-        // this.transferjudge = undefined;
-        this.showTransfer = true;
-        // console.log('Submit successfully!');
-        // console.log(res);
-      } else {
-        this.flashMessage.show('Please type correct barcode!', {cssClass: 'alert-danger', timeout: 3000});
-        // console.log('Submit failed!');
-        // console.log(res);
-      }
-    });
+    // const searchData = {
+    //   barcode: this.barcode
+    // }
+    // this.dataService.searchData('Plate_barcode', searchData).subscribe(res => {
+    //   if (res[0].id != null && res[0].barcode != null && res[0].name != "" && res[0].coor != "" && res[0].volume != "" && res[0].description != "") {
+    //     this.flashMessage.show('Submit successfully!', {cssClass: 'alert-success', timeout: 3000});
+    //     this.targetjudge = false;
+    //     // this.router.navigate(['/transfer/targetplate']);
+    //     // window.location.href = "/transfer/targetplate";
+    //     this.barcode_targetjudge = res[0].barcode;
+    //     // this.transferjudge = undefined;
+    //     this.showTransfer = true;
+    //     // console.log('Submit successfully!');
+    //     // console.log(res);
+    //   } else {
+    //     this.flashMessage.show('Please type correct barcode!', {cssClass: 'alert-danger', timeout: 3000});
+    //     // console.log('Submit failed!');
+    //     // console.log(res);
+    //   }
+    // });
   }
 
   /**

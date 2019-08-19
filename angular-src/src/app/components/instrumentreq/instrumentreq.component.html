@@ -19,7 +19,7 @@
             <option [ngValue]="instrument" *ngFor='let instrument of instruments'>{{instrument.short}}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create Work-order</button>
+        <button type="submit" class="btn btn-success">Generate Work-order</button>
 
         <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>

@@ -9,7 +9,7 @@
     <button class="btn btn-success" [routerLink]="['/login']"><i class="fas fa-user"></i> Login</button>
   </div>
   <div *ngIf="!authService.isTokenExp()">
-    <button class="btn btn-primary" (click)="onLogoutClick()">Logout</button>
+    <button class="btn btn-danger" (click)="onLogoutClick()"><i class="far fa-user"></i> Logout</button>
   </div>
 </div>
 <hr>

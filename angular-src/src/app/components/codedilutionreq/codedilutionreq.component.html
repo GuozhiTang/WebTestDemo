@@ -37,7 +37,7 @@
           <label style="font-size: 16px;">Volume (uL)</label>
           <input class="form-control" type="number" [(ngModel)]="Volume" name="Volume" placeholder="500" disabled>
         </div>
-        <button class="btn btn-primary" type="submit">Calculate</button>
+        <button class="btn btn-info" type="submit">Calculate</button>
       </form>
     </div>
   </div>
@@ -60,7 +60,7 @@
             <option [value]="assayCodeType" *ngFor='let assayCodeType of assayCodeTypes'>{{assayCodeType}}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create Work-order</button>
+        <button type="submit" class="btn btn-success">Generate Work-order</button>
 
         <!-- The modal content for successfully generation of work-order -->
         <ng-template #content let-modal>
