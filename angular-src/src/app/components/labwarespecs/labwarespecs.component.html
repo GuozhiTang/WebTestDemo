@@ -10,7 +10,7 @@
   <!-- To show local and remote Labwarespecs data -->
   <div class="row">
     <!-- Area to update and show Labwarespecs locally -->
-    <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
+    <div class="col" style="height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Update and Show All LabwareSpecs Locally</b></h2>
       <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset LabwareSpecs</h5>
       <form (submit)="onResetLwareSpecs()" style="margin-bottom: 15px">
@@ -46,12 +46,12 @@
       </table>
     </div>
 
-    <!-- Area to show Labwarespecs remotely -->
+    <!-- Area to show Labwarespecs remotely
     <div class="col" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Show All LabwareSpecs Remotely</b></h2>
       <p>According to: <a href="http://10.253.7.14:8000/?request=getLabwareSpecs">http://10.253.7.14:8000/?request=getLabwareSpecs</a></p>
       <hr>
-      <!-- table to show labwarespecs remotely -->
+      table to show labwarespecs remotely
       <table class="table-striped table-hover"  style="text-align: center">
         <tr>
           <th style="padding-right: 2px">id</th>
@@ -78,7 +78,7 @@
           <td style="padding-left: 2px; padding-right: 2px">{{remotelwarespec.moduleName}}</td>
         </tr>
       </table>
-    </div>
+    </div> -->
   </div>
 </div>
 <hr>

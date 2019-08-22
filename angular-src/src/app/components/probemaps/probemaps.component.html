@@ -10,7 +10,7 @@
   <!-- To show local and remote Probemaps data -->
   <div class="row">
     <!-- Area to update and show Probemaps locally -->
-    <div class="col" style="margin-left: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
+    <div class="col" style="height: 500px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Update and Show All Probemaps Locally</b></h2>
       <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Reset Probemaps</h5>
       <form (submit)="onResetProbemaps()" style="margin-bottom: 15px">
@@ -40,9 +40,39 @@
         </tr>
       </table>
     </div>
+    
+    <!-- Area to show Probemaps remotely
+    <div class="col" *ngIf="!probeRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
+      <h2 style="margin-top: 15px"><b>Show All Probemaps Remotely</b></h2>
+      <p>According to: <a href="http://10.253.7.14:8000/?request=getAllProbemaps">http://10.253.7.14:8000/?request=getAllProbemaps</a></p>
+      <hr>
+      table to show probemaps remotely
+      <table class="table-striped table-hover"  style="text-align: center">
+        <tr>
+          <th style="padding-right: 2px">id</th>
+          <th style="padding-left: 2px; padding-right: 2px">name</th>
+          <th style="padding-left: 2px; padding-right: 2px">creator</th>
+          <th style="padding-left: 2px; padding-right: 2px">codemap_id.name</th>
+          <th style="padding-left: 2px; padding-right: 2px">most_current</th>
+          <th style="padding-left: 2px; padding-right: 2px">className</th>
+          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
+        </tr>
+        <tr *ngFor="let remoteprobemap of remoteprobemaps">
+          <td style="padding-right: 2px">{{remoteprobemap.id}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">name: {{remoteprobemap.creator.requestor_id.name}}<br>requested: {{remoteprobemap.creator.requested}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.codemap_id.name}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.most_current}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.className}}</td>
+          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.moduleName}}</td>
+        </tr>
+      </table>
+    </div> -->
+  </div>
 
+  <div class="row">
     <!-- Area to show probes -->
-    <div class="col" *ngIf="probeRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto;">
+    <div class="col" *ngIf="probeRes" style="height: 500px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
       <h2 style="margin-top: 15px"><b>Show Probes -- ProbemapId: </b><span class="badge badge-pill badge-dark">{{probemapId}}</span></h2>
       <hr>
       <!-- Table to display probes -->
@@ -66,34 +96,6 @@
           <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.col}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{proberes.code.row}}</td>
           <td style="padding-left: 2px; padding-right: 2px">{{proberes.probe_id.qc}}</td>
-        </tr>
-      </table>
-    </div>
-    
-    <!-- Area to show Probemaps remotely -->
-    <div class="col" *ngIf="!probeRes" style="margin-left: 3px; margin-right: -160px; width: 350px; height: 700px; overflow: auto; border-radius: 15px; border: 3px dashed #fff">
-      <h2 style="margin-top: 15px"><b>Show All Probemaps Remotely</b></h2>
-      <p>According to: <a href="http://10.253.7.14:8000/?request=getAllProbemaps">http://10.253.7.14:8000/?request=getAllProbemaps</a></p>
-      <hr>
-      <!-- table to show probemaps remotely -->
-      <table class="table-striped table-hover"  style="text-align: center">
-        <tr>
-          <th style="padding-right: 2px">id</th>
-          <th style="padding-left: 2px; padding-right: 2px">name</th>
-          <th style="padding-left: 2px; padding-right: 2px">creator</th>
-          <th style="padding-left: 2px; padding-right: 2px">codemap_id.name</th>
-          <th style="padding-left: 2px; padding-right: 2px">most_current</th>
-          <th style="padding-left: 2px; padding-right: 2px">className</th>
-          <th style="padding-left: 2px; padding-right: 2px">moduleName</th>
-        </tr>
-        <tr *ngFor="let remoteprobemap of remoteprobemaps">
-          <td style="padding-right: 2px">{{remoteprobemap.id}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.name}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">name: {{remoteprobemap.creator.requestor_id.name}}<br>requested: {{remoteprobemap.creator.requested}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.codemap_id.name}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.most_current}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.className}}</td>
-          <td style="padding-left: 2px; padding-right: 2px">{{remoteprobemap.moduleName}}</td>
         </tr>
       </table>
     </div>
