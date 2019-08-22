@@ -23,6 +23,7 @@ export class TransferreqComponent implements OnInit {
   labwareSpecs: LabwareSpec[]
   username: any;
   parentOptions: Object;
+  SourceAmount: number;
   num: number = 1;
   sourceList: any = [{
     ordNum: this.num,
@@ -142,6 +143,12 @@ export class TransferreqComponent implements OnInit {
         this.flashMessage.show('There exists some errors! Please re-check!');
       }
     });
+  }
+
+  onGetSourceAmount() {
+    for (var i = 1; i < this.SourceAmount; i++) {
+      this.addSource();
+    }
   }
 
   /**

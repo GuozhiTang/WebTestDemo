@@ -6,26 +6,34 @@
       <h1 style="margin-top: 15px;"><b>Generate Transfer Request</b></h1>
       <h5 class="text-warning">Customize your Transfer Target:</h5>
       <form (submit)="onSubmitTarget()">
-        <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;">Select your department:</label>
-          <select class="form-control" [(ngModel)]="department" name="department">
-            <option>Select department...</option>
-            <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
-          </select>
-        </div>
-        <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;">Select the Role Type:</label>
-          <select class="form-control" [(ngModel)]="role" name="role">
-            <option>Select role type...</option>
-            <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
-          </select>
-        </div>
-        <div class="form-group" style="width: 350px;">
-          <label style="font-size: 16px;">Select the LabwareSpec Type:</label>
-          <select class="form-control" [(ngModel)]="labwareSpec" name="labwareSpec">
-            <option>Select labwareSpec type...</option>
-            <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
-          </select>
+        <div class="form-group">
+          <table>
+            <tr>
+              <th><label>Select your department:</label></th>
+              <th><label>Select the Role Type:</label></th>
+              <th><label>Select the LabwareSpec Type:</label></th>
+            </tr>
+            <tr>
+              <td>
+                <select class="form-control" [(ngModel)]="department" name="department">
+                  <option>Select department...</option>
+                  <option [ngValue]="department" *ngFor='let department of departments'>{{department.name}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="role" name="role">
+                  <option>Select role type...</option>
+                  <option [ngValue]="role" *ngFor='let role of roles'>{{role.role}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="labwareSpec" name="labwareSpec">
+                  <option>Select labwareSpec type...</option>
+                  <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
+                </select>
+              </td>
+            </tr>
+          </table>
         </div>
         <button type="submit" class="btn btn-info">Submit Target Info</button>
       </form>
@@ -37,7 +45,16 @@
   <div class="row" *ngIf="parentOptions">
     <div class="col">
       <h5 class="text-warning">Customize your Transfer Source:</h5>
-      <div class="form">
+      <p class="text-info">(You can both type in the amount at one time or create one by one.)</p>
+      <form (submit)="onGetSourceAmount()">
+        <div class="form-group">
+          <label style="font-size: 16px;">You can type in the amout of source list:</label>
+          <input class="form-control" style="width: 150px;" type="number" [(ngModel)]="SourceAmount" name="SourceAmount" placeholder="Amount here...">
+        </div>
+        <button class="btn btn-info" type="submit">Create Source List</button>
+      </form>
+
+      <div class="form" style="margin-top: 15px;">
         <div class="form-group">
           <table class="table-striped text-center">
             <tr>
