@@ -1,7 +1,13 @@
 export class LabwareSpec {
   className: String;
   moduleName: String;
-  map_id: Object;
+  map_id: {
+    id: Number;
+    name: String;
+    description: String;
+    moduleName: String;
+    className: String;
+  }
   name: String;
   description: String;
   material: String;

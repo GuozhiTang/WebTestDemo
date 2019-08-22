@@ -46,6 +46,7 @@ export class ProbemapsComponent implements OnInit {
       // show all probemaps locally
       this.dataService.getData('Probemap').subscribe(probemaps => {
         this.probemaps = probemaps;
+        // console.log(this.probemaps);
       });
 
       // show all probemaps remotely
@@ -173,6 +174,7 @@ export class ProbemapsComponent implements OnInit {
     this.probemapId = mapId;
     this.dataService.searchData('Probemap_probemapId', searchData).subscribe(res => {
       this.probeRes = res;
+      // console.log(this.probeRes);
       // console.log("res: " + res.length); 
     });
   }

@@ -25,7 +25,15 @@ export class ReqStatus {
     }
     id: Number;
   }
-  requestor_id: Object;
+  requestor_id: {
+    moduleName: String;
+    name: String;
+    admin: Boolean;
+    className: String;
+    active: Boolean;
+    manufacturing: Boolean;
+    id: Number;
+  }
   dept_spec: Object;
   className: String;
   moduleName: String;

@@ -48,6 +48,7 @@ export class LabwarespecsComponent implements OnInit {
       // show labwarespecs locally
       this.dataService.getData('LabwareSpec').subscribe(lwarespecs => {
         this.lwarespecs = lwarespecs;
+        // console.log(this.lwarespecs);
       });
 
       // show labwarespecs remotely
