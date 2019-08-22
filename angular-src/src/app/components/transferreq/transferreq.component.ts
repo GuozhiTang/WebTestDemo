@@ -145,6 +145,9 @@ export class TransferreqComponent implements OnInit {
     });
   }
 
+  /**
+   * Method to get the exact amount of items in source list and do the loop to call addSource()
+   */
   onGetSourceAmount() {
     for (var i = 1; i < this.SourceAmount; i++) {
       this.addSource();
