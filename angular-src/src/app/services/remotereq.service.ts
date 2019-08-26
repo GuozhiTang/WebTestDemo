@@ -20,7 +20,9 @@ export class RemotereqService {
     let headers = new Headers();
     console.log(req);
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', req, {headers: headers})
+    // return this.http.post('http://10.253.7.14:8000', req, {headers: headers})
+    // return this.http.post('http://localhost:3000/remotes/postReq', req, {headers: headers})
+    return this.http.post('remotes/postReq', req, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -44,7 +46,9 @@ export class RemotereqService {
     }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', retrievalData, {headers: headers})
+    // return this.http.post('http://10.253.7.14:8000', retrievalData, {headers: headers})
+    // return this.http.post('http://localhost:3000/remotes/retrievalData', retrievalData, {headers: headers})
+    return this.http.post('remotes/retrievalData', retrievalData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -66,7 +70,9 @@ export class RemotereqService {
     }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://10.253.7.14:8000', createData, {headers: headers})
+    // return this.http.post('http://10.253.7.14:8000', createData, {headers: headers})
+    // return this.http.post('http://localhost:3000/remotes/createData', createData, {headers: headers})
+    return this.http.post('remotes/createData', createData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

@@ -22,20 +22,6 @@ export class AuthService {
     ) { }
 
   /**
-   * Function to register to the user
-   * Here is where we actually reach into our backend API and make that post request to register
-   * @param user: json sent to local server conatining all information for adding/registering new users
-   */
-  registerUser(user) {
-    // Set header values
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
-    // return this.http.post('users/register', user, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
-
-  /**
    * Authenticate the login information for the specific operator.
    * @param operator: json sent to local server conatining all information for authenticating existed operators.
    */
@@ -43,8 +29,8 @@ export class AuthService {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/operators/authenticate', operator, {headers: headers})
-    // return this.http.post('users/authent/icate', user, {headers: headers})
+    // return this.http.post('http://localhost:3000/operators/authenticate', operator, {headers: headers})
+    return this.http.post('operators/authenticate', operator, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -61,12 +47,13 @@ export class AuthService {
       // Use the token here
       headers.append('Authorization', this.authToken);
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/operators/profile', {headers: headers})
-      // return this.http.get('users/profile', {headers: headers})
+      // return this.http.get('http://localhost/:3000/operators/profile', {headers: headers})
+      return this.http.get('operators/profile', {headers: headers})
         .pipe(map(res => res.json()));
     } else {
       headers.append('Content-Type','application/json');
-      return this.http.get('http://localhost:3000/operators/nulloperator', {headers: headers})
+      // return this.http.get('http://localhost:3000/operators/nulloperator', {headers: headers})
+      return this.http.get('operators/nulloperator', {headers: headers})
         .pipe(map(res => res.json()));
     }
   }

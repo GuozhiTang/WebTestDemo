@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
-// import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SpecsComponent } from './components/specs/specs.component';
@@ -45,7 +44,6 @@ import { TransferreqComponent } from './components/transferreq/transferreq.compo
 const appRoutes: Routes = [
   // This could be the home page
   {path: '', component: HomeComponent},
-  // {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'specs', component: SpecsComponent, canActivate:[AuthGuard]},
@@ -78,7 +76,6 @@ export function tokenGetter() {
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    // RegisterComponent,
     HomeComponent,
     DashboardComponent,
     SpecsComponent,
