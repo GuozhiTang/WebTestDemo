@@ -29,8 +29,8 @@ export class AuthService {
     // Set header values
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    // return this.http.post('http://localhost:3000/operators/authenticate', operator, {headers: headers})
-    return this.http.post('operators/authenticate', operator, {headers: headers})
+    return this.http.post('http://localhost:3000/operators/authenticate', operator, {headers: headers})
+    // return this.http.post('operators/authenticate', operator, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -47,13 +47,13 @@ export class AuthService {
       // Use the token here
       headers.append('Authorization', this.authToken);
       headers.append('Content-Type','application/json');
-      // return this.http.get('http://localhost/:3000/operators/profile', {headers: headers})
-      return this.http.get('operators/profile', {headers: headers})
+      return this.http.get('http://localhost:3000/operators/profile', {headers: headers})
+      // return this.http.get('operators/profile', {headers: headers})
         .pipe(map(res => res.json()));
     } else {
       headers.append('Content-Type','application/json');
-      // return this.http.get('http://localhost:3000/operators/nulloperator', {headers: headers})
-      return this.http.get('operators/nulloperator', {headers: headers})
+      return this.http.get('http://localhost:3000/operators/nulloperator', {headers: headers})
+      // return this.http.get('operators/nulloperator', {headers: headers})
         .pipe(map(res => res.json()));
     }
   }

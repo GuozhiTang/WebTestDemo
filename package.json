@@ -7,7 +7,7 @@
     "angular-install": "cd angular-src && npm install",
     "start": "node app",
     "server": "nodemon app.js",
-    "angular": "cd angular-src && ng serve",
+    "angular": "cd angular-src && npm start",
     "dev": "concurrently \"npm run server\" \"npm run angular\""
   },
   "author": "Guozhi Tang",

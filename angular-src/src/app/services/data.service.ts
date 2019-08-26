@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from 'rxjs/operators';
+import { testServer } from '../../testServer';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class DataService {
       case 'Spec': route = 'specs/getspecs'; break;
       case 'OperatorDept': route= 'operatordepts/getoperatordepts'; break;
     }
-    // return this.http.get('http://localhost:3000/' + route, {headers: headers})
-    return this.http.get(route, {headers: headers})
+    return this.http.get(testServer + route, {headers: headers})
+    // return this.http.get(route, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -51,8 +52,8 @@ export class DataService {
       // case 'Spec': route = 'specs/addspecs'; break;
     }
     headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3000/' + route, addData, {headers: headers})
-    return this.http.post(route, component, {headers: headers})
+    return this.http.post(testServer + route, addData, {headers: headers})
+    // return this.http.post(route, addData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -76,8 +77,8 @@ export class DataService {
       case 'OperatorDept': route = 'operatordepts/resetoperatordepts'; break;
     }
     headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3000/' + route, {headers: headers})
-    return this.http.post(route, {headers: headers})
+    return this.http.post(testServer + route, {headers: headers})
+    // return this.http.post(route, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -117,8 +118,8 @@ export class DataService {
       case 'Spec_conditions': route = 'specs/searchbyconditions'; break;
     }
     headers.append('Content-Type', 'application/json');
-    // return this.http.post('http://localhost:3000/' + route, searchData, {headers: headers})
-    return this.http.post(route, searchData, {headers: headers})
+    return this.http.post(testServer + route, searchData, {headers: headers})
+    // return this.http.post(route, searchData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }
