@@ -6,9 +6,9 @@ const Remote = require('../models/remote');
 router.post('/retrievalData', (req, res, next) => {
   const retrievalData = req.body;
   // console.log(req.body);
-  Remote.retrievalData(retrievalData, (err, data) => {
+  Remote.remoteData(retrievalData, (err, data) => {
     if (err) {
-      res.json({success: false, msg:'Failed!'});
+      res.json({success: false, msg:'Failed to retrieval data from data server!'});
     } else {
       try {
         res.json(data);
@@ -20,11 +20,11 @@ router.post('/retrievalData', (req, res, next) => {
 });
 
 router.post('/createData', (req, res, next) => {
-  const retrievalData = req.body;
+  const createData = req.body;
   // console.log(req.body);
-  Remote.createData(retrievalData, (err, data) => {
+  Remote.remoteData(createData, (err, data) => {
     if (err) {
-      res.json({success: false, msg:'Failed!'});
+      res.json({success: false, msg:'Failed to create data for data server!'});
     } else {
       try {
         res.json(data);
@@ -38,9 +38,9 @@ router.post('/createData', (req, res, next) => {
 router.post('/postReq', (req, res, next) => {
   const reqData = req.body;
   // console.log(req.body);
-  Remote.postReq(reqData, (err, data) => {
+  Remote.remoteData(reqData, (err, data) => {
     if (err) {
-      res.json({success: false, msg:'Failed!'});
+      res.json({success: false, msg:'Failed to do the post request to data server!'});
     } else {
       try {
         res.json(data);
