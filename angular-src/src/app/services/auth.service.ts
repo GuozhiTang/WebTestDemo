@@ -23,8 +23,8 @@ export class AuthService {
     ) { }
 
   /**
-   * Authenticate the login information for the specific operator.
-   * @param operator: json sent to local server conatining all information for authenticating existed operators.
+   * Authenticate the login information for the specific operator
+   * @param operator json sent to local server conatining all information for authenticating existed operators
    */
   authenticateOperator(operator) {
     // Set header values
@@ -35,8 +35,8 @@ export class AuthService {
   }
 
   /**
-   * Load the data in local storage and set it as current user.
-   * Before login there should be a null user from users/nulluser.
+   * Load the data in local storage and set it as current operator
+   * Before login there should be a null operator from operators/nulluser
    */
   getProfile() {
     // Set header values
@@ -58,8 +58,8 @@ export class AuthService {
 
   /**
    * Store login information in local storage
-   * @param token: the token information of authentication
-   * @param operators: the operators information of login user
+   * @param token the token information of authentication
+   * @param operators the operators information of login user
    */
   storeUserData(token, operators) {
     localStorage.setItem('id_token', token);
@@ -81,14 +81,14 @@ export class AuthService {
   // }
 
   /**
-   * Judge whether the token of login user has expired.
+   * Judge whether the token of login user has expired
    */
   isTokenExp(){
     return this.jwtHelper.isTokenExpired();
   }
 
   /**
-   * Functionality of logout and set token and user information as null. Finally clear up the local storage.
+   * Functionality of logout and set token and user information as null. Finally clear up the local storage
    */
   logout() {
     this.authToken = null;
@@ -98,8 +98,8 @@ export class AuthService {
   }
 
   /**
-   * Authenticate the login information for the specific user.
-   * @param user: json sent to local server conatining all information for authenticating existed users.
+   * Authenticate the login information for the specific user
+   * @param user json sent to local server conatining all information for authenticating existed users
    */
   // authenticateUser(user) {
   //   // Set header values
