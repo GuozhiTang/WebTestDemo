@@ -19,7 +19,7 @@ export class SourceplateComponent implements OnInit {
   emptyCoorRes: Plate[];
   results: object;
   text: String;
-  // @Input() sourcebarcode: Number;
+  @Input() sourcebarcode: Number;
   // @Input() showSource : boolean = true;
 
   constructor(
