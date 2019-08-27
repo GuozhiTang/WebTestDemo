@@ -74,7 +74,7 @@ module.exports = {
     // For Heroku
     const port = process.env.PORT || 8080;
     ```
-  * Meanwhile, in `./angular-src/src/testServer.ts`, the testServer parameter should be changed like below:
+  * Meanwhile, in `./angular-src/src/app/testServer.ts`, the testServer parameter should be changed like below:
     ```javascript
     // When in development mode, the address for Node Server could be defined exactly 
     //export const testServer = 'http://localhost:3000/';

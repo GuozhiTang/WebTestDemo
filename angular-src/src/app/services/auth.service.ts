@@ -4,7 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 // import { tokenNotExpired } from 'angular2-jwt';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { testServer } from '../../testServer';
+import { testServer } from '../testServer';
 
 @Injectable({
   providedIn: 'root'

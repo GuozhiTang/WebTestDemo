@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from 'rxjs/operators';
-import { testServer } from '../../testServer';
+import { testServer } from '../testServer';
 
 @Injectable({
   providedIn: 'root'
