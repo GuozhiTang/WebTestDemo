@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
       timeout: 3000
     });
     // this.router.navigate(['/login']);
+    window.location.href = "/login";
     window.location.href = "/webuigz/login";
     return false;
   }
