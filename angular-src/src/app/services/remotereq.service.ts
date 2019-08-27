@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from 'rxjs/operators';
+import { testServer } from '../../testServer';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,7 @@ export class RemotereqService {
     let headers = new Headers();
     console.log(req);
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/remotes/postReq', req, {headers: headers})
-    // return this.http.post('remotes/postReq', req, {headers: headers})
+    return this.http.post(testServer + 'remotes/postReq', req, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -45,8 +45,7 @@ export class RemotereqService {
     }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/remotes/retrievalData', retrievalData, {headers: headers})
-    // return this.http.post('remotes/retrievalData', retrievalData, {headers: headers})
+    return this.http.post(testServer + 'remotes/retrievalData', retrievalData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -68,8 +67,7 @@ export class RemotereqService {
     }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/remotes/createData', createData, {headers: headers})
-    // return this.http.post('remotes/createData', createData, {headers: headers})
+    return this.http.post(testServer + 'remotes/createData', createData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

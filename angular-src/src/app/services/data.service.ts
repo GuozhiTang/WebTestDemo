@@ -30,7 +30,6 @@ export class DataService {
       case 'OperatorDept': route= 'operatordepts/getoperatordepts'; break;
     }
     return this.http.get(testServer + route, {headers: headers})
-    // return this.http.get(route, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -53,7 +52,6 @@ export class DataService {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(testServer + route, addData, {headers: headers})
-    // return this.http.post(route, addData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -78,7 +76,6 @@ export class DataService {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(testServer + route, {headers: headers})
-    // return this.http.post(route, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -119,7 +116,6 @@ export class DataService {
     }
     headers.append('Content-Type', 'application/json');
     return this.http.post(testServer + route, searchData, {headers: headers})
-    // return this.http.post(route, searchData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 }
