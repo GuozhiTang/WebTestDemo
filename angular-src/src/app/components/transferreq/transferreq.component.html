@@ -61,6 +61,7 @@
               <th style="padding: 5px 15px 0px;"><label style="font-size: 16px;">No.</label></th>
               <th><label style="font-size: 16px;">Role</label></th>
               <th><label style="font-size: 16px;">LabwareSpec</label></th>
+              <th><label style="font-size: 16px;">Value (uL)</label></th>
             </tr>
             <tr *ngFor="let source of sourceList">
               <td>
@@ -77,6 +78,9 @@
                   <option>Select labwareSpec type...</option>
                   <option [ngValue]="labwareSpec" *ngFor='let labwareSpec of labwareSpecs'>{{labwareSpec.name}}</option>
                 </select>
+              </td>
+              <td>
+                <input class="form-control" type="number" [(ngModel)]="source.value" name="source.value">
               </td>
               <td>
                 <button class="btn" type="button" style="font-size: 28px;" (click)="addSource()"><i class="far fa-plus-square"></i></button>

@@ -109,13 +109,12 @@ export class TransferreqComponent implements OnInit {
    * @param content content area for successful result modal
    */
   onCreateReq(content) {
-    // console.log(this.list);
     var subReqOptions = [];
     for (var i = 0; i < this.sourceList.length; i++) {
       const subReqData = {
         roleName: this.sourceList[i].role.role,
         labwareSpec: this.sourceList[i].labwareSpec.name,
-        value: 1,
+        value: this.sourceList[i].value,
         units: "uL",
         ordNum: i,
         reqElemSpecName: "Labware Req Elem"
@@ -132,7 +131,7 @@ export class TransferreqComponent implements OnInit {
       parentOptions: this.parentOptions,
       subReqOptions: {"subReqOptionsList": subReqOptions}
     }
-    console.log(generateReq);
+    // console.log(generateReq);
 
     this.remoteService.remotePostReq(generateReq).subscribe(res => {
       // console.log(res);
@@ -164,7 +163,8 @@ export class TransferreqComponent implements OnInit {
     var data = {
       ordNum: this.num,
       role: Role,
-      labwareSpec: LabwareSpec
+      labwareSpec: LabwareSpec,
+      value: Number
     }
     this.sourceList.push(data);
   }
