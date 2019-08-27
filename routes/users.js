@@ -7,8 +7,9 @@ const config = require('../config/database');
 // Bring in our models
 const User = require('../models/user');
 
-// Register - /users/register
-// To register and add new users
+// @route  POST users/register
+// @desc   To register and add new users
+// @access Private
 router.post('/register', (req, res, next) => {
   //  res.send('REGISTER');
   let newUser = new User(req.body);
@@ -22,7 +23,9 @@ router.post('/register', (req, res, next) => {
   });
 });
 
-// Search users by Name
+// @route  POST users/getuserbyname
+// @desc   Search users by Name
+// @access Private
 router.post('/getuserbyname', (req, res, next) => {
   const name = req.body.name;
   User.getUserByName(name, (err, user) => {
@@ -34,8 +37,9 @@ router.post('/getuserbyname', (req, res, next) => {
   });
 })
 
-// Authenticate- /users/authenticate
-// To authenticate that whether the login user has same information with register one.
+// @route  POST users/authenticate
+// @desc   To authenticate that whether the login user has same information with register one.
+// @access Private
 router.post('/authenticate', (req, res, next) => {
   // res.send('AUTHENTICATE');
   const name = req.body.name;
@@ -70,8 +74,9 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-// Profile - /users/profile
-// one of the routes we will protect with our aithenticate with our token
+// @route  GET users/profile
+// @desc   one of the routes we will protect with our aithenticate with our token
+// @access Private
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   // res.send('PROFILE');
   // res.json({msg: "success profile"});

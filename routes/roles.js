@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Role = require('../models/role');
 
-// To get all roles locally
+// @route  GET roles/getroles
+// @desc   To get all roles locally
+// @access Private
 router.get('/getroles', (req, res, next) => {
   Role.find((err, role) => {
     if (err) {
@@ -14,7 +16,9 @@ router.get('/getroles', (req, res, next) => {
   });
 });
 
-// To add and save new roles locally
+// @route  POST roles/addrole
+// @desc   To add and save new roles locally
+// @access Private
 router.post('/addrole', (req, res, next) => {
   // console.log(req.body);
   let newRole = new Role(req.body);
@@ -27,8 +31,10 @@ router.post('/addrole', (req, res, next) => {
   });
 });
 
-// 1. Drop the current Role collection locally
-// 2. To pull Roles from remote server to local database
+// @route  POST roles/resetroles
+// @desc   1. Drop the current Role collection locally
+// @desc   2. To pull Roles from remote server to local database
+// @access Private
 router.post('/resetroles', (req, res, next) => {
   Role.resetRoles((err, dataObj) => {
     if (err) {
@@ -45,7 +51,9 @@ router.post('/resetroles', (req, res, next) => {
   });
 });
 
-// Search by Role
+// @route  POST roles/searchbyrole
+// @desc   Search by Role
+// @access Private
 router.post('/searchbyrole', (req, res, next) => {
   const rolename = req.body.role;
 
@@ -58,7 +66,9 @@ router.post('/searchbyrole', (req, res, next) => {
   });
 });
 
-// Search by Liquid_class
+// @route  POST roles/searchbyliquidclass
+// @desc   Search by Liquid_class
+// @access Private
 router.post('/searchbyliquidclass', (req, res, next) => {
   const liquid_class = req.body.liquid_class;
 
@@ -71,7 +81,9 @@ router.post('/searchbyliquidclass', (req, res, next) => {
   });
 });
 
-// Search by role_id
+// @route  POST roles/searchbyid
+// @desc   Search by role_id
+// @access Private
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -84,7 +96,9 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
-// Search by both role and liquid_class
+// @route  POST roles/searchbyconditions
+// @desc   Search by both role and liquid_class
+// @access Private
 router.post('/searchbyconditions', (req, res, next) => {
   const rolename = req.body.role;
   const liquid_class = req.body.liquid_class;

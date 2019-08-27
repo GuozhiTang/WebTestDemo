@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const OperatorDept = require('../models/operatordept');
 
-// To get all OperatorDepts
+// @route  GET operatordepts/getoperatordepts
+// @desc   To get all OperatorDepts
+// @access Private
 router.get('/getoperatordepts', (req, res, next) => {
   OperatorDept.find((err, operatordept) => {
     if (err) {
@@ -14,7 +16,9 @@ router.get('/getoperatordepts', (req, res, next) => {
   });
 });
 
-// To add and save new OperatorDepts locally
+// @route  POST operatordepts/addoperatordept
+// @desc   To add and save new OperatorDepts locally
+// @access Private
 router.post('/addoperatordept', (req, res, next) => {
   let OperatorDept = new OperatorDept(req.body);
   OperatorDept.addOperatorDept(newOperatorDept, (err, operatordept) => {
@@ -26,8 +30,10 @@ router.post('/addoperatordept', (req, res, next) => {
   });
 });
 
-// 1. Drop the current OperatorDept collection locally
-// 2. To pull OperatorDepts from remote server to local database
+// @route  POST operatordepts/resetoperatordepts
+// @desc   1. Drop the current OperatorDept collection locally
+// @desc   2. To pull OperatorDepts from remote server to local database
+// @access Private
 router.post('/resetoperatordepts', (req, res, next) => {
   OperatorDept.resetOperatorDepts((err, dataObj) => {
     if (err) {

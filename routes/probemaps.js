@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Probemap = require('../models/probemap');
 
-// To get all probemaps locally
+// @route  GET probemaps/getProbemaps
+// @desc   To get all probemaps locally
+// @access Private
 router.get('/getProbemaps', (req, res, next) => {
   Probemap.find((err, probemap) => {
     if (err) {
@@ -14,7 +16,9 @@ router.get('/getProbemaps', (req, res, next) => {
   });
 });
 
-// To add and save new probemaps locally
+// @route  POST probemaps/addProbemap
+// @desc   To add and save new probemaps locally
+// @access Private
 router.post('/addProbemap', (req, res, next) => {
   let newProbemap = new Probemap(req.body);
   Probemap.addProbemap(newProbemap, (err, probemap) => {
@@ -26,8 +30,10 @@ router.post('/addProbemap', (req, res, next) => {
   });
 });
 
-// 1. Drop the current Probemap collection locally
-// 2. To pull Probemaps from remote server to local database
+// @route  POST probemaps/resetProbemaps
+// @desc   1. Drop the current Probemap collection locally
+// @desc   2. To pull Probemaps from remote server to local database
+// @access Private
 router.post('/resetProbemaps', (req, res, next) => {
   Probemap.resetProbemaps((err, dataObj) => {
     if (err) {
@@ -44,7 +50,9 @@ router.post('/resetProbemaps', (req, res, next) => {
   });
 });
 
-// Search by moduleName
+// @route  POST probemaps/searchbymoduleName
+// @desc   Search by moduleName
+// @access Private
 router.post('/searchbymoduleName', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -57,7 +65,9 @@ router.post('/searchbymoduleName', (req, res, next) => {
   });
 });
 
-// Search by Name
+// @route  POST probemaps/searchbyname
+// @desc   Search by Name
+// @access Private
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -70,7 +80,9 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
-// Search by probemap_id
+// @route  POST probemaps/searchbyid
+// @desc   Search by probemap_id
+// @access Private
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -83,7 +95,9 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
-// Search by both moduleName and name
+// @route  POST probemaps/searchbyconditions
+// @desc   Search by both moduleName and name
+// @access Private
 router.post('/searchbyconditions', (req, res, next) => {
   const moduleName = req.body.moduleName;
   const name = req.body.name;
@@ -97,7 +111,9 @@ router.post('/searchbyconditions', (req, res, next) => {
   });
 });
 
-// Search by creatorName
+// @route  POST probemaps/searchbycreatorname
+// @desc   Search by creatorName
+// @access Private
 router.post('/searchbycreatorname', (req, res, next) => {
   const creatorName = req.body.creatorName;
 

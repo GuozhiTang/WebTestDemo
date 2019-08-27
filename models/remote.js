@@ -1,6 +1,7 @@
 const request = require('request');
 const dataServer = 'http://10.253.7.14:8000';
 
+// Send all types of requests to data server
 module.exports.remoteData = function (remoteData, callback) {
   // console.log(retrievalData);
   request.post(dataServer, {

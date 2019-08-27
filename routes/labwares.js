@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Labware = require('../models/labware');
 
-// To pull labwares data from data server
+// @route  POST labwares/grabLabwares
+// @desc   To pull labwares data from data server
+// @access Private
 router.post('/grabLabwares', (req, res, next) => {
   Labware.grabLabwareSpecs((err, dataObj) => {
     if (err) {

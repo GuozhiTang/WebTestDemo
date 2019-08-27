@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 // Bring in our models
 const Instrument = require('../models/instrument');
-
-// To get all Instruments locally
+ 
+// @route  GET instruments/getInstruments
+// @desc   To get all Instruments locally
+// @access Private
 router.get('/getInstruments', (req, res, next) => {
   Instrument.find((err, instrument) => {
     if (err) {
@@ -14,7 +16,9 @@ router.get('/getInstruments', (req, res, next) => {
   });
 });
 
-// To add and save new Instrument locally
+// @route  POST instruments/addInstrument
+// @desc   To add and save new Instrument locally
+// @access Private
 router.post('/addInstrument', (req, res, next) => {
   let newInstrument = new Instrument(req.body);
   Instrument.addInstrument(newInstrument, (err, instrument) => {
@@ -26,8 +30,10 @@ router.post('/addInstrument', (req, res, next) => {
   });
 });
 
-// 1. Drop the current Instrument collection locally
-// 2. To pull Instruments from remote server to local database
+// @route  POST instruments/resetInstruments
+// @desc   1. Drop the current Instrument collection locally
+// @desc   2. To pull Instruments from remote server to local database
+// @access Private
 router.post('/resetInstruments', (req, res, next) => {
   Instrument.resetInstruments((err, dataObj) => {
     if (err) {
@@ -44,7 +50,9 @@ router.post('/resetInstruments', (req, res, next) => {
   });
 });
 
-// Search by moduleName
+// @route  POST instruments/searchbymoduleName
+// @desc   Search by moduleName
+// @access Private
 router.post('/searchbymoduleName', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -57,7 +65,9 @@ router.post('/searchbymoduleName', (req, res, next) => {
   });
 });
 
-// Search by short
+// @route  POST instruments/searchbyshort
+// @desc   Search by short
+// @access Private
 router.post('/searchbyshort', (req, res, next) => {
   const short = req.body.short;
 
@@ -70,7 +80,9 @@ router.post('/searchbyshort', (req, res, next) => {
   });
 });
 
-// Search by instrument_id
+// @route  POST instruments/searchbyid
+// @desc   Search by instrument_id
+// @access Private
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -83,7 +95,9 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
-// Search by both moduleName and short
+// @route  POST instruments/searchbyconditions
+// @desc   Search by both moduleName and short
+// @access Private
 router.post('/searchbyconditions', (req, res, next) => {
   const moduleName = req.body.moduleName;
   const short = req.body.short;

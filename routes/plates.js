@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Plate = require('../models/plate');
 
-// To get all plates
+// @route  GET plates/getplates
+// @desc   To get all plates
+// @access Private
 router.get('/getplates', (req, res, next) => {
   // res.send('getplates');
   Plate.find((err, plate) => {
@@ -15,7 +17,9 @@ router.get('/getplates', (req, res, next) => {
   });
 })
 
-// Search by coor
+// @route  POST plates/searchbycoor
+// @desc   Search by coor
+// @access Private
 router.post('/searchbycoor', (req, res, next) => {
   const coor = req.body.coor;
 
@@ -28,7 +32,9 @@ router.post('/searchbycoor', (req, res, next) => {
   });
 });
 
-// Search by barcode
+// @route  POST plates/searchbybarcode
+// @desc   Search by barcode
+// @access Private
 router.post('/searchbybarcode', (req, res, next) => {
   const barcode = req.body.barcode;
 

@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Spec = require('../models/spec');
 
-// To get all Specs
+// @route  GET specs/getspecs
+// @desc   To get all Specs
+// @access Private
 router.get('/getspecs', (req, res, next) => {
   // res.send('GETSPECS');
   Spec.find((err, spec) => {
@@ -15,7 +17,9 @@ router.get('/getspecs', (req, res, next) => {
   });
 });
 
-// To add and save new Specs locally
+// @route  POST specs/addspecs
+// @desc   To add and save new Specs locally
+// @access Private
 router.post('/addspecs', (req, res, next) => {
   let newSpec = new Spec(req.body);
   // addspec inside the model
@@ -28,8 +32,10 @@ router.post('/addspecs', (req, res, next) => {
   });
 });
 
-// 1. Drop the current Spec collection locally
-// 2. To pull Specs from remote server to local database
+// @route  POST specs/resetspecs
+// @desc   1. Drop the current Spec collection locally
+// @desc   2. To pull Specs from remote server to local database
+// @access Private
 router.post('/resetspecs', (req, res, next) => {
   Spec.resetSpecs((err, dataObj) => {
     if (err) {
@@ -79,7 +85,9 @@ router.post('/resetspecs', (req, res, next) => {
   // });
 });
 
-// Search by name
+// @route  POST specs/searchbyname
+// @desc   Search by name
+// @access Private
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -92,7 +100,9 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
-// Search by moduleName
+// @route  POST specs/searchbymodulename
+// @desc   Search by moduleName
+// @access Private
 router.post('/searchbymodulename', (req, res, next) => {
   const moduleName = req.body.moduleName;
 
@@ -105,7 +115,9 @@ router.post('/searchbymodulename', (req, res, next) => {
   });
 });
 
-// Search by id
+// @route  POST specs/searchbyid
+// @desc   Search by id
+// @access Private
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -118,7 +130,9 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
-// Search by conditions
+// @route  POST specs/searchbyconditions
+// @desc   Search by conditions
+// @access Private
 router.post('/searchbyconditions', (req, res, next) => {
   const name = req.body.name;
   const moduleName = req.body.moduleName;

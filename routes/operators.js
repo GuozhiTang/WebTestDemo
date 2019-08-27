@@ -6,7 +6,9 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const passport = require('passport');
 
-// To get all Operators
+// @route  GET operators/getoperators
+// @desc   To get all Operators
+// @access Private
 router.get('/getoperators', (req, res, next) => {
   Operator.find((err, operator) => {
     if (err) {
@@ -17,7 +19,9 @@ router.get('/getoperators', (req, res, next) => {
   });
 });
 
-// To add and save new Operators locally
+// @route  POST operators/addoperator
+// @desc   To add and save new Operators locally
+// @access Private
 router.post('/addoperator', (req, res, next) => {
   let newOperator = new Operator(req.body);
   Operator.addOperator(newOperator, (err, operator) => {
@@ -29,8 +33,10 @@ router.post('/addoperator', (req, res, next) => {
   });
 });
 
-// 1. Drop the current Operator collection locally
-// 2. To pull Operators from remote server to local database
+// @route  POST operators/resetOperators
+// @desc   1. Drop the current Operator collection locally
+// @desc   2. To pull Operators from remote server to local database
+// @access Private
 router.post('/resetOperators', (req, res, next) => {
   Operator.resetOperators((err, dataObj) => {
     if (err) {
@@ -45,7 +51,9 @@ router.post('/resetOperators', (req, res, next) => {
   });
 });
 
-// Search by name
+// @route  POST operators/searchbyname
+// @desc   Search by name
+// @access Private
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -58,7 +66,9 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
-// To authenticate that whether the login operator has same information with exusted one.
+// @route  POST operators/authenticate
+// @desc   To authenticate that whether the login operator has same information with exusted one.
+// @access Private
 router.post('/authenticate', (req, res, next) => {
   // res.send('AUTHENTICATE');
   const name = req.body.name;
@@ -89,7 +99,9 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-// one of the routes we will protect with our aithenticate with our token
+// @route  GET operators/profile
+// @desc   one of the routes we will protect with our aithenticate with our token
+// @access Private
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   // res.send('PROFILE');
   // res.json({msg: "success profile"});
@@ -97,6 +109,9 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
   // console.log(req.user);
 });
 
+// @route  GET operators/nulloperator
+// @desc   To handle the case of null operator
+// @access Private
 router.get('/nulloperator', (req, res, next) => {
   const name = undefined;
   const operator = {

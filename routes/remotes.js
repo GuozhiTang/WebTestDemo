@@ -3,6 +3,9 @@ const router = express.Router();
 // Bring in our models
 const Remote = require('../models/remote');
 
+// @route  POST remotes/retrievalData
+// @desc   To retrieval data from remote data server
+// @access Private
 router.post('/retrievalData', (req, res, next) => {
   const retrievalData = req.body;
   // console.log(req.body);
@@ -19,6 +22,9 @@ router.post('/retrievalData', (req, res, next) => {
   });
 });
 
+// @route  POST remotes/createData
+// @desc   To create data for remote data server
+// @access Private
 router.post('/createData', (req, res, next) => {
   const createData = req.body;
   // console.log(req.body);
@@ -35,6 +41,9 @@ router.post('/createData', (req, res, next) => {
   });
 });
 
+// @route  POST remotes/postReq
+// @desc   To send post request with json data to remote data server
+// @access Private
 router.post('/postReq', (req, res, next) => {
   const reqData = req.body;
   // console.log(req.body);

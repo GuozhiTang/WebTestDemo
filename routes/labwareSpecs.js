@@ -3,7 +3,9 @@ const router = express.Router();
 // Bring in our models
 const LabwareSpec = require('../models/labwareSpec');
 
-// To get all labwarespecs
+// @route  GET labwareSpecs/getlwarespec
+// @desc   To get all labwarespecs
+// @access Private
 router.get('/getlwarespec', (req, res, next) => {
   LabwareSpec.find((err, lwarespec) => {
     if (err) {
@@ -14,7 +16,9 @@ router.get('/getlwarespec', (req, res, next) => {
   });
 });
 
-// To add and save new labwarespecs locally
+// @route  POST labwareSpecs/addlwarespec
+// @desc   To add and save new labwarespecs locally
+// @access Private
 router.post('/addlwarespec', (req, res, next) => {
   let newLwarespec = new LabwareSpec(req.body);
   LabwareSpec.addLabwareSpec(newLwarespec, (err, lwarespec) => {
@@ -26,8 +30,10 @@ router.post('/addlwarespec', (req, res, next) => {
   });
 });
 
-// 1. Drop the current LabwareSpec collection locally
-// 2. To pull LabwareSpecs from remote server to local database
+// @route  POST labwareSpecs/resetLabwareSpecs
+// @desc   1. Drop the current LabwareSpec collection locally
+// @desc   2. To pull LabwareSpecs from remote server to local database
+// @access Private
 router.post('/resetLabwareSpecs', (req, res, next) => {
   LabwareSpec.resetLabwareSpecs((err, dataObj) => {
     if (err) {
@@ -46,7 +52,9 @@ router.post('/resetLabwareSpecs', (req, res, next) => {
   });
 });
 
-// Search by name
+// @route  POST labwareSpecs/searchbyname
+// @desc   Search by name
+// @access Private
 router.post('/searchbyname', (req, res, next) => {
   const name = req.body.name;
 
@@ -59,7 +67,9 @@ router.post('/searchbyname', (req, res, next) => {
   });
 });
 
-// Search by manufacturer
+// @route  POST labwareSpecs/searchbymanufacturer
+// @desc   Search by manufacturer
+// @access Private
 router.post('/searchbymanufacturer', (req, res, next) => {
   const manufacturer = req.body.manufacturer;
 
@@ -72,7 +82,9 @@ router.post('/searchbymanufacturer', (req, res, next) => {
   });
 });
 
-// Search by labwarespec_id
+// @route  POST labwareSpecs/searchbyid
+// @desc   Search by labwarespec_id
+// @access Private
 router.post('/searchbyid', (req, res, next) => {
   const id = req.body.id;
 
@@ -85,7 +97,9 @@ router.post('/searchbyid', (req, res, next) => {
   });
 });
 
-// Search by name and manufacturer
+// @route  POST labwareSpecs/searchbyconditions
+// @desc   Search by name and manufacturer
+// @access Private
 router.post('/searchbyconditions', (req, res, next) => {
   const name = req.body.name;
   const manufacturer = req.body.manufacturer;
