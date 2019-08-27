@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert-success',
           timeout: 5000});
           // this.router.navigate(['/dashboard']);
-          window.location.href = "/dashboard";
+          window.location.href = "/webuigz/dashboard";
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',
