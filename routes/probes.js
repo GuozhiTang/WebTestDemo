@@ -1,3 +1,11 @@
+/*
+ * @Description: Route configuration for Probes
+ * @Author: Guozhi Tang
+ * @Date: 2019-05-08 14:00:45
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:59:32
+ */
 const express = require('express');
 const router = express.Router();
 // Bring in our models

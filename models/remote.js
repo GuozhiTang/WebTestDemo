@@ -1,3 +1,11 @@
+/*
+ * @Description: Backend model for Remote request
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-26 11:03:19
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:06:37
+ */
 const request = require('request');
 const dataServer = 'http://10.253.7.14:8000';
 

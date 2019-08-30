@@ -1,3 +1,11 @@
+/*
+ * @Description: Model for Request Status
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-24 10:50:13
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:44:45
+ */
 export class ReqStatus {
   requested: String;
   status_op: {

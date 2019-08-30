@@ -1,3 +1,11 @@
+/*
+ * @Description: The operators registration page and details
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-24 11:06:58
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:23:14
+ */
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';

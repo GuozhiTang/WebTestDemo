@@ -1,3 +1,10 @@
+/*
+ * @Description: The main declaration area for all components and services
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:11:32
+ */
 // Whenever create a component or service we should import them here
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

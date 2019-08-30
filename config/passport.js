@@ -1,3 +1,11 @@
+/*
+ * @Description: Configuration for passport
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:08:48
+ */
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 // const User = require('../models/user');

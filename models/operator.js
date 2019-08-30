@@ -1,3 +1,11 @@
+/*
+ * @Description: Backend model for Operator
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-15 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:04:10
+ */
 const mongoose = require('mongoose');
 const request = require('request');
 

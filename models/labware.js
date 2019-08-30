@@ -1,3 +1,10 @@
+/*
+ * @Description: Backend model for Labware
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-11 14:00:28
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:03:42
+ */
 const mongoose = require('mongoose');
 const request = require('request');
 

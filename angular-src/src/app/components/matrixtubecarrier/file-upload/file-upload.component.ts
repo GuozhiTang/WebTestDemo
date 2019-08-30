@@ -1,3 +1,11 @@
+/*
+ * @Description: The file uploaded area for matrix tube carrier request
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-19 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-07-19 14:00:28
+ */
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

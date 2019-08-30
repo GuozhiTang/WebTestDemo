@@ -1,3 +1,11 @@
+/*
+ * @Description: Model for Probe
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-24 10:50:13
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-07-24 10:50:13
+ */
 export class Probe {
   className: String;
   moduleName: String;

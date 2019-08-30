@@ -1,3 +1,11 @@
+/*
+ * @Description: The matrix tube carrier request page
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-15 16:13:19
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:20:06
+ */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { requiredFileType } from './upload-file-validators';

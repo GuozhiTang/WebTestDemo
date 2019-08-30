@@ -1,3 +1,11 @@
+/*
+ * @Description: Route configuration for Roles
+ * @Author: Guozhi Tang
+ * @Date: 2019-05-07 14:00:45
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:58:27
+ */
 const express = require('express');
 const router = express.Router();
 // Bring in our models

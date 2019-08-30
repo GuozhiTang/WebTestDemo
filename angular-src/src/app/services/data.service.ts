@@ -1,3 +1,11 @@
+/*
+ * @Description: The data service for handle all the operations for local database
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-22 09:26:14
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:38:34
+ */
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from 'rxjs/operators';

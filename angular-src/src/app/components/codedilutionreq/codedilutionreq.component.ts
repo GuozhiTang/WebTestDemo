@@ -1,3 +1,11 @@
+/*
+ * @Description: The Code Dilution Request
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-06 15:18:55
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:14:33
+ */
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';
@@ -6,6 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth.service';
 import { Operator } from '../../../models/Operator';
 import { Department } from '../../../models/Department';
+import { TableCode } from '../../../models/TableCode';
 
 @Component({
   selector: 'app-codedilutionreq',
@@ -51,8 +60,8 @@ export class CodedilutionreqComponent implements OnInit {
   UC3: number;
   Grid: number[];
   percentages: number[];
-  tableCode1: number[];
-  tableCode2: number[];
+  tableCode1: TableCode[];
+  tableCode2: TableCode[];
   newReqID: number;
 
   constructor(

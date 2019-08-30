@@ -1,3 +1,11 @@
+/*
+ * @Description: The login page for the web application
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:14:49
+ */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -41,6 +49,7 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert-success',
           timeout: 5000});
           // this.router.navigate(['/dashboard']);
+          // window.location.href = "/dashboard";
           window.location.href = "/webuigz/dashboard";
       } else {
         this.flashMessage.show(data.msg, {

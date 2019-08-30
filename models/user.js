@@ -1,3 +1,11 @@
+/*
+ * @Description: Backend model for User
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:07:34
+ */
 // create models for our users, hold all the fields
 // fields: types of fields (name, password, email etc.), functions interacting with the database
 const mongoose = require('mongoose');

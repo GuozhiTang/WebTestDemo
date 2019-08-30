@@ -1,3 +1,11 @@
+/*
+ * @Description: Code Mix Request
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-07 16:17:38
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:15:22
+ */
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RemotereqService } from '../../services/remotereq.service';

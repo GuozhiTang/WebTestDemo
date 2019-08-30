@@ -1,3 +1,11 @@
+/*
+ * @Description: The transfe request in test version mainly for testing the drag and drop plate model. It is not used for now.
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-22 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:22:01
+ */
 import { Component, OnInit } from '@angular/core';
 import { Plate } from '../../../models/Plate';
 import { FlashMessagesService } from 'angular2-flash-messages';

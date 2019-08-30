@@ -1,3 +1,11 @@
+/*
+ * @Description: The Dashboard to show some demanded details
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:15:52
+ */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Operator } from '../../../models/Operator';

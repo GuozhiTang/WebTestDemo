@@ -1,3 +1,11 @@
+/*
+ * @Description: Route configuration for Remote requests
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-26 11:03:19
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:59:09
+ */
 const express = require('express');
 const router = express.Router();
 // Bring in our models

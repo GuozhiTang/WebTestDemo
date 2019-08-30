@@ -1,3 +1,11 @@
+/*
+ * @Description: The navbar for the web application
+ * @Author: Guozhi Tang
+ * @Date: 2019-04-09 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:15:13
+ */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';

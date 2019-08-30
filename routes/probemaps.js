@@ -1,3 +1,11 @@
+/*
+ * @Description: Route configuration for Probemaps
+ * @Author: Guozhi Tang
+ * @Date: 2019-05-08 14:00:45
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:00:35
+ */
 const express = require('express');
 const router = express.Router();
 // Bring in our models

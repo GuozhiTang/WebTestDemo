@@ -1,3 +1,11 @@
+/*
+ * @Description: The setup process UI for request
+ * @Author: Guozhi Tang
+ * @Date: 2019-05-14 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:20:08
+ */
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth.service';

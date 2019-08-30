@@ -1,3 +1,11 @@
+/*
+ * @Description: Backend model for Role
+ * @Author: Guozhi Tang
+ * @Date: 2019-05-07 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:07:02
+ */
 const mongoose = require('mongoose');
 const request = require('request');
 

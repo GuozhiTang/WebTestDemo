@@ -1,3 +1,11 @@
+/*
+ * @Description: Page for some remarks for the web application
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-15 16:13:19
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:35:54
+ */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RemarksComponent } from './remarks.component';

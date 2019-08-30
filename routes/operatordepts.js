@@ -1,3 +1,11 @@
+/*
+ * @Description: Route configuration for OperatorDepts
+ * @Author: Guozhi Tang
+ * @Date: 2019-08-06 15:01:27
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 15:01:26
+ */
 const express = require('express');
 const router = express.Router();
 // Bring in our models

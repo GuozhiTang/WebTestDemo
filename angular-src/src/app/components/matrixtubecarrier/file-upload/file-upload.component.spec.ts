@@ -1,3 +1,11 @@
+/*
+ * @Description: The file uploaded area for matrix tube carrier request
+ * @Author: Guozhi Tang
+ * @Date: 2019-07-19 14:00:28
+ * @Github: https://github.com/GuozhiTang/Bio-WebApp
+ * @LastEditors: Guozhi Tang
+ * @LastEditTime: 2019-08-30 14:34:42
+ */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
