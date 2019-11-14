@@ -3,6 +3,8 @@
 
 A MEAN stack demo appliction whose frontend is built by angular-cli while backend is built by express. Can login/logout, register, pull data from data server and do specific search and add, as well as total requesting process to the robot. Facing to biological engineers to send requests to the bio-robot.
 
+Hint: Because some parts of project's data server was based on an internal database, the Heroku link https://fflabdemo.herokuapp.com/ can not show all functions in the projects.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
