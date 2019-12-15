@@ -122,6 +122,10 @@ Once we have some changes on the frontend side, run following command to export 
 ng build
 ```
 
+The final home page is shown below:
+
+![home](./angular-src/src/assets/home.png)
+
 ## Built With
 
 * [MongoDB/Mongoose](https://www.npmjs.com/package/mongoose) - The database for the project and the related small API.
