@@ -126,6 +126,10 @@ The final home page is shown below:
 
 ![home](./angular-src/src/assets/home.png)
 
+All the functionalities:
+
+![functions](./angular-src/src/assets/functions.png)
+
 ## Built With
 
 * [MongoDB/Mongoose](https://www.npmjs.com/package/mongoose) - The database for the project and the related small API.
