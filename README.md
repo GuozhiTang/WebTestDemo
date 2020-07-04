@@ -5,6 +5,10 @@ A MEAN stack demo appliction whose frontend is built by angular-cli while backen
 
 Hint: Because some parts of project's data server was based on an internal database, the Heroku link https://fflabdemo.herokuapp.com/ can not show all functions in the projects.
 
+## TODO
+
+Configure the API endpoints of frontend in `/angular-src/src/environments` insead of creating an extra `testServer.ts` file.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
